@@ -1,0 +1,18 @@
+-- 130_relation_label.sql
+-- st_df0a8d71 D1 — gendered/granular relationship sub-label for people.
+--
+-- relation_tag stays the structural CLASS (parent, parent-in-law, spouse, …)
+-- so every existing consumer (scoring tiers, family inference guards,
+-- relationship-builder edge derivation) keeps working unchanged. This column
+-- carries the closed-vocabulary sub-LABEL (mother vs father, wife vs husband,
+-- mother-in-law vs father-in-law, pet) enforced in lib/relation-vocabulary.js —
+-- the single source both writers and renderers import.
+--
+-- Additive + nullable: existing rows stay NULL until the relationship-graph
+-- rerun or a chat correction back-fills them; the ego renderer falls back to
+-- the tag ("parent") for NULL labels — no flag day, trivially reversible.
+-- History/provenance for every label change rides entity_facts
+-- (fact_type='relationship_label', the slot migration 043 already carved out);
+-- this column is only the hot-path current value (two indexed columns per row,
+-- never a temporal scan on the render path).
+ALTER TABLE people ADD COLUMN relation_label TEXT DEFAULT NULL;

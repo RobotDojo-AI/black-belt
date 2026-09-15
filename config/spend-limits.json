@@ -1,0 +1,24 @@
+{
+  "_comment": "st_4312c9c0. The brake. Everything else in the spend system measures and classifies; this is the only thing that STOPS a call. Limits are USD against the owner's metered key, evaluated over a rolling window from local midnight. Raising a limit is an owner decision — check-spend-limits.js blocks a raise without a recorded approval, exactly like a tier raise.",
+
+  "daily_usd": {
+    "pipeline": 25.00,
+    "total": 40.00
+  },
+
+  "monthly_usd": {
+    "total": 300.00
+  },
+
+  "warn_at_pct": 50,
+
+  "_why_two_daily_ceilings": "Background work stops first, interactive chat stops last. A cap that kills the thing the owner is looking at, at the same moment it kills a batch job he cannot see, is a cap he will disable. 'pipeline' bounds everything with no human waiting — enrichment, sweeps, synthesis. 'total' is the hard stop and covers chat as well. Between the two, a runaway background loop goes quiet while the product keeps answering.",
+
+  "_calibration": "RECALIBRATED against the real billing history, after the first pass was set from a badly incomplete measurement. The server log showed ~$23 over 2.5 months and that number was wrong by ~50x: it only captured what the running server did, and the actual spend is manually-invoked bulk pipeline runs during development, which log to a terminal and vanish.\n\nThe truth, from 13 auto-recharge receipts: $1,239 of API credit consumed between 2026-02-16 and 2026-08-05. The pattern is bursts — three $95 recharges in five days (Jul 23-27), three in three days (May 11-13), three in a week (Feb 18-24) — each burst landing on the heaviest development days in the session log.\n\nWhat a burst IS: one full pass of the entity pipeline over this corpus (646k people, 12.5k entity cards, 73k facts, 312k emails) costs roughly $271 at corrected Haiku pricing. $1,239 divided by $271 is ~4.6 full corpus passes. That is the entire mystery: the graph was rebuilt about five times, and nothing metered it.\n\nSo the ceiling is not set to catch a runaway loop — the background rate is genuinely ~$0.30/day and no ceiling is needed for it. It is set so that A DELIBERATE CORPUS PASS IS A DELIBERATE DECISION. $25/day pipeline stops a full rebuild partway; the operator then either raises the limit for that run or uses the override, having priced it first with scripts/spend-estimate.js. warn_at_pct is 50 so the notification arrives with half the day's budget left rather than at the edge.",
+
+  "_planned_bulk_run": "Before a full corpus pass, price it: node scripts/spend-estimate.js --label entity-enrich-reacts-null --count <n>. Then run it with ROBOTDOJO_SPEND_OVERRIDE=1 so the ceiling does not stop it halfway. A pass halted at 60% costs the same as one that finished and leaves the graph inconsistent — the ceiling exists to make the decision conscious, not to make bulk work impossible.",
+
+  "_override": "ROBOTDOJO_SPEND_OVERRIDE=1 bypasses every ceiling for one process. For a deliberate large run (a full corpus re-enrichment). It is loud in the log and never persisted — a new process is capped again.",
+
+  "_failure_posture": "If the ledger cannot be read, the guard ALLOWS the call and alarms. Fail-closed would mean an unreadable bookkeeping table takes down chat, which is a worse outcome than a bounded overspend — but the bypass is recorded so it appears in the report rather than passing silently."
+}

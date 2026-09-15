@@ -1,0 +1,29 @@
+-- 128_passive_jobs_stall_probe.sql
+--
+-- df_02d633dc — stall-guard fix, revised twice. Round 1's escape hatch cooled
+-- down on `updated_at`, which enqueuePassiveJob's ON CONFLICT clause
+-- unconditionally refreshes on every ~5-minute re-plan tick — so a
+-- stall-guarded row's updated_at never ages past the cooldown and the row
+-- can never be re-admitted. stall_probe_at fixed that: it tracks "time of
+-- the last non-progressing event" (a busy-classified retry, a lease-expiry
+-- reclaim, or a benign requeue) independently of the periodic re-plan, so
+-- the cooldown actually elapses. Nullable, no default: NULL means "never
+-- stall-probed," which the escape hatch treats as immediately eligible.
+--
+-- Round 2 found the score itself had the same disease one layer up:
+-- stall_score = MAX(retry_count - attempts, 0) + reclaims was built from
+-- lifetime-cumulative counters that nothing ever resets, so a row with any
+-- historical, fully-resolved stall (even from months-old, long-closed
+-- incidents) stayed permanently flagged as stuck. stall_streak fixes this:
+-- a direct, resettable counter incremented only at the same non-progressing
+-- write-sites and reset to 0 by completePassiveJob — the one place a row's
+-- real success is recorded. See lib/passive-jobs.js for exactly which branch
+-- of each write-site touches which column.
+--
+-- Both columns absent from enqueuePassiveJob's ON CONFLICT SET list by
+-- construction, same discipline as created_at/last_success_at — neither may
+-- be reset or refreshed by the periodic re-plan pass. Both columns are also
+-- carried in lib/db.js's passive_jobs rebuild DDL + copyCols list (same as
+-- the `reclaims` column) so a fresh-DB rebuild does not drop them.
+ALTER TABLE passive_jobs ADD COLUMN stall_probe_at TEXT;
+ALTER TABLE passive_jobs ADD COLUMN stall_streak INTEGER NOT NULL DEFAULT 0;

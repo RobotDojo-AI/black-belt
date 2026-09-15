@@ -1,0 +1,35 @@
+{
+  "$schema": "https://unpkg.com/knip@latest/schema.json",
+  "entry": [
+    "index.js",
+    "lib/server.js",
+    "routes/*.js",
+    "routes/setup/*.js"
+  ],
+  "project": [
+    "lib/**/*.js",
+    "routes/**/*.js",
+    "scripts/**/*.js",
+    "middleware.js"
+  ],
+  "ignore": [
+    "apps/**",
+    "api/**",
+    "gateway/**",
+    "scripts/qa/**",
+    "tests/**"
+  ],
+  "ignoreDependencies": [
+    "@hono/node-server",
+    "better-sqlite3",
+    "better-sqlite3-multiple-ciphers",
+    "@ai-sdk/anthropic",
+    "@anthropic-ai/sdk",
+    "ai",
+    "exceljs",
+    "lru-cache",
+    "mammoth",
+    "pdf-parse",
+    "sqlite-vec"
+  ]
+}

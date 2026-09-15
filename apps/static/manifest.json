@@ -1,0 +1,60 @@
+{
+  "name": "Robot Dojo",
+  "short_name": "Robot Dojo",
+  "start_url": "/chat",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "share_target": {
+    "action": "/podcast",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "shortcuts": [
+    {
+      "name": "Chat",
+      "short_name": "Chat",
+      "description": "Open Robot Dojo chat",
+      "url": "/chat",
+      "icons": [
+        { "src": "/static/icon-192.png", "sizes": "192x192", "type": "image/png" }
+      ]
+    },
+    {
+      "name": "Podcast",
+      "short_name": "Podcast",
+      "description": "Listen to saved essays, articles, feeds, and PDFs",
+      "url": "/podcast",
+      "icons": [
+        { "src": "/static/icon-192.png", "sizes": "192x192", "type": "image/png" }
+      ]
+    },
+    {
+      "name": "Health",
+      "short_name": "Health",
+      "description": "Labs, medications, and health history",
+      "url": "/health",
+      "icons": [
+        { "src": "/static/icon-192.png", "sizes": "192x192", "type": "image/png" }
+      ]
+    },
+    {
+      "name": "Fitness",
+      "short_name": "Fitness",
+      "description": "Today’s meals, training, and recovery",
+      "url": "/fitness",
+      "icons": [
+        { "src": "/static/icon-192.png", "sizes": "192x192", "type": "image/png" }
+      ]
+    }
+  ],
+  "icons": [
+    { "src": "/static/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/static/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

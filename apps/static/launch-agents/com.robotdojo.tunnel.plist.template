@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Robot Dojo — standalone relay tunnel LaunchAgent template.
+  Tokens are expanded by install.sh. The tunnel is launch-critical remote access,
+  so it runs as its own KeepAlive process rather than as a child of the server.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.robotdojo.tunnel</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>__ROBOTDOJO_RUNTIME__</string>
+    <string>__ROBOTDOJO_HOME__/scripts/tunnel-standalone.js</string>
+    <string>--launch</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>__ROBOTDOJO_HOME__</string>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>KeepAlive</key>
+  <dict>
+    <key>SuccessfulExit</key>
+    <false/>
+    <key>Crashed</key>
+    <true/>
+  </dict>
+
+  <key>ThrottleInterval</key>
+  <integer>10</integer>
+
+  <key>StandardOutPath</key>
+  <string>__CONFIG__/logs/robotdojo-tunnel.out.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>__CONFIG__/logs/robotdojo-tunnel.err.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>__HOME__</string>
+    <key>USER</key>
+    <string>__USER__</string>
+    <key>PATH</key>
+    <string>__PATH__</string>
+    <key>NODE_ENV</key>
+    <string>production</string>
+    <key>ROBOTDOJO_HOME</key>
+    <string>__ROBOTDOJO_HOME__</string>
+    <key>ROBOTDOJO_CONFIG</key>
+    <string>__CONFIG__</string>
+    <key>ROBOTDOJO_TUNNEL_LAUNCH_MODE</key>
+    <string>1</string>
+    <key>ROBOTDOJO_TUNNEL_CLIENT_CONNECTIONS</key>
+    <string>32</string>
+    <key>ROBOTDOJO_TUNNEL_ROTATE_MS</key>
+    <string>0</string>
+  </dict>
+</dict>
+</plist>

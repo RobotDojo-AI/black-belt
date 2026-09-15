@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect — Robot Dojo</title>
+  <meta name="description" content="Connect to your local Robot Dojo with your dojo token.">
+  <meta name="robots" content="noindex">
+
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+  <link rel="stylesheet" href="/static/vendor/fonts.css">
+  <link rel="stylesheet" href="/static/shared/marketing.css">
+  <script src="/static/shared/sw-register.js"></script>
+
+  <style>
+    /* Centered auth-card layout on the shared marketing palette.
+       st_5a63545d AC 16 — token-paste connect is the sole entry surface.
+       The 6-digit-code UI from the magic-code era is removed; one input,
+       one submit. */
+    .auth-wrap { min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; background: var(--bg); }
+    .auth-top { padding: 1.5rem 2rem; }
+    .auth-top a { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--text); font-weight: 600; letter-spacing: -0.02em; }
+    .auth-top img { width: 28px; height: 28px; }
+    .auth-main { display: flex; align-items: center; justify-content: center; padding: 2rem; }
+    .auth-card { width: 100%; max-width: 420px; background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 2.25rem 2rem; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 12px 32px rgba(59, 130, 246, 0.06); }
+    .auth-eyebrow { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+    .auth-title { margin: 0.5rem 0 0.35rem; font-size: 1.45rem; font-weight: 600; letter-spacing: -0.02em; }
+    .auth-sub { margin: 0 0 1.6rem; color: var(--text-dim); font-size: 0.92rem; line-height: 1.55; }
+    .auth-form { display: grid; gap: 0.75rem; }
+    .auth-field { display: grid; gap: 0.35rem; }
+    .auth-field--hidden { display: none; }
+    .auth-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em; color: var(--text-dim); }
+    .auth-hint { font-size: 0.78rem; color: var(--text-muted); line-height: 1.45; margin: -0.35rem 0 0.25rem; }
+    .auth-status { display: grid; gap: 0.35rem; margin: -0.55rem 0 1.15rem; padding: 0.7rem 0.8rem; border: 1px solid #dbeafe; border-radius: 10px; background: #eff6ff; color: #1e3a8a; font-size: 0.82rem; line-height: 1.4; }
+    .auth-status[data-state="busy"] { border-color: #bfdbfe; background: #eff6ff; color: #1d4ed8; }
+    .auth-status[data-state="error"] { border-color: #fecaca; background: #fef2f2; color: #991b1b; }
+    .auth-status-main { font-weight: 600; }
+    .auth-status-target { color: inherit; opacity: 0.78; overflow-wrap: anywhere; }
+    .auth-input { width: 100%; padding: 0.75rem 0.9rem; border: 1px solid var(--border-light); border-radius: 10px; font-size: 0.95rem; font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; color: var(--text); background: #fff; transition: border-color 0.15s, box-shadow 0.15s; }
+    .auth-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18); }
+    .auth-submit { width: 100%; padding: 0.8rem 1rem; margin-top: 0.35rem; border: none; border-radius: 10px; background: var(--accent); color: #fff; font-family: var(--font); font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.15s, box-shadow 0.15s, transform 0.05s; }
+    .auth-submit:hover:not(:disabled) { background: var(--accent-hover); box-shadow: 0 2px 10px rgba(59, 130, 246, 0.28); }
+    .auth-submit:disabled { opacity: 0.7; cursor: wait; }
+    .auth-error { display: none; margin-top: 0.9rem; padding: 0.65rem 0.85rem; background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; color: #b91c1c; font-size: 0.85rem; line-height: 1.45; }
+    .auth-error.visible { display: block; }
+    .auth-error-code { display: inline-flex; margin-bottom: 0.35rem; padding: 0.15rem 0.4rem; border-radius: 5px; background: #fff; color: #991b1b; font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; font-size: 0.72rem; font-weight: 700; overflow-wrap: anywhere; }
+    .auth-error-message { color: #b91c1c; }
+    .auth-foot { padding: 1.5rem 2rem; text-align: center; font-size: 0.82rem; color: var(--text-muted); }
+    .auth-foot a { color: var(--text-dim); text-decoration: none; }
+    .auth-foot a:hover { color: var(--accent); }
+    /* st_96bb626f AC 4 — "Lost your token?" recovery affordance. Reuses the
+       shared marketing modal (.m-modal-*) already loaded via marketing.css for
+       visual parity with the install-command modal; only the trigger link and
+       the in-modal explanation are styled here. */
+    .auth-lost-token { display: inline-block; margin-top: 0.9rem; padding: 0; background: none; border: none; color: var(--accent); font: inherit; font-size: 0.82rem; font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+    .auth-lost-token:hover { color: var(--accent-hover, #2563eb); }
+    .auth-lost-token-explain { margin: 0 0 1.1rem; color: var(--text-dim); font-size: 0.9rem; line-height: 1.5; }
+  </style>
+</head>
+<body data-app="website" data-app-flow="connect">
+  <div class="auth-wrap">
+    <header class="auth-top">
+      <a href="/" aria-label="Robot Dojo home">
+        <img src="/static/img/logo.svg" alt="">
+        <span>Robot Dojo</span>
+      </a>
+    </header>
+
+    <main class="auth-main">
+      <section class="auth-card" aria-labelledby="auth-title">
+        <div class="auth-eyebrow">Connect</div>
+        <h1 id="auth-title" class="auth-title">Connect to Robot Dojo</h1>
+        <p class="auth-sub">
+          Open with the token stored on this Mac, or paste the token visible
+          in Admin on your Accounts page.
+        </p>
+        <div id="statusBox" class="auth-status" data-state="ready" role="status" aria-live="polite"></div>
+
+        <form class="auth-form" id="connectForm" novalidate>
+          <!--
+            Hidden routing hint. The public URL stays on robotdojo.ai; the
+            relay slug is plumbing used only to reach the local Mac.
+          -->
+          <div class="auth-field auth-field--hidden" id="serverField" aria-hidden="true">
+            <label for="server" class="auth-label">Routing key</label>
+            <input
+              type="text"
+              id="server"
+              name="server"
+              class="auth-input"
+              autocomplete="username"
+              autocapitalize="none"
+              autocorrect="off"
+              spellcheck="false"
+              tabindex="-1"
+              placeholder="my-mac">
+            <div class="auth-hint">Hidden relay routing key.</div>
+          </div>
+
+          <div class="auth-field">
+            <label for="token" class="auth-label">Dojo token</label>
+            <input
+              type="password"
+              id="token"
+              name="token"
+              class="auth-input"
+              autocomplete="current-password"
+              autocapitalize="none"
+              autocorrect="off"
+              spellcheck="false"
+              required
+              autofocus
+              placeholder="rdj_…">
+            <div class="auth-hint">Find it in Admin on the Accounts page.</div>
+          </div>
+
+          <button type="submit" id="submitBtn" class="auth-submit">Connect</button>
+          <div id="errorBox" class="auth-error" role="alert"></div>
+        </form>
+        <button type="button" id="lostTokenBtn" class="auth-lost-token">Lost your token?</button>
+      </section>
+    </main>
+
+    <footer class="auth-foot">
+      <a href="/">← Back to robotdojo.ai</a>
+    </footer>
+  </div>
+
+  <!-- st_96bb626f AC 4 — lost-token recovery modal. Same monospace copyable
+       command block + copy button as the marketing install modal. -->
+  <div id="lostTokenModal" class="m-modal-overlay" hidden role="dialog" aria-modal="true" aria-label="Recover your dojo token">
+    <div class="m-modal">
+      <button type="button" class="m-modal-close" data-lost-token-close aria-label="Close">&times;</button>
+      <h2 class="m-modal-title">Recover your token</h2>
+      <p class="auth-lost-token-explain">Run this in the Terminal app on the Mac where Robot Dojo is installed — it prints your current dojo token.</p>
+      <div class="m-modal-cmd-wrap">
+        <code id="lostTokenCmd" class="m-modal-cmd">npm run token -- show</code>
+        <button type="button" class="m-modal-copy" data-copy-target="lostTokenCmd" aria-label="Copy command">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/shared/app-registry.js?v=2026-09-09-2" defer></script>
+  <script>
+    (function () {
+      const form = document.getElementById('connectForm');
+      const serverField = document.getElementById('serverField');
+      const serverInput = document.getElementById('server');
+      const tokenInput = document.getElementById('token');
+      const submitBtn = document.getElementById('submitBtn');
+      const errorBox = document.getElementById('errorBox');
+      const statusBox = document.getElementById('statusBox');
+
+      const params = new URLSearchParams(window.location.search);
+      const redirectTo = params.get('redirect') || null;
+      function normalizeServerHint(value) {
+        const v = String(value || '').trim().toLowerCase();
+        return /^[a-z0-9-]{1,40}$/.test(v) ? v : '';
+      }
+      function readStoredServerHint() {
+        try { return normalizeServerHint(localStorage.getItem('robotdojo_last_server')); }
+        catch { return ''; }
+      }
+      const DEFAULT_SERVER_HINT = 'dojo';
+      const serverHint = normalizeServerHint(params.get('server')) || readStoredServerHint() || DEFAULT_SERVER_HINT;
+      const CONNECT_TIMEOUT_MS = 30000;
+      const CONNECT_TIMEOUT_SECONDS = Math.round(CONNECT_TIMEOUT_MS / 1000);
+
+      // Two public surfaces serve this same HTML: the apex domain and the
+      // routed subdomain. The user-facing URL stays clean; routing details stay
+      // hidden behind the form payload.
+      const hostname = window.location.hostname;
+      const loopbackName = ['local', 'host'].join('');
+      const loopbackV4 = ['127', '0', '0', '1'].join('.');
+      const isLoopback = hostname === loopbackName ||
+                         hostname === loopbackV4 ||
+                         hostname === '[::1]' ||
+                         hostname === '::1';
+      const isApex = isLoopback ||
+                     hostname.split('.').length <= 2;
+
+      if (isApex) {
+        serverInput.value = serverHint;
+        serverInput.required = false;
+        if (!isLoopback) tokenInput.focus();
+      } else {
+        // Slug subdomain — hide the field and pre-set its value to the
+        // current subdomain's first label. Keeps the form structure
+        // identical and lets the same submit handler build the same
+        // payload regardless of surface.
+        serverInput.value = hostname.split('.')[0];
+        serverInput.required = false;
+      }
+
+      function escapeHtml(value) {
+        return String(value ?? '').replace(/[&<>"']/g, (c) => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;',
+        }[c]));
+      }
+      function showError(msg, code = 'RDJ_CONNECT_ERROR') {
+        errorBox.setAttribute('data-error-code', code);
+        errorBox.innerHTML = `<code class="auth-error-code">${escapeHtml(code)}</code><div class="auth-error-message">${escapeHtml(msg)}</div>`;
+        errorBox.classList.add('visible');
+        setStatus(msg, { state: 'error', detail: code });
+      }
+      function hideError() {
+        errorBox.textContent = '';
+        errorBox.removeAttribute('data-error-code');
+        errorBox.classList.remove('visible');
+      }
+      function prettyPath(path) {
+        const value = String(path || '').trim();
+        if (!value) return '';
+        try { return decodeURIComponent(value); } catch { return value; }
+      }
+      function setStatus(message, { state = 'ready', detail = '' } = {}) {
+        if (!statusBox) return;
+        statusBox.dataset.state = state;
+        statusBox.innerHTML = `<div class="auth-status-main">${escapeHtml(message)}</div>${detail ? `<div class="auth-status-target">${escapeHtml(detail)}</div>` : ''}`;
+      }
+      function responseReason(res, data) {
+        const headerReason = res?.headers?.get?.('x-status-reason') || '';
+        const bodyReason = typeof data?.error === 'string' ? data.error : '';
+        return String(headerReason || bodyReason).trim().toLowerCase();
+      }
+      function connectCodeForReason(reason) {
+        const normalized = String(reason || '').trim().toLowerCase();
+        if (normalized === 'session_expired') return 'RDJ_CONNECT_SESSION_EXPIRED';
+        if (normalized === 'server_unreachable' || normalized === 'mac_unreachable') return 'RDJ_CONNECT_SERVER_UNREACHABLE';
+        if (normalized === 'invalid_format') return 'RDJ_CONNECT_ROUTE_INVALID';
+        if (normalized === 'wrong_token' || normalized === 'unauthorized') return 'RDJ_CONNECT_TOKEN_REJECTED';
+        if (normalized === 'token_required') return 'RDJ_CONNECT_TOKEN_REQUIRED';
+        if (normalized === 'local_only') return 'RDJ_CONNECT_LOCAL_ONLY';
+        if (normalized === 'origin_not_local') return 'RDJ_CONNECT_LOCAL_ORIGIN_REJECTED';
+        if (normalized === 'local_auto_header_required') return 'RDJ_CONNECT_LOCAL_AUTO_REJECTED';
+        if (normalized === 'mac_error') return 'RDJ_CONNECT_MAC_ERROR';
+        // api/auth/token.js emits the legacy wire code `..._endpoint_missing` on
+        // a 404 from the Mac. Match its stable suffix so the connect page keeps
+        // the specific "update your Mac" guidance without hardcoding the
+        // deprecated verb the rest of this page has dropped.
+        if (normalized.endsWith('_endpoint_missing')) return 'RDJ_CONNECT_ENDPOINT_MISSING';
+        if (normalized === 'mac_rejected') return 'RDJ_CONNECT_MAC_REJECTED';
+        if (normalized === 'not_initialized') return 'RDJ_CONNECT_NOT_INITIALIZED';
+        if (normalized === 'rate_limit') return 'RDJ_CONNECT_RATE_LIMITED';
+        return 'RDJ_CONNECT_ERROR';
+      }
+      function authFailureMessage(res, data) {
+        const reason = responseReason(res, data);
+        if (!isApex) {
+          return {
+            code: connectCodeForReason(reason || 'wrong_token'),
+            message: 'The token did not match this computer. Copy the current token from Admin on the Accounts page and try again.',
+          };
+        }
+        if (reason === 'mac_unreachable') {
+          return {
+            code: connectCodeForReason(reason),
+            message: 'Can\'t reach your Robot Dojo. Make sure it is running on your Mac, then retry.',
+          };
+        }
+        if (reason === 'invalid_format') {
+          return {
+            code: connectCodeForReason(reason),
+            message: 'Could not route to your Robot Dojo. Refresh and try again.',
+          };
+        }
+        if (reason === 'wrong_token' || reason === 'token_required' || reason === 'unauthorized') {
+          return {
+            code: connectCodeForReason(reason),
+            message: 'The token did not match this computer. Copy the current token from Admin on the Accounts page and try again.',
+          };
+        }
+        if (reason === 'mac_error') {
+          return {
+            code: connectCodeForReason(reason),
+            message: 'Robot Dojo answered, but could not create a session. Restart Robot Dojo on that Mac, then try again.',
+          };
+        }
+        if (reason.endsWith('_endpoint_missing')) {
+          return {
+            code: connectCodeForReason(reason),
+            message: 'That computer is reachable, but its Robot Dojo version cannot finish Connect. Update or restart Robot Dojo on that Mac.',
+          };
+        }
+        if (reason === 'mac_rejected') {
+          return {
+            code: connectCodeForReason(reason),
+            message: 'Robot Dojo rejected the sign-in. Restart Robot Dojo on that Mac, then try the current token.',
+          };
+        }
+        return {
+          code: connectCodeForReason(reason),
+          message: 'Could not connect. Make sure Robot Dojo is running on your Mac, then retry the token.',
+        };
+      }
+      function initialConnectMessage(reason) {
+        const normalized = String(reason || '').trim().toLowerCase();
+        if (normalized === 'session_expired') {
+          return {
+            code: connectCodeForReason(normalized),
+            message: 'Your session expired. Paste your token to reconnect.',
+          };
+        }
+        if (normalized === 'server_unreachable') {
+          return {
+            code: connectCodeForReason(normalized),
+            message: 'Could not reach your Robot Dojo. Make sure it is running, then reconnect.',
+          };
+        }
+        return null;
+      }
+      function safeClientRedirect(rawRedirect) {
+        const raw = (typeof rawRedirect === 'string') ? rawRedirect : '';
+        return (raw.startsWith('/') && !raw.startsWith('//') && !raw.includes('://')) ? raw : '/chat';
+      }
+      function openRedirect(rawRedirect) {
+        const safe = safeClientRedirect(rawRedirect);
+        setStatus('Signed in. Opening page…', { state: 'busy', detail: prettyPath(safe) });
+        window.location.href = safe;
+      }
+      function localAutoFailure(reason) {
+        const mapped = connectCodeForReason(reason);
+        const code = mapped === 'RDJ_CONNECT_ERROR' ? 'RDJ_CONNECT_LOCAL_AUTO_FAILED' : mapped;
+        if (reason === 'not_initialized') {
+          return {
+            code,
+            message: 'Robot Dojo does not have a stored local token yet. Open Accounts locally and create one.',
+          };
+        }
+        if (reason === 'local_only' || reason === 'origin_not_local' || reason === 'local_auto_header_required') {
+          return {
+            code,
+            message: 'Stored-token sign-in is only allowed from the local Robot Dojo browser page.',
+          };
+        }
+        if (reason === 'server_error') {
+          return {
+            code: 'RDJ_CONNECT_LOCAL_SESSION_ERROR',
+            message: 'Robot Dojo is running, but could not create a local browser session. Restart Robot Dojo and try again.',
+          };
+        }
+        return {
+          code: 'RDJ_CONNECT_LOCAL_AUTO_FAILED',
+          message: 'Robot Dojo could not use the stored local token. Paste the token below to connect manually.',
+        };
+      }
+      async function tryStoredLocalSession() {
+        if (!isLoopback) return false;
+        hideError();
+        submitBtn.disabled = true;
+        tokenInput.disabled = true;
+        submitBtn.textContent = 'Opening…';
+        setStatus('Opening with stored local token…', {
+          state: 'busy',
+          detail: redirectTo ? `After sign-in: ${prettyPath(redirectTo)}` : 'Creating browser session.',
+        });
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), CONNECT_TIMEOUT_MS);
+        let navigating = false;
+        try {
+          const res = await fetch('/api/auth/local-session', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-RDJ-Local-Auto': '1',
+            },
+            credentials: 'same-origin',
+            signal: controller.signal,
+            body: JSON.stringify({ redirect: redirectTo }),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (res.ok && data?.ok) {
+            navigating = true;
+            openRedirect(data.redirect);
+            return true;
+          }
+          const reason = responseReason(res, data);
+          const failure = localAutoFailure(reason);
+          showError(failure.message, failure.code);
+          tokenInput.focus();
+          return false;
+        } catch (err) {
+          if (err?.name === 'AbortError') {
+            showError(`Local connect did not answer within ${CONNECT_TIMEOUT_SECONDS} seconds. Robot Dojo may still be starting; retry once it is ready.`, 'RDJ_CONNECT_LOCAL_TIMEOUT');
+          } else {
+            showError('Local connect hit a network error. Paste the token below to connect manually.', 'RDJ_CONNECT_LOCAL_NETWORK_ERROR');
+          }
+          tokenInput.focus();
+          return false;
+        } finally {
+          clearTimeout(timeoutId);
+          if (!navigating) {
+            submitBtn.disabled = false;
+            tokenInput.disabled = false;
+            submitBtn.textContent = 'Connect';
+          }
+        }
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        hideError();
+        const token = tokenInput.value.trim();
+        const server = serverInput.value.trim().toLowerCase();
+        if (isApex && !server) {
+          showError('Could not find your Robot Dojo route. Refresh and try again.', 'RDJ_CONNECT_ROUTE_MISSING');
+          return;
+        }
+        if (!token) {
+          showError('Paste your dojo token to continue.', 'RDJ_CONNECT_TOKEN_MISSING');
+          tokenInput.focus();
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Connecting…';
+        setStatus('Connecting to Robot Dojo…', {
+          state: 'busy',
+          detail: redirectTo ? `After sign-in: ${prettyPath(redirectTo)}` : 'Creating browser session.',
+        });
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), CONNECT_TIMEOUT_MS);
+
+        try {
+          // Apex carries {server, token} so the Vercel Edge function can
+          // proxy to the right subdomain. Slug subdomain carries {token}
+          // only — the Mac's handler ignores extra fields but sending the
+          // extra `server` value would be wasted bytes.
+          const payload = isApex
+            ? { server, token, redirect: redirectTo }
+            : { token, redirect: redirectTo };
+          const res = await fetch('/api/auth/token', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            signal: controller.signal,
+            body: JSON.stringify(payload),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (res.status === 429) {
+            showError('Too many attempts. Try again in a minute.', 'RDJ_CONNECT_RATE_LIMITED');
+            return;
+          }
+          if (res.status === 401) {
+            const failure = authFailureMessage(res, data);
+            showError(failure.message, failure.code);
+            tokenInput.select();
+            return;
+          }
+          if (res.status === 409) {
+            showError('This dojo isn’t initialized yet. Run the local browser handoff from Terminal first.', 'RDJ_CONNECT_NOT_INITIALIZED');
+            return;
+          }
+          if (!res.ok || !data?.ok) {
+            showError(data?.message || 'Sign-in failed. Try again.', 'RDJ_CONNECT_RESPONSE_INVALID');
+            return;
+          }
+          try { localStorage.setItem('robotdojo_token', token); } catch {}
+          if (server) {
+            try { localStorage.setItem('robotdojo_last_server', server); } catch {}
+          }
+          openRedirect(data.redirect);
+        } catch (err) {
+          if (err?.name === 'AbortError') {
+            showError(`Connect did not answer within ${CONNECT_TIMEOUT_SECONDS} seconds. Robot Dojo may still be starting; retry once it is ready.`, 'RDJ_CONNECT_TIMEOUT');
+          } else {
+            showError('Network error. Try again.', 'RDJ_CONNECT_NETWORK_ERROR');
+          }
+        } finally {
+          clearTimeout(timeoutId);
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Connect';
+        }
+      });
+
+      const initialMessage = initialConnectMessage(params.get('reason'));
+      if (isLoopback) {
+        tryStoredLocalSession();
+      } else if (initialMessage) {
+        showError(initialMessage.message, initialMessage.code);
+      } else {
+        setStatus('Connect page loaded. Paste your token to open the requested page.', {
+          state: 'ready',
+          detail: redirectTo ? `Waiting to open: ${prettyPath(redirectTo)}` : 'No destination was requested.',
+        });
+      }
+    })();
+  </script>
+
+  <!-- st_96bb626f AC 4 — lost-token modal controller. Self-contained; no
+       external deps. Mirrors the marketing copy-button behavior (Copied /
+       is-copied / 1.5s reset). -->
+  <script>
+    (function () {
+      const btn = document.getElementById('lostTokenBtn');
+      const modal = document.getElementById('lostTokenModal');
+      if (!btn || !modal) return;
+      const openModal = () => modal.removeAttribute('hidden');
+      const closeModal = () => modal.setAttribute('hidden', '');
+      btn.addEventListener('click', openModal);
+      modal.addEventListener('click', (event) => {
+        if (event.target === modal || (event.target.closest && event.target.closest('[data-lost-token-close]'))) closeModal();
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !modal.hasAttribute('hidden')) closeModal();
+      });
+      const copyBtn = modal.querySelector('[data-copy-target]');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          const target = document.getElementById(copyBtn.getAttribute('data-copy-target'));
+          const text = target ? target.innerText.trim() : '';
+          if (text && navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
+          const original = copyBtn.innerHTML;
+          copyBtn.textContent = 'Copied';
+          copyBtn.classList.add('is-copied');
+          setTimeout(() => { copyBtn.innerHTML = original; copyBtn.classList.remove('is-copied'); }, 1500);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

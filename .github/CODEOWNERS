@@ -1,0 +1,3 @@
+# Robot Dojo architecture lock.
+# Branch protection must require CODEOWNERS review before protected files merge.
+* @RobotDojo-AI/maintainers

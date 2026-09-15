@@ -1,0 +1,35 @@
+# Repo-wide patterns only — directory-scoped patterns live in <dir>/.gitignore.
+# This was migrated from a single root .gitignore in st_6f2343ef per the per-dir
+# architecture (see CLAUDE.md gitignore rules).
+
+# OS / editor noise
+.DS_Store
+
+# Environment / secrets
+.env
+.env*.local
+
+# Vendor / build outputs (anywhere in tree)
+node_modules/
+.vercel
+.claude/worktrees/
+
+# Project-wide artifacts
+.gitignore-audit.md
+.playwright-mcp
+
+# File-level patterns that may appear at root in addition to config/
+identity.json
+identity.local.json
+taxonomy.user.json
+
+# Story-local substrate backups (contain PII; revert via local files only)
+.backup/
+
+# Browser markdown edit snapshots; local recovery trail, not source.
+.history
+
+# Deploy artifact: written by scripts/deploy-vercel.sh on every prod deploy.
+# Contains the local git SHA at deploy time — changes on every deploy and is
+# regenerated fresh each run, so it should not appear in git history.
+# st_6f81e248 — deploy-freshness proof.

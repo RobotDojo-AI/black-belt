@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Robot Dojo — chunk-embed daemon (st_2cd1af73).
+
+  Long-lived embedder. Loads the embedding model ONCE and lives, draining the
+  embed backlog value-first while yielding the single WAL writer to chat. This
+  REPLACES scripts/overnight-drain.mjs and takes over embedding from the 120s
+  chunk-worker (which reloaded the 2GB model every fire and livelocked on a lease
+  it never renewed). The chunk-worker keeps its chunk-source-scanner role.
+
+  Why KeepAlive=true (NOT StartInterval): the daemon is meant to LIVE, not fire
+  on a cadence. KeepAlive respawns it if it exits (RSS-ceiling restart, jetsam,
+  crash) so the model reloads once per process lifetime and the backlog keeps
+  draining. The daemon's internal loop is truth-driven (chunks WHERE embedded=0)
+  and sleeps when drained, so a bare KeepAlive does not busy-loop.
+
+  Why ROBOTDOJO_MMAP_SIZE=0: lib/db.js reserves a 16 GiB mmap by default to warm
+  the page cache for the foreground server. The daemon holds the ~2GB ONNX model
+  resident; the extra 16 GiB virtual reservation needlessly inflates its footprint
+  and raises jetsam exposure on a 16 GB machine. Setting it to 0 sheds the mmap so
+  the daemon's footprint is dominated by the model alone. lib/db.js honors this env.
+
+  Why Background QoS + LowPriorityIO + Nice 10 (same as the chunk-worker): pins
+  the daemon to efficiency cores and throttles its disk I/O so the embed trickle
+  yields CPU/IO to the foreground server. The memory axis is handled by the
+  self-imposed RSS ceiling (lib/idle-gate.js) + KeepAlive respawn, and the chat
+  axis by the activity-signal pause inside the daemon.
+
+  Why __NODE__ (not __ROBOTDOJO_RUNTIME__): the macOS permission .app binary
+  resolves the @huggingface/transformers cacheDir to a directory that does not
+  contain the embedding model, so embedBatch fails with "file was not found
+  locally". Running via node resolves the model from
+  ~/.robotdojo/models/embeddings/ correctly. (Same constraint as the chunk-worker
+  plist — tracked df_4a599d5a.)
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.robotdojo.chunk-embed-daemon</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>__NODE__</string>
+    <string>__ROBOTDOJO_HOME__/scripts/chunk-embed-daemon.mjs</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>__ROBOTDOJO_HOME__</string>
+
+  <key>KeepAlive</key>
+  <true/>
+
+  <key>ProcessType</key>
+  <string>Background</string>
+
+  <key>LowPriorityIO</key>
+  <true/>
+
+  <key>Nice</key>
+  <integer>10</integer>
+
+  <key>StandardOutPath</key>
+  <string>__CONFIG__/logs/robotdojo-chunk-embed-daemon.out.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>__CONFIG__/logs/robotdojo-chunk-embed-daemon.err.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>__HOME__</string>
+    <key>USER</key>
+    <string>__USER__</string>
+    <key>NODE_ENV</key>
+    <string>production</string>
+    <key>PATH</key>
+    <string>__PATH__</string>
+    <key>ROBOTDOJO_HOME</key>
+    <string>__ROBOTDOJO_HOME__</string>
+    <key>ROBOTDOJO_CONFIG</key>
+    <string>__CONFIG__</string>
+    <key>ROBOTDOJO_DB</key>
+    <string>__CONFIG__/robotdojo.db</string>
+    <key>ROBOTDOJO_ACTIVITY_PAUSE_MS</key>
+    <string>60000</string>
+    <key>ROBOTDOJO_DAEMON_STARTUP_GRACE_MS</key>
+    <string>90000</string>
+    <key>ROBOTDOJO_MMAP_SIZE</key>
+    <string>0</string>
+  </dict>
+</dict>
+</plist>

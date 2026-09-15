@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Robot Dojo — relay SNI watchdog.
+  Every 60s — verifies the public device subdomain and repairs stale NLB
+  routing after ECS task replacement.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.robotdojo.relay-watchdog</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>__ROBOTDOJO_RUNTIME__</string>
+    <string>__ROBOTDOJO_HOME__/scripts/relay-watchdog.js</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>__ROBOTDOJO_HOME__</string>
+
+  <key>StartInterval</key>
+  <integer>60</integer>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>Nice</key>
+  <integer>10</integer>
+
+  <key>StandardOutPath</key>
+  <string>__CONFIG__/logs/robotdojo-relay-watchdog.out.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>__CONFIG__/logs/robotdojo-relay-watchdog.err.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>__HOME__</string>
+    <key>USER</key>
+    <string>__USER__</string>
+    <key>NODE_ENV</key>
+    <string>production</string>
+    <key>PATH</key>
+    <string>__PATH__</string>
+    <key>ROBOTDOJO_HOME</key>
+    <string>__ROBOTDOJO_HOME__</string>
+    <key>ROBOTDOJO_CONFIG</key>
+    <string>__CONFIG__</string>
+    <key>ROBOTDOJO_RELAY_WATCHDOG_TCP_CONNECTIONS</key>
+    <string>2</string>
+    <key>ROBOTDOJO_RELAY_WATCHDOG_HEALTH_SAMPLES</key>
+    <string>16</string>
+    <key>ROBOTDOJO_RELAY_WATCHDOG_SNI_FAILURES</key>
+    <string>3</string>
+  </dict>
+</dict>
+</plist>

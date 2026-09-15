@@ -1,0 +1,123 @@
+{
+  "_comment": [
+    "THE PERMITTED LIST (st_dd0e19d8 AC15). Every entry here is a DELIBERATE WEAKENING",
+    "of the publication gate. Read it that way.",
+    "",
+    "An entry says: this exact TERM, in this exact FILE, from this exact CLASS, is not a",
+    "leak — and here is why. Scoped per term AND file AND class, never a bare term: a",
+    "bare-term suppression is the failure mode that let one dead rule silently hide 184",
+    "later real findings in the study this design is built on.",
+    "",
+    "DECAY. Every publication run removes entries that no longer match anything, scoped to",
+    "the paths that run actually scanned — so an entry covering a file the run did not look",
+    "at is neither matched nor removed. The list cannot fill up with dead rules.",
+    "",
+    "WHAT MAY LIVE IN THIS FILE. This file is TRACKED and it ships in the published",
+    "repository, so an entry publishes both its term and the statement that the term is a",
+    "member of an owner-corpus class. Entries for the owner-identifying classes (terms,",
+    "private_terms, domains, entity_ids, paths) are therefore REFUSED here and belong in",
+    "the gitignored config/publication-permitted.user.json. And every term named here must",
+    "already appear, in cleartext, in the tracked file the entry names — a permitted entry",
+    "may only excuse an exposure the tree already has, never create one.",
+    "",
+    "Both rules are enforced: node scripts/check-publication-permitted.js --schema",
+    "",
+    "Five of the entries below sit in files the pre-commit hook regenerates and stages",
+    "DURING the commit (public-truth, llms-full, the FAQ bundle and context). Without them,",
+    "promoting the address class to blocking at commit time would fail every commit the",
+    "owner makes, because the hook itself puts the address back."
+  ],
+  "permitted": [
+    {
+      "term": "miyagi@robotdojo.ai",
+      "file": "apps/licensing.html",
+      "class": "emails",
+      "reason": "the product's public support address, printed on the public licensing page. It is in the owner corpus only because it is also his own mailbox; it is published on purpose.",
+      "added": "2026-07-25"
+    },
+    {
+      "term": "miyagi@robotdojo.ai",
+      "file": "apps/privacy.html",
+      "class": "emails",
+      "reason": "public support address in the published privacy policy — the contact a reader is meant to use.",
+      "added": "2026-07-25"
+    },
+    {
+      "term": "miyagi@robotdojo.ai",
+      "file": "apps/terms.html",
+      "class": "emails",
+      "reason": "public support address in the published terms of service.",
+      "added": "2026-07-25"
+    },
+    {
+      "term": "miyagi@robotdojo.ai",
+      "file": "apps/static/public-truth.json",
+      "class": "emails",
+      "reason": "public support address inside the generated public-truth corpus. Regenerated and staged by the pre-commit hook, so it returns on every commit.",
+      "added": "2026-07-25"
+    },
+    {
+      "term": "miyagi@robotdojo.ai",
+      "file": "apps/static/llms-full.txt",
+      "class": "emails",
+      "reason": "public support address inside the generated llms-full corpus. Regenerated and staged by the pre-commit hook, so it returns on every commit.",
+      "added": "2026-07-25"
+    },
+    {
+      "term": "miyagi@robotdojo.ai",
+      "file": "apps/static/faq/faq-context.json",
+      "class": "emails",
+      "reason": "public support address in the generated FAQ context. Regenerated and staged by the pre-commit hook, so it returns on every commit.",
+      "added": "2026-07-25"
+    },
+    {
+      "term": "miyagi@robotdojo.ai",
+      "file": "lib/public-chat/public-truth.js",
+      "class": "emails",
+      "reason": "public support address in the generated public-truth module. Regenerated and staged by the pre-commit hook, so it returns on every commit.",
+      "added": "2026-07-25"
+    },
+    {
+      "term": "miyagi@robotdojo.ai",
+      "file": "lib/public-chat/faq-bundle.js",
+      "class": "emails",
+      "reason": "public support address in the generated FAQ bundle. Regenerated and staged by the pre-commit hook, so it returns on every commit.",
+      "added": "2026-07-25"
+    },
+    {
+      "term": "miyagi@robotdojo.ai",
+      "file": "lib/config.js",
+      "class": "emails",
+      "reason": "public support address as the product's default contact mailbox in configuration.",
+      "added": "2026-07-25"
+    },
+    {
+      "term": "miyagi@robotdojo.ai",
+      "file": "lib/email.js",
+      "class": "emails",
+      "reason": "public support address as the outbound sender the product uses.",
+      "added": "2026-07-25"
+    },
+    {
+      "term": "miyagi@robotdojo.ai",
+      "file": "routes/accounts.js",
+      "class": "emails",
+      "reason": "public support address shown to a user in the account surface.",
+      "added": "2026-07-25"
+    },
+    {
+      "term": "sc-noreply@google.com",
+      "file": "lib/gsc-heal.js",
+      "class": "emails",
+      "reason": "Google Search Console's own public no-reply sender. The healer matches on it to find Search Console mail; it identifies Google, not anyone in the owner's graph.",
+      "added": "2026-07-25"
+    },
+    {
+      "term": "sc-noreply@google.com",
+      "file": "scripts/gsc-poll.js",
+      "class": "emails",
+      "reason": "Google Search Console's own public no-reply sender, matched by the poller for the same reason.",
+      "added": "2026-07-25"
+    }
+  ]
+}

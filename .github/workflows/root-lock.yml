@@ -1,0 +1,32 @@
+name: Root architecture lock
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  root-lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/check-root-lock.js --ci
+      - run: node scripts/gate.js
+      - run: node scripts/generate-ontology.js --check
+      - run: node scripts/generate-sitemap.js --check
+      - run: node scripts/check-gitignore.js
+      # st_862d73d1 AC4 — doc-budget RAISE sign-off mirror. On a PR, compare the
+      # surfaces.json budgets against the base branch so an unapproved max_chars
+      # increase is blocked in CI as well as at pre-commit. (CODEOWNERS review on
+      # architecture/surfaces.json — a CORE_PROTECTED_FILE — is the human gate.)
+      - run: |
+          if [ -n "${{ github.base_ref }}" ]; then
+            git fetch --no-tags --depth=1 origin "${{ github.base_ref }}"
+            node scripts/check-doc-budget-raise.js --base "origin/${{ github.base_ref }}"
+          else
+            node scripts/check-doc-budget-raise.js
+          fi

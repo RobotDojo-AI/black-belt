@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Cohort revocation poller — hourly check for revoked cohort weeks.
+  Installed by install.sh; runs scripts/cohort-revocation-poll.js every
+  3600s and once at load (RunAtLoad=true) so a fresh boot picks up any
+  revocations that happened while the machine was off.
+
+  st_5a63545d AC 19. Moved into apps/static/launch-agents/ by st_bc949e7c.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.robotdojo.cohort-poll</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>__ROBOTDOJO_RUNTIME__</string>
+    <string>__ROBOTDOJO_HOME__/scripts/cohort-revocation-poll.js</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>__ROBOTDOJO_HOME__</string>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>StartInterval</key>
+  <integer>3600</integer>
+
+  <key>StandardOutPath</key>
+  <string>__CONFIG__/logs/cohort-poll.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>__CONFIG__/logs/cohort-poll.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>__HOME__</string>
+    <key>USER</key>
+    <string>__USER__</string>
+    <key>PATH</key>
+    <string>__PATH__</string>
+  </dict>
+</dict>
+</plist>

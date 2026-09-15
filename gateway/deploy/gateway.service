@@ -1,0 +1,57 @@
+[Unit]
+Description=Robot Dojo blind SNI relay (st_63b59bda)
+Documentation=file:///opt/robotdojo/gateway/README.md
+After=network-online.target
+Wants=network-online.target
+
+# Disable systemd's crash-loop circuit breaker ENTIRELY. Its defaults
+# (DefaultStartLimitIntervalSec=10s, DefaultStartLimitBurst=5) stop restarting a
+# service after 5 crashes in 10 seconds — which would silently take the relay
+# down with no load balancer health check to catch it. On a single VPS the relay
+# must keep trying and keep alerting. The alerting half of AC-3 (the Mac-side
+# relay-watchdog's macOS notification) is what escalates a genuine crash loop to
+# a human; systemd's job here is only to never give up on its own.
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+
+# Dedicated unprivileged service account — NEVER root. The relay holds no user
+# key and reads no user file; running it as root would be gratuitous privilege.
+User=robotdojo
+Group=robotdojo
+
+WorkingDirectory=/opt/robotdojo/gateway
+EnvironmentFile=/etc/robotdojo/gateway.env
+ExecStart=/usr/bin/node /opt/robotdojo/gateway/index.js
+
+# Always restart. A clean exit is not expected except a deliberate SIGTERM
+# drain (see gateway/index.js), so Restart=always (not on-failure) is correct —
+# any exit at all means bring it back.
+Restart=always
+RestartSec=2
+
+# Bind :443 as an unprivileged user. A bare VPS process — unlike the Docker
+# container's EXPOSE 443 — needs the capability grant explicitly.
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+
+# Honor the app's own SIGTERM drain window (GATEWAY_SIGTERM_DRAIN_MS default 90s).
+KillSignal=SIGTERM
+TimeoutStopSec=120
+
+# Hardening — the relay is structurally blind; lock it down accordingly.
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+
+# Durable state (st_63b59bda hardening) — a writable dir that survives the
+# read-only ProtectSystem=strict FS, holding the persisted device registry
+# (slug → secret hash, no user content) and the persistent ACME account key.
+# Points GATEWAY_STATE_FILE / GATEWAY_ACME_ACCOUNT_KEY_FILE at /var/lib/robotdojo-gateway.
+StateDirectory=robotdojo-gateway
+StateDirectoryMode=0700
+
+[Install]
+WantedBy=multi-user.target

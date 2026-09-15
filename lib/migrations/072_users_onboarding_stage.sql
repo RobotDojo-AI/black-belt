@@ -1,0 +1,11 @@
+-- st_5a63545d AC 7 / AC 8
+-- Adds onboarding_stage as a column on users so the OAuth callback can
+-- advance it server-side in the same transaction as token storage, and so
+-- POST /api/setup/llm-key can advance it inline. Previously onboarding_stage
+-- lived in user_settings (key='onboarding_stage', value=stringified int) —
+-- the new column is the canonical home; the lib helper reads/writes both
+-- during transition so legacy callers keep working.
+--
+-- Default 1 = stage 1 (Install) per docs/onboarding-flow.md.
+-- Range gate is enforced at the API level (routes/setup/onboarding.js).
+ALTER TABLE users ADD COLUMN onboarding_stage INTEGER NOT NULL DEFAULT 1;

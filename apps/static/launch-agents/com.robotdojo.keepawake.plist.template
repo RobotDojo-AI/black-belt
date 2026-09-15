@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Robot Dojo — relay keep-awake assertion.
+  Prevents idle, disk, and AC-power system sleep while letting the display sleep.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.robotdojo.keepawake</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/caffeinate</string>
+    <string>-i</string>
+    <string>-m</string>
+    <string>-s</string>
+  </array>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>KeepAlive</key>
+  <true/>
+
+  <key>ThrottleInterval</key>
+  <integer>10</integer>
+
+  <key>StandardOutPath</key>
+  <string>__CONFIG__/logs/robotdojo-keepawake.out.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>__CONFIG__/logs/robotdojo-keepawake.err.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>__HOME__</string>
+    <key>USER</key>
+    <string>__USER__</string>
+    <key>PATH</key>
+    <string>__PATH__</string>
+  </dict>
+</dict>
+</plist>

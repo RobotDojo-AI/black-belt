@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Robot Dojo — device TLS cert renewal (st_63b59bda hardening).
+  Daily at 04:17: re-registers the device at the relay (idempotent, self-heals
+  per-device auth) and renews {slug}.robotdojo.ai through the relay when the cert
+  is within 30 days of expiry. Silent no-op when the cert is still fresh.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.robotdojo.cert-renew</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>__ROBOTDOJO_RUNTIME__</string>
+    <string>__ROBOTDOJO_HOME__/scripts/renew-device-cert.js</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>__ROBOTDOJO_HOME__</string>
+
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>4</integer>
+    <key>Minute</key>
+    <integer>17</integer>
+  </dict>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>Nice</key>
+  <integer>10</integer>
+
+  <key>StandardOutPath</key>
+  <string>__CONFIG__/logs/robotdojo-cert-renew.out.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>__CONFIG__/logs/robotdojo-cert-renew.err.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>__HOME__</string>
+    <key>USER</key>
+    <string>__USER__</string>
+    <key>NODE_ENV</key>
+    <string>production</string>
+    <key>PATH</key>
+    <string>__PATH__</string>
+    <key>ROBOTDOJO_HOME</key>
+    <string>__ROBOTDOJO_HOME__</string>
+    <key>ROBOTDOJO_CONFIG</key>
+    <string>__CONFIG__</string>
+  </dict>
+</dict>
+</plist>

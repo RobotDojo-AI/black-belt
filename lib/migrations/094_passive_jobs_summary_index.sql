@@ -1,0 +1,25 @@
+-- st_27561b77 P3 — passive_jobs(queue, job_type, status) composite index.
+--
+-- WHY: getPassiveJobSummary runs four sequential aggregate queries with
+-- WHERE queue=? GROUP BY job_type[,status]. The existing indices
+--   idx_passive_jobs_claim    (queue, status, run_after, priority, created_at)
+--   idx_passive_jobs_type_status (job_type, status, updated_at)
+-- cover the lease-acquire path but force a post-filter sort for the
+-- GROUP BY job_type WHERE queue=? scans. On a 6.1 GB SQLCipher DB with
+-- 32+ queue depth, each scan is 250–370 ms (P1 trace, 2026-06-05).
+--
+-- Column order (queue, job_type, status):
+--   (a) WHERE queue=? GROUP BY job_type, status  → index-only group-by
+--       in column order (leading prefix queue covers the WHERE; trailing
+--       prefix (job_type, status) covers the GROUP BY).
+--   (b) WHERE queue=? GROUP BY job_type with SUM/MAX → same leading prefix.
+--   (c) WHERE queue=? AND status='running' → leading prefix queue still
+--       drives the scan; SQLite uses (queue, *) prefix even when the
+--       intermediate column is unconstrained.
+--
+-- The lease-acquire query (acquireNextPassiveJob) is unaffected — it uses
+-- idx_passive_jobs_claim which has the same leading column. SQLite picks
+-- the narrower index for that query because the WHERE includes
+-- run_after <= ? (a column present in claim, absent here).
+CREATE INDEX IF NOT EXISTS idx_passive_jobs_summary
+  ON passive_jobs(queue, job_type, status);

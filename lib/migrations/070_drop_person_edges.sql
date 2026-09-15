@@ -1,0 +1,21 @@
+-- Story: st_87a0d072 (network-ranking-quality-investigation)
+-- Phase 6: Drop person_edges and its co-occurrence pipeline.
+--
+-- DESTRUCTIVE. The table previously stored derived co-occurrence weights
+-- between pairs of people, computed by scripts/ingest/09-cooccurrence.js.
+-- That pipeline is retired in this story; every consumer (relationship-builder,
+-- routes/network.js, 07-context.js, nightly.js, account-deletion.js,
+-- phase-00-snapshot, phase-01-hard-delete, phase-06-restore) was patched in
+-- Phase 6a to expect the table absent.
+--
+-- DATA IMPACT: live DB currently has 0 active co-occurrence rows after the
+-- retro mandates that the data be derived freshly each run; even if non-zero,
+-- the rows are derived from person_interactions + timeline_event_entities and
+-- can be recomputed if a future story re-introduces co-occurrence.
+--
+-- ROLLBACK: re-create the schema from the original migration:
+--   lib/migrations/000_base_entities.sql (CREATE TABLE person_edges + indexes)
+--   lib/migrations/046_person_edges_columns.sql (9-column schema, UNIQUE)
+-- Then restore the 09-cooccurrence.js pipeline script.
+
+DROP TABLE IF EXISTS person_edges;

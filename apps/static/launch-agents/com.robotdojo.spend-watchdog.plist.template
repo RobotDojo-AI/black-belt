@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Robot Dojo — API spend watchdog.
+  Every 15 minutes — reads the spend ledgers and notifies when a ceiling band
+  worsens, so a runaway is caught while there is still a day left to act on it
+  rather than at the next invoice. Observes only; the hard stop lives in
+  lib/spend-guard.js on the call path.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.robotdojo.spend-watchdog</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>__ROBOTDOJO_RUNTIME__</string>
+    <string>__ROBOTDOJO_HOME__/scripts/spend-watchdog.js</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>__ROBOTDOJO_HOME__</string>
+
+  <key>StartInterval</key>
+  <integer>900</integer>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>Nice</key>
+  <integer>10</integer>
+
+  <key>StandardOutPath</key>
+  <string>__CONFIG__/logs/robotdojo-spend-watchdog.out.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>__CONFIG__/logs/robotdojo-spend-watchdog.err.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>__HOME__</string>
+    <key>USER</key>
+    <string>__USER__</string>
+    <key>NODE_ENV</key>
+    <string>production</string>
+    <key>PATH</key>
+    <string>__PATH__</string>
+    <!--
+      Path parity with every other DB-touching agent. Without these the watchdog
+      resolves its own default and would read a DIFFERENT database than the one
+      the system actually spends against — reporting $0.00 forever while the real
+      ledger filled up. A spend alarm pointed at the wrong ledger is worse than
+      none, because it reads as an all-clear.
+    -->
+    <key>ROBOTDOJO_HOME</key>
+    <string>__ROBOTDOJO_HOME__</string>
+    <key>ROBOTDOJO_CONFIG</key>
+    <string>__CONFIG__</string>
+    <key>ROBOTDOJO_DB</key>
+    <string>__CONFIG__/robotdojo.db</string>
+  </dict>
+</dict>
+</plist>

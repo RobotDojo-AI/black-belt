@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Robot Dojo root allowlist lock",
+  "type": "object",
+  "required": [
+    "$schema_version",
+    "kind",
+    "owner_approval_required",
+    "owner_codeowner",
+    "entries",
+    "retired",
+    "gitignore",
+    "dot_robotdojo_entries",
+    "protected_files"
+  ],
+  "properties": {
+    "$schema_version": { "type": "integer", "const": 1 },
+    "kind": { "type": "string", "const": "robotdojo-root-allowlist-lock" },
+    "owner_approval_required": { "type": "boolean", "const": true },
+    "story_id": { "type": "string" },
+    "owner_approval_quote": { "type": "string" },
+    "owner_codeowner": {
+      "type": "string",
+      "pattern": "^@[A-Za-z0-9_.-]+(/[A-Za-z0-9_.-]+)?$"
+    },
+    "external_enforcement": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "entries": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["type", "class", "required", "purpose"],
+        "properties": {
+          "type": { "enum": ["dir", "file"] },
+          "class": { "enum": ["github", "gcp", "mixed", "regenerable"] },
+          "required": { "type": "boolean" },
+          "hidden": { "type": "boolean" },
+          "gitignorePolicy": { "enum": ["has_gitignore", "no_special_rules", "repo_wide"] },
+          "extensions": { "type": "array", "items": { "type": "string" } },
+          "purpose": { "type": "string" },
+          "belongs": { "type": "string" },
+          "doesNotBelong": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "retired": { "type": "array", "items": { "type": "string" } },
+    "gitignore": {
+      "type": "object",
+      "required": ["repo_wide_patterns", "root_file_patterns", "per_dir_node_modules_ok"],
+      "properties": {
+        "repo_wide_patterns": { "type": "array", "items": { "type": "string" } },
+        "root_file_patterns": { "type": "array", "items": { "type": "string" } },
+        "per_dir_node_modules_ok": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "dot_robotdojo_entries": { "type": "array", "items": { "type": "string" } },
+    "protected_files": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false
+}

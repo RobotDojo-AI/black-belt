@@ -1,0 +1,292 @@
+{
+  "_comment": "Canonical registry for Robot Dojo maintenance jobs. Shape: Signal -> queue -> planner -> policy/budget -> worker -> artifact -> ledger -> status.",
+  "defaults": {
+    "first_import_budget_cents": 2500,
+    "bulk_mode": "batch",
+    "long_tail_model_tier": "cpu"
+  },
+  "deprecated_launch_agents": [
+    {
+      "label": "com.robotdojo.nightly",
+      "reason": "overnight batch deleted by st_fd14cdd4 - routines run always-on via the maintenance worker; deploy runbook boots the live agent out and removes its plist"
+    }
+  ],
+  "routines": [
+    {
+      "id": "server",
+      "kind": "launch-agent",
+      "owner": "runtime",
+      "entrypoint": "index.js",
+      "trigger": "launchd KeepAlive",
+      "cadence": "continuous",
+      "writes": [
+        "conversations",
+        "messages",
+        "topic CRUD",
+        "chat tool writes"
+      ],
+      "canonical_context_writer": false,
+      "rag_writer": false,
+      "backup_writer": false,
+      "log_paths": [
+        "~/.robotdojo/logs/robotdojo-server.out.log",
+        "~/.robotdojo/logs/robotdojo-server.err.log"
+      ],
+      "overlap_guard": "launchd KeepAlive singleton",
+      "failure_policy": "crash restarts; status must expose unsafe env drift",
+      "status_surface": "background-status",
+      "launch_required": true
+    },
+    {
+      "id": "sync",
+      "kind": "launch-agent",
+      "owner": "integrations",
+      "entrypoint": "scripts/sync.js",
+      "trigger": "launchd StartInterval",
+      "cadence": "300s",
+      "writes": [
+        "emails",
+        "calendar_events",
+        "drive_files",
+        "contacts",
+        "photos",
+        "granola",
+        "imessage",
+        "monarch"
+      ],
+      "canonical_context_writer": false,
+      "rag_writer": false,
+      "backup_writer": false,
+      "log_paths": [
+        "~/.robotdojo/logs/robotdojo-sync.out.log",
+        "~/.robotdojo/logs/robotdojo-sync.err.log"
+      ],
+      "overlap_guard": "withLaunchDbWriterGuard external-db-writer lock",
+      "failure_policy": "continue per source; status must surface source errors",
+      "status_surface": "background-status",
+      "launch_required": true
+    },
+    {
+      "id": "chunk-worker",
+      "kind": "launch-agent",
+      "owner": "rag",
+      "entrypoint": "scripts/chunk-embed-worker.js",
+      "trigger": "launchd StartInterval",
+      "cadence": "120s",
+      "writes": [
+        "chunks",
+        "chunk_vec_*",
+        "worker_backoff",
+        "setup_tasks"
+      ],
+      "canonical_context_writer": false,
+      "rag_writer": true,
+      "backup_writer": false,
+      "log_paths": [
+        "~/.robotdojo/logs/robotdojo-chunk-worker.out.log",
+        "~/.robotdojo/logs/robotdojo-chunk-worker.err.log"
+      ],
+      "overlap_guard": "withLaunchDbWriterGuard external-db-writer lock",
+      "failure_policy": "skip when no work; retry TCC failures via backoff",
+      "status_surface": "background-status",
+      "launch_required": true
+    },
+    {
+      "id": "topic-edit-watcher",
+      "kind": "launch-agent",
+      "owner": "topic-context",
+      "entrypoint": "scripts/topic-edit-watcher.js",
+      "trigger": "needs_regen=1 and quiet period",
+      "cadence": "60s",
+      "writes": [
+        "user_topics.description_embedding",
+        "chunks.topic",
+        "conversation_topics",
+        "user_topics.context_md",
+        "topic_context_history"
+      ],
+      "canonical_context_writer": true,
+      "rag_writer": true,
+      "backup_writer": false,
+      "log_paths": [
+        "~/.robotdojo/logs/robotdojo-topic-edit-watcher.out.log",
+        "~/.robotdojo/logs/robotdojo-topic-edit-watcher.err.log"
+      ],
+      "overlap_guard": "withLaunchDbWriterGuard external-db-writer lock",
+      "failure_policy": "leave needs_regen=1 on failure",
+      "status_surface": "background-status",
+      "launch_required": true
+    },
+    {
+      "id": "maintenance-routines",
+      "kind": "maintenance-worker",
+      "owner": "maintenance",
+      "entrypoint": "scripts/maintenance-phases.js",
+      "trigger": "freshness windows in lib/maintenance-routines.js seeded by the supervisor probe; drained by the server-supervised off-process maintenance worker (scripts/supervisor-maintenance-worker.mjs) during idle/quiet windows",
+      "cadence": "continuous — per-routine freshness windows (15m floor for pipeline_ingest, ~6h rolling for hygiene, 24h for daily routines); nothing waits for a clock time",
+      "writes": [
+        "cleanup",
+        "scores",
+        "chunk_entities",
+        "entity_facts",
+        "entity_relationships",
+        "entity enrichment",
+        "topic context",
+        "conversation reclassification",
+        "audit history",
+        "models.json"
+      ],
+      "canonical_context_writer": true,
+      "rag_writer": true,
+      "backup_writer": false,
+      "log_paths": [
+        "~/.robotdojo/logs/robotdojo-server.out.log",
+        "~/.robotdojo/logs/maintenance/"
+      ],
+      "overlap_guard": "withLaunchDbWriterGuard external-db-writer lock per phase slice; maintenance worker pidfile singleton",
+      "failure_policy": "phase failure exits nonzero -> passive-job retry/quarantine + Asana task; failed context rows remain dirty for retry",
+      "status_surface": "background-status",
+      "launch_required": false
+    },
+    {
+      "id": "entity-pipeline-ingest",
+      "kind": "maintenance-worker",
+      "owner": "entity-context",
+      "entrypoint": "scripts/ingest/index.js",
+      "trigger": "pipeline_ingest routine (data-arrival trigger from sync drains + 15-min freshness floor; spawned child under the phase runner's launch DB writer guard)",
+      "cadence": "continuous (within minutes of new data; pipeline_entities chains on completion)",
+      "writes": [
+        "people",
+        "person_identifiers",
+        "person_interactions",
+        "timeline_events",
+        "chunk_entities",
+        "companies",
+        "places",
+        "scores",
+        "entity_facts"
+      ],
+      "canonical_context_writer": false,
+      "rag_writer": false,
+      "backup_writer": false,
+      "log_paths": [
+        "~/.robotdojo/logs/robotdojo-server.out.log"
+      ],
+      "overlap_guard": "runs inside the phase runner's withLaunchDbWriterGuard external-db-writer lock; one maintenance worker drains one job at a time",
+      "failure_policy": "non-fatal — INGEST phase failure is logged and surfaced as an Asana task; other routines unaffected",
+      "status_surface": "background-status",
+      "launch_required": false
+    },
+    {
+      "id": "backup",
+      "kind": "launch-agent",
+      "owner": "backup",
+      "entrypoint": "scripts/backup-dispatcher.js",
+      "trigger": "launchd CalendarInterval",
+      "cadence": "02:30 local",
+      "writes": [
+        "GCS private backup"
+      ],
+      "canonical_context_writer": false,
+      "rag_writer": false,
+      "backup_writer": true,
+      "log_paths": [
+        "~/.robotdojo/logs/robotdojo-backup.out.log",
+        "~/.robotdojo/logs/robotdojo-backup.err.log"
+      ],
+      "overlap_guard": "backup lockfile",
+      "failure_policy": "strict mode exits nonzero; restore proof required",
+      "status_surface": "background-status",
+      "launch_required": true
+    },
+    {
+      "id": "workbench-index",
+      "kind": "manual",
+      "owner": "workbenches",
+      "entrypoint": "scripts/workbench-index.js",
+      "trigger": "Codex/user-confirmed workbench indexing",
+      "cadence": "manual",
+      "writes": [
+        "workbench_items",
+        "chunks"
+      ],
+      "canonical_context_writer": false,
+      "rag_writer": true,
+      "backup_writer": false,
+      "log_paths": [],
+      "overlap_guard": "manual command; DB transaction",
+      "failure_policy": "fail loudly",
+      "status_surface": "workbench-open",
+      "launch_required": false
+    },
+    {
+      "id": "workbench-promote",
+      "kind": "manual",
+      "owner": "workbenches",
+      "entrypoint": "scripts/workbench-promote.js",
+      "trigger": "reviewed promotion",
+      "cadence": "manual",
+      "writes": [
+        "user/contexts/**/context.md",
+        "user_topics.context_md",
+        "entity_facts",
+        "workbench_promotions"
+      ],
+      "canonical_context_writer": true,
+      "rag_writer": false,
+      "backup_writer": false,
+      "log_paths": [],
+      "overlap_guard": "reviewed compact body required",
+      "failure_policy": "reviewed compact body required; promotion writes history and fails if target missing or body too large",
+      "status_surface": "workbench-open",
+      "launch_required": false
+    },
+    {
+      "id": "entity-context-enrichment",
+      "kind": "maintenance-worker",
+      "owner": "entity-context",
+      "entrypoint": "scripts/ingest/08-entity-enrich.js",
+      "trigger": "maintenance_queue entity context_refresh",
+      "cadence": "daily maintenance routine (maint_enrich) or on-demand",
+      "writes": [
+        "user/contexts/{people,companies,places}/**/context.md",
+        "entity_facts",
+        "people.needs_regen",
+        "companies.needs_regen",
+        "places.needs_regen"
+      ],
+      "canonical_context_writer": true,
+      "rag_writer": false,
+      "backup_writer": false,
+      "log_paths": [
+        "~/.robotdojo/logs/robotdojo-server.out.log"
+      ],
+      "overlap_guard": "maintenance_queue + DB writer lock",
+      "failure_policy": "leave needs_regen=1 and queue failed job for retry",
+      "status_surface": "background-status",
+      "launch_required": false
+    },
+    {
+      "id": "maint_ambient_shard",
+      "kind": "maintenance-worker",
+      "owner": "rag",
+      "entrypoint": "scripts/maintenance-phases.js",
+      "trigger": "freshness window (daily) in lib/maintenance-routines.js; drained by the maintenance worker as --phase AMBIENT_SHARD, which spawns scripts/build-general-shard.js bounded by --max-seconds",
+      "cadence": "daily, low priority - st_2d941f89 gap 1: builds the ambient chunk_vec_general shard an unscoped no-topic chat query reads, gated on server activity + HID idle before spawn and on --max-seconds + chat-app-active during the run",
+      "writes": [
+        "chunk_vec_general (vector relocation only - no re-embedding)"
+      ],
+      "canonical_context_writer": false,
+      "rag_writer": true,
+      "backup_writer": false,
+      "log_paths": [
+        "~/.robotdojo/logs/robotdojo-server.out.log",
+        "~/.robotdojo/logs/maintenance/"
+      ],
+      "overlap_guard": "withLaunchDbWriterGuard external-db-writer lock per phase slice; maintenance worker pidfile singleton",
+      "failure_policy": "non-zero exit -> passive-job retry/quarantine; a partial slice is idempotent and resumes next fire",
+      "status_surface": "background-status",
+      "launch_required": false
+    }
+  ]
+}

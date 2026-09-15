@@ -1,0 +1,96 @@
+{
+  "gsc": {
+    "healWindowDays": 7
+  },
+  "attribution": {
+    "marginRejectThreshold": 0.15,
+    "nameMentionConfidence": 0.7,
+    "handoffConfidence": 0.6,
+    "turntakingConfidence": 0.55,
+    "fingerprintFloorTokens": 1000,
+    "fingerprintMinConfidence": 0.5,
+    "llmMinConfidence": 0.5,
+    "maxResidualChunks": 96
+  },
+  "junkClassifier": {
+    "minTokensPostStrip": 50
+  },
+  "idleGate": {
+    "thresholdSeconds": 300
+  },
+  "embed": {
+    "ortIntraOpThreads": 2,
+    "ortEnableCpuMemArena": false,
+    "ortEnableMemPattern": false,
+    "longInputCharThreshold": 2000,
+    "emailBodyCharCap": 1800,
+    "emailTotalCharCap": 1900,
+    "emailSubjectCharCap": 240,
+    "emailSenderCharCap": 160,
+    "longInputBatchSize": 2,
+    "mediumInputCharThreshold": 800,
+    "mediumInputBatchSize": 4,
+    "topicTimeBudgetMs": 120000,
+    "topicCooldownMs": 600000
+  },
+  "watchdog": {
+    "cpuBurnPercent": 20,
+    "cpuBurnSampleCount": 3,
+    "asanaDedupTtlHours": 12,
+    "backoffSchedule": [60, 300, 900, 1800, 3600]
+  },
+  "chat_injection": {
+    "per_topic_chars": 12000
+  },
+  "chat_context": {
+    "total_char_budget": 60000
+  },
+  "ragSearch": {
+    "freshVectorOverlayK": 96,
+    "freshVectorOverlayGraceMs": 2000
+  },
+  "serverListen": {
+    "retryDelaysMs": [250, 500, 1000, 2000, 4000, 8000, 12000]
+  },
+  "workbenchPromote": {
+    "compactMaxChars": 2400,
+    "compactMaxLines": 78,
+    "domainLookupConcurrency": 6,
+    "routePrefix": "/workbench"
+  },
+  "chatEntityLinking": {
+    "companyShortNameFloor": 4,
+    "sweepConcurrency": 8,
+    "sweepBatchSize": 500
+  },
+  "topic_distill": {
+    "enabled": false
+  },
+  "providerHealth": {
+    "enabled": false,
+    "windowMs": 900000,
+    "minOverloadErrors": 2
+  },
+  "ownerCorpus": {
+    "floorFraction": 0.5,
+    "sweepCeiling": 400
+  },
+  "credentialScan": {
+    "minSecretLength": 16
+  },
+  "monarch": {
+    "opItem": "Monarch",
+    "opVault": "Robot Dojo",
+    "txnPageLimit": 1000,
+    "timeoutMs": 600000,
+    "syncWeekday": 6,
+    "syncHour": 8,
+    "syncMinute": 0,
+    "syncTimeZone": "America/New_York",
+    "failureBackoffMs": 86400000,
+    "watchdogPadMs": 15000,
+    "txnCountDropRatio": 0.8,
+    "totalsJumpRatio": 0.2,
+    "userAgent": "RobotDojo/1.0"
+  }
+}

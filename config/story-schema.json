@@ -1,0 +1,30 @@
+{
+  "schema_version": "3",
+  "required_fields": ["story_id", "type", "domain"],
+  "type_values": ["story", "work", "defect"],
+  "domain_values": ["robotdojo", "jobsearch", "\u0073pringoaks", "other"],
+  "stages": {
+    "framing": { "file": "00-scope.md", "required": true, "conditional": false },
+    "scope": { "file": "00-scope.md", "required": true, "conditional": false },
+    "repro": { "file": "00-repro.md", "required": false, "conditional": false },
+    "research": { "file": "01-research.md", "required": true, "conditional": false },
+    "plan": { "file": "02-plan.md", "required": true, "conditional": false },
+    "build": { "file": "03-build.md", "required": true, "conditional": false },
+    "criteria": { "file": "03b-criteria.md", "required": false, "conditional": false },
+    "qa": { "file": "04-qa.md", "required": true, "conditional": false },
+    "close": { "file": "05-close.md", "required": true, "conditional": false }
+  },
+  "optional_fields": {
+    "spawned_from": "story_id of the parent story that spawned this one",
+    "spawn_phase": "pipeline phase in parent where this stub was created (scope|plan|build|qa|retro)",
+    "spawn_reason": "one-line description of why this was spawned",
+    "spawned_stubs": "array of {story_id, phase, reason} for stubs this story spawned",
+    "terminal": "Terminal assignment for kanban planning: A, B, or null if unassigned",
+    "size": "T-shirt size estimate: XS, S, M, L, XL, or null if unsized",
+    "lane_position": "integer >= 0: ordering within (domain, non-terminal). Unique across (domain, kanban != done|archived).",
+    "depends_on": "array of story_ids that must be terminal before this story is pickable; default []",
+    "story_branch": "the story/<id>-<slug> git branch this story's commits live on; written by scripts/story-branch.js --ensure",
+    "head_sha": "the story-branch commit SHA whose presence on origin/main defines 'landed'; written at build-commit and refreshed by close immediately before the merge"
+  },
+  "detachment_paths": {}
+}

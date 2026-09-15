@@ -1,0 +1,256 @@
+{
+  "version": "0847ccb5bff0faad",
+  "generated": "deterministic",
+  "system": "You are Miyagi for Robot Dojo public docs chat. Answer concisely using only the public Robot Dojo truth projection below. Cite source path names naturally when useful. If the projection does not support a claim, say it is not covered in the public docs. Public boundary: answer only from this public codebase projection. Do not claim access to local installs, private user data, authenticated chat, account APIs, files, RAG indexes, memories, databases, or sessions.",
+  "context_header": "Robot Dojo public truth version 0847ccb5bff0faad. Generated from canonical docs; not source truth.",
+  "categories": {
+    "product": [
+      {
+        "q": "What is Robot Dojo?",
+        "a": "Robot Dojo is a personal AI system that actually knows you. Chat with your email, calendar, contacts, and messages unified into one living memory; work in it with research, analyses, and apps on your own data; and build the bigger ideas you’ve always had. All local, on your Mac.",
+        "tags": [
+          "product"
+        ],
+        "keywords": [
+          "what",
+          "is",
+          "robot",
+          "dojo"
+        ],
+        "source": "architecture/product.md"
+      },
+      {
+        "q": "Who is Robot Dojo for?",
+        "a": "Founders, builders, and entrepreneurs tired of repeating themselves to AI. You already have the context (inbox, calendar, messages, notes), and Robot Dojo turns it into an assistant that remembers you across every session. The private beta is a small, smart cohort installing on a Mac and getting more out of AI than a stock foundation model, with no founder hand-holding.",
+        "tags": [
+          "product"
+        ],
+        "keywords": [
+          "who",
+          "is",
+          "robot",
+          "dojo",
+          "for"
+        ],
+        "source": "architecture/product.md"
+      },
+      {
+        "q": "Is this like Garry Tan's GBrain?",
+        "a": "Similar arc, different audience. GBrain (https://github.com/garrytan/gbrain) is a developer tool: a knowledge graph you or an agent fills by writing markdown pages. Robot Dojo is for non-technical people: more productized, less configuration. It extracts signal from data you already have (email, iMessage, calendar, transcripts, contacts), so you don't write pages; Robot Dojo reads what you already did.",
+        "tags": [
+          "product"
+        ],
+        "keywords": [
+          "is",
+          "this",
+          "like",
+          "garry",
+          "tan",
+          "s",
+          "gbrain"
+        ],
+        "source": "architecture/product.md"
+      },
+      {
+        "q": "Is it open source?",
+        "a": "Yes. White Belt is MIT, fully open source, free to read, audit, fork, and run. Black Belt is source-available on a subscription: the code is still public so you can audit every line, and an active subscription unlocks the premium engines and the encrypted relay.",
+        "tags": [
+          "product"
+        ],
+        "keywords": [
+          "is",
+          "it",
+          "open",
+          "source"
+        ],
+        "source": "architecture/product.md + architecture/architecture.md"
+      }
+    ],
+    "install": [
+      {
+        "q": "What should I connect and import?",
+        "a": "Start with the accounts that already know you. Connect Google with one OAuth click for Gmail, Calendar, and Contacts. Grant Full Disk Access on your Mac and Robot Dojo reads your local Apple data: iMessage, Contacts, Calendar, Notes, Photos metadata, Call history, and Mail. Drop a Google Takeout archive or any foundation-model chat exports into your inbox folder for deeper history. The more real context Robot Dojo has, the faster it feels like it knows you.",
+        "tags": [
+          "install"
+        ],
+        "keywords": [
+          "what",
+          "should",
+          "i",
+          "connect",
+          "and",
+          "import"
+        ],
+        "source": "architecture/product.md"
+      },
+      {
+        "q": "Do I need a dedicated computer?",
+        "a": "No. Robot Dojo runs fine on the Mac you already own. 16GB of RAM is enough on any modern machine. A Mac mini is a better host if you want one, because it stays on whether your laptop is open or not, so the relay is always reachable from another computer or your phone. Move to a dedicated machine any time; nothing locks you in.",
+        "tags": [
+          "install"
+        ],
+        "keywords": [
+          "do",
+          "i",
+          "need",
+          "a",
+          "dedicated",
+          "computer"
+        ],
+        "source": "architecture/product.md"
+      },
+      {
+        "q": "How do I install Robot Dojo?",
+        "a": "One command on your Mac: curl -fsSL https://robotdojo.ai/install.sh | bash. Or open the Install modal at the top of robotdojo.ai for the same command. Install takes 10–20 minutes; when the local server is ready, your browser opens to setup.",
+        "tags": [
+          "install"
+        ],
+        "keywords": [
+          "how",
+          "do",
+          "i",
+          "install",
+          "robot",
+          "dojo"
+        ],
+        "source": "architecture/product.md + apps/static/install.sh"
+      }
+    ],
+    "privacy": [
+      {
+        "q": "Where does my data live?",
+        "a": "On your machine. Always. Robot Dojo runs locally and stores everything on your hardware; the robotdojo.ai servers never see your private data. When you want to reach your instance from another computer or your phone, robotdojo.ai provides an encrypted, zero-knowledge relay: end-to-end encrypted, no cloud storage, and Robot Dojo cannot read what passes through it. Remote access via the relay is a paid Black Belt feature.",
+        "tags": [
+          "privacy"
+        ],
+        "keywords": [
+          "where",
+          "does",
+          "my",
+          "data",
+          "live"
+        ],
+        "source": "architecture/product.md + architecture/architecture.md"
+      }
+    ],
+    "belts": [
+      {
+        "q": "What is Black Belt?",
+        "a": "Black Belt knows your world. It includes White Belt plus entity extraction, enrichment, entity context files, people, places, companies, relationship context, entity-aware chat, premium apps, and premium tool runs. Every install includes Black Belt for 90 days. Then the key expires.",
+        "tags": [
+          "belts"
+        ],
+        "keywords": [
+          "what",
+          "is",
+          "black",
+          "belt"
+        ],
+        "source": "architecture/product.md"
+      },
+      {
+        "q": "What happens when Black Belt expires?",
+        "a": "White Belt knows you locally: White Belt is the local foundation: chat with RAG, user files, chat history, topics, local memory, and user context. The code is public; you can audit, fork, and run it on your own hardware. White Belt does not include entity extraction, entity enrichment, inline entity recognition, build skills, premium apps, or premium agent/tool runs. Black Belt is the world model and creation layer. It includes White Belt plus entity extraction, enrichment, entity context files, people/places/companies, relationship context, entity-aware chat, coding-agent skills on topics, Health, premium apps, and premium agent/tool runs.",
+        "tags": [
+          "belts"
+        ],
+        "keywords": [
+          "what",
+          "happens",
+          "when",
+          "black",
+          "belt",
+          "expires"
+        ],
+        "source": "architecture/product.md"
+      }
+    ],
+    "repo": [
+      {
+        "q": "Which docs are canonical?",
+        "a": "Canonical docs are split by purpose: architecture/product.md says what Robot Dojo is, architecture/architecture.md says how the product is shaped, architecture/structure.md says where things belong, architecture/sitemap.md is generated file inventory, and architecture/ontology.md is generated directory ontology. Product truth changes start in architecture/product.md.",
+        "tags": [
+          "repo"
+        ],
+        "keywords": [
+          "which",
+          "docs",
+          "are",
+          "canonical"
+        ],
+        "source": "architecture/architecture.md + architecture/structure.md"
+      },
+      {
+        "q": "Where do files belong in the repo?",
+        "a": "The root stays rare and canonical. Browser code belongs in apps/, reusable business logic in lib/, HTTP handlers in routes/ or api/, operational scripts in scripts/, tests in tests/, and planning artifacts in pipeline/. The generated ontology enforces those boundaries.",
+        "tags": [
+          "repo"
+        ],
+        "keywords": [
+          "where",
+          "do",
+          "files",
+          "belong",
+          "in",
+          "the",
+          "repo"
+        ],
+        "source": "architecture/structure.md + architecture/ontology.md"
+      }
+    ],
+    "identity": [
+      {
+        "q": "Does Robot Dojo depend on the first user?",
+        "a": "The first user is a calibration seed, not a hard-coded product subject. Product code, skills, personas, pipeline instructions, and public docs refer to the current user, owner, or account through runtime variables and identity context. First-user-specific names, samples, memories, topics, entities, chats, credentials, and voice calibration must remain only in private seed data or explicitly labeled owner/developer files that never ship in customer builds. The same repo serves the founder as user one, then serves any future user without agents needing to remember which names were hard-coded by accident.",
+        "tags": [
+          "identity"
+        ],
+        "keywords": [
+          "does",
+          "robot",
+          "dojo",
+          "depend",
+          "on",
+          "the",
+          "first",
+          "user"
+        ],
+        "source": "architecture/product.md"
+      }
+    ],
+    "public-chat": [
+      {
+        "q": "What can I ask on /faq?",
+        "a": "Use /faq for product, install, privacy, tier, architecture, repo-structure, and usage questions about Robot Dojo. It is public and bounded to the public Robot Dojo docs corpus.",
+        "tags": [
+          "public-chat"
+        ],
+        "keywords": [
+          "what",
+          "can",
+          "i",
+          "ask",
+          "on",
+          "faq"
+        ],
+        "source": "architecture/product.md + architecture/architecture.md"
+      },
+      {
+        "q": "What source files power this answer?",
+        "a": "The projection is generated from registered public-safe sources: architecture/product.md, architecture/architecture.md, architecture/structure.md, architecture/sitemap.md, architecture/ontology.md, ACCOUNT_RECOVERY.txt, README.md, apps/privacy.html, apps/static/install.sh.",
+        "tags": [
+          "public-chat"
+        ],
+        "keywords": [
+          "what",
+          "source",
+          "files",
+          "power",
+          "this",
+          "answer"
+        ],
+        "source": "config/public-truth-sources.json"
+      }
+    ]
+  }
+}

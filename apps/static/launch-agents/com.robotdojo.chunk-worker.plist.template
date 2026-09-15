@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Robot Dojo — background chunk + embed worker.
+  Drains the embedding queue every 120s. Idle-gated entrypoint
+  (scripts/chunk-embed-worker.js) — yields to user activity to avoid CPU
+  contention during typing/scrolling.
+
+  Why __NODE__ (not __ROBOTDOJO_RUNTIME__): the macOS permission .app binary
+  resolves the @huggingface/transformers cacheDir to a directory that does
+  not contain the embedding model, so embedBatch fails with
+  "file was not found locally". Running the same script via node resolves
+  the model from ~/.robotdojo/models/embeddings/ correctly. Tracked: df_4a599d5a.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.robotdojo.chunk-worker</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>__NODE__</string>
+    <string>__ROBOTDOJO_HOME__/scripts/chunk-embed-worker.js</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>__ROBOTDOJO_HOME__</string>
+
+  <key>StartInterval</key>
+  <integer>120</integer>
+
+  <!--
+    st_b50005df Phase 3 — background QoS + survive death.
+
+    ProcessType=Background pins this worker to efficiency cores at background
+    QoS on Apple Silicon (the scheduler dispatches QoS-9 threads to E-cores
+    only and they cannot be promoted), so it yields CPU to the foreground.
+    LowPriorityIO throttles its disk I/O the way Time Machine's background QoS
+    does. Together they make the trickle invisible on the CPU/IO axes — but NOT
+    the memory axis (jetsam is orthogonal to QoS), which the self-imposed RSS
+    ceiling in lib/idle-gate.js + lib/rag/embed.js handles.
+
+    KeepAlive with SuccessfulExit=false makes launchd respawn the worker after
+    an abnormal exit — a jetsam -9, an OOM, a crash — so a kill is SURVIVED, not
+    just avoided. The in-flight embedding_topic job is reclaimed by its lease
+    (Phase 2) on the next fire; the DELETE+INSERT vec write is idempotent, so a
+    reclaimed job costs no correctness and no real-failure attempt. We pin
+    SuccessfulExit=false (not bare KeepAlive=true) so a CLEAN exit — no pending
+    work, idle-pause, or the RSS-ceiling restart — does NOT immediately respawn;
+    StartInterval drives the normal 120s trickle cadence instead. Bare
+    KeepAlive=true would busy-loop the worker against StartInterval.
+  -->
+  <key>ProcessType</key>
+  <string>Background</string>
+
+  <key>LowPriorityIO</key>
+  <true/>
+
+  <key>Nice</key>
+  <integer>10</integer>
+
+  <key>KeepAlive</key>
+  <dict>
+    <key>SuccessfulExit</key>
+    <false/>
+  </dict>
+
+  <key>StandardOutPath</key>
+  <string>__CONFIG__/logs/robotdojo-chunk-worker.out.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>__CONFIG__/logs/robotdojo-chunk-worker.err.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>__HOME__</string>
+    <key>USER</key>
+    <string>__USER__</string>
+    <key>NODE_ENV</key>
+    <string>production</string>
+    <key>PATH</key>
+    <string>__PATH__</string>
+    <key>ROBOTDOJO_HOME</key>
+    <string>__ROBOTDOJO_HOME__</string>
+    <key>ROBOTDOJO_CONFIG</key>
+    <string>__CONFIG__</string>
+    <key>ROBOTDOJO_DB</key>
+    <string>__CONFIG__/robotdojo.db</string>
+  </dict>
+</dict>
+</plist>

@@ -1,0 +1,11 @@
+{
+  "_comment": "TRACKED half of the allowlist for scripts/check-first-user-clean.js. The gate cannot scan the file it matches against, so this file is excluded from its own scan — which makes it the one place a personal name could ship unseen. THE RULE: only terms that are the PRODUCT'S OWN vocabulary belong here. A term that names a person, an employer, a school, a venture, or any other affiliation of the machine's user belongs in the gitignored local half, config/owner-corpus-allowlist.user.json, which never ships. The loader takes the UNION of the two, so suppression works identically on a machine that has both. Provenance is the test, not judgement: the four newsletter labels below ship in config/taxonomy.default.json as product categories, and the product name is the product's. Everything that failed that test was moved out under st_dd0e19d8 AC22. Terms are compared case-insensitively, whitespace-collapsed. Adding a term here is a deliberate, auditable weakening of the gate for one collision — keep the list minimal, and route anything owner-specific to the local half instead.",
+  "allow": [
+    "robot dojo",
+    "robot-dojo",
+    "nl: health",
+    "nl: finance",
+    "nl: tech",
+    "nl: general"
+  ]
+}

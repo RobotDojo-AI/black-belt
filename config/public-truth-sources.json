@@ -1,0 +1,78 @@
+{
+  "sources": [
+    {
+      "path": "architecture/product.md",
+      "title": "Product vision",
+      "sections": [
+        "Promise",
+        "Who it's for",
+        "Tiers",
+        "What you can do",
+        "Launch scope",
+        "First user to product",
+        "Non-negotiables"
+      ]
+    },
+    {
+      "path": "architecture/architecture.md",
+      "title": "Architecture",
+      "sections": [
+        "System shape",
+        "Data flow",
+        "Agent OS",
+        "Tier enforcement",
+        "Core invariants"
+      ]
+    },
+    {
+      "path": "architecture/structure.md",
+      "title": "Repository structure",
+      "sections": [
+        "Root files",
+        "Top-level directories",
+        "Doc-class homes",
+        "Enforcing gates",
+        "Change rules"
+      ]
+    },
+
+    {
+      "path": "architecture/sitemap.md",
+      "title": "Generated sitemap",
+      "sections": [
+        "Entry Points",
+        "Routes",
+        "Lib Modules"
+      ]
+    },
+    {
+      "path": "architecture/ontology.md",
+      "title": "Repository ontology",
+      "sections": [
+        "Top-Level Directories",
+        "Top-Level Files",
+        "Rules"
+      ]
+    },
+    {
+      "path": "ACCOUNT_RECOVERY.txt",
+      "title": "Account recovery",
+      "sections": []
+    },
+    {
+      "path": "README.md",
+      "title": "Public README",
+      "sections": []
+    },
+    {
+      "path": "apps/privacy.html",
+      "title": "Privacy page",
+      "sections": []
+    },
+    {
+      "path": "apps/static/install.sh",
+      "title": "Install script",
+      "sections": []
+    }
+  ]
+}

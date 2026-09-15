@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="robots" content="noindex,follow">
+<title>Dojo — Chat</title>
+<meta http-equiv="Cache-Control" content="no-store">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<link rel="dns-prefetch" href="https://api.anthropic.com">
+<link rel="dns-prefetch" href="https://generativelanguage.googleapis.com">
+<link rel="dns-prefetch" href="https://api.x.ai">
+<link rel="manifest" href="/static/manifest.json">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/static/icon-180.png">
+<style>
+:root{--bg:#fff;--bg-main:#f7f8fc;--surface:#f1f3f4;--surface2:#e8eaed;--border-light:#e8eaed;--text:#1f1f1f;--text2:#444746;--muted:#70757a;--accent:#1a73e8;--md-on-primary:#fff;--md-surface-container-low:#f8f9fa;--md-primary-container:#d3e3fd;--md-on-primary-container:#041e49;--radius:24px;--font:Inter,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;--sidebar-width:272px}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{opacity:1;font-family:var(--font);background:var(--bg);color:var(--text);height:100dvh;display:flex;flex-direction:column;overflow:hidden;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.global-topbar{display:flex;align-items:center;gap:8px;min-height:48px;padding:6px 10px;border-bottom:1px solid var(--border-light);flex:0 0 auto}
+.app-body{display:flex;flex:1;min-height:0;overflow:hidden;background:var(--bg-main);padding-top:10px}
+.app-sidebar{width:var(--sidebar-width);background:var(--md-surface-container-low);display:flex;flex-direction:column;flex-shrink:0;padding:6px;overflow:hidden}
+.sidebar-top{display:flex;align-items:center;gap:4px;padding:4px 8px 6px}
+.sidebar-new-btn{display:inline-flex;align-items:center;gap:10px;min-width:140px;padding:7px 18px 7px 14px;background:var(--bg);border:0;border-radius:16px;font:inherit;font-size:14px;font-weight:500;color:var(--text2);box-shadow:0 1px 3px rgba(60,64,67,.15)}
+#topicList{padding:4px 0;overflow-y:auto}
+.overlay{display:none}
+.main{flex:1;display:flex;flex-direction:column;min-width:0;position:relative;background:var(--bg);order:1;overflow-x:hidden}
+#convListView{display:none!important}
+#emptyState{display:none}
+#chatView{display:flex;min-height:0;flex:1;flex-direction:column}
+.main[data-view="new-chat"] #chatView{display:none}
+.main[data-view="new-chat"] #emptyState{display:flex}
+.empty-state{flex-direction:column;align-items:center;justify-content:center;flex:1;padding:32px 16px;position:relative;overflow:hidden;max-width:100%;box-sizing:border-box}
+.empty-state .logo{width:48px;height:48px;margin-bottom:12px;opacity:.9}
+.empty-state .greeting{font-size:30px;font-weight:400;line-height:1.3;min-height:39px;margin:0 0 36px;width:100%;max-width:760px;text-align:center;color:var(--text)}
+.empty-prompt{width:100%;max-width:760px;min-height:118px;margin:0 auto}
+.input-container{background:var(--md-surface-container-low);border:1px solid transparent;border-radius:28px;box-shadow:none;padding:8px 12px}
+.input-main{display:flex;align-items:flex-end;gap:2px}
+.entity-highlight-wrap{flex:1;min-width:0}
+.chat-input{width:100%;min-height:20px;max-height:160px;resize:none;border:0;outline:0;background:transparent;color:var(--text);font:inherit;font-size:14px;line-height:1.4;padding:6px 8px}
+.send-circle{width:32px;height:32px;border:0;border-radius:50%;display:none;align-items:center;justify-content:center;background:var(--accent);color:var(--md-on-primary);flex:0 0 auto}
+.send-circle:disabled{opacity:.3}
+.input-toolbar{display:flex;align-items:center;gap:2px;padding:2px 2px 0;color:var(--muted);font-size:12px;flex-wrap:wrap}
+.tb-spacer{flex:1}
+.tb-icon-btn,.chat-pill{display:inline-flex;align-items:center;border:0;background:transparent;color:var(--text2);font:inherit}
+.chat-pill{min-height:28px;padding:3px 10px;border-radius:14px;background:var(--surface)}
+.file-chips{min-height:0}
+.topbar{padding:8px 24px;display:flex;align-items:center;gap:10px;min-height:52px;background:transparent}
+.topbar-hamburger,.topbar-icon-btn,.view-toggle-btn,.back-btn{width:40px;height:40px;border:0;border-radius:50%;background:transparent;color:var(--text2);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.topbar-icon-btn,.view-toggle-btn{width:36px;height:36px}
+.back-btn{width:36px;height:36px}
+.material-symbols-outlined{font-size:20px;line-height:1;width:20px;min-width:20px;max-width:20px;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;color:inherit}
+.icon-sm{font-size:18px;width:18px;min-width:18px;max-width:18px}
+.icon-md{font-size:20px;width:20px;min-width:20px;max-width:20px}
+.help-bg,.modal-bg,.context-menu,.conv-detail-menu,.pill-dropdown{display:none}
+.help-fab{position:fixed;right:20px;bottom:20px;z-index:40;width:48px;height:48px;border:0;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--text2);box-shadow:0 4px 16px rgba(60,64,67,.18)}
+.flex-spacer{flex:1}
+.messages{flex:1;overflow-y:auto;display:flex;flex-direction:column}
+.messages-inner{max-width:760px;margin:0 auto;padding:16px 24px;width:100%;box-sizing:border-box;display:flex;flex-direction:column}
+.input-area{padding:8px 24px 16px;flex-shrink:0;max-width:760px;margin:0 auto;width:100%;box-sizing:border-box}
+.chat-load-status{position:absolute;top:12px;left:50%;z-index:12;display:inline-flex;align-items:center;gap:8px;max-width:min(calc(100% - 32px),420px);min-height:30px;padding:5px 11px;border:1px solid var(--border-light);border-radius:8px;background:var(--bg);color:var(--text2);font-size:12px;line-height:1.25;transform:translateX(-50%);pointer-events:none}
+.chat-load-status[hidden]{display:none}
+.material-symbols-outlined{font-size:20px;color:inherit;line-height:1}
+@media (max-width:768px){.global-topbar{min-height:48px}.app-body{padding:0}.app-sidebar{position:fixed;z-index:30;top:48px;left:0;bottom:0;width:min(var(--sidebar-width),calc(100vw - 48px));max-width:86vw;transform:translateX(-105%)}.main{width:100%}.messages-inner{padding:12px}.input-area{padding:8px 12px 12px}}
+</style>
+<link rel="preload" href="/static/vendor/fonts.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="/static/vendor/hljs-github.min.css" id="hljs-light" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="/static/vendor/hljs-github-dark.min.css" id="hljs-dark" media="print" onload="this.media='all'" disabled>
+<link rel="preload" href="/static/shared/theme.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="/static/shared/shell.css?v=2026-09-09-1" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="/static/shared/app-layout.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="/chat/style.css?v=2026-09-09-1" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+<link rel="stylesheet" href="/static/vendor/fonts.css">
+<link rel="stylesheet" href="/static/vendor/hljs-github.min.css">
+<link rel="stylesheet" href="/static/shared/theme.css">
+<link rel="stylesheet" href="/static/shared/shell.css?v=2026-09-09-1">
+<link rel="stylesheet" href="/static/shared/app-layout.css">
+<link rel="stylesheet" href="/chat/style.css?v=2026-09-09-1">
+</noscript>
+<script>
+  window.RobotDojoBootFallback = setTimeout(() => {
+    if (!document.body || document.body.classList.contains('app-ready')) return;
+    document.body.classList.add('app-ready', 'app-boot-fallback');
+    const fallback = document.createElement('div');
+    fallback.className = 'rd-boot-fallback rd-error';
+    fallback.setAttribute('role', 'alert');
+    fallback.textContent = 'Robot Dojo is still opening. Refresh if this stays here.';
+    document.body.prepend(fallback);
+  }, 20000);
+</script>
+<script src="/static/shared/sw-register.js?v=2026-09-09-3" defer></script>
+<script src="/static/vendor/marked.min.js" defer></script>
+<script src="/static/vendor/purify.min.js" defer></script>
+<script src="/static/vendor/highlight.min.js" defer></script>
+<script src="/static/vendor/sortable.min.js" defer></script>
+<!-- split.min.js removed — not used in robotdojo -->
+</head>
+<body data-app="chat">
+
+<!-- Global Top Bar (rendered by shell.js) -->
+<div class="global-topbar" id="globalTopbar"></div>
+
+<!-- App body (sidebar + main) -->
+<div class="app-body" id="appBody">
+
+<!-- Sidebar -->
+<div class="app-sidebar" id="sidebar">
+  <div class="sidebar-top">
+    <button class="sidebar-new-btn" id="newItemBtn" data-action="sidebarNewItem" title="New (n)">
+      <span class="material-symbols-outlined icon-sm">edit_square</span>
+      <span id="newItemLabel">New chat</span>
+    </button>
+  </div>
+  <!-- Label list (Gmail-style left panel) -->
+  <div id="topicList"></div>
+</div>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay" data-action="closeSidebar"></div>
+
+<!-- Main -->
+<div class="main" id="mainArea" data-view="new-chat">
+  <div class="chat-load-status" id="chatLoadStatus" role="status" aria-live="polite" data-testid="chat-load-status" hidden>
+    <span class="chat-load-dot" aria-hidden="true"></span>
+    <span class="chat-load-text">Opening chat...</span>
+  </div>
+
+  <div id="convListView" hidden aria-hidden="true">
+    <div class="conv-list-body" id="convListBody"></div>
+  </div>
+
+  <!-- Empty state (chat) -->
+  <div class="empty-state" id="emptyState">
+    <img src="/static/favicon.svg" alt="" class="logo">
+    <p class="greeting" id="greeting">Good afternoon</p>
+    <p class="greeting-next" id="greetingNext" hidden></p>
+    <script>
+      (function () {
+        var h = new Date().getHours();
+        var text = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+        var el = document.getElementById('greeting');
+        if (el) el.textContent = text;
+      }());
+    </script>
+    <div class="empty-prompt" id="emptyPrompt">
+      <div class="input-container">
+        <div class="input-main">
+          <div class="entity-highlight-wrap">
+            <div class="passive-entity-highlighter" aria-hidden="true"></div>
+            <textarea class="chat-input" data-testid="multimodal-input" placeholder="Ask Miyagi" rows="1"></textarea>
+          </div>
+          <button class="send-circle" data-testid="send-button" disabled><span class="material-symbols-outlined">arrow_upward</span></button>
+        </div>
+        <div class="file-chips" id="fileChips"></div>
+        <div class="input-toolbar">
+          <label class="tb-icon-btn" title="Attach (f)"><span class="material-symbols-outlined icon-md">attach_file</span></label>
+          <span class="tb-spacer"></span>
+          <div class="pill-wrapper"><div class="chat-pill" data-chat-mode-pill title="Fast or Deep">Fast</div><div class="pill-dropdown" id="modeDropdown"><div class="pill-option selected" data-chat-mode="fast" data-testid="chat-mode-fast"><span class="check">&#10003;</span><span>Fast</span></div><div class="pill-option" data-chat-mode="deep" data-testid="chat-mode-deep"><span class="check"></span><span>Deep</span></div></div></div>
+          <div class="pill-wrapper"><div class="chat-pill" title="Topic (t)">All</div></div>
+          <div class="pill-wrapper"><div class="chat-pill" title="Model (m)">Loading model</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat view -->
+  <div id="chatView">
+    <div class="topbar" id="topbar">
+      <button class="back-btn" id="backBtn" data-action="showListView" title="New chat" hidden>
+        <span class="material-symbols-outlined">arrow_back</span>
+      </button>
+      <span class="topbar-title" id="topbarTitle"></span>
+      <span class="flex-spacer"></span>
+      <div class="conv-detail-menu-wrapper" id="convDetailMenuWrapper">
+        <button class="topbar-icon-btn" data-action="toggleConvDetailMenu" title="More actions">
+          <span class="material-symbols-outlined">more_vert</span>
+        </button>
+        <div class="conv-detail-menu" id="convDetailMenu"></div>
+      </div>
+    </div>
+    <div class="messages" id="messages"><div class="messages-inner" id="messagesInner"></div></div>
+    <div class="input-area" id="inputArea"></div>
+  </div>
+
+  <!-- Fixed help button -->
+  <button class="help-fab" data-action="toggleHelp" title="Help (?)">
+    <span class="material-symbols-outlined">help_outline</span>
+  </button>
+</div>
+
+</div><!-- /app-body -->
+
+<!-- Context menu (populated dynamically by modals.js) -->
+<div class="context-menu" id="contextMenu"></div>
+
+<!-- Help -->
+<div class="help-bg" id="helpModal" data-action="closeHelp" data-self-only="true">
+  <div class="help-modal">
+    <h2><img src="/static/favicon.svg" alt="" style="width:1em;height:1em;vertical-align:-0.15em"> Miyagi</h2>
+    <h3 class="help-section-title">Keyboard Shortcuts</h3>
+    <div class="shortcut-grid">
+      <div class="shortcut-row"><span>New chat</span><span class="keys"><kbd>n</kbd></span></div>
+      <div class="shortcut-row"><span>Focus prompt</span><span class="keys"><kbd>/</kbd></span></div>
+      <div class="shortcut-row"><span>Cycle model</span><span class="keys"><kbd>m</kbd></span></div>
+      <div class="shortcut-row"><span>Attach file</span><span class="keys"><kbd>f</kbd></span></div>
+      <div class="shortcut-row"><span>Navigate topics</span><span class="keys"><kbd>j</kbd> <kbd>k</kbd></span></div>
+      <div class="shortcut-row"><span>Open topic</span><span class="keys"><kbd>o</kbd></span></div>
+      <div class="shortcut-row"><span>Archive</span><span class="keys"><kbd>e</kbd> <kbd>y</kbd></span></div>
+      <div class="shortcut-row"><span>Delete</span><span class="keys"><kbd>#</kbd></span></div>
+      <div class="shortcut-row"><span>Star</span><span class="keys"><kbd>s</kbd></span></div>
+      <div class="shortcut-row"><span>Label / Topic</span><span class="keys"><kbd>l</kbd></span></div>
+      <div class="shortcut-row"><span>Find</span><span class="keys"><kbd>&#x2318;</kbd><kbd>K</kbd></span></div>
+      <div class="shortcut-row"><span>Chat view</span><span class="keys"><kbd>&#x2318;</kbd><kbd>1</kbd></span></div>
+      <div class="shortcut-row"><span>Tasks view</span><span class="keys"><kbd>&#x2318;</kbd><kbd>2</kbd></span></div>
+      <div class="shortcut-row"><span>Escape / Close</span><span class="keys"><kbd>Esc</kbd></span></div>
+      <div class="shortcut-row"><span>This help</span><span class="keys"><kbd>?</kbd></span></div>
+    </div>
+    <h3 class="help-section-title help-usage-title">Usage</h3>
+    <div class="help-usage-row">
+      <span>Today's cost:</span>
+      <span id="usageCost" class="help-usage-value">$0.00</span>
+      <span class="usage-dot" id="usageDot"></span>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-bg" id="robotdojoModal" data-action="closeModal" data-self-only="true">
+  <div class="modal-dialog">
+    <h3 id="modalTitle"></h3>
+    <p id="modalMessage"></p>
+    <input id="modalInput">
+    <div class="modal-actions">
+      <button class="cancel" data-action="closeModal">Cancel</button>
+      <button class="confirm" id="modalConfirmBtn">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script src="/static/shared/icons.js?v=2026-08-17-9" defer></script>
+<script src="/static/shared/utils.js" defer></script>
+<script src="/static/shared/api.js" defer></script>
+<script src="/static/shared/app-registry.js?v=2026-09-09-3" defer></script>
+<script src="/static/shared/shell.js?v=2026-09-09-3" defer></script>
+<script src="/static/shared/shell-notifications.js" defer></script>
+<script src="/static/shared/shell-search.js" defer></script>
+<script src="/static/shared/layout-manager.js?v=2026-09-07-you-8" defer></script>
+<script src="/static/shared/app-components.js" defer></script>
+<script src="/static/shared/shortcuts.js?v=2026-09-08-9" defer></script>
+<script type="module" src="/chat/app.js?v=2026-09-13-4"></script>
+</body>
+</html>

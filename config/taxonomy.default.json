@@ -1,0 +1,54 @@
+{
+  "Work": {
+    "icon": "briefcase",
+    "description": "Professional life: career, the current role, and side projects.",
+    "topics": {
+      "career": { "label": "Career", "icon": "trending-up", "sort_order": 1, "description": "career, job history, roles, promotions, transitions, professional growth, work experience, advancement, reputation" },
+      "current-role": { "label": "Current Role", "icon": "building", "sort_order": 2, "description": "current job, current employer, company, responsibilities, team, position, title, manager, coworkers, day-to-day work" },
+      "side-projects": { "label": "Side Projects", "icon": "zap", "sort_order": 3, "description": "side projects, personal projects, open-source, ventures, prototypes, indie, startup idea, hobby coding" }
+    }
+  },
+  "Family": {
+    "icon": "home",
+    "description": "Home and family: household, finances, and kids.",
+    "topics": {
+      "home": { "label": "Home", "icon": "home", "sort_order": 1, "description": "household, home maintenance, moving, appliances, renovation, pets, repairs, furniture, domestic logistics" },
+      "finances": { "label": "Finances", "icon": "dollar-sign", "sort_order": 2, "description": "family finances, taxes, insurance, investments, banking, budgeting, mortgage, estate planning, savings, retirement" },
+      "kids": { "label": "Kids", "icon": "heart", "sort_order": 3, "description": "kids, children, parenting, schools, childcare, activities, milestones, family planning, daycare" }
+    }
+  },
+  "Personal": {
+    "icon": "user",
+    "description": "Personal life: health, hobbies, learning, and other genuinely personal-general material. This is not the fallback bucket for unclear data.",
+    "topics": {
+      "health": { "label": "Health", "icon": "activity", "sort_order": 1, "description": "health, medical, labs, medications, fitness, sleep, diet, nutrition, supplements, longevity, doctor, exercise, symptoms" },
+      "hobbies": { "label": "Hobbies", "icon": "star", "sort_order": 2, "description": "hobbies, sports, music, reading, travel, food, cooking, recreation, leisure, games, outdoors" },
+      "learning": { "label": "Learning", "icon": "book", "sort_order": 3, "description": "learning, courses, tutorials, books, study, skills, research, how-to, lessons, self-education" }
+    }
+  },
+  "Education": {
+    "icon": "graduation-cap",
+    "description": "Formal education and academic history.",
+    "topics": {
+      "degree": { "label": "Degree", "icon": "award", "sort_order": 1, "description": "degree, university, college, coursework, academic, graduate school, thesis, major, professor, alma mater" },
+      "courses": { "label": "Courses", "icon": "book-open", "sort_order": 2, "description": "courses, classes, certifications, online learning, MOOC, bootcamp, continuing education, workshops, training, syllabus" }
+    }
+  },
+  "Newsletters": {
+    "icon": "mail",
+    "description": "Newsletter and subscription sources grouped by theme. Use as source/channel metadata; durable memory should route to the underlying topic when possible.",
+    "topics": {
+      "nl-tech": { "label": "Tech", "icon": "cpu", "sort_order": 1, "description": "tech newsletter, technology digest, AI newsletter, startup digest, developer newsletter, software digest" },
+      "nl-finance": { "label": "Finance", "icon": "trending-up", "sort_order": 2, "description": "finance newsletter, market digest, investing newsletter, economics digest, macro newsletter" },
+      "nl-health": { "label": "Health", "icon": "activity", "sort_order": 3, "description": "health newsletter, wellness digest, longevity newsletter, fitness digest" },
+      "nl-general": { "label": "General", "icon": "rss", "sort_order": 4, "description": "general newsletter, media digest, weekly roundup, lifestyle newsletter, culture digest" }
+    }
+  },
+  "Uncategorized": {
+    "label": "Unfiled",
+    "icon": "inbox",
+    "hidden": true,
+    "description": "Searchable holding area for data that has not yet earned a coherent durable topic.",
+    "topics": {}
+  }
+}

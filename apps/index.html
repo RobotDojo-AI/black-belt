@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- SEO -->
+  <title>AI that knows you — Robot Dojo</title>
+  <meta name="description" content="AI that knows you. Your personal AI system on your Mac — chat with full memory, work as fast as you think, build the ideas you’ve always had. Local, private, and highly effective.">
+  <meta name="public-truth-version" content="0847ccb5bff0faad">
+  <meta name="keywords" content="personal AI, AI memory, permanent memory, AI operating system, private AI, local AI, data ownership, open source AI, Robot Dojo, RAG">
+  <meta name="author" content="Robot Dojo">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://robotdojo.ai">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://robotdojo.ai">
+  <meta property="og:title" content="Robot Dojo — AI that knows you">
+  <meta property="og:description" content="Your personal AI system — local, private, and highly effective. Chat with full memory, work as fast as you think, build the ideas you’ve always had.">
+  <meta property="og:image" content="https://robotdojo.ai/og-image.png?v=4">
+  <meta property="og:site_name" content="Robot Dojo">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Robot Dojo — AI that knows you">
+  <meta name="twitter:description" content="AI that knows you. Your personal AI system — local, secure, private. Chat, work, and build on your Mac.">
+  <meta name="twitter:image" content="https://robotdojo.ai/og-image.png?v=4">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+  <link rel="apple-touch-icon" href="/static/icon-180.png">
+  <link rel="manifest" href="/static/manifest.json">
+
+  <!-- Analytics: set IDs after creating GA4 property + Clarity project -->
+  <meta name="ga-id" content="G-H8LVE245RK">
+  <meta name="clarity-id" content="wct3hwnf2q">
+
+  <!-- Styles — critical (above-fold) CSS inline for first paint. The full sheet is
+       linked AFTER this block so it wins the cascade on equal specificity: inline is a
+       desktop-only subset and would otherwise beat marketing.css's mobile media rules. -->
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--md-primary:#1a73e8;--md-surface:#fff;--md-surface-container-low:#f8f9fa;--md-on-surface:#1f1f1f;--md-on-surface-variant:#444746;--md-outline-variant:#c4c7c5;--brand-50:#f0f7ff;--brand-600:#2563eb;--bg:var(--md-surface);--bg2:var(--md-surface-container-low);--text:var(--md-on-surface);--text-dim:var(--md-on-surface-variant);--accent:var(--md-primary);--accent-hover:#2563eb;--border:var(--md-outline-variant);--font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--radius:8px;--max-w:1080px;--nav-h:64px}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    .m-beta-banner{position:sticky;top:0;z-index:110;background:var(--brand-600);color:#fff;text-align:center;padding:.5rem 1rem;font-size:.9rem;font-weight:550;letter-spacing:.01em;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+    .m-hero{min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(var(--nav-h) + 6rem) 2rem 5rem;text-align:center}
+    .m-hero h1{font-size:clamp(2.5rem,6vw,4rem);font-weight:700;line-height:1.1;margin-bottom:1.25rem;background:linear-gradient(135deg,var(--text) 0%,var(--brand-600) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .m-hero-sub{font-size:1.1rem;color:var(--text-dim);max-width:900px;margin:0 auto 2.5rem;line-height:1.7;font-weight:400}
+    .m-hero-sub-extra{display:inline}.m-br-mobile{display:none}.m-hero-cta{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center}
+    .m-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1.25rem;border-radius:var(--radius);font-size:.875rem;font-weight:550;text-decoration:none;cursor:pointer;transition:all .15s;border:none;font-family:var(--font)}
+    .m-btn-primary{background:var(--accent);color:#fff;box-shadow:0 1px 2px rgba(59,130,246,.2)}.m-btn-primary:hover{background:var(--accent-hover);box-shadow:0 2px 8px rgba(59,130,246,.25)}.m-btn-large{padding:.75rem 2rem;font-size:1rem}
+    .m-nav{position:sticky;top:0;z-index:100;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(250,252,255,.88);backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid var(--border)}
+    .m-nav-brand{display:flex;align-items:center;gap:.75rem;text-decoration:none}.m-nav-brand img{height:36px;width:36px}.m-nav-brand-text{display:flex;flex-direction:column;line-height:1.2}.m-nav-brand-name{font-size:1.05rem;font-weight:600;color:var(--text)}
+    .m-nav-links{display:flex;align-items:center;gap:.25rem}.m-nav-link{color:var(--text-dim);text-decoration:none;font-size:.875rem;padding:.5rem .75rem;border-radius:var(--radius);font-weight:450}.m-nav-cta{margin-left:.75rem}.m-hamburger{display:none}
+    .m-modal-overlay{position:fixed;inset:0;background:rgba(10,20,40,.55);display:flex;align-items:center;justify-content:center;z-index:9000;padding:1rem}.m-modal-overlay[hidden]{display:none}.m-modal{background:var(--bg);border:1px solid var(--brand-200);border-radius:14px;padding:2rem;max-width:700px;width:100%;position:relative;box-shadow:0 20px 60px rgba(30,60,120,.18)}.m-modal-close{position:absolute;top:1rem;right:1rem;background:none;border:0;cursor:pointer;font-size:1.4rem;color:var(--text-dim);line-height:1;padding:.2rem .4rem;border-radius:6px}.m-modal-title{font-size:1.3rem;font-weight:650;color:var(--text);margin-bottom:.75rem}.m-modal-steps{margin:0 0 1.25rem;padding-left:1.25rem;list-style:disc;font-size:.95rem;color:var(--text-dim);line-height:1.6}.m-modal-steps li{margin-bottom:.3rem}.m-modal-cmd-wrap{display:flex;align-items:center;gap:.5rem;background:var(--bg2);border:1px solid var(--brand-200);border-radius:8px;padding:.75rem .9rem}.m-modal-cmd{flex:1;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.85rem;color:var(--text);user-select:all;word-break:break-all}.m-modal-copy{background:none;border:0;cursor:pointer;color:var(--text-dim);padding:.2rem;border-radius:4px;flex-shrink:0}.m-modal-copy.is-copied{color:var(--accent);font:inherit;font-size:.85rem}
+    .m-section{padding:5rem 2rem;max-width:var(--max-w);margin:0 auto}.m-section-alt{background:var(--bg2)}.m-section-alt .m-section{padding:5rem 2rem}.m-section-header{text-align:center;margin-bottom:3.5rem}.m-section-header h2{font-size:1.75rem;font-weight:600;margin-bottom:.5rem;color:var(--text)}.m-section-header p{color:var(--text-dim);font-size:1.05rem;max-width:520px;margin:0 auto}
+    main>.m-section,main>.m-section-alt{content-visibility:auto;contain-intrinsic-size:720px}
+    .m-problem{padding-top:3rem;padding-bottom:3rem}.m-problem-split{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}.m-problem-big{font-size:1.35rem;font-weight:500;line-height:1.5;color:var(--text)}.m-problem-right{display:flex;flex-direction:column;gap:1.25rem}.m-problem-point{font-size:.9rem;line-height:1.7;color:var(--text-dim);padding-left:1rem;border-left:3px solid var(--brand-200)}.m-problem-point strong{color:var(--accent);font-weight:600;display:block;margin-bottom:.25rem;font-size:1.05rem}
+    .m-guide-centered{max-width:var(--max-w);margin:0 auto;padding:5rem 2rem}.m-guide-with-avatar{display:grid;grid-template-columns:1fr 360px;gap:8rem;align-items:center;max-width:1120px;margin:0 auto}.m-guide-content-left{max-width:640px;text-align:left}.m-guide-content-left h2{font-size:1.5rem;font-weight:600;margin-bottom:1.25rem}.m-guide-content-left p{color:var(--text-dim);font-size:1.05rem;line-height:1.8;margin-bottom:1rem}.m-guide-avatar{text-align:center}.m-guide-avatar-img{width:275px;height:auto}
+    @media(max-width:767px){.m-hero{padding:5rem 1.25rem 3rem}.m-hero h1{font-size:clamp(2.4rem,13vw,3.5rem)}.m-hero-sub{font-size:1rem}.m-hero-sub-extra{display:none}.m-br-mobile{display:block}}
+  </style>
+  <link rel="stylesheet" href="/static/shared/marketing.css">
+  <!-- Structured Data — SoftwareApplication (existing) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://robotdojo.ai/#software",
+    "name": "Robot Dojo",
+    "url": "https://robotdojo.ai",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "macOS",
+    "description": "AI that knows you. Your personal AI system that unifies your email, calendar, contacts, and messages on your Mac — chat, work, and build on top of your own data. Runs locally.",
+    "author": { "@id": "https://robotdojo.ai/#organization" },
+    "publisher": { "@id": "https://robotdojo.ai/#organization" },
+    "offers": [
+      { "@type": "Offer", "name": "White Belt", "price": "0", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "Black Belt private beta key", "availability": "https://schema.org/LimitedAvailability" }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data — Organization (entity graph anchor) -->
+  <!-- WHY @id: stable cross-page anchor so Google can disambiguate the entity across pages.
+       Pattern from HTTP Archive 2024 + best-in-class SaaS (Anthropic, Stripe). -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://robotdojo.ai/#organization",
+    "name": "Robot Dojo",
+    "url": "https://robotdojo.ai",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://robotdojo.ai/og-image.png"
+    },
+    "sameAs": [
+      "https://github.com/RobotDojo-AI"
+    ]
+  }
+  </script>
+
+  <!-- Structured Data — WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://robotdojo.ai/#website",
+    "name": "Robot Dojo",
+    "url": "https://robotdojo.ai",
+    "publisher": { "@id": "https://robotdojo.ai/#organization" },
+    "inLanguage": "en-US"
+  }
+  </script>
+</head>
+<body data-app="website" data-app-flow="home">
+  <script>
+    document.addEventListener('click', function (event) {
+      var copy = event.target && event.target.closest && event.target.closest('[data-copy-target]');
+      if (copy) {
+        event.preventDefault();
+        var copyTarget = document.getElementById(copy.getAttribute('data-copy-target'));
+        var text = copyTarget ? copyTarget.innerText.trim() : '';
+        if (text && navigator.clipboard) navigator.clipboard.writeText(text).catch(function () {});
+        var original = copy.innerHTML;
+        copy.textContent = 'Copied';
+        copy.classList.add('is-copied');
+        setTimeout(function () {
+          copy.innerHTML = original;
+          copy.classList.remove('is-copied');
+        }, 1500);
+        return;
+      }
+      var trigger = event.target && event.target.closest && event.target.closest('[data-modal="install"]');
+      if (!trigger) return;
+      event.preventDefault();
+      var modal = document.getElementById('m-modal-install');
+      if (modal) {
+        modal.removeAttribute('hidden');
+      }
+    });
+    document.addEventListener('click', function (event) {
+      var modal = document.getElementById('m-modal-install');
+      if (!modal || modal.hasAttribute('hidden')) return;
+      if (event.target === modal || (event.target.closest && event.target.closest('.m-modal-close'))) {
+        modal.setAttribute('hidden', '');
+      }
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape') return;
+      var modal = document.getElementById('m-modal-install');
+      if (modal) modal.setAttribute('hidden', '');
+    });
+
+    // Mobile nav toggle. The homepage does not load shared/marketing.js, so the
+    // hamburger has no handler without this — the nav links are unreachable on
+    // every phone. Mirrors _bindNav() in shared/marketing.js: toggle .open on
+    // .m-nav-links (the media query styles that class) and track aria-expanded.
+    // Delegated from document because this script runs in <head>, before the nav
+    // markup is parsed — querying elements directly here would find nothing.
+    function _rdSetNavOpen(open) {
+      var links = document.querySelector('.m-nav-links');
+      var hamburger = document.querySelector('.m-hamburger');
+      if (!links || !hamburger) return;
+      links.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', String(open));
+    }
+    document.addEventListener('click', function (event) {
+      if (!event.target.closest) return;
+      var links = document.querySelector('.m-nav-links');
+      if (!links) return;
+      if (event.target.closest('.m-hamburger')) {
+        event.preventDefault();
+        _rdSetNavOpen(!links.classList.contains('open'));
+        return;
+      }
+      if (!links.classList.contains('open')) return;
+      // Close after following a link, or tapping anywhere outside the menu.
+      if (!links.contains(event.target) || event.target.closest('a')) _rdSetNavOpen(false);
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') _rdSetNavOpen(false);
+    });
+  </script>
+  <!-- Static beta banner — also injected by marketing.js initMarketing() for
+       parity across pages. WHY both: curl/SSR tests fetch the raw HTML and
+       assert the banner text is present; JS injection alone would yield a
+       blank in the static body. The JS init is the canonical render path; if
+       JS removes this element on init it dedupes. -->
+  <div class="m-beta-banner m-beta-banner-static" role="status" aria-live="polite">Private beta. 90 days of Black Belt on install.</div>
+  <nav class="m-nav marketing-nav" role="navigation" aria-label="Main">
+    <a href="/" class="m-nav-brand" aria-label="Robot Dojo home">
+      <img src="/static/img/logo.svg" alt="Robot Dojo" width="36" height="36">
+      <span class="m-nav-brand-text">
+        <span class="m-nav-brand-name">Robot Dojo</span>
+      </span>
+    </a>
+    <button class="m-hamburger" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <div class="m-nav-links">
+      <a class="m-nav-link" href="#" data-modal="install">Install</a>
+      <a class="m-btn m-btn-primary m-nav-cta" href="/connect">Connect</a>
+    </div>
+  </nav>
+  <div id="m-modal-install" class="m-modal-overlay install-modal" hidden role="dialog" aria-modal="true" aria-label="Install Robot Dojo">
+    <div class="m-modal">
+      <button class="m-modal-close" aria-label="Close">&times;</button>
+      <h2 class="m-modal-title">Install Robot Dojo</h2>
+      <ul class="m-modal-steps">
+        <li>Open an account on your Mac with admin privileges</li>
+        <li>Open the Terminal app</li>
+        <li>Paste this command into the terminal and hit enter</li>
+        <li>Install takes 10&ndash;20 minutes</li>
+        <li>Your browser opens to setup when the local server is ready</li>
+      </ul>
+      <div class="m-modal-cmd-wrap">
+        <code id="m-install-cmd" class="m-modal-cmd">curl -fsSL https://robotdojo.ai/install.sh | bash</code>
+        <button class="m-modal-copy" data-copy-target="m-install-cmd" aria-label="Copy command">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ========== 1. HERO ========== -->
+    <section class="m-hero" aria-labelledby="hero-heading">
+      <h1 id="hero-heading" class="m-animate">AI that knows you</h1>
+      <p class="m-hero-sub m-animate m-animate-1">
+        Chat with full memory.<br class="m-br-mobile"> Work as fast as you think.<br class="m-br-mobile"> Build the ideas you’ve always had.<span class="m-hero-sub-extra"><br> Your personal AI system. Local, private, and highly effective.</span>
+      </p>
+      <div class="m-hero-cta m-animate m-animate-2">
+        <button type="button" data-modal="install" class="m-btn m-btn-primary m-btn-large">Install Robot Dojo →</button>
+      </div>
+    </section>
+
+    <!-- ========== 2. PROBLEM ========== -->
+    <div class="m-section-alt">
+      <section class="m-section m-problem" id="problem" aria-labelledby="problem-heading">
+        <div class="m-section-header">
+          <h2 id="problem-heading">We are racing toward AGI</h2>
+          <p>But your chat forgot you mid-thread.</p>
+        </div>
+        <div class="m-problem-split">
+          <div class="m-problem-left">
+            <p class="m-problem-big">For founders and builders drowning in AI slop,<br>including their own.</p>
+          </div>
+          <div class="m-problem-right">
+            <div class="m-problem-point">
+              <strong>No goldilocks zone.</strong> A new thread knows nothing. A long one drifts. You're taught to build context, but not too much. Nobody gets it right.
+            </div>
+            <div class="m-problem-point">
+              <strong>Dozens of accounts.</strong> Not just five foundation models. Work and personal copies of each, plus every pre-AI tool: calendar, email, messaging, notes. You copy-paste the same context between them all day. Dumb.
+            </div>
+            <div class="m-problem-point">
+              <strong>You're the integration layer.</strong> The labs keep fragmenting across web, API, CLI, and IDE. More surfaces, same amnesia. You're the one carrying context between them.
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========== 3. GUIDE ========== -->
+    <section class="m-section m-guide-centered" id="about" aria-labelledby="guide-heading">
+      <div class="m-guide-with-avatar">
+        <div class="m-guide-content-left">
+          <h2 id="guide-heading">Why this exists</h2>
+          <p>The big labs are optimizing for coding benchmarks and enterprise sales. Nobody is building the obvious thing: an AI that just knows you.</p>
+          <p>Robot Dojo starts from the local context you already have. The real unlock is being both local and open source, two things the big labs and hyperscalers cannot do.</p>
+          <p>It is built for people who want AI to become leverage, not another place to repeat themselves.</p>
+        </div>
+        <div class="m-guide-avatar">
+          <!-- Below the fold and not the LCP element (that is hero/problem copy),
+               so it must not compete with the render-blocking stylesheet on a
+               cold first visit. Lazy + async, no preload, no high priority. -->
+          <img src="/static/img/robotdojo-mascot.png" alt="Robot Dojo mascot" class="m-guide-avatar-img" width="600" height="600" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 4. PRINCIPLES ========== -->
+    <div class="m-section-alt">
+      <section class="m-section" id="principles" aria-labelledby="principles-heading">
+        <div class="m-section-header">
+          <h2 id="principles-heading">Five Principles</h2>
+        </div>
+        <div class="m-principles m-principles-5" role="list">
+          <article class="m-principle" role="listitem">
+            <div class="m-principle-icon">
+              <!-- House/home with lock -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><rect x="9" y="13" width="6" height="5" rx="1"/><circle cx="12" cy="15.5" r="1" fill="currentColor"/><path d="M12 15.5V17"/></svg>
+            </div>
+            <h3>Local Data</h3>
+            <p>The only person you can trust with your data is you. Local is the only way to build real, evolving context.</p>
+          </article>
+          <article class="m-principle" role="listitem">
+            <div class="m-principle-icon">
+              <!-- Code brackets with heart -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3L3 12l5 9"/><path d="M16 3l5 9-5 9"/><path d="M12 8.5c-1-1.5-3-1.5-3.5.5-.3 1 .5 2 1.5 3l2 1.5 2-1.5c1-1 1.8-2 1.5-3-.5-2-2.5-2-3.5-.5z" fill="currentColor" opacity="0.3"/></svg>
+            </div>
+            <h3>Open Source</h3>
+            <p>The code is public. See exactly what your AI does with your data. Trust through transparency.</p>
+          </article>
+          <article class="m-principle" role="listitem">
+            <div class="m-principle-icon">
+              <!-- Suitcase with arrow (take it with you) -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M8 8V6a4 4 0 018 0v2"/><path d="M12 12v5m0 0l-2-2m2 2l2-2"/></svg>
+            </div>
+            <h3>Portable</h3>
+            <p>Your data, your preferences, your model. Yours to keep, yours to move, any time.</p>
+          </article>
+          <article class="m-principle" role="listitem">
+            <div class="m-principle-icon">
+              <!-- Lightning bolt -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+            </div>
+            <h3>Zero Work</h3>
+            <p>A few clicks to start, then it runs in the background as you live. It compounds: every day sharpens the next answer.</p>
+          </article>
+          <article class="m-principle" role="listitem">
+            <div class="m-principle-icon">
+              <!-- Rocket — escape velocity -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M15 9v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+            </div>
+            <h3>Escape Velocity</h3>
+            <p>Learn AI from the inside out by using it, then go build your own on top. The fastest path to creating yours.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========== 5. HOW YOU WORK (Chat / Work / Build) ========== -->
+    <section class="m-section" id="skills" aria-labelledby="skills-heading">
+      <div class="m-section-header">
+        <h2 id="skills-heading">As Versatile As You</h2>
+        <p>Three ways to work. Pick what you need.</p>
+      </div>
+      <div class="m-skills" role="list">
+        <article class="m-skill" role="listitem">
+          <div class="m-skill-icon">
+            <!-- Chat — speech bubble -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/>
+            </svg>
+          </div>
+          <h3>Chat</h3>
+          <p>Just talk. Every answer is grounded in your real history, voice, and context. The fastest way to learn, iterate, and communicate.</p>
+        </article>
+        <article class="m-skill" role="listitem">
+          <div class="m-skill-badge">Black Belt</div>
+          <div class="m-skill-icon">
+            <!-- Work — briefcase -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2.5" y="7.5" width="19" height="13" rx="2.5"/>
+              <path d="M16 20.5V6a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v14.5"/>
+            </svg>
+          </div>
+          <h3>Work</h3>
+          <p>Apps that evolve as fast as you think. Spin up research, analyses, and dashboards on your own data.</p>
+        </article>
+        <article class="m-skill" role="listitem">
+          <div class="m-skill-badge">Black Belt</div>
+          <div class="m-skill-icon">
+            <!-- Build — stacked blocks -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9.5" y="3.5" width="5" height="5" rx="1.2"/>
+              <rect x="4" y="11" width="5" height="5" rx="1.2"/>
+              <rect x="15" y="11" width="5" height="5" rx="1.2"/>
+            </svg>
+          </div>
+          <h3>Build</h3>
+          <p>Finally build the big ideas you’ve always had with the same coding-agent personas and skills that built Robot Dojo, made for non-technical builders.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========== 6. BELTS ========== -->
+    <div class="m-section-alt">
+      <section class="m-section" id="belts" aria-labelledby="belts-heading">
+        <div class="m-section-header">
+          <h2 id="belts-heading">Always Free.<br>Upgrade for Leverage.</h2>
+        </div>
+        <div class="m-belts" role="list">
+          <article class="m-belt m-belt-free m-belt-center belt-card white" role="listitem">
+            <img src="/static/img/belt-white.svg" alt="" class="m-belt-icon">
+            <div class="m-belt-tier">White Belt</div>
+            <h3>Your <em>Memory</em></h3>
+            <p>Your models, chats, and context — organized by topic. Shape it through chat.</p>
+            <div class="m-belt-price-block">
+              <p class="m-belt-price m-belt-price-display">Free</p>
+            </div>
+          </article>
+          <article class="m-belt m-belt-featured m-belt-center belt-card black" role="listitem">
+            <img src="/static/img/belt-black.svg" alt="" class="m-belt-icon">
+            <div class="m-belt-tier">Black Belt</div>
+            <h3>Your <em>World</em></h3>
+            <p>Your people, companies, and places — pulled from history. Work and build on top.</p>
+            <div class="m-belt-price-block">
+              <p class="m-belt-price m-belt-price-display"><span data-price-belt="black">$200/mo</span></p>
+              <p class="m-belt-trial">90 days free</p>
+            </div>
+          </article>
+        </div>
+        <!-- Single Get Started CTA below both belts (AC 5). Opens install modal. -->
+        <div class="belts-cta-row">
+          <button type="button" data-modal="install" class="btn-primary">Get Started</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========== 7. PLAN ========== -->
+    <section class="m-section" id="plan" aria-labelledby="plan-heading">
+      <div class="m-section-header">
+        <h2 id="plan-heading">Set it up once.<br>It only gets smarter.</h2>
+      </div>
+      <div class="m-plan" role="list">
+        <article class="m-plan-step" role="listitem">
+          <span class="m-plan-num">1</span>
+          <h3>Install</h3>
+          <p>One command on your Mac. It installs locally and opens setup in your browser when it's ready.</p>
+        </article>
+        <article class="m-plan-step" role="listitem">
+          <span class="m-plan-num">2</span>
+          <h3>Connect</h3>
+          <p>Click to connect your accounts, or drop in files from any app. One secure approval each, add more any time.</p>
+        </article>
+        <article class="m-plan-step" role="listitem">
+          <span class="m-plan-num">3</span>
+          <h3>Compound</h3>
+          <p>Every conversation builds on the last. Your AI sharpens with every use, and you own every byte.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========== 7b. INSTALL ========== -->
+    <div class="m-section-alt">
+      <section class="m-section m-install" id="install" aria-labelledby="install-heading">
+        <div class="m-section-header">
+          <h2 id="install-heading">Install</h2>
+        </div>
+
+        <div class="m-install-cmd">
+          <pre><code id="install-cmd">curl -fsSL https://robotdojo.ai/install.sh | bash</code></pre>
+          <button type="button" class="m-install-copy" aria-label="Copy install command" data-copy-target="install-cmd">Copy</button>
+        </div>
+
+        <div class="m-install-steps-wrap">
+          <ul class="m-install-steps">
+            <li>Open an account on your Mac with admin privileges</li>
+            <li>Open the Terminal app</li>
+            <li>Paste the command above and hit enter</li>
+            <li>Install takes 10–20 minutes</li>
+            <li>Your browser opens to setup when the local server is ready</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========== 8. CTA ========== -->
+    <div class="m-section-alt">
+      <section class="m-cta" aria-labelledby="cta-heading">
+        <h1 class="m-cta-hero" id="cta-heading">Install Once, Yours Forever</h1>
+        <p>Collaborate with an AI that knows you.</p>
+        <button type="button" data-modal="install" class="m-btn m-btn-primary m-btn-large">Install Robot Dojo →</button>
+      </section>
+    </div>
+  </main>
+
+  <footer class="m-footer" role="contentinfo">
+    <span>&copy; 2026 Robot Dojo, LLC</span>
+    <div class="m-footer-links">
+      <a href="/licensing">Licensing</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+  </footer>
+
+</body>
+</html>

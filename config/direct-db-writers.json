@@ -1,0 +1,901 @@
+{
+  "_comment": "Every scripts/*.js entrypoint that can reach lib/db.js must be classified here. Classes: server-owned, guarded-launch-agent, read-only-launch-agent, guarded-child, manual-only, blocked-beta.",
+  "writers": [
+    {
+      "path": "scripts/add-relationship.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/analyze-communication-style.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/attribute-transcripts.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/backfill-archive-test-residue.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/backfill-canonical-display-names.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/backfill-claude-code-jsonl.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/backfill-context-pointers.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/backfill-conversations.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/backfill-email-chunks.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/backfill-email-history.js",
+      "classification": "guarded-launch-agent"
+    },
+    {
+      "path": "scripts/backfill-email-import-sources.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/backfill-email-participants.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/backfill-entity-facts-provenance.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/backfill-granola-segments.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/backfill-llm-chunks.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/backfill-llm-exports.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/backfill-participants.js",
+      "classification": "guarded-child"
+    },
+    {
+      "path": "scripts/backfill-person-company-relationships.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/backfill-quality-scores.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/backfill-referral-yc-filter.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/backfill-speech-profiles.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/backfill-transcripts.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/belt-check.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/build-general-shard.js",
+      "classification": "guarded-child"
+    },
+    {
+      "path": "scripts/build-global-hnsw.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/canonical-rollback.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/canonical-trend.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/chat-memory-backfill.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/check-agent-trust-filter.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/check-entity-research-home.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/check-integration-truth.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/check-migration-completeness.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/check-pipeline-workbench-reconcile.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/check-pipeline-workbench-row.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/chunk-embed-daemon.mjs",
+      "classification": "guarded-launch-agent",
+      "dynamicImports": true
+    },
+    {
+      "path": "scripts/chunk-embed-worker.js",
+      "classification": "guarded-launch-agent"
+    },
+    {
+      "path": "scripts/classify-places.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/claude.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/clean-entities.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/compact-email-chunk-inputs.mjs",
+      "classification": "guarded-launch-agent"
+    },
+    {
+      "path": "scripts/create-gmail-drafts.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/criteria/chat-cache-hit-row-present.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/criteria/chat-observability-error-row-present.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/criteria/chat-observability-row-present.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/criteria/warmup-on-model-switch.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/dedup-places.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/distill-identity.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/dmarc-parse.js",
+      "classification": "guarded-child"
+    },
+    {
+      "path": "scripts/enrich-places.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/entity-qc-report.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/extract-all-pdfs.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/extract-places.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/fanout.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/generate-user-md.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/granola-segment-spike.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/gsc-poll.js",
+      "classification": "guarded-child"
+    },
+    {
+      "path": "scripts/health-context-migrate.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/health-recovery-status.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/import-apple-health-xml.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/import-fhir.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/import-linkedin-connections.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/import-local-chat-transcripts.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/import-pdf-labs.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest-agency-xlsx.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest-voices.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/01-extract.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/02-resolve.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/03-timeline.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/03b-service-vendor.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/04-classify.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/05-reclassify-chunks.js",
+      "classification": "guarded-child"
+    },
+    {
+      "path": "scripts/ingest/05-score.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/06-archive.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/07-context.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/08-entity-enrich.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/08-entity-link.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/08b-places-classify.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/09b-companies-normalize.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/10-mine-relations.js",
+      "classification": "guarded-child"
+    },
+    {
+      "path": "scripts/ingest/adjudicate-email-classification.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/backfill-display-names.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/backfill-event-time.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/backfill-merge-loser-cleanup.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/backup-before-rebuild.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/check-quality.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/detach-role-emails.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/detect-over-merges.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/index.js",
+      "classification": "guarded-child"
+    },
+    {
+      "path": "scripts/ingest/link-chunk-entities.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/merge-triage.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/re-resolve-identity.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/reap-archived-endpoints.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/reformat-context-split.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/rerun-owner-to-perfect.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/run-all.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/timeline-wire.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/ingest/unmerge-owner-foreign.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/integration-monitor.js",
+      "classification": "guarded-launch-agent"
+    },
+    {
+      "path": "scripts/integration-resync.js",
+      "classification": "guarded-launch-agent",
+      "dynamicImports": true
+    },
+    {
+      "path": "scripts/link-chat-chunk-entities.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/maintenance-phases.js",
+      "classification": "guarded-child"
+    },
+    {
+      "path": "scripts/memory-context-packet.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/memory-recalc.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/memory-synthesize.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/migrate-context-packages.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/migrate-entity-package-slugs.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/migrate-health-dedup.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/migrate-overnight-to-routines.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/migrate-source-topics.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/migrate.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/migration/drain-personal-embeddings.mjs",
+      "classification": "manual-only",
+      "dynamicImports": true
+    },
+    {
+      "path": "scripts/migration/repair-split-vec-orphans.mjs",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/migration/reset-embedded-for-resync.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/migration/run-embedding-drain-guarded.mjs",
+      "classification": "manual-only",
+      "dynamicImports": true
+    },
+    {
+      "path": "scripts/migration/run-post-embedding-drain-pipeline.mjs",
+      "classification": "manual-only",
+      "dynamicImports": true
+    },
+    {
+      "path": "scripts/neon-seed-user.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/oauth-callback-server.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/onboard.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/promote-workbench-corpus.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/purge-junk-chunks.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/blocked-turn-audit.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/capture-after-log.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/card-graph-consistency.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/chat-hot-path-probe.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/check-vec-orphans.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/context-pointer-audit.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/data-pipeline-status.js",
+      "classification": "manual-only",
+      "dynamicImports": true
+    },
+    {
+      "path": "scripts/qa/embed-throughput-benchmark.mjs",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/enrichment-qc-sample.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/external-provider-roundtrips.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/foreground-smoke.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/graph-fact-quiz.js",
+      "classification": "guarded-child"
+    },
+    {
+      "path": "scripts/qa/launch-stoplight.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/merge-validation-drill.js",
+      "classification": "guarded-child"
+    },
+    {
+      "path": "scripts/qa/passive-data-plane-self-heal.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/passive-foreground-latency.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/passive-launch-chaos.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/passive-restart-recovery.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/routing-residue-audit.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/second-account-continuity.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/test-assistant-relation-tag.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/test-deceased-rank.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/test-email-participant-extract.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/test-linkedin-enrichment-only.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/test-nickname-merge.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/tests/chat-browser-real-turn.spec.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/tests/chat-do-no-harm.spec.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/tests/chat-qa-isolation.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/tests/ss.spec.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/tests/viewer-stable-urls.spec.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/ttft-baseline.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/ttft-sample.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/vendor-routing-proof.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/verify-owner-split.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/verify-reresolve-separation.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/qa/viewer-top-entity-humanity-audit.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/read-doc.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/rebuild/index.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/rebuild/phase-00-snapshot.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/rebuild/phase-01-hard-delete.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/rebuild/phase-02-contacts.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/rebuild/phase-03-calendar.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/rebuild/phase-04-imessage.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/rebuild/phase-05-email.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/rebuild/phase-06-restore.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/rebuild/phase-07-places.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/rebuild/phase-08-score.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/rebuild/phase-09-classify.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/rebuild/phase-10-places.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/rebuild/phase-11-address.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/rebuild/relation-resolve-run.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/rebuild/relationship-graph-rerun.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/reclassify-conversations.js",
+      "classification": "guarded-child"
+    },
+    {
+      "path": "scripts/refocus-memory-routing.js",
+      "classification": "manual-only",
+      "dynamicImports": true
+    },
+    {
+      "path": "scripts/regen-entities.js",
+      "classification": "guarded-child"
+    },
+    {
+      "path": "scripts/relabel-uncategorized-unfiled.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/repair-chunks-fts.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/repair-coding-surface-st_abf246e4.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/repair-health-legacy-db.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/repair-memory-routing.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/repair-oversized-pending-chunks.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/repair-source-topic-metadata.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/robotdojo.js",
+      "classification": "manual-only",
+      "dynamicImports": true
+    },
+    {
+      "path": "scripts/score-content-depth.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/seed-canonical-genesis.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/seed-health-groups.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/seed-world-logs.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/smart-quarantine-acceptance.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/smart-quarantine-execute.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/smart-quarantine.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/snapshot.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/spend-estimate.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/spend-report.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/spend-watchdog.js",
+      "classification": "read-only-launch-agent"
+    },
+    {
+      "path": "scripts/states/bootstrap-states.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/states/delaware-ingest-rag.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/states/delaware-model.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/sync-apple-photos-metadata.js",
+      "classification": "guarded-child"
+    },
+    {
+      "path": "scripts/sync-asana-context.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/sync-imessage.js",
+      "classification": "guarded-child"
+    },
+    {
+      "path": "scripts/sync.js",
+      "classification": "guarded-launch-agent"
+    },
+    {
+      "path": "scripts/synthesize-brief.js",
+      "classification": "guarded-child"
+    },
+    {
+      "path": "scripts/tantei-rebuild.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/timeline-pipeline.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/timeline-recalc.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/tls-rpt-parse.js",
+      "classification": "guarded-child"
+    },
+    {
+      "path": "scripts/token.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/top-referrals.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/topic-distill.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/topic-edit-watcher.js",
+      "classification": "guarded-launch-agent"
+    },
+    {
+      "path": "scripts/topic-session-close.js",
+      "classification": "guarded-child"
+    },
+    {
+      "path": "scripts/topic-workbench-backfill.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/vault-manifest.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/workbench-discover.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/voice-learn.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/workbench-index.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/workbench-open.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/workbench-promote.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/workbench-register.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/workbench-resolve.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/workbench-resume.js",
+      "classification": "manual-only"
+    },
+    {
+      "path": "scripts/workbench-synthesize.js",
+      "classification": "manual-only"
+    }
+  ]
+}

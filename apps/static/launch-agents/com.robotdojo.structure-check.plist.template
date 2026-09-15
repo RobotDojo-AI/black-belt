@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Robot Dojo — daily filesystem structure audit.
+  Runs at 03:17 local time daily. Calls scripts/gate.js to enforce the
+  canonical filesystem ontology and report drift.
+
+  Bundled version drops `--notify` (owner-only Asana alert). The owner's
+  personal copy can re-add it via the local plist; the manifest template
+  ships without it for distribution.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.robotdojo.structure-check</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>__ROBOTDOJO_RUNTIME__</string>
+    <string>__ROBOTDOJO_HOME__/scripts/gate.js</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>__ROBOTDOJO_HOME__</string>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>3</integer>
+    <key>Minute</key>
+    <integer>17</integer>
+  </dict>
+
+  <key>StandardOutPath</key>
+  <string>__CONFIG__/logs/structure-check.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>__CONFIG__/logs/structure-check.err</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>__HOME__</string>
+    <key>PATH</key>
+    <string>__PATH__</string>
+  </dict>
+</dict>
+</plist>

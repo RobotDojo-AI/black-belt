@@ -1,0 +1,4 @@
+{
+  "revoked": [],
+  "_note": "List of ISO-week strings (e.g. '2026-W01') whose cohort JWT should be revoked. Edit and redeploy to revoke; api/bb-revocation.js reads this file at request time."
+}

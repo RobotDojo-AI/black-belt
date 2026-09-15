@@ -1,0 +1,35 @@
+{
+  "comment": "df_e1dcf732 — single source of truth for transcript-derived Asana call-task routing. `domains` maps a calendar-invite attendee domain (subdomains included) to a topic slug; `calendars` (df_33f550b7) maps an EXACT calendar_id to a topic slug — calendar-ownership routing for import/subscribed calendars that strip attendees, so a work-calendar call with no attendee signal still routes correctly; exact-id allowlist, never a suffix/pattern (a pattern would sweep an owner's other-venture import calendar); `topicAliases` normalizes legacy topic spellings; `destinations` maps a topic slug to the Asana target; `boards` maps named product boards (build kanban, People board, Companies board) to their Asana project gid and, where used, section gids. A new client/employer workspace is one row — no code change. PUBLIC-SAFE DEFAULT: this tracked file ships empty domains/calendars/topicAliases, a single `default` destination with a PLACEHOLDER workspace, and PLACEHOLDER board/project/section gids. Every real routed domain, work calendar-import id, and workspace/project/board/section gid lives ONLY in the gitignored config/asana-routing.user.json override, deep-merged over this file at load by lib/asana-routing-config.js (domains/calendars/topicAliases override per key; destinations override per field, so the override can supply just `default.workspace` while this file supplies provider/tokenName/label; boards override per field with a nested per-section merge). Replace every REPLACE_WITH_* placeholder with your own Asana gid, or set them via the override. On a fresh clone with no override, board gids stay placeholders and the Asana writers degrade gracefully (log + skip) rather than crash. Consumed by lib/asana.js, lib/followup-sweep.js, scripts/sync-asana.js, scripts/asana-upsert-story.js, and lib/call-routing.js (loadAsanaRoutingConfig); documented for humans in ~/robotdojo/user/files/asana-conventions.md. No owner gid literals live in tracked source — enforced by scripts/check-public-config-clean.js.",
+  "domains": {},
+  "calendars": {},
+  "topicAliases": {},
+  "destinations": {
+    "default": {
+      "provider": "asana",
+      "tokenName": "ASANA_PAT",
+      "workspace": "REPLACE_WITH_YOUR_ASANA_WORKSPACE_GID",
+      "project": null,
+      "label": "Primary"
+    }
+  },
+  "boards": {
+    "build": {
+      "project": "REPLACE_WITH_YOUR_ASANA_BUILD_PROJECT_GID",
+      "sections": {
+        "backlog": "REPLACE_WITH_YOUR_BACKLOG_SECTION_GID",
+        "next": "REPLACE_WITH_YOUR_NEXT_SECTION_GID",
+        "in-progress": "REPLACE_WITH_YOUR_IN_PROGRESS_SECTION_GID",
+        "done": "REPLACE_WITH_YOUR_DONE_SECTION_GID"
+      }
+    },
+    "people": {
+      "project": "REPLACE_WITH_YOUR_PEOPLE_BOARD_GID",
+      "sections": {
+        "researching": "REPLACE_WITH_YOUR_RESEARCHING_SECTION_GID"
+      }
+    },
+    "companies": {
+      "project": "REPLACE_WITH_YOUR_COMPANIES_BOARD_GID"
+    }
+  }
+}

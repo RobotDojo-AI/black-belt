@@ -1,0 +1,12 @@
+# gateway/ — node_modules under this dir.
+node_modules/
+
+# Local Terraform/deploy inputs. Source .tf files are tracked; filled vars,
+# plans, local backend data, and generated terraform dirs are local state.
+infra/.terraform/
+infra/terraform.tfvars
+infra/terraform.tfvars.bak
+infra/*.tfplan
+infra/tfplan
+infra/*.tfstate
+infra/*.tfstate.*

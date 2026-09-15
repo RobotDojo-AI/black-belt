@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- SEO -->
+  <title>Ask Robot Dojo — FAQ</title>
+  <meta name="description" content="Ask anything about Robot Dojo. Answers stream live from the public Robot Dojo docs corpus.">
+  <meta name="keywords" content="Robot Dojo FAQ, personal AI questions, AI memory, local AI, private AI, open source AI">
+  <link rel="canonical" href="https://robotdojo.ai/faq">
+  <meta name="robots" content="index,follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://robotdojo.ai/faq">
+  <meta property="og:title" content="Ask Robot Dojo — FAQ">
+  <meta property="og:description" content="Ask anything about Robot Dojo. Answers stream live from the public Robot Dojo docs corpus.">
+  <meta property="og:image" content="https://robotdojo.ai/og-image.png">
+  <meta property="og:site_name" content="Robot Dojo">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ask Robot Dojo — FAQ">
+  <meta name="twitter:description" content="Ask anything about Robot Dojo. Answers stream live from the public Robot Dojo docs corpus.">
+  <meta name="twitter:image" content="https://robotdojo.ai/og-image.png">
+
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+  <link rel="apple-touch-icon" href="/static/icon-180.png">
+  <link rel="manifest" href="/static/manifest.json">
+
+  <link rel="dns-prefetch" href="https://api.anthropic.com">
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    :root{--bg:#fff;--text:#1f1f1f;--muted:#5f6368;--border:#d8dde3;--accent:#1a73e8;--font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+    body{opacity:1;margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5}
+    body.app-ready{opacity:1}
+    .m-beta-banner{position:sticky;top:0;z-index:110;background:#2563eb;color:#fff;text-align:center;padding:.5rem 1rem;font-size:.9rem;font-weight:550;letter-spacing:.01em;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+    .app-body{min-height:calc(100vh - 38px);display:flex;justify-content:center;background:#fff}
+    .main{width:100%;max-width:880px;min-height:calc(100vh - 38px);display:flex;flex-direction:column;margin:0 auto;padding:24px 18px}
+    #chatView{min-height:calc(100vh - 86px);display:flex;flex-direction:column}
+    .messages{flex:1;overflow:auto}.messages-inner{display:flex;flex-direction:column;gap:16px;padding:32px 0 16px}
+    .input-area{position:sticky;bottom:0;background:#fff;padding:12px 0 24px}
+    .input-container{border:1px solid var(--border);border-radius:18px;background:#fff;box-shadow:0 8px 24px rgba(15,23,42,.08);padding:10px 12px}
+    .input-main{display:flex;align-items:flex-end;gap:10px}.chat-input{flex:1;min-height:44px;max-height:160px;resize:none;border:0;outline:0;font:inherit;color:var(--text);padding:10px 4px}.send-circle{width:36px;height:36px;border-radius:50%;border:0;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center}.send-circle:disabled{background:#d8dde3;color:#6b7280}.input-toolbar{display:flex;align-items:center;gap:8px;padding:4px 2px 0;color:var(--muted);font-size:12px}.tb-spacer{flex:1}
+  </style>
+  <!-- These must load for every visitor, not just JS-disabled ones. Nothing
+       injects them at runtime, so inside <noscript> they never loaded at all:
+       .material-symbols-outlined stayed undefined and the composer rendered its
+       icon ligatures as the literal words "arrow_upward" and "verified". -->
+  <link rel="stylesheet" href="/static/vendor/fonts.css">
+  <link rel="stylesheet" href="/static/vendor/hljs-github.min.css">
+  <link rel="stylesheet" href="/static/shared/theme.css">
+  <link rel="stylesheet" href="/static/shared/shell.css?v=2026-09-09-1">
+  <link rel="stylesheet" href="/static/shared/app-layout.css">
+  <link rel="stylesheet" href="/faq/style.css?v=2026-09-09-1">
+
+  <script>
+    window.RobotDojoBootFallback = setTimeout(() => {
+      if (!document.body || document.body.classList.contains('app-ready')) return;
+      document.body.classList.add('app-ready', 'app-boot-fallback');
+      const fallback = document.createElement('div');
+      fallback.className = 'rd-boot-fallback rd-error';
+      fallback.setAttribute('role', 'alert');
+      fallback.textContent = 'Robot Dojo could not finish loading. Refresh to retry.';
+      document.body.prepend(fallback);
+    }, 8000);
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Ask Robot Dojo — FAQ",
+    "url": "https://robotdojo.ai/faq",
+    "description": "Ask anything about Robot Dojo. Answers stream live from the public Robot Dojo docs corpus.",
+    "isPartOf": { "@id": "https://robotdojo.ai/#website" }
+  }
+  </script>
+</head>
+<body data-app="faq" data-app-flow="faq">
+
+  <!-- Static beta banner. The public chat surface stays single-purpose: no
+       marketing nav/footer injection on the hot path. -->
+  <div class="m-beta-banner m-beta-banner-static" role="status" aria-live="polite">Private beta. 90 days of Black Belt on install.</div>
+
+  <!-- App body — mirrors apps/chat/index.html (public-only subset). The
+       sidebar / topbar / conv-list / empty-state nodes are intentionally
+       omitted; the public faq surface is centered chat-only. body.public-chat-mode
+       in /static/shared/shell.css + /faq/style.css hides authed chrome by
+       default; we also just don't render it. -->
+  <div class="app-body" id="appBody">
+    <div class="main" id="mainArea" data-view="focus">
+      <div id="chatView">
+        <div class="messages" id="messages"><div class="messages-inner" id="messagesInner"></div></div>
+        <div class="input-area" id="inputArea">
+          <div class="input-container public-composer">
+            <div class="input-main">
+              <textarea class="chat-input" data-testid="multimodal-input" rows="1" placeholder="Ask anything about Robot Dojo"></textarea>
+              <button class="send-circle" data-testid="send-button" disabled>arrow_upward</button>
+            </div>
+            <div class="input-toolbar"><span>verified Public repo docs only</span><span class="tb-spacer"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Entry point. Dynamic import starts after DOMContentLoaded so the static
+       composer remains the first usable surface even if the edge is slow. -->
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      setTimeout(function () { import('/faq/app.js').catch(function () {}); }, 0);
+    });
+  </script>
+</body>
+</html>

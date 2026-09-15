@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.robotdojo.server</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>__NODE_BIN__</string>
+    <string>__REPO_ROOT__/index.js</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>__REPO_ROOT__</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>__HOME__</string>
+    <key>PATH</key>
+    <string>__PATH__</string>
+    <key>NODE_ENV</key>
+    <string>production</string>
+  </dict>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>KeepAlive</key>
+  <dict>
+    <key>SuccessfulExit</key>
+    <false/>
+    <key>Crashed</key>
+    <true/>
+  </dict>
+
+  <key>ThrottleInterval</key>
+  <integer>10</integer>
+
+  <key>StandardOutPath</key>
+  <string>/tmp/robotdojo-server.out.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>/tmp/robotdojo-server.err.log</string>
+
+  <key>ProcessType</key>
+  <string>Background</string>
+</dict>
+</plist>

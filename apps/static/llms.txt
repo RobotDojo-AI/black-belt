@@ -1,0 +1,36 @@
+# Robot Dojo
+
+> Local-first personal intelligence. Chat is the hero. Context is the product.
+
+Public truth version: 0847ccb5bff0faad. Generated from config/public-truth-sources.json.
+
+Robot Dojo is a local-first personal intelligence system. White Belt knows you. Black Belt knows your world. Every install includes Black Belt for 90 days; if Black Belt expires, premium engines pause while user-owned local artifacts remain local.
+
+## Ask
+
+- [Public docs chat](https://robotdojo.ai/ask): Public Robot Dojo product, install, privacy, tier, architecture, and repo-structure questions.
+
+## Canonical Sources
+
+- [Product vision](https://robotdojo.ai/): architecture/product.md sha256=0c39b54e138a3710861232e5503f979ae4a90b1433196096f8399044fa4a3c66
+- [Architecture](https://robotdojo.ai/): architecture/architecture.md sha256=557471bb41559718c6226a39e0f1384d6b08732da231795cd4c4985f89b33b13
+- [Repository structure](https://robotdojo.ai/): architecture/structure.md sha256=898ad7b3c388173fa7ea2639e65165a298a8f0508d9453d3d3843870bc49395c
+- [Generated sitemap](https://robotdojo.ai/): architecture/sitemap.md sha256=f306a251594cfc79a588aae787c6627ec17ee9f644cbc7e01e873a8fe7d27ba1
+- [Repository ontology](https://robotdojo.ai/): architecture/ontology.md sha256=95220b49c6e8e803f638e970905cdc6c5744a646fc0066b4b7f5bf82087d1f70
+- [Account recovery](https://robotdojo.ai/): ACCOUNT_RECOVERY.txt sha256=13a8a0f0aa8d073a45b5873604aa0695f57b788ba742674242752c57bfff189d
+- [Public README](https://robotdojo.ai/): README.md sha256=54cd89e284da66c4eb38e5bcbd2efcf8db04a2fc9f8ce0c740e1124b7387deac
+- [Privacy page](https://robotdojo.ai/): apps/privacy.html sha256=bd360f1357d5a39d1241edfc95eb5570c7ed84e885c65685bdeba08a99a8c7d0
+- [Install script](https://robotdojo.ai/): apps/static/install.sh sha256=fdfcfd278727803e08eec0035a9399a80e178da173df3e3746d7e647c2371ec1
+
+## Common Questions
+
+- What is Robot Dojo?: Robot Dojo is a personal AI system that actually knows you. Chat with your email, calendar, contacts, and messages unified into one living memory; work in it with research, analyses, and apps on your own data; and build the bigger ideas you’ve always had. All local, on your Mac.
+- Who is Robot Dojo for?: Founders, builders, and entrepreneurs tired of repeating themselves to AI. You already have the context (inbox, calendar, messages, notes), and Robot Dojo turns it into an assistant that remembers you across every session. The private beta is a small, smart cohort installing on a Mac and getting more out of AI than a stock foundation model, with no founder hand-holding.
+- Is this like Garry Tan's GBrain?: Similar arc, different audience. GBrain (https://github.com/garrytan/gbrain) is a developer tool: a knowledge graph you or an agent fills by writing markdown pages. Robot Dojo is for non-technical people: more productized, less configuration. It extracts signal from data you already have (email, iMessage, calendar, transcripts, contacts), so you don't write pages; Robot Dojo reads what you already did.
+- What should I connect and import?: Start with the accounts that already know you. Connect Google with one OAuth click for Gmail, Calendar, and Contacts. Grant Full Disk Access on your Mac and Robot Dojo reads your local Apple data: iMessage, Contacts, Calendar, Notes, Photos metadata, Call history, and Mail. Drop a Google Takeout archive or any foundation-model chat exports into your inbox folder for deeper history. The more real context Robot Dojo has, the faster it feels like it knows you.
+- Where does my data live?: On your machine. Always. Robot Dojo runs locally and stores everything on your hardware; the robotdojo.ai servers never see your private data. When you want to reach your instance from another computer or your phone, robotdojo.ai provides an encrypted, zero-knowledge relay: end-to-end encrypted, no cloud storage, and Robot Dojo cannot read what passes through it. Remote access via the relay is a paid Black Belt feature.
+- Do I need a dedicated computer?: No. Robot Dojo runs fine on the Mac you already own. 16GB of RAM is enough on any modern machine. A Mac mini is a better host if you want one, because it stays on whether your laptop is open or not, so the relay is always reachable from another computer or your phone. Move to a dedicated machine any time; nothing locks you in.
+- Is it open source?: Yes. White Belt is MIT, fully open source, free to read, audit, fork, and run. Black Belt is source-available on a subscription: the code is still public so you can audit every line, and an active subscription unlocks the premium engines and the encrypted relay.
+- How do I install Robot Dojo?: One command on your Mac: curl -fsSL https://robotdojo.ai/install.sh | bash. Or open the Install modal at the top of robotdojo.ai for the same command. Install takes 10–20 minutes; when the local server is ready, your browser opens to setup.
+- What is Black Belt?: Black Belt knows your world. It includes White Belt plus entity extraction, enrichment, entity context files, people, places, companies, relationship context, entity-aware chat, premium apps, and premium tool runs. Every install includes Black Belt for 90 days. Then the key expires.
+- What happens when Black Belt expires?: White Belt knows you locally: White Belt is the local foundation: chat with RAG, user files, chat history, topics, local memory, and user context. The code is public; you can audit, fork, and run it on your own hardware. White Belt does not include entity extraction, entity enrichment, inline entity recognition, build skills, premium apps, or premium agent/tool runs. Black Belt is the world model and creation layer. It includes White Belt plus entity extraction, enrichment, entity context files, people/places/companies, relationship context, entity-aware chat, coding-agent skills on topics, Health, premium apps, and premium agent/tool runs.

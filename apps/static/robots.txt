@@ -1,0 +1,53 @@
+# Robot Dojo — robots.txt
+# Policy: marketing pages open to all crawlers including AI bots.
+# App shells (account/chat/network/login/pulse) and the API stay disallowed.
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /apps/account/
+Disallow: /apps/chat/
+Disallow: /apps/network/
+Disallow: /apps/pulse/
+Disallow: /apps/login/
+
+# OpenAI — explicit allow for training + search
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google — Gemini training opt-in
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Apple Intelligence training opt-in
+User-agent: Applebot-Extended
+Allow: /
+
+# Common Crawl
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://robotdojo.ai/sitemap.xml

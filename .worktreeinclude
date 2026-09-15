@@ -1,0 +1,7 @@
+# st_8745309c — files copied into each new worktree by `claude --worktree`.
+#
+# Worktrees start without the main checkout's untracked files. .env.local
+# carries the ROBOTDOJO_DATABASES_ROOT override that isolates the worktree
+# session from the production database. Without this file the override
+# would not propagate and lib/db.js would hard-refuse at startup.
+.env.local

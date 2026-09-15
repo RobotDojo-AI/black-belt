@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Robot Dojo — Cloudflare Tunnel (cloudflared) LaunchAgent template.
+  Placeholders are expanded by install.sh (st_96bb626f AC 2 / Phase B).
+
+  cloudflared runs as its own KeepAlive process — not a child of the server — so
+  remote Connect reachability at {slug}.connect.robotdojo.ai survives server
+  restarts, mirroring why the old standalone tunnel ran independently.
+
+  The run token is read at launch from __CONFIG__/cloudflared/token (written 0600
+  by provision_cloudflare_tunnel), so the secret never lives inside this template
+  or the installed plist. --no-autoupdate pins the cloudflared binary so it does
+  not swap itself mid-session.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.robotdojo.cloudflared</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/sh</string>
+    <string>-c</string>
+    <string>exec cloudflared tunnel --no-autoupdate run --token "$(cat __CONFIG__/cloudflared/token)"</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>__ROBOTDOJO_HOME__</string>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>KeepAlive</key>
+  <dict>
+    <key>SuccessfulExit</key>
+    <false/>
+    <key>Crashed</key>
+    <true/>
+  </dict>
+
+  <key>ThrottleInterval</key>
+  <integer>10</integer>
+
+  <key>StandardOutPath</key>
+  <string>__CONFIG__/logs/robotdojo-cloudflared.out.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>__CONFIG__/logs/robotdojo-cloudflared.err.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>__HOME__</string>
+    <key>USER</key>
+    <string>__USER__</string>
+    <key>PATH</key>
+    <string>__PATH__</string>
+    <key>NODE_ENV</key>
+    <string>production</string>
+    <key>ROBOTDOJO_HOME</key>
+    <string>__ROBOTDOJO_HOME__</string>
+    <key>ROBOTDOJO_CONFIG</key>
+    <string>__CONFIG__</string>
+    <key>TUNNEL_NO_AUTOUPDATE</key>
+    <string>true</string>
+  </dict>
+</dict>
+</plist>

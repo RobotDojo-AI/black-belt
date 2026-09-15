@@ -1,0 +1,18 @@
+-- df_02d633dc — dedup guard for Granola-call → Asana task creation. Without
+-- this, createGranolaCallAsanaTask() has no record of an already-created
+-- Asana task until completePassiveJob() writes it into passive_jobs.metadata
+-- AFTER the handler returns successfully — a crash, lease-expiry reclaim, or
+-- DB lock between the successful Asana POST and that write causes a second,
+-- duplicate POST on retry. This column closes that window to a single atomic
+-- UPDATE, written by the handler itself immediately after the POST succeeds,
+-- independent of passive_jobs bookkeeping.
+--
+-- Nullable, no default: NULL = no Asana task created yet for this transcript
+-- (every existing row and every future non-Granola row). Never backfilled —
+-- pre-fix transcripts that already have a manually-created task are handled
+-- by QA's manual reconciliation, not by this migration guessing at gids.
+-- TEXT, not a foreign key: Asana gids are opaque external identifiers, same
+-- convention as the existing calendar_event_id/ical_uid columns on this table
+-- — no FK constraint, no CHECK, no index (all lookups are by transcripts.id,
+-- never by gid).
+ALTER TABLE transcripts ADD COLUMN asana_call_task_gid TEXT;

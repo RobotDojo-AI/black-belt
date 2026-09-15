@@ -1,0 +1,42 @@
+# config/ — repo defaults are tracked; user-specific configs (PII) are local.
+private.json
+voices/samples/
+voices/*.md
+!voices/README.md
+# Voices subdirs are SHIPPED canonical fragments (agent-comms + writing-templates).
+# Each is generic, not user-specific. Tracked.
+health-markers.json
+taxonomy.json
+taxonomy.user.json
+vault-manifest.json
+family.json
+initial-slug
+company-aliases.user.json
+service-vendor-keywords.user.json
+source-topic-routing.user.json
+asana-routing.user.json
+viewer-topic-lens.user.json
+qa-proof-fixtures.user.json
+# The owner's own affiliation terms (employers, schools, ventures) that collide
+# with ordinary product vocabulary. The TRACKED owner-corpus-allowlist.json keeps
+# only generic product terms; this local override carries the distinctive ones so
+# they never enter the published tree. MUST stay ignored (st_dd0e19d8 AC22).
+owner-corpus-allowlist.user.json
+# Permitted-list entries whose TERM or CLASS ANNOTATION would itself be a leak if
+# committed (an employer domain, a family name, an entity id). The tracked
+# publication-permitted.json carries only entries whose term is public by
+# construction; anything owner-identifying lives here. MUST stay ignored
+# (st_dd0e19d8 AC15).
+publication-permitted.user.json
+# Operator-specific object-storage backup bucket names. The tracked scripts read
+# them at runtime via lib/backup-buckets.js and refuse when this file is absent —
+# a bucket-mutating script must never run against a placeholder name
+# (st_dd0e19d8 AC5).
+backup-buckets.user.json
+# The operator's own sender domains for the email-ingest allowlist. The tracked
+# list keeps generic infrastructure senders; a domain that names a specific
+# merchant relationship lives here (st_dd0e19d8 AC5).
+email-allowlist-domains.user.json
+# Optional local Monarch 1Password item/vault override. Password and OTP stay
+# in 1Password; this file only names the item.
+monarch.user.json

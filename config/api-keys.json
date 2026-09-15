@@ -1,0 +1,49 @@
+{
+  "_comment": "st_4312c9c0. One credential per (PROVIDER x SPEND CLASS), so 'where did the money go' is a dropdown in whichever vendor console is billing — permanently, with no instrumentation to maintain. Classes mirror the trigger taxonomy in config/tier-policy.json, because work that fires with nobody watching is a different KIND of risk from work the owner launched. Splitting on model or module would not separate those.",
+
+  "_why_not_one_key": "This session spent hours reconstructing $1,239 from receipts, session logs, file mtimes and screenshots, and ~$274 is still unattributed. Split credentials answer the same question in one click, and each can be revoked independently — killing background spend never means killing chat.",
+
+  "_vendor_agnostic": "Names are derived by CONVENTION, not enumerated: {base}_{CLASS} where base comes from providers below. Adding xAI, OpenAI or Google needs no edit here — mint robotdojo-XAI_API_KEY_AUTONOMOUS and it is found. The same class taxonomy therefore survives a vendor switch, which is the point: moving the coding agent to Grok must not restart the traceability work.",
+
+  "providers": {
+    "anthropic": "ANTHROPIC_API_KEY",
+    "xai": "XAI_API_KEY",
+    "openai": "OPENAI_API_KEY",
+    "google": "GOOGLE_AI_API_KEY"
+  },
+
+  "_resolution_order": "For provider P, class C: env ROBOTDOJO_{P}_KEY_{C} -> keychain robotdojo-{base}_{C} -> keychain robotdojo-{base} (shared). A class with no dedicated credential falls back silently, so this is safe to adopt one key at a time and one vendor at a time.",
+
+  "classes": {
+    "autonomous": {
+      "covers": "Scheduled and backlog work with no human in the loop: entity enrichment drain, granola sync attribution, topic-context regeneration, the entity context pipeline.",
+      "expect_monthly_usd": 5,
+      "alarm_if_over_usd": 15,
+      "why": "THE credential to watch. Measured background rate is ~$0.30/day, so anything past $15/month means an unattended job is doing more than it should. This is the class that produced surprise invoices and the one the owner never explicitly asked for. Revoking it stops all background spend and leaves chat working."
+    },
+    "interactive": {
+      "covers": "Chat turns, context routing, entity cards for the current conversation, dropped-file extraction — anything with a human waiting.",
+      "expect_monthly_usd": 30,
+      "alarm_if_over_usd": 100,
+      "why": "Bounded by the owner's own activity, so a spike is self-explanatory: he was using the product. Separate so background noise cannot hide inside it."
+    },
+    "explicit": {
+      "covers": "Bulk runs launched by hand: full corpus enrichment, health intel regeneration, PDF and lab imports, place classification, email adjudication.",
+      "expect_monthly_usd": 50,
+      "alarm_if_over_usd": 300,
+      "why": "Episodic and legitimately large — one full corpus pass is real money. The aim is not to cap it but to see it as its own line, so a $200 month reads as one deliberate rebuild rather than unexplained drift."
+    },
+    "research": {
+      "covers": "Web research campaigns: company and founder profiling, career work, /profile and /followup. Both the search fee and the tokens that process what comes back.",
+      "expect_monthly_usd": 0,
+      "alarm_if_over_usd": 200,
+      "why": "July 2026 was $506 — 37% of the year — and the artifacts (founder-research, crunchbase pulls, tier-1 scoring, drugco classification) confirm approved career work. Zero expected in a normal month because it is campaign-shaped: nothing for weeks, then several hundred dollars in three days."
+    },
+    "experimental": {
+      "covers": "Anything outside robotdojo — agent frameworks, coding agents, evaluations, one-off tools.",
+      "expect_monthly_usd": 0,
+      "alarm_if_over_usd": 100,
+      "why": "February through April 2026 cost $362 on Sonnet 4.5, Haiku 3, Opus 4 and Sonnet 4 — models robotdojo has never been configured to use. That spend came from outside this codebase and is now permanently unattributable. This is also where a new default coding agent belongs while it is being trialled, so its cost is legible from day one rather than reconstructed later."
+    }
+  }
+}

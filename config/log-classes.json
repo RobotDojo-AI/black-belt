@@ -1,0 +1,6 @@
+{
+  "comment": "st_ae536261. Whitelist of paths permitted to set class='log' (which allows max_chars: null). Limited to append-only directories whose growth is structurally bounded by external mechanisms (Merkle chain pruning, rotation, GCS sync). Anything not on this list with class='log' fails check-registry-schema.js.",
+  "paths": [
+    "user/memory/log/"
+  ]
+}

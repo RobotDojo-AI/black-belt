@@ -1,0 +1,97 @@
+{
+  "title": "Personal Shopping & Cooking Guide",
+  "strategy": "This plan focuses on brain, heart, inflammatory, kidney-stone, metabolic, and recovery goals using source-backed personal context. Food guidance should remain patient-specific without hard-coding a first-user identity.",
+  "patientDrivers": [
+    "Lipid and cardiovascular prevention",
+    "Systemic inflammation control",
+    "Kidney stone risk management",
+    "Metabolic stability and brain health"
+  ],
+  "tiers": [
+    {
+      "level": 1,
+      "name": "Daily Staples",
+      "frequency": "Unlimited",
+      "subtitle": "The Anti-Inflammatory Foundation",
+      "categories": {
+        "Proteins": ["Salmon", "Sardines", "Chicken breast", "Lean ground turkey (99% lean)", "Egg whites", "White fish (cod, halibut, sea bass)"],
+        "Veggies": ["Arugula", "Kale", "Broccoli", "Cauliflower", "Brussels sprouts", "Bok choy", "Asparagus"],
+        "Fruits": ["Blueberries", "Raspberries", "Strawberries", "Blackberries"],
+        "Carbs": ["None; Tier 1 uses high-fiber vegetables as the primary volume"],
+        "Fats and Oils": ["Extra virgin olive oil", "Avocado oil", "Avocados"],
+        "Nuts and Seeds": ["Unsalted mixed nuts", "Pumpkin seeds (pepitas)", "Pecans"],
+        "Snacks": ["Seaweed snacks in olive oil", "Seed-flour crackers such as Simple Mills", "Bone broth"],
+        "Desserts": ["Dark chocolate over 85% cacao", "Fruit sorbets"]
+      }
+    },
+    {
+      "level": 2,
+      "name": "Weekly Rotation",
+      "frequency": "1-3x per week",
+      "subtitle": "Variety and Performance Energy",
+      "categories": {
+        "Proteins": ["Bison", "Venison", "Filet mignon", "Whole eggs, limited to 4-6 yolks per week"],
+        "Veggies": ["Nightshades such as tomatoes, peppers, and eggplant, ideally peeled, seeded, and well-cooked", "Onions", "Garlic", "Mushrooms"],
+        "Fruits": ["Apples", "Pears", "Oranges", "Grapefruit"],
+        "Carbs": ["Wild rice", "Sourdough bread", "Sweet potatoes", "Quinoa"],
+        "Fats and Oils": ["Avocado oil for high-heat cooking or roasting"],
+        "Nuts and Seeds": ["Pistachios"],
+        "Snacks": ["Quinoa-based crackers", "Rice cakes", "Veggie flour if not mixed with almond flour"],
+        "Desserts": ["Non-dairy nice cream made from frozen fruit blended with unsweetened plant milk"]
+      }
+    },
+    {
+      "level": 3,
+      "name": "Allowable Exceptions",
+      "frequency": "Managed Stress",
+      "subtitle": "Occasional Western-Style Treats",
+      "categories": {
+        "Proteins": ["Fatty beef such as ribeye or brisket", "Lamb"],
+        "Veggies": ["Cooked carrots", "Squash", "Beets", "White potatoes"],
+        "Fruits": ["Bananas", "Grapes", "Mangoes", "Dried fruits, very high sugar"],
+        "Carbs": ["White rice", "Traditional pasta", "White bread"],
+        "Fats and Oils": ["Half-and-half for coffee only"],
+        "Nuts and Seeds": ["Cashews"],
+        "Snacks": ["Aged cheese", "Brie"],
+        "Desserts": ["Traditional ice cream"]
+      }
+    },
+    {
+      "level": 4,
+      "name": "Danger Zone",
+      "frequency": "Avoid",
+      "subtitle": "The Inflammation and Stone Triggers",
+      "categories": {
+        "Proteins": ["Processed meats such as salami, pepperoni, or deli meats with nitrates"],
+        "Veggies": ["Raw spinach"],
+        "Carbs": ["Most commercial keto breads", "Almond-flour based baked goods"],
+        "Fats and Oils": ["Coconut oil", "Butter", "Ghee", "Palm oil"],
+        "Nuts and Seeds": ["Hazelnuts (reactive)", "Walnuts", "Almonds"],
+        "Snacks": ["Traditional crackers made with wheat and butter"],
+        "Desserts": ["Coconut-based ice creams or treats"]
+      }
+    }
+  ],
+  "chefNarrative": [
+    {
+      "name": "The Cold Start",
+      "rule": "Cook starches such as rice or potatoes a day in advance and chill them overnight. Reheating increases resistant starch and makes the meal gentler for metabolism."
+    },
+    {
+      "name": "Before the Meal: The Fat Buffer",
+      "rule": "For a heavier Tier 3 meal such as lamb or ribeye, have the patient eat a small source of Tier 1 fat such as olive oil about 15 minutes before the meal."
+    },
+    {
+      "name": "During the Meal: The Order of Operations",
+      "rule": "Serve fiber and protein first, then starch last. This buffers glucose response and supports brain and metabolic stability."
+    },
+    {
+      "name": "The Clothe the Carbs Rule",
+      "rule": "Never serve starch naked. Dress rice, sourdough, or potato with a Tier 1 fat or fiber such as olive oil, avocado oil, or vegetables."
+    },
+    {
+      "name": "Stone Prevention: The Citrus Squeeze",
+      "rule": "Keep water intake high and add fresh lemon or lime. Citrate helps inhibit calcium oxalate stone formation."
+    }
+  ]
+}

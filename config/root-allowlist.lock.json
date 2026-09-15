@@ -1,0 +1,566 @@
+{
+  "$schema_version": 1,
+  "kind": "robotdojo-root-allowlist-lock",
+  "owner_approval_required": true,
+  "story_id": "st_9699c94f",
+  "owner_approval_quote": "go — Boundary-complete (amend AC1): move + untrack only the tracked dev-pipeline files into the robot-dojo workbench; pipeline/ persists as the untracked quarantine home; the boundary holds iff zero tracked files remain under pipeline/",
+  "owner_codeowner": "@RobotDojo-AI/maintainers",
+  "external_enforcement": {
+    "github": {
+      "codeowners_file": ".github/CODEOWNERS",
+      "required_workflow": "Root architecture lock",
+      "branch_protection_required": true,
+      "code_owner_review_required": true
+    }
+  },
+  "entries": {
+    ".backup": {
+      "type": "dir",
+      "class": "gcp",
+      "required": false,
+      "hidden": true,
+      "purpose": "Local story snapshots, rollback files, and exported stash bundles"
+    },
+    ".claude": {
+      "type": "dir",
+      "class": "gcp",
+      "required": false,
+      "hidden": true,
+      "purpose": "Repo-local Claude state and worktrees"
+    },
+    ".DS_Store": {
+      "type": "file",
+      "class": "regenerable",
+      "required": false,
+      "purpose": "macOS Finder metadata"
+    },
+    ".env": {
+      "type": "file",
+      "class": "gcp",
+      "required": false,
+      "purpose": "Local environment secrets"
+    },
+    ".env.local": {
+      "type": "file",
+      "class": "gcp",
+      "required": false,
+      "purpose": "Local environment secrets"
+    },
+    ".git": {
+      "type": "dir",
+      "class": "regenerable",
+      "required": false,
+      "hidden": true,
+      "purpose": "Local Git metadata; source state recovers from GitHub"
+    },
+    ".github": {
+      "type": "dir",
+      "class": "github",
+      "required": true,
+      "hidden": true,
+      "gitignorePolicy": "no_special_rules",
+      "extensions": [
+        ".yml",
+        ".yaml",
+        ".md",
+        ""
+      ],
+      "purpose": "GitHub CODEOWNERS and CI workflows that enforce the architecture lock remotely"
+    },
+    ".gitignore": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Repo-wide ignore policy"
+    },
+    ".vercel": {
+      "type": "dir",
+      "class": "regenerable",
+      "required": false,
+      "hidden": true,
+      "purpose": "Local Vercel link/cache state"
+    },
+    ".vercelignore": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Vercel deploy exclusion policy"
+    },
+    "ACCOUNT_RECOVERY.txt": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Local operator account recovery instructions"
+    },
+    "agents": {
+      "type": "dir",
+      "class": "github",
+      "required": true,
+      "gitignorePolicy": "has_gitignore",
+      "extensions": [
+        ".js",
+        ".ts",
+        ".mjs",
+        ".json",
+        ".md"
+      ],
+      "purpose": "Canonical Robot Dojo Agent OS: roster, personas, build skills, generated adapters",
+      "belongs": "roster.md, personas/*.md, agents/skills/*/SKILL.md, quality/build contracts, generated dist/",
+      "doesNotBelong": "User profile, private memory, runtime data"
+    },
+    "api": {
+      "type": "dir",
+      "class": "github",
+      "required": true,
+      "gitignorePolicy": "no_special_rules",
+      "extensions": [
+        ".js",
+        ".ts",
+        ".mjs"
+      ],
+      "purpose": "Public Vercel serverless functions",
+      "belongs": "Public-facing edge functions",
+      "doesNotBelong": "Business logic"
+    },
+    "apps": {
+      "type": "dir",
+      "class": "github",
+      "required": true,
+      "gitignorePolicy": "no_special_rules",
+      "extensions": [
+        ".html",
+        ".js",
+        ".css",
+        ".json",
+        ".svg",
+        ".png",
+        ".ico",
+        ".webp",
+        ".jpg",
+        ".jpeg",
+        ".gif",
+        ".woff",
+        ".woff2",
+        ".ttf",
+        ".txt",
+        ".xml",
+        ".sh",
+        ".template",
+        ".encrypted"
+      ],
+      "purpose": "Frontend applications",
+      "belongs": "Browser HTML, JS, CSS, and assets",
+      "doesNotBelong": "Backend logic"
+    },
+    "architecture": {
+      "type": "dir",
+      "class": "github",
+      "required": true,
+      "gitignorePolicy": "no_special_rules",
+      "extensions": [
+        ".md",
+        ".json"
+      ],
+      "purpose": "Architecture and canonical documentation surfaces",
+      "belongs": "architecture/product.md, architecture/architecture.md, architecture/structure.md, generated architecture/sitemap.md, generated architecture/ontology.md, architecture/surfaces.json",
+      "doesNotBelong": "Runtime code, private user data, process artifacts, or generated public bundles"
+    },
+    "CLAUDE.md": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Claude Code project adapter"
+    },
+    "code": {
+      "type": "dir",
+      "class": "gcp",
+      "required": true,
+      "gitignorePolicy": "has_gitignore",
+      "purpose": "External repos, gitignored and GCP-backed",
+      "belongs": "Git clones of linked external repos",
+      "doesNotBelong": "Committed product source"
+    },
+    "config": {
+      "type": "dir",
+      "class": "mixed",
+      "required": true,
+      "gitignorePolicy": "has_gitignore",
+      "extensions": [
+        ".json",
+        ".yaml",
+        ".yml",
+        ".toml",
+        ".js",
+        ".md"
+      ],
+      "purpose": "Configuration and registries",
+      "belongs": "Models, voices, taxonomy, account settings, lock files, registries",
+      "doesNotBelong": "Secrets or raw data"
+    },
+    "docs": {
+      "type": "dir",
+      "class": "mixed",
+      "required": true,
+      "gitignorePolicy": "has_gitignore",
+      "extensions": [
+        ".png",
+        ".svg",
+        ".jpg",
+        ".jpeg",
+        ".webp",
+        ".gif",
+        ".pdf",
+        ".md"
+      ],
+      "purpose": "Robot Dojo/product/operator documentation",
+      "belongs": "Human-facing product and operator docs",
+      "doesNotBelong": "Product truth, planning artifacts, raw user files, derived workbench analysis"
+    },
+    "gateway": {
+      "type": "dir",
+      "class": "github",
+      "required": true,
+      "gitignorePolicy": "has_gitignore",
+      "extensions": [
+        ".js",
+        ".ts",
+        ".mjs",
+        ".json",
+        ".toml",
+        ".md",
+        ".tf",
+        ".hcl",
+        ".sh",
+        ".example",
+        ".service"
+      ],
+      "purpose": "Canonical WebSocket/TCP/SNI gateway deployment source",
+      "belongs": "Hono server, Redis integration, Docker config, Terraform deploy source, deploy scripts, device registration, tunnel routes, and blind TCP/SNI relay code",
+      "doesNotBelong": "Application business logic"
+    },
+    "identity.example.json": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Example local identity configuration"
+    },
+    "identity.json": {
+      "type": "file",
+      "class": "gcp",
+      "required": false,
+      "purpose": "Local identity config"
+    },
+    "identity.local.json": {
+      "type": "file",
+      "class": "gcp",
+      "required": false,
+      "purpose": "Local identity config override"
+    },
+    "index.js": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Server entry point"
+    },
+    "install.sh": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Terminal install path"
+    },
+    "knip.json": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Dead-code/dependency analysis config"
+    },
+    "lib": {
+      "type": "dir",
+      "class": "github",
+      "required": true,
+      "gitignorePolicy": "has_gitignore",
+      "extensions": [
+        ".js",
+        ".ts",
+        ".mjs",
+        ".sql",
+        ".pem"
+      ],
+      "purpose": "Core reusable business logic",
+      "belongs": "Reusable modules, integrations, data pipelines",
+      "doesNotBelong": "Route handlers, scripts, frontend code"
+    },
+    "LICENSE": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Repository license"
+    },
+    "LICENSE-BLACKBELT": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Black Belt source-available license (Elastic License 2.0); White Belt root LICENSE stays MIT"
+    },
+    "middleware.js": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Vercel edge middleware"
+    },
+    "node_modules": {
+      "type": "dir",
+      "class": "regenerable",
+      "required": false,
+      "gitignorePolicy": "repo_wide",
+      "purpose": "npm dependency install output"
+    },
+    "package-lock.json": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "npm lockfile"
+    },
+    "package.json": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Node.js project manifest"
+    },
+    "pipeline": {
+      "type": "dir",
+      "class": "gcp",
+      "required": false,
+      "gitignorePolicy": "has_gitignore",
+      "purpose": "Retired (st_0c491456 Phase 3e). The dev pipeline (kanban, stories, generalizations, schema) relocated to user/workbenches/topics/work/robot-dojo/wk_robot_dojo/ (st_9699c94f). This entry remains only so the existing untracked scratch directory does not trip the root allowlist; no tracked files may land under it (check-root-lock enforces).",
+      "belongs": "Untracked scratch only (legacy quarantine-manifest.jsonl, archive/, batch-prep/, research/, reports/, sessions/). Nothing canonical.",
+      "doesNotBelong": "Tracked files of any kind; any new dev-pipeline artifacts (those go to the wk_robot_dojo workbench)"
+    },
+    "playwright.config.js": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Playwright test config"
+    },
+    "quarantine": {
+      "type": "dir",
+      "class": "gcp",
+      "required": false,
+      "gitignorePolicy": "no_special_rules",
+      "purpose": "Stop-the-line holding zone for misplaced files",
+      "belongs": "Temporary files awaiting routing",
+      "doesNotBelong": "Permanent storage"
+    },
+    "README.md": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Public repository overview"
+    },
+    "routes": {
+      "type": "dir",
+      "class": "github",
+      "required": true,
+      "gitignorePolicy": "no_special_rules",
+      "extensions": [
+        ".js",
+        ".ts",
+        ".mjs"
+      ],
+      "purpose": "HTTP route handlers",
+      "belongs": "Hono route files",
+      "doesNotBelong": "Business logic or frontend code"
+    },
+    "scripts": {
+      "type": "dir",
+      "class": "github",
+      "required": true,
+      "gitignorePolicy": "has_gitignore",
+      "extensions": [
+        ".js",
+        ".ts",
+        ".mjs",
+        ".sh",
+        ".json",
+        ".sql",
+        ".py",
+        ".template",
+        ".zsh"
+      ],
+      "purpose": "Operational, QA, migration, and generator scripts",
+      "belongs": "Scripts run by humans, CI, cron, install, QA, and build-pipeline support",
+      "doesNotBelong": "Library code or route handlers"
+    },
+    "skills-lock.json": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Installed skill/plugin lockfile"
+    },
+    "stryker.config.mjs": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Mutation testing config"
+    },
+    "taxonomy.user.json": {
+      "type": "file",
+      "class": "gcp",
+      "required": false,
+      "purpose": "Local user taxonomy fallback"
+    },
+    "tests": {
+      "type": "dir",
+      "class": "github",
+      "required": true,
+      "gitignorePolicy": "no_special_rules",
+      "extensions": [
+        ".js",
+        ".ts",
+        ".mjs",
+        ".sh",
+        ".json",
+        ".jsonl",
+        ".html",
+        ".txt",
+        ".png",
+        ".webp",
+        ".xml",
+        ".csv",
+        ".eml",
+        ".md"
+      ],
+      "purpose": "Automated tests and fixtures",
+      "belongs": "node:test files, fixtures, Playwright specs, shell-fixture tests",
+      "doesNotBelong": "Product source"
+    },
+    "user": {
+      "type": "dir",
+      "class": "gcp",
+      "required": true,
+      "gitignorePolicy": "has_gitignore",
+      "purpose": "Private per-user substrate",
+      "belongs": "profile, inbox, imports, files, contexts, workbenches, transcripts, memory, databases, logs, media, models",
+      "doesNotBelong": "Tracked source code, product docs, canonical Agent OS definitions"
+    },
+    "vercel.json": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Vercel deployment configuration"
+    },
+    ".worktreeinclude": {
+      "type": "file",
+      "class": "github",
+      "required": false,
+      "purpose": "Files copied into a new git worktree by `claude --worktree` (st_8745309c) — currently .env.local for DB isolation"
+    },
+    ".playwright-mcp": {
+      "type": "dir",
+      "class": "regenerable",
+      "required": false,
+      "hidden": true,
+      "purpose": "Playwright MCP tool output — console logs and page snapshots from automated browser sessions"
+    },
+    "AGENTS.md": {
+      "type": "file",
+      "class": "github",
+      "required": true,
+      "purpose": "Install symlink (or file) to agents/dist/AGENTS.md for Grok/Codex project roots"
+    }
+  },
+  "retired": [
+    ".gstack",
+    "contexts",
+    "databases",
+    "identity",
+    "imports",
+    "logs",
+    "media",
+    "memory",
+    "models",
+    "plans",
+    "qa-reports",
+    "research",
+    "skills",
+    "system",
+    "systems",
+    "test-results",
+    "transcripts",
+    "userfiles",
+    "workbenches",
+    "gateway-src"
+  ],
+  "gitignore": {
+    "repo_wide_patterns": [
+      ".DS_Store",
+      ".backup/",
+      ".env",
+      ".env*.local",
+      ".vercel",
+      ".claude/worktrees/",
+      ".gitignore-audit.md",
+      "node_modules/"
+    ],
+    "root_file_patterns": [
+      ".gitignore-audit.md",
+      "identity.json",
+      "identity.local.json",
+      "taxonomy.user.json"
+    ],
+    "per_dir_node_modules_ok": [
+      "gateway"
+    ]
+  },
+  "dot_robotdojo_entries": [
+    "backups",
+    "bin",
+    "cache",
+    "cohort-revocation.json",
+    "config.json",
+    "doc-budget-approvals.json",
+    "doc-budget-raises.log",
+    "embeddings.db",
+    "embeddings.db-shm",
+    "embeddings.db-wal",
+    "external-db-writer.lock",
+    "fanout",
+    "first-user-baseline.json",
+    "key",
+    "key.meta.json",
+    "launch-agents-quarantine",
+    "linkedin-cookies.json",
+    "logs",
+    "model-train.yaml",
+    "models",
+    "modules",
+    "onboarding-phases",
+    "owner-corpus.cache.json",
+    "plans",
+    "reports",
+    "robotdojo.db",
+    "robotdojo.db-shm",
+    "robotdojo.db-wal",
+    "root-lock-approvals.json",
+    "runtime",
+    "state",
+    "supervisor-maintenance.lock",
+    "tier-approvals.json",
+    "tls",
+    "vault-manifest.json",
+    "virtue-mapping.json"
+  ],
+  "protected_files": [
+    "apps/static/llms-full.txt",
+    "apps/static/llms.txt",
+    "apps/static/public-truth.json",
+    "architecture/architecture.md",
+    "architecture/ontology.md",
+    "architecture/product.md",
+    "architecture/sitemap.md",
+    "architecture/structure.md",
+    "architecture/surfaces.json",
+    "docs/launch-agents.md",
+    "lib/public-chat/public-truth.js"
+  ]
+}

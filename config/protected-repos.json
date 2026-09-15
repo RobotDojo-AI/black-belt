@@ -1,0 +1,21 @@
+{
+  "$comment": "Git repositories whose commit history must never live on one disk. A LIST, not a constant (df_3df1f108 OOS 2): the owner's recorded intent is 'just robotdojo, let's get it working 100% then i can expand if desired', which is only cheap to honour if expanding means adding a line here. `discover` walks the backed-up roots so a repository created tomorrow is picked up by the mechanism rather than by an edit (AC4(c)).",
+  "version": 1,
+  "repos": [
+    {
+      "label": "robotdojo",
+      "path": "~/robotdojo",
+      "reason": "the main repository; origin RobotDojo-AI/dev.git"
+    },
+    {
+      "label": "black-belt",
+      "path": "~/robotdojo/code/black-belt",
+      "reason": "gitignored by the outer repo (code/.gitignore is '*') and .git is excluded from the bucket, so an unpushed commit here is protected by GitHub, the bucket, and the outer repo in exactly none of the three"
+    }
+  ],
+  "discover": {
+    "roots": ["~/robotdojo"],
+    "maxDepth": 4,
+    "skipDirs": ["node_modules", ".git", "user", "pipeline", "quarantine", ".claude", "gateway/node_modules"]
+  }
+}

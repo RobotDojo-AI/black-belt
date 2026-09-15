@@ -1,0 +1,7 @@
+-- No-op migration marker.
+--
+-- The work-order covering index depends on chunks.value_rank, and value_rank is
+-- created by the existing programmatic st-db4b3118 migration after SQL migrations
+-- run on fresh databases. Keeping this filename as a no-op lets already-applied
+-- live databases stay aligned while fresh databases create the real index inside
+-- lib/db.js next to the column it covers.

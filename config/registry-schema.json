@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://robotdojo.ai/schemas/canonical-surfaces.json",
+  "title": "Canonical surfaces registry schema",
+  "description": "Every entry in architecture/surfaces.json#surfaces[] must declare its path, class, owner_script, added_at, story_id, and max_chars budget. Canonical surfaces are hand-curated; autonomous writer fields are rejected by additionalProperties:false and policy gates.",
+  "type": "object",
+  "required": ["$schema_version", "surfaces"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema_version": { "type": "integer", "minimum": 1 },
+    "story_id": { "type": "string" },
+    "default_quality_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "default_quality_hash_doc": { "type": "string" },
+    "surfaces": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/surface" }
+    }
+  },
+  "definitions": {
+    "surface": {
+      "type": "object",
+      "required": [
+        "path",
+        "class",
+        "owner_script",
+        "added_at",
+        "story_id",
+        "max_chars"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "class": {
+          "type": "string",
+          "enum": ["human-authored", "log", "manual"]
+        },
+        "owner_script": { "type": ["string", "null"] },
+        "added_at": { "type": "string", "minLength": 1 },
+        "story_id": { "type": "string" },
+        "max_chars": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        },
+        "manual_rationale": { "type": "string", "minLength": 1 },
+        "trigger_config": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "events": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "source_filters": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "class": { "const": "manual" } }, "required": ["class"] },
+          "then": { "required": ["manual_rationale"] }
+        },
+        {
+          "if": { "properties": { "class": { "const": "log" } }, "required": ["class"] },
+          "then": { "properties": { "max_chars": { "type": "null" } }, "required": ["max_chars"] }
+        },
+        {
+          "if": { "properties": { "class": { "enum": ["human-authored", "manual"] } }, "required": ["class"] },
+          "then": { "properties": { "max_chars": { "type": "integer", "minimum": 1 } }, "required": ["max_chars"] }
+        }
+      ]
+    }
+  }
+}

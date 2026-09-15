@@ -1,0 +1,32 @@
+Robot Dojo Account Recovery
+
+Robot Dojo runs on this machine. If you are logged out or lose the login token,
+recover from the local folder:
+
+1. Open Terminal.
+2. Go to this folder:
+
+   cd ~/robotdojo
+
+3. Show the current token:
+
+   npm run token -- show
+
+4. Rotate the token if it was exposed:
+
+   npm run token -- rotate
+
+Rotating the token signs out every browser session. Use the new token with the
+Server Name shown in Accounts > Admin.
+
+Advanced:
+
+- Set a chosen token:
+
+  npm run token -- set rd_your_new_token_here
+
+- Show help:
+
+  npm run token -- help
+
+The token is stored in macOS Keychain under robotdojo-ROBOTDOJO_AUTH_TOKEN.

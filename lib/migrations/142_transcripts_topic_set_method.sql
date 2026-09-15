@@ -1,0 +1,19 @@
+-- Migration 142 (st_1169bfc7) — provenance pin for Granola folder-derived
+-- transcript topics.
+--
+-- 'folder' = the topic was set from the call's Granola folder (authoritative;
+--   the retrieval reclassification repair, scripts/repair-source-topic-metadata.js,
+--   must never overwrite it).
+-- 'sync'   = stamped at sync by the no-folder fail-safe (the reclassifier may
+--   still refine it).
+--
+-- Mirrors the conversations.topic_set_method='user' precedent (migration 056):
+-- one provenance column, a closed value set, read only by the repair guard.
+--
+-- Bare ALTER, no CREATE-TABLE guard: transcripts is created by SQL migration
+-- 023_transcripts.sql, and SQL migrations run in sorted name order, so 023 runs
+-- before 142 and the table always exists here — the same established pattern as
+-- 051_transcripts_file_path.sql and 127_granola_call_asana_dedup.sql. Additive,
+-- nullable-with-default → no rewrite of existing rows; every existing row reads
+-- 'sync' from the DEFAULT (not pinned, still reclassifiable) → forward-only.
+ALTER TABLE transcripts ADD COLUMN topic_set_method TEXT DEFAULT 'sync';

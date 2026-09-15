@@ -1,0 +1,11 @@
+# docs/ — technical docs are public; user-specific reports + personal subdirs are local.
+reports/
+*rebuild-report*.md
+*punch-list*.md
+*-report-*.md
+!dead-code-report-*.md
+personal/
+family/
+education/
+work/
+newsletters/

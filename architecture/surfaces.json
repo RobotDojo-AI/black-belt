@@ -1,0 +1,735 @@
+{
+  "$schema_version": 1,
+  "story_id": "st_a78848a0",
+  "default_quality_hash": "7fd7e33b22e33b79c8857e2a93969024eca2be575eef206837dcf0ce7d580bec",
+  "default_quality_hash_doc": "sha256 of agents/default-quality.md. Updating the contract requires updating this hash and any embedded copies in persona or skill files.",
+  "surfaces": [
+    {
+      "path": "CLAUDE.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-11T23:17:16Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 10000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "architecture/product.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-22T00:00:00Z",
+      "story_id": "st_launch_canonical_reset",
+      "max_chars": 10000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "architecture/structure.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-22T00:00:00Z",
+      "story_id": "st_launch_canonical_reset",
+      "max_chars": 18000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "architecture/surfaces.json",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-01T00:00:00Z",
+      "story_id": "st_608fe3ed",
+      "max_chars": 22000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "config/root-allowlist.lock.json",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-01T00:00:00Z",
+      "story_id": "st_608fe3ed",
+      "max_chars": 30000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "config/root-allowlist.schema.json",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-01T00:00:00Z",
+      "story_id": "st_608fe3ed",
+      "max_chars": 9000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "config/structure.json",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-01T00:00:00Z",
+      "story_id": "st_608fe3ed",
+      "max_chars": 8000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "scripts/root-lock-lib.js",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-01T00:00:00Z",
+      "story_id": "st_608fe3ed",
+      "max_chars": 14000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "scripts/check-root-lock.js",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-01T00:00:00Z",
+      "story_id": "st_608fe3ed",
+      "max_chars": 16000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "scripts/gate.js",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-01T00:00:00Z",
+      "story_id": "st_608fe3ed",
+      "max_chars": 18000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "scripts/check-gitignore.js",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-01T00:00:00Z",
+      "story_id": "st_608fe3ed",
+      "max_chars": 18000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "scripts/generate-ontology.js",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-01T00:00:00Z",
+      "story_id": "st_608fe3ed",
+      "max_chars": 14000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "scripts/pre-commit.sh",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-01T00:00:00Z",
+      "story_id": "st_608fe3ed",
+      "max_chars": 25000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "scripts/detax.sh",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-09T00:00:00Z",
+      "story_id": "st_862d73d1",
+      "max_chars": 12000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": ".github/CODEOWNERS",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-01T00:00:00Z",
+      "story_id": "st_608fe3ed",
+      "max_chars": 2000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": ".github/workflows/root-lock.yml",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-01T00:00:00Z",
+      "story_id": "st_608fe3ed",
+      "max_chars": 3000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "user/memory/MEMORY.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-11T23:17:16Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 12800,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/agents.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-11T23:17:16Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 12000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "architecture/architecture.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-11T23:17:16Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 30000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "user/contexts/companies.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-11T23:17:16Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 2450,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "user/contexts/entity.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-11T23:17:16Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 2800,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "user/contexts/people.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-11T23:17:16Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 2450,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "user/contexts/places.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-11T23:17:16Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 2450,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "architecture/sitemap.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-11T23:17:16Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 29000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/SKILLS.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-11T23:17:16Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 9000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "config/agent-voice/voice.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-29T00:00:00Z",
+      "story_id": "st_1103b91f",
+      "max_chars": 4800,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "config/agent-voice/formatting/web.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-29T00:00:00Z",
+      "story_id": "st_1103b91f",
+      "max_chars": 1300,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "architecture/ontology.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-11T23:17:16Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 10000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "user/contexts/topics.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-11T23:17:16Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 2450,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/personas/Miyagi.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-22T19:48:23Z",
+      "story_id": "st_214eb176",
+      "max_chars": 25000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/personas/Tantei.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-22T19:48:23Z",
+      "story_id": "st_214eb176",
+      "max_chars": 20000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/personas/Hakase.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-22T19:48:23Z",
+      "story_id": "st_214eb176",
+      "max_chars": 19500,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/personas/Ori.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-22T19:48:23Z",
+      "story_id": "st_214eb176",
+      "max_chars": 21000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/personas/Katagami.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-22T19:48:23Z",
+      "story_id": "st_214eb176",
+      "max_chars": 22000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/personas/Bunshin.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-22T19:48:23Z",
+      "story_id": "st_214eb176",
+      "max_chars": 23000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/research/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-11T23:37:02Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 8800,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/plan/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-11T23:37:02Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 8000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/build/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-11T23:37:02Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 12000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+
+    {
+      "path": "agents/skills/check/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-10T00:00:00Z",
+      "story_id": "st_73169c14",
+      "max_chars": 8000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "~/.claude/CLAUDE.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-12T00:25:00Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 3000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/close/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-21T21:45:00Z",
+      "story_id": "pipeline-cleanup",
+      "max_chars": 9500,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/email/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-08-05T00:00:00Z",
+      "story_id": "st_4312c9c0",
+      "max_chars": 6000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/fanout/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-08-05T00:00:00Z",
+      "story_id": "st_4312c9c0",
+      "max_chars": 7000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/defect/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-12T01:07:11Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 5000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/format/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-12T01:07:11Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 4500,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/framing/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-12T01:07:11Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 5000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/goal/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-29T00:00:00Z",
+      "story_id": "goal-skill",
+      "max_chars": 7000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/kanban/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-12T01:07:11Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 6500,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/qa/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-12T01:07:11Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 8500,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/scope/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-12T01:07:11Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 6500,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/story/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-12T01:07:11Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 5000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/work/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-12T01:07:11Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 11000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/topic/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-09-08T00:00:00Z",
+      "story_id": "st_c5c4e824",
+      "max_chars": 12000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/write/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-12T01:07:11Z",
+      "story_id": "st_a78848a0",
+      "max_chars": 6500,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "README.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-19T00:00:00Z",
+      "story_id": "st_5285c160",
+      "max_chars": 10000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/build-conventions.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-19T00:00:00Z",
+      "story_id": "st_5285c160",
+      "max_chars": 24000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/asana/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-19T15:45:00Z",
+      "story_id": "st_7fcebb44",
+      "max_chars": 8500,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/coach/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-21T00:00:00Z",
+      "story_id": "st_4a7d6b1f",
+      "max_chars": 3000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/health/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-21T00:00:00Z",
+      "story_id": "st_4a7d6b1f",
+      "max_chars": 3000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/followup/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-22T00:00:00Z",
+      "story_id": "st_040dc390",
+      "max_chars": 6000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/promote/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-24T00:00:00Z",
+      "story_id": "st_launch_public_repo",
+      "max_chars": 7000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "agents/skills/profile/SKILL.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-22T00:00:00Z",
+      "story_id": "st_040dc390",
+      "max_chars": 8000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "user/contexts/topics/personal/coaching/context.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-21T00:00:00Z",
+      "story_id": "st_4a7d6b1f",
+      "max_chars": 10000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "user/contexts/topics/personal/health/context.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-21T00:00:00Z",
+      "story_id": "st_4a7d6b1f",
+      "max_chars": 10000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "user/contexts/topics/personal/health/framings/medical-engineer.md",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-05-21T00:00:00Z",
+      "story_id": "st_4a7d6b1f",
+      "max_chars": 6000,
+      "trigger_config": {
+        "events": []
+      }
+    },
+    {
+      "path": "user/workbenches/topics/work/robot-dojo/wk_robot_dojo/sessions.json",
+      "class": "human-authored",
+      "owner_script": null,
+      "added_at": "2026-06-06T00:00:00Z",
+      "story_id": "st_8745309c",
+      "max_chars": 200000,
+      "trigger_config": {
+        "events": []
+      }
+    }
+  ]
+}

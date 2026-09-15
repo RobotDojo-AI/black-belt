@@ -1,0 +1,121 @@
+{
+  "_comment": [
+    "st_dd0e19d8 AC4 — every publication path the repository documents or scripts, enumerated,",
+    "so 'publishing happens through the checked step or it does not happen' can be CHECKED rather",
+    "than believed. scripts/qa/publication-paths-proof.js re-derives the candidate set from the",
+    "tree on every run and refuses when a candidate is missing from this file, when an entry names",
+    "a file that no longer exists, or when a file listed as removed is still present.",
+    "",
+    "The derivation is DATA, not a rule buried in the proof: `signals` below are the literals that",
+    "make a file a candidate. A new script that pushes, adds a remote, creates a repository, or",
+    "archives a tree matches one of them and forces a decision. Widening the signal list is how the",
+    "enumeration keeps up with the repository; narrowing it is how someone would hide a path, which",
+    "is why the list lives here in the open next to the classifications it drives.",
+    "",
+    "Classifications:",
+    "  checked-step   the one step that may publish. Performs the push itself.",
+    "  routes-through the file participates in publication but only through the checked step.",
+    "  not-a-path     matches a signal but cannot publish this repository. Reason required.",
+    "  removed        a publication path this story deleted. The proof asserts it is really gone."
+  ],
+  "checked_step": "scripts/publish-clean-tree.js",
+  "signals": [
+    "git push",
+    "git remote add",
+    "gh repo create",
+    "git archive"
+  ],
+  "exclude_from_derivation": [
+    {
+      "glob": "package-lock.json",
+      "reason": "npm lockfile — dependency metadata, never executed"
+    },
+    {
+      "glob": "architecture/sitemap.md",
+      "reason": "generated file inventory; it names every script by path and would match on any signal any script contains"
+    }
+  ],
+  "paths": [
+    {
+      "path": "scripts/publish-clean-tree.js",
+      "classification": "checked-step",
+      "reason": "the sequence of refusals ending in the only push. Requires --from <named commit>, checks the destination, proves detection, audits the built tree, and only then pushes."
+    },
+    {
+      "path": "lib/publication-step.js",
+      "classification": "routes-through",
+      "reason": "the checked step's logic. Exposes pushExportTree, which publish() reaches only after every refusal above it has passed."
+    },
+    {
+      "path": "scripts/qa/export-scan-liveness.js",
+      "classification": "not-a-path",
+      "reason": "builds a throwaway export to prove the composed scans detect inside it. Adds no remote and never pushes; the directory is deleted in a finally."
+    },
+    {
+      "path": "lib/gsc-heal.js",
+      "classification": "not-a-path",
+      "reason": "pushes a marketing SITE repository under the configured sites root, resolved per finding by _repoRootForFiles, which returns null for any file outside it. It cannot address this repository."
+    },
+    {
+      "path": "lib/owner-corpus.js",
+      "classification": "not-a-path",
+      "reason": "a comment describing the export-tree signature it refuses to build a corpus from. No git invocation."
+    },
+    {
+      "path": "scripts/check-public-config-clean.js",
+      "classification": "not-a-path",
+      "reason": "a comment explaining why gitignored overrides never reach an export. No git invocation."
+    },
+    {
+      "path": "agents/build-conventions.md",
+      "classification": "not-a-path",
+      "reason": "documentation of git filter-repo recovery steps for the development repository. Prose, not a path."
+    },
+    {
+      "path": "config/publication-paths.json",
+      "classification": "not-a-path",
+      "reason": "this file. It declares the signals, so it necessarily contains them. Enumerated rather than excluded from the derivation: an exclusion is a file nobody has to justify, and the whole point of this list is that every match is justified."
+    },
+    {
+      "path": "scripts/qa/publication-paths-proof.js",
+      "classification": "not-a-path",
+      "reason": "the proof itself. It reads the signals and greps for an executed push, so it carries both. Same reasoning as the file above — named and classified, not hidden behind an exclusion."
+    },
+    {
+      "path": "scripts/qa/publication-refusals.js",
+      "classification": "not-a-path",
+      "reason": "builds throwaway export trees to demonstrate each refusal. Its git runner throws on any push argv, so a future edit that reached the push step during a probe fails loudly instead of publishing. This entry exists because the proof caught the file the moment it was written — which is the enumeration working."
+    },
+    {
+      "path": "scripts/qa/ac2-equivalence.js",
+      "classification": "not-a-path",
+      "reason": "a comment noting the AC2 baseline is extracted with git archive into a scratch directory, read-only, with no worktree or branch mutation. No remote, no push."
+    },
+    {
+      "path": "tests/first-user-clean.test.js",
+      "classification": "not-a-path",
+      "reason": "a comment naming the export-tree signature under test."
+    },
+    {
+      "path": "tests/generator-drift.test.js",
+      "classification": "not-a-path",
+      "reason": "a comment stating the test clones rather than archives, because it needs a working .git."
+    },
+    {
+      "path": "tests/runtime-writer-safety.test.js",
+      "classification": "not-a-path",
+      "reason": "asserts the gsc-heal push stays explicit opt-in. A test of a guard, not a path."
+    },
+    {
+      "path": "tests/skill-git-wiring.test.js",
+      "classification": "not-a-path",
+      "reason": "asserts the qa skill still calls git push for ordinary development commits to the private repository."
+    }
+  ],
+  "removed": [
+    {
+      "path": "scripts/export-clean-tree.sh",
+      "reason": "the previous publication path. It built from `git stash create` (working-tree state, not a named commit), ran two composed scans that were structural no-ops inside the export, and left the push to a human — moving the one irreversible action outside the checks. Deleted rather than kept as a shim: a second way to publish is a second way to publish unchecked."
+    }
+  ]
+}

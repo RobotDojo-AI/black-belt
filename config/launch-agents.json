@@ -1,0 +1,138 @@
+{
+  "_comment": "Single source of truth for product LaunchAgents installed by install.sh. Drift between manifest, templates, and install.sh is gated by scripts/check-installer-parity.js in pre-commit. Owner-personal legacy plists are not declared here — product backup uses com.robotdojo.backup.",
+  "agents": [
+    {
+      "label": "com.robotdojo.server",
+      "template": "apps/static/launch-agents/com.robotdojo.server.plist.template",
+      "description": "Main Hono server on HTTPS port 4338 — serves UI and /api/*.",
+      "audience": "product"
+    },
+    {
+      "label": "com.robotdojo.keychain-bridge",
+      "template": "apps/static/launch-agents/com.robotdojo.keychain-bridge.plist.template",
+      "description": "Aqua Keychain bridge — decrypts robotdojo-LOCAL_DB_KEY for hardened coding-agent hosts that cannot call security -w.",
+      "audience": "product"
+    },
+    {
+      "label": "com.robotdojo.tunnel",
+      "template": "apps/static/launch-agents/com.robotdojo.tunnel.plist.template",
+      "description": "Standalone relay tunnel — keeps remote Connect reachability independent from server restarts.",
+      "audience": "product"
+    },
+    {
+      "label": "com.robotdojo.cloudflared",
+      "template": "apps/static/launch-agents/com.robotdojo.cloudflared.plist.template",
+      "description": "Cloudflare Tunnel (cloudflared) — per-user named tunnel keeping remote Connect reachable at {slug}.connect.robotdojo.ai, independent from server restarts.",
+      "audience": "product"
+    },
+    {
+      "label": "com.robotdojo.keepawake",
+      "template": "apps/static/launch-agents/com.robotdojo.keepawake.plist.template",
+      "description": "Relay keep-awake assertion — prevents idle, disk, and AC-power system sleep so public links stay reachable.",
+      "audience": "product"
+    },
+    {
+      "label": "com.robotdojo.cohort-poll",
+      "template": "apps/static/launch-agents/com.robotdojo.cohort-poll.plist.template",
+      "description": "Hourly cohort-key revocation poller — restarts server in WB mode on revocation.",
+      "audience": "product",
+      "interval_seconds": 3600
+    },
+    {
+      "label": "com.robotdojo.sync",
+      "template": "apps/static/launch-agents/com.robotdojo.sync.plist.template",
+      "description": "Incremental Gmail/Calendar/Drive sync every 5 minutes.",
+      "audience": "product",
+      "interval_seconds": 300
+    },
+    {
+      "label": "com.robotdojo.chunk-worker",
+      "template": "apps/static/launch-agents/com.robotdojo.chunk-worker.plist.template",
+      "description": "Background chunk-source scanner — chunks new emails/calendar/transcripts every 2 minutes. Embedding is owned by the chunk-embed-daemon.",
+      "audience": "product",
+      "interval_seconds": 120
+    },
+    {
+      "label": "com.robotdojo.chunk-embed-daemon",
+      "template": "apps/static/launch-agents/com.robotdojo.chunk-embed-daemon.plist.template",
+      "description": "Long-lived embedder — drains the embedding backlog value-first, pauses on server activity, never idle. KeepAlive.",
+      "audience": "product"
+    },
+    {
+      "label": "com.robotdojo.integration-monitor",
+      "template": "apps/static/launch-agents/com.robotdojo.integration-monitor.plist.template",
+      "description": "OAuth token health monitor — checks Google/Oura/Notion every 15 minutes.",
+      "audience": "product",
+      "interval_seconds": 900
+    },
+    {
+      "label": "com.robotdojo.integration-resync",
+      "template": "apps/static/launch-agents/com.robotdojo.integration-resync.plist.template",
+      "description": "Periodic full Google resync — drains history for every connected account every 4 hours, yielding to chat.",
+      "audience": "product",
+      "interval_seconds": 14400
+    },
+    {
+      "label": "com.robotdojo.login-probe",
+      "template": "apps/static/launch-agents/com.robotdojo.login-probe.plist.template",
+      "description": "Apex login health probe — verifies cookie-session round-trip every minute and restarts only the relay tunnel on remote-only failure.",
+      "audience": "product",
+      "interval_seconds": 60
+    },
+    {
+      "label": "com.robotdojo.relay-watchdog",
+      "template": "apps/static/launch-agents/com.robotdojo.relay-watchdog.plist.template",
+      "description": "Relay SNI watchdog — verifies the public device subdomain every minute and alerts on a sustained outage. systemd owns relay restart since st_63b59bda; this probes and notifies, it does not repair.",
+      "audience": "product",
+      "interval_seconds": 60
+    },
+    {
+      "label": "com.robotdojo.cert-renew",
+      "template": "apps/static/launch-agents/com.robotdojo.cert-renew.plist.template",
+      "description": "Daily device TLS cert renewal via the relay; self-heals per-device registration.",
+      "audience": "product"
+    },
+    {
+      "label": "com.robotdojo.disk-watchdog",
+      "template": "apps/static/launch-agents/com.robotdojo.disk-watchdog.plist.template",
+      "description": "Disk watchdog — bounds Robot Dojo launchd logs every 5 minutes so disk pressure cannot take down relay-critical local services.",
+      "audience": "product",
+      "interval_seconds": 300
+    },
+    {
+      "label": "com.robotdojo.backup",
+      "template": "apps/static/launch-agents/com.robotdojo.backup.plist.template",
+      "description": "Daily product-state backup dispatcher — noops when skipped or unconfigured.",
+      "audience": "product",
+      "schedule": "02:30"
+    },
+    {
+      "label": "com.robotdojo.topic-edit-watcher",
+      "template": "apps/static/launch-agents/com.robotdojo.topic-edit-watcher.plist.template",
+      "description": "Detects topic taxonomy edits and triggers reclassification every 60 seconds.",
+      "audience": "product",
+      "interval_seconds": 60
+    },
+    {
+      "label": "com.robotdojo.ramwatch",
+      "template": "apps/static/launch-agents/com.robotdojo.ramwatch.plist.template",
+      "description": "Per-slot RAM watchdog — terminates runaway processes every 60 seconds.",
+      "audience": "product",
+      "interval_seconds": 60
+    },
+    {
+      "label": "com.robotdojo.structure-check",
+      "template": "apps/static/launch-agents/com.robotdojo.structure-check.plist.template",
+      "description": "Daily filesystem structure audit — runs at 03:17 local time.",
+      "audience": "product",
+      "schedule": "03:17"
+    },
+    {
+      "label": "com.robotdojo.spend-watchdog",
+      "template": "apps/static/launch-agents/com.robotdojo.spend-watchdog.plist.template",
+      "description": "API spend watchdog — reads the spend ledgers every 15 minutes and notifies when a ceiling band worsens, so a runaway is caught while there is a day left to act rather than at the invoice.",
+      "audience": "product",
+      "interval_seconds": 900
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+# scripts/ — most scripts are tracked; specific user-specific or diagnostic scripts are local.
+qa/diag-*.mjs
+asana-sync.py
+restore-health-from-premerge.js
+restore-historical-from-premerge.js
+import-oura-json.js
+import-pdf-labs-batch.js
+import-openai-conversations.js

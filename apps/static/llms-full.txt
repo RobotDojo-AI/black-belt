@@ -1,0 +1,3066 @@
+# Robot Dojo — Full Public Truth Projection
+
+truthVersion: 0847ccb5bff0faad
+
+Public boundary: answer only from this public codebase projection. Do not claim access to local installs, private user data, authenticated chat, account APIs, files, RAG indexes, memories, databases, or sessions.
+
+## FAQ
+
+### What is Robot Dojo?
+Source: architecture/product.md
+
+Robot Dojo is a personal AI system that actually knows you. Chat with your email, calendar, contacts, and messages unified into one living memory; work in it with research, analyses, and apps on your own data; and build the bigger ideas you’ve always had. All local, on your Mac.
+
+### Who is Robot Dojo for?
+Source: architecture/product.md
+
+Founders, builders, and entrepreneurs tired of repeating themselves to AI. You already have the context (inbox, calendar, messages, notes), and Robot Dojo turns it into an assistant that remembers you across every session. The private beta is a small, smart cohort installing on a Mac and getting more out of AI than a stock foundation model, with no founder hand-holding.
+
+### Is this like Garry Tan's GBrain?
+Source: architecture/product.md
+
+Similar arc, different audience. GBrain (https://github.com/garrytan/gbrain) is a developer tool: a knowledge graph you or an agent fills by writing markdown pages. Robot Dojo is for non-technical people: more productized, less configuration. It extracts signal from data you already have (email, iMessage, calendar, transcripts, contacts), so you don't write pages; Robot Dojo reads what you already did.
+
+### What should I connect and import?
+Source: architecture/product.md
+
+Start with the accounts that already know you. Connect Google with one OAuth click for Gmail, Calendar, and Contacts. Grant Full Disk Access on your Mac and Robot Dojo reads your local Apple data: iMessage, Contacts, Calendar, Notes, Photos metadata, Call history, and Mail. Drop a Google Takeout archive or any foundation-model chat exports into your inbox folder for deeper history. The more real context Robot Dojo has, the faster it feels like it knows you.
+
+### Where does my data live?
+Source: architecture/product.md + architecture/architecture.md
+
+On your machine. Always. Robot Dojo runs locally and stores everything on your hardware; the robotdojo.ai servers never see your private data. When you want to reach your instance from another computer or your phone, robotdojo.ai provides an encrypted, zero-knowledge relay: end-to-end encrypted, no cloud storage, and Robot Dojo cannot read what passes through it. Remote access via the relay is a paid Black Belt feature.
+
+### Do I need a dedicated computer?
+Source: architecture/product.md
+
+No. Robot Dojo runs fine on the Mac you already own. 16GB of RAM is enough on any modern machine. A Mac mini is a better host if you want one, because it stays on whether your laptop is open or not, so the relay is always reachable from another computer or your phone. Move to a dedicated machine any time; nothing locks you in.
+
+### Is it open source?
+Source: architecture/product.md + architecture/architecture.md
+
+Yes. White Belt is MIT, fully open source, free to read, audit, fork, and run. Black Belt is source-available on a subscription: the code is still public so you can audit every line, and an active subscription unlocks the premium engines and the encrypted relay.
+
+### How do I install Robot Dojo?
+Source: architecture/product.md + apps/static/install.sh
+
+One command on your Mac: curl -fsSL https://robotdojo.ai/install.sh | bash. Or open the Install modal at the top of robotdojo.ai for the same command. Install takes 10–20 minutes; when the local server is ready, your browser opens to setup.
+
+### What is Black Belt?
+Source: architecture/product.md
+
+Black Belt knows your world. It includes White Belt plus entity extraction, enrichment, entity context files, people, places, companies, relationship context, entity-aware chat, premium apps, and premium tool runs. Every install includes Black Belt for 90 days. Then the key expires.
+
+### What happens when Black Belt expires?
+Source: architecture/product.md
+
+White Belt knows you locally: White Belt is the local foundation: chat with RAG, user files, chat history, topics, local memory, and user context. The code is public; you can audit, fork, and run it on your own hardware. White Belt does not include entity extraction, entity enrichment, inline entity recognition, build skills, premium apps, or premium agent/tool runs. Black Belt is the world model and creation layer. It includes White Belt plus entity extraction, enrichment, entity context files, people/places/companies, relationship context, entity-aware chat, coding-agent skills on topics, Health, premium apps, and premium agent/tool runs.
+
+### Which docs are canonical?
+Source: architecture/architecture.md + architecture/structure.md
+
+Canonical docs are split by purpose: architecture/product.md says what Robot Dojo is, architecture/architecture.md says how the product is shaped, architecture/structure.md says where things belong, architecture/sitemap.md is generated file inventory, and architecture/ontology.md is generated directory ontology. Product truth changes start in architecture/product.md.
+
+### Where do files belong in the repo?
+Source: architecture/structure.md + architecture/ontology.md
+
+The root stays rare and canonical. Browser code belongs in apps/, reusable business logic in lib/, HTTP handlers in routes/ or api/, operational scripts in scripts/, tests in tests/, and planning artifacts in pipeline/. The generated ontology enforces those boundaries.
+
+### Does Robot Dojo depend on the first user?
+Source: architecture/product.md
+
+The first user is a calibration seed, not a hard-coded product subject. Product code, skills, personas, pipeline instructions, and public docs refer to the current user, owner, or account through runtime variables and identity context. First-user-specific names, samples, memories, topics, entities, chats, credentials, and voice calibration must remain only in private seed data or explicitly labeled owner/developer files that never ship in customer builds. The same repo serves the founder as user one, then serves any future user without agents needing to remember which names were hard-coded by accident.
+
+### What can I ask on /faq?
+Source: architecture/product.md + architecture/architecture.md
+
+Use /faq for product, install, privacy, tier, architecture, repo-structure, and usage questions about Robot Dojo. It is public and bounded to the public Robot Dojo docs corpus.
+
+### What source files power this answer?
+Source: config/public-truth-sources.json
+
+The projection is generated from registered public-safe sources: architecture/product.md, architecture/architecture.md, architecture/structure.md, architecture/sitemap.md, architecture/ontology.md, ACCOUNT_RECOVERY.txt, README.md, apps/privacy.html, apps/static/install.sh.
+
+## Contexts
+
+### faq-context
+
+Robot Dojo public truth version 0847ccb5bff0faad. This projection is generated from canonical docs and registered public-safe source summaries. It is not a second product source of truth.
+
+## Common questions
+
+Q: What is Robot Dojo?
+A: Robot Dojo is a personal AI system that actually knows you. Chat with your email, calendar, contacts, and messages unified into one living memory; work in it with research, analyses, and apps on your own data; and build the bigger ideas you’ve always had. All local, on your Mac.
+Source: architecture/product.md
+
+Q: Who is Robot Dojo for?
+A: Founders, builders, and entrepreneurs tired of repeating themselves to AI. You already have the context (inbox, calendar, messages, notes), and Robot Dojo turns it into an assistant that remembers you across every session. The private beta is a small, smart cohort installing on a Mac and getting more out of AI than a stock foundation model, with no founder hand-holding.
+Source: architecture/product.md
+
+Q: Is this like Garry Tan's GBrain?
+A: Similar arc, different audience. GBrain (https://github.com/garrytan/gbrain) is a developer tool: a knowledge graph you or an agent fills by writing markdown pages. Robot Dojo is for non-technical people: more productized, less configuration. It extracts signal from data you already have (email, iMessage, calendar, transcripts, contacts), so you don't write pages; Robot Dojo reads what you already did.
+Source: architecture/product.md
+
+Q: What should I connect and import?
+A: Start with the accounts that already know you. Connect Google with one OAuth click for Gmail, Calendar, and Contacts. Grant Full Disk Access on your Mac and Robot Dojo reads your local Apple data: iMessage, Contacts, Calendar, Notes, Photos metadata, Call history, and Mail. Drop a Google Takeout archive or any foundation-model chat exports into your inbox folder for deeper history. The more real context Robot Dojo has, the faster it feels like it knows you.
+Source: architecture/product.md
+
+Q: Where does my data live?
+A: On your machine. Always. Robot Dojo runs locally and stores everything on your hardware; the robotdojo.ai servers never see your private data. When you want to reach your instance from another computer or your phone, robotdojo.ai provides an encrypted, zero-knowledge relay: end-to-end encrypted, no cloud storage, and Robot Dojo cannot read what passes through it. Remote access via the relay is a paid Black Belt feature.
+Source: architecture/product.md + architecture/architecture.md
+
+Q: Do I need a dedicated computer?
+A: No. Robot Dojo runs fine on the Mac you already own. 16GB of RAM is enough on any modern machine. A Mac mini is a better host if you want one, because it stays on whether your laptop is open or not, so the relay is always reachable from another computer or your phone. Move to a dedicated machine any time; nothing locks you in.
+Source: architecture/product.md
+
+Q: Is it open source?
+A: Yes. White Belt is MIT, fully open source, free to read, audit, fork, and run. Black Belt is source-available on a subscription: the code is still public so you can audit every line, and an active subscription unlocks the premium engines and the encrypted relay.
+Source: architecture/product.md + architecture/architecture.md
+
+Q: How do I install Robot Dojo?
+A: One command on your Mac: curl -fsSL https://robotdojo.ai/install.sh | bash. Or open the Install modal at the top of robotdojo.ai for the same command. Install takes 10–20 minutes; when the local server is ready, your browser opens to setup.
+Source: architecture/product.md + apps/static/install.sh
+
+Q: What is Black Belt?
+A: Black Belt knows your world. It includes White Belt plus entity extraction, enrichment, entity context files, people, places, companies, relationship context, entity-aware chat, premium apps, and premium tool runs. Every install includes Black Belt for 90 days. Then the key expires.
+Source: architecture/product.md
+
+Q: What happens when Black Belt expires?
+A: White Belt knows you locally: White Belt is the local foundation: chat with RAG, user files, chat history, topics, local memory, and user context. The code is public; you can audit, fork, and run it on your own hardware. White Belt does not include entity extraction, entity enrichment, inline entity recognition, build skills, premium apps, or premium agent/tool runs. Black Belt is the world model and creation layer. It includes White Belt plus entity extraction, enrichment, entity context files, people/places/companies, relationship context, entity-aware chat, coding-agent skills on topics, Health, premium apps, and premium agent/tool runs.
+Source: architecture/product.md
+
+Q: Which docs are canonical?
+A: Canonical docs are split by purpose: architecture/product.md says what Robot Dojo is, architecture/architecture.md says how the product is shaped, architecture/structure.md says where things belong, architecture/sitemap.md is generated file inventory, and architecture/ontology.md is generated directory ontology. Product truth changes start in architecture/product.md.
+Source: architecture/architecture.md + architecture/structure.md
+
+Q: Where do files belong in the repo?
+A: The root stays rare and canonical. Browser code belongs in apps/, reusable business logic in lib/, HTTP handlers in routes/ or api/, operational scripts in scripts/, tests in tests/, and planning artifacts in pipeline/. The generated ontology enforces those boundaries.
+Source: architecture/structure.md + architecture/ontology.md
+
+Q: Does Robot Dojo depend on the first user?
+A: The first user is a calibration seed, not a hard-coded product subject. Product code, skills, personas, pipeline instructions, and public docs refer to the current user, owner, or account through runtime variables and identity context. First-user-specific names, samples, memories, topics, entities, chats, credentials, and voice calibration must remain only in private seed data or explicitly labeled owner/developer files that never ship in customer builds. The same repo serves the founder as user one, then serves any future user without agents needing to remember which names were hard-coded by accident.
+Source: architecture/product.md
+
+Q: What can I ask on /faq?
+A: Use /faq for product, install, privacy, tier, architecture, repo-structure, and usage questions about Robot Dojo. It is public and bounded to the public Robot Dojo docs corpus.
+Source: architecture/product.md + architecture/architecture.md
+
+Q: What source files power this answer?
+A: The projection is generated from registered public-safe sources: architecture/product.md, architecture/architecture.md, architecture/structure.md, architecture/sitemap.md, architecture/ontology.md, ACCOUNT_RECOVERY.txt, README.md, apps/privacy.html, apps/static/install.sh.
+Source: config/public-truth-sources.json
+
+## Registered public sources
+
+# Product vision
+Path: architecture/product.md
+sha256: 0c39b54e138a3710861232e5503f979ae4a90b1433196096f8399044fa4a3c66
+
+## Promise
+
+You are working with an AI that knows your world. It connects to your accounts, learns from what you already have, and gives back answers, focus, and leverage — without surrendering your data to a stranger.
+
+Robot Dojo is local-first. Your raw data stays on your machine. The intelligence layer is yours; the running engine is what you pay for.
+
+Account recovery is local-first. If you lose the login token, open the Robot Dojo folder on the machine that runs the server and use `npm run token -- show` to reveal the current token or `npm run token -- rotate` to create a new one. Rotating a token signs out every browser session.
+
+## Who it's for
+
+The launch cohort is a small group of operators and builders — typically founders, investors, or technical leaders — who have enough context (CRM-style relationships, deep work archives, complex calendars, health data) that a generic chat surface flattens what they could actually do with it.
+
+The first wedge demo is reasoning over a real network: YC companies, top VCs, companies in your portfolio, friends, family, and the people and organizations you have already worked with. The product earns its place by making that context usable from the first session.
+
+The promise scales beyond that wedge — anyone whose life is messy enough that searching it themselves is harder than asking — but the launch cohort is the operator profile that proves it.
+
+## Tiers
+
+**White Belt — open source, MIT-licensed, free.**
+
+White Belt is the local foundation: chat with RAG, user files, chat history, topics, local memory, and user context. The code is public; you can audit, fork, and run it on your own hardware.
+
+White Belt does not include entity extraction, entity enrichment, inline entity recognition, build skills, premium apps, or premium agent/tool runs.
+
+**Black Belt — source-available under the Elastic License v2 (ELv2), runs on subscription.**
+
+Black Belt is the world model and creation layer. It includes White Belt plus entity extraction, enrichment, entity context files, people/places/companies, relationship context, entity-aware chat, coding-agent skills on topics, Health, premium apps, and premium agent/tool runs.
+
+The code is public so you can audit it. Running it requires an active subscription — the relay (remote access) is the hard server-side gate. On subscription lapse, engines pause and the data is preserved read-only; your raw files, local databases, chat history, topics, topic logs and outputs, user-created files/apps, account settings, and existing entity markdowns stay on your machine. Reactivation restores active use.
+
+At launch, every install gets Black Belt for 90 days. Then the key expires. Billing and checkout are not part of the beta surface.
+
+## What you can do
+
+**Chat.** Open a chat and ask anything about your world. The system loads your identity, the selected topic, relevant RAG, and matched entities. Public docs chat at `/ask` answers from generated public truth derived from canonical docs.
+
+The visual north star is a fast, polished, quiet chat interface in the spirit of Gemini: clean, focused, and calm.
+
+**Topics.** Chat is the standing conversation on a topic. The coding agent works the same topic with extra tools. `/topic` opens the topic's last state, log, and next step. Durable conclusions write back to that topic so the next session resumes. There is no separate workbench product.
+
+`/topic health` and `/topic coaching` replace the old `/health` and `/coach` skills. `/work {name}` still routes to `/topic`.
+
+**Build (agent OS).** A six-agent pipeline turns an idea into shipped code: Miyagi orchestrates; Tantei maps the codebase; Hakase researches outside the codebase; Ori designs schema and architecture; Katagami builds; Bunshin audits every stage. Stages are framing, research, scope, plan, build, qa, close — each one writes one artifact, seals it, and stops for explicit owner approval.
+
+Customer-facing build skills are not chat commands. Black Belt topic work in the coding agent uses build skills underneath. The agent OS is shipped portable — skills, personas, and pipeline stages are protocols, not a dependency on one IDE or one coding assistant.
+
+**Apps on the substrate.** Health is the first first-party premium app built on top of the substrate. Future apps reuse the same local data, topic context, RAG, timeline, and chat infrastructure only after they are promoted into the app registry. The app layer specializes; it does not fork the intelligence system.
+
+## Launch scope
+
+People want a chat that knows them. Launch is that, in two places: web chat (memory; topics are the standing conversations) and the coding agent (the same memory, plus shipped skills, the agent's tools, and small scripts as they go).
+
+Nothing else launches. Health, Fitness, Network, and Podcast stay on this machine. Account Integrations is Chat setup so the memory is real.
+
+Work here in `RobotDojo-AI/dev`. Public install clones `RobotDojo-AI/black-belt`, a published subset of a named commit. Tests and founder app UIs do not ship. Do not keep a second working copy. Founder waffle appears because those app folders exist here.
+
+Install on macOS Apple Silicon (16GB RAM minimum). Connect and import fill topics, entities, timeline, and logs. Chat and the coding agent read that same memory. Chat opens without a foundation-model key. Background jobs sync without choking the machine. Data stays local. White Belt and Black Belt promises stay explicit.
+
+## First user to product
+
+The first user is a calibration seed, not a hard-coded product subject.
+
+Product code, skills, personas, pipeline instructions, and public docs refer to the current user, owner, or account through runtime variables and identity context. First-user-specific names, samples, memories, topics, entities, chats, credentials, and voice calibration must remain only in private seed data or explicitly labeled owner/developer files that never ship in customer builds.
+
+The same repo serves the founder as user one, then serves any future user without agents needing to remember which names were hard-coded by accident.
+
+## Non-negotiables
+
+- Local-first data ownership.
+- No user data on Robot Dojo servers.
+- Mac-only until further notice.
+- Apple Silicon and 16GB RAM minimum; 32GB recommended for heavier Black Belt work.
+- No CPU-choking background work.
+- Fast chat.
+- Clear White and Black tier behavior.
+- Product intelligence is shipped; founder identity data is not.
+- No random agent-built product surfaces.
+- No hidden dependence on one coding assistant.
+- No hard-coded first-user identity in product behavior.
+- Canonical docs stay short and useful.
+- Generated docs summarize the codebase; curated docs guide future code.
+
+---
+
+# Architecture
+Path: architecture/architecture.md
+sha256: 557471bb41559718c6226a39e0f1384d6b08732da231795cd4c4985f89b33b13
+
+## System shape
+
+Robot Dojo is a single local server (a Hono process on the user's Mac) plus a relay for optional remote access. There is no cloud business logic. The user's data lives in `~/robotdojo/user/`, the product code lives in `~/robotdojo/{lib,routes,apps,scripts,agents}/`, and the public surface lives at `~/robotdojo/api/` (Vercel edge functions) and `~/robotdojo/apps/` (browser HTML).
+
+The product layers:
+
+1. **Install and access.** macOS-only on Apple Silicon. The app runs on the user's Mac and is reachable locally. A relay at `robotdojo.ai` is optional remote access — not cloud hosting, not a VPN, not required for local use.
+2. **Account connections and imports.** The user connects email, calendar, SMS/iMessage, chat exports, files, and health or domain data where available, plus foundation model session exports.
+3. **Local data plane.** Raw personal data stays local. User data is never stored on Robot Dojo's servers as part of the core product. Product intelligence and user identity are separate.
+4. **RAG and timeline.** Useful source material is embedded, scored, filtered, and tagged. Low-quality or stale material is suppressed. Background indexing throttles itself.
+5. **User and topic context.** A user-editable `user/workbenches/user/wk_user/` vessel (chat-injected distillation + deep companion) plus topic and entity context files synthesized over time.
+6. **Black Belt world model.** Entity extraction, enrichment, context files, and world-aware chat. People, places, and companies become first-class surfaces.
+7. **Chat runtime.** Chat loads user context, selected topic context, relevant RAG, and any matched entity context. Topic selection uses a registry lookup, not an LLM on the critical path.
+8. **Apps on the substrate.** Health is the first first-party premium app. Future apps ship through the app registry/package contract.
+9. **Build system.** Skills and pipeline stages are reusable build protocols. Customer-facing build skills are not chat commands.
+10. **Backup boundary.** Product code in source control; private local state in GCP-backed backup; no hidden third place.
+
+Internally, chat is the hero. The framing is that everything else feeds the chat experience or is consumed by it. The visual north star is fast, polished, and quiet.
+
+## Data flow
+
+Robot Dojo improves by repeatedly distilling source material into cleaner context:
+
+1. Ingest raw records.
+2. Normalize and deduplicate.
+3. Score and filter.
+4. Tag by topic.
+5. Update timeline and user-level context.
+6. In Black Belt, extract and enrich entities.
+7. Generate or refresh context docs.
+8. Use those docs in chat.
+9. Let the user's corrections feed the next pass.
+
+This is the same pattern behind health and coaching. Chat grows the corpus laterally. Focused topic sessions in the coding agent grow it vertically by adding framing, decisions, and reusable mental models.
+
+The architectural promise:
+
+- It keeps syncing from the user's connected accounts.
+- It filters weak source material instead of hoarding noise.
+- It weights recent knowledge because people change.
+- It improves topic context while the user chats and while the user is away.
+- It recognizes entities and context as the user chats.
+- It lets the user correct identity, agents, topics, and important context directly.
+
+## Agent OS
+
+The build pipeline is a six-agent system, isolated context windows, persona-bound briefs.
+
+- **Miyagi (宮城)** — orchestrator + thinking partner. Always running. Routes work, enforces gates via story-gate.js, talks to the owner.
+- **Tantei (探偵)** — codebase mapper. Spawned when a story touches code that needs a map.
+- **Hakase (博士)** — external researcher. Spawned when a story needs knowledge outside the codebase.
+- **Ori (織)** — schema + design architect. Spawned when a story is multi-phase or needs schema/API design.
+- **Katagami (型紙)** — builder. Spawned after the plan is sealed.
+- **Bunshin (分身)** — mandatory stage QC auditor. Runs before research, scope, plan, build, and QA artifacts are presented. Close uses Bunshin only when it introduces new judgment, waiver, failed-QA handling, rollback guidance, or product/architecture claims.
+
+The pipeline stages are fixed: framing → research → scope → plan → build → qa → close. Every stage writes one artifact under `user/workbenches/topics/work/robot-dojo/wk_robot_dojo/stories/{id}/`, seals it, and stops for explicit owner approval. The single hop after a seal is the only implicit-approval exception; everything else is owner-driven.
+
+The skill set is portable. Skills, personas, and pipeline stages are protocols. They are designed to be carried across IDEs (Claude Code, Codex, Cursor) — the canonical sources live in `agents/personas/*.md` and `agents/skills/*/SKILL.md`, and tool-specific adapters in `agents/dist/` are disposable generated outputs.
+
+Topic-bound exploratory work runs through the universal `/topic {name}` opener — one OPEN/CLOSE ritual for every topic or entity. Bespoke `/coach` and `/health` are deprecated stubs that redirect to `/topic coaching` and `/topic health`. `/work {name}` is the same command.
+
+The system is built to be portable across future AI stacks. The owner-facing decision points (each stage seal, each Bunshin verdict, each implicit-approval boundary) are protocol-level, not Claude-specific.
+
+## Tier enforcement
+
+White Belt is MIT-licensed open source. The code is public; anyone can audit, fork, and run it.
+
+Black Belt is source-available under the Elastic License v2 (ELv2). The code is public so users can audit what they run. Running Black Belt requires an active subscription — the relay (remote access) is the hard server-side gate, not a client-side check. Subscription state lives server-side and is not crackable from the client.
+
+If Black Belt expires:
+
+- Engines pause: entity extraction and enrichment jobs, entity-aware chat injection, coding-agent skills on topics, Health and premium app execution, premium agent/tool runs.
+- Data is preserved read-only: raw files, local databases, chat history, topics, topic logs and outputs, user-created files/apps, account settings, and existing entity markdowns stay on the machine.
+- Reactivation restores active use.
+
+User raw data is never encrypted by Robot Dojo. It stays the user's, in plain SQLite under `~/robotdojo/user/databases/` (default) with optional encryption gates documented in build conventions.
+
+The tier boundary is enforced through the relay and through clearly-labeled engine gates inside the codebase. There is no AES-256 runtime artifact, no inert-bytes scheme, no key-management layer on the user's machine — the gate is server-side because that is what is actually unforgeable.
+
+## Core invariants
+
+- Local-first is a product promise, not an implementation detail.
+- Robot Dojo servers do not store user private data.
+- Raw user data is preserved unless the user explicitly deletes it.
+- Derived intelligence must be regenerable from raw data and history.
+- The first user is seed data, not a hard-coded product assumption.
+- Customer mode is the release default. Owner/dev mode can expose internal fixtures and tooling, but customer mode cannot.
+- Background work must be load-aware and must not make the user's machine feel slow.
+- No agent should write directly to the database through ad hoc scripts during normal product operation.
+- Server-side write paths should use a single-writer event protocol.
+- Canonical docs guide future work; generated inventory docs summarize the codebase.
+- Human-readable docs distill signal over time instead of accumulating every historical explanation.
+
+---
+
+# Repository structure
+Path: architecture/structure.md
+sha256: 898ad7b3c388173fa7ea2639e65165a298a8f0508d9453d3d3843870bc49395c
+
+## Root files
+
+Root files must be rare.
+
+| File | Purpose |
+| --- | --- |
+| `ACCOUNT_RECOVERY.txt` | Local operator account recovery instructions |
+| `README.md` | Public repository overview |
+| `CLAUDE.md` | Claude Code adapter only |
+| `.gitignore` | Repo-wide ignore policy |
+| `.vercelignore` | Vercel deploy exclusion policy |
+| `identity.example.json` | Example local identity config |
+| `index.js` | Local server entry point |
+| `middleware.js` | Vercel edge middleware |
+| `install.sh` | Terminal install path |
+| `knip.json` | Dead-code/dependency analysis config |
+| `package.json` | Node project manifest |
+| `package-lock.json` | npm lockfile |
+| `playwright.config.js` | Playwright test config |
+| `skills-lock.json` | Installed skill/plugin lockfile |
+| `stryker.config.mjs` | Mutation testing config |
+| `vercel.json` | Vercel deployment config |
+| `LICENSE` | License |
+
+`ACCOUNT_RECOVERY.txt` stays at root because emergency recovery must be discoverable when the operator is locked out or disoriented. It is not part of the architecture doc set.
+
+Do not add new root docs. Cross-cutting product and repo docs belong in `architecture/`.
+
+## Top-level directories
+
+| Directory | Belongs Here | Does Not Belong Here |
+| --- | --- | --- |
+| `.github/` | CODEOWNERS and CI workflows that enforce owner review for architecture lock changes | Product source, local state, secrets |
+| `api/` | Public Vercel functions | Business logic |
+| `apps/` | Browser HTML, JS, CSS, assets | Backend logic |
+| `agents/` | Canonical Robot Dojo Agent OS: roster, personas, build skills, generated adapters | User profile, private memory, runtime data |
+| `code/` | External repos, gitignored and GCP-backed | Committed product source |
+| `config/` | User-created config, root lock, and registry config | Secrets or raw data |
+| `docs/` | Robot Dojo/product/operator documentation written for humans | Product truth, planning artifacts, raw user-added files, derived workbench analysis |
+| `gateway/` | Sole canonical gateway folder: Hono control plane, Redis integration, Terraform deploy source, deploy scripts, device registration, tunnel routes, and blind TCP/SNI relay code | App business logic, filled Terraform vars/state/plans |
+| `lib/` | Core reusable business logic | Route handlers, frontend, one-off scripts |
+| `quarantine/` | Temporary holding zone for misplaced files, gitignored | Permanent storage |
+| `routes/` | Hono route handlers | Reusable business logic |
+| `scripts/` | Operational, QA, migration, and generator scripts | Library modules |
+| `tests/` | Automated tests and fixtures | Product source |
+| `user/` | Private per-user substrate, gitignored and GCP-backed: profile, inbox, imports, files, contexts, workbenches, transcripts, memory, databases, logs, media, models | Canonical Agent OS, product source, public docs |
+
+Recoverability rule: every file must be in exactly one recoverability class — GitHub-tracked source, GCP-backed private/local state, or explicitly regenerable tool output. `scripts/check-backup-recoverability.js` enforces this for ignored files so GitHub and GCP stay MECE instead of relying on memory.
+
+## Doc-class homes
+
+Canonical docs distill signal. Each doc class has exactly one home. Generated docs follow code and config; curated docs guide future code.
+
+| Doc class | Home | Notes |
+| --- | --- | --- |
+| Product truth | `architecture/product.md` | Customer promise, launch scope, tier model |
+| System shape | `architecture/architecture.md` | Human-readable architecture; internal "chat is the hero" framing |
+| Placement rules | `config/root-allowlist.lock.json` → `architecture/structure.md` | This file derives from the lock |
+| File inventory | `architecture/sitemap.md` | Generated by `scripts/generate-sitemap.js` |
+| Directory ontology | `architecture/ontology.md` | Generated by `scripts/generate-ontology.js` from the lock |
+| Agent OS roster + routing | `agents/agents.md` | Per-agent bodies in `agents/personas/{Name}.md` |
+| Build conventions | `agents/build-conventions.md` | Portable cross-tool engineering rules |
+| Quality contract | `agents/default-quality.md` | Embedded by include marker into every persona and skill |
+| Skills (build + tool) | `agents/skills/*/SKILL.md` | Each skill carries its own contract + steps |
+| Current work state | `user/workbenches/topics/work/robot-dojo/wk_robot_dojo/kanban.md` | Not auto-loaded globally |
+| Owner user context (chat) | `user/workbenches/user/wk_user/context.md` | Chat-injected distillation, ≤ `USER_CARD_CHAR_BUDGET` |
+| Owner user context (IDE deep) | `user/workbenches/user/wk_user/USER.md` | Long-form deep companion |
+| Owner writing (voice + structure + formatting) | `user/workbenches/user/wk_user/user-voice/` (`voice.md`, `structure/`, `formatting/`, `samples/`, `check.md`, auto `learned.md`) | How the owner writes to the world (PII) — gitignored, never shipped. Compounds from writing samples and sent mail. Operator chat is not a source. |
+| Miyagi writing (voice + structure + formatting) | `config/agent-voice/` (`voice.md`, `structure/`, `formatting/`) | How Miyagi talks to the owner — PII-free, included by every persona. Chat logs and working-together feedback train this path via standing corrections. |
+| Topic context (canonical) | `user/contexts/topics/{t1}/[{t2}/]context.md` | Compact memory for chat |
+| Entity context (canonical) | `user/contexts/{people,companies,places}/{display-slug}--{stable-id-suffix}/context.md` | Display-slug name; stable entity id in frontmatter and DB |
+| Workbench resume + substrate | `user/workbenches/{topics|entities}/.../{workbench_id}/INDEX.md` + `substrate/` | Deep work; promotes durable truth into the attached `context.md` |
+| Pipeline story artifacts | `user/workbenches/topics/work/robot-dojo/wk_robot_dojo/stories/{id}/` | Per `STORY_SCHEMA.json` |
+
+**Package rule.** Canonical topic and entity memory lives inside a package directory as `context.md`. Topic package names use topic slugs. Entity package names use a human-readable display slug plus a stable ID suffix: `{display-slug}--{stable-id-suffix}`. The package directory is also the owner for workbenches and other first-class context-local support files attached to that owner.
+
+**Context-doc ontology.** Every `context.md` (user, topic, or entity) is loaded directly into chat — it is the compact canonical memory layer, not deep substrate. Section schema: a `# Topic|Entity: {slug}` heading, a short "what this covers" paragraph, optional boot-up reading list, then current state. Injection contract: `wk_user/context.md` is injected by `lib/identity-card.js` (budget `USER_CARD_CHAR_BUDGET = 4000`); topic and entity `context.md` files are loaded by the topic/entity resolver. Compact ≠ thin: every line earns its place because it ships in every chat turn for that selection.
+
+**Workbench placement.** Deep topic/entity work belongs in a registered workbench under `user/workbenches/`, not hidden inside a pipeline story or nested inside compact context packages. The canonical resume index lives at `user/workbenches/topics/{t1}/{t2}/{workbench_id}/INDEX.md` or `user/workbenches/entities/{people|companies|places}/{entity-package}/{workbench_id}/INDEX.md`. Pipeline artifacts are not deleted, but pipeline remains process history rather than the workbench home.
+
+Placement rule: if it is evidence, cite it. If it is thinking, move it. If it is truth, promote it. Raw evidence can remain in `user/transcripts/`, `user/databases/`, `user/files/`, or another approved user source root; `docs/` is evidence only when the documentation itself is the source. Derived research, analysis, dashboards, normalized datasets, decisions, todos, and next-action state belong in the attached workbench. Long-form workbench synthesis may be as deep as the work requires; durable compressed conclusions promote into the attached topic/entity `context.md`.
+
+Every workbench `INDEX.md` includes a distillation contract. The contract names the purpose, canonical target, compact-context rule, long-synthesis home, RAG substrate, and review threshold. Agents must state or refresh that contract before major research or build work so the user can correct the promotion boundary before work accumulates.
+
+Every T1 and T2 topic has a natural default workbench landing zone. Creating a topic creates that default workbench unless one already exists. Entity workbenches are created on demand when a person, company, or place becomes the owner of deep work. Topic rename, delete, or merge operations must consolidate attached workbenches by rehoming their `INDEX.md` and substrate under the surviving topic/entity and repointing canonical promotion targets.
+
+`user/contexts/research/` is retired. It is not an approved destination for new or canonical workbench substrate; if it reappears, the contents must be moved into `user/workbenches/` or cited from an approved source root.
+
+Every workbench attaches to one or more canonical targets:
+
+- topic: T1 or T2 topic slug
+- person: canonical person ID
+- company: canonical company ID
+- place: canonical place ID
+
+`thing` and health-condition entities are not workbench attachment types. Health investigations attach to the existing personal health topic. Durable findings promote back into the attached topic/entity context and RAG; the workbench keeps the in-flight layer resumable.
+
+## Enforcing gates
+
+Pre-commit gates fire on every commit. Each one targets a specific class of failure.
+
+| Gate | Script | Failure it blocks |
+| --- | --- | --- |
+| Root allowlist | `scripts/check-root-lock.js` | New top-level entries not approved in `config/root-allowlist.lock.json` |
+| Registry schema | `scripts/check-registry-schema.js` | Malformed entries in `architecture/surfaces.json` |
+| Canonical mode | `scripts/check-canonical-mode.js` | Re-introduction of autonomous doc-writer pattern |
+| Doc budget | `scripts/check-doc-budget.js` | Any registered surface over its `max_chars` cap |
+| Human-authored class | `scripts/gate-human-authored.js` | Staged edits to a human-authored canonical surface without a story declaring it in `meta.json.touches` |
+| Canonical readers | `scripts/check-canonical-readers.js` | Skill or persona missing `canonical_reads` frontmatter or a sitemap+ontology read in its first step |
+| Persona ontology | `scripts/check-persona-ontology.js` | Persona missing required frontmatter, wrong section order, stale include hash, or 7th unsanctioned persona file |
+| Skill ontology | `scripts/check-skill-ontology.js` | Skill missing `name`/`description`/`type`, missing `## Contract`/`## Steps`, stale include hash |
+| Agent-voice ontology | `scripts/check-fragment-ontology.js` | `config/agent-voice/` missing its base/channel purpose headers, or owner voice (PII) surfacing under shipped config |
+| Architecture doc schema | `scripts/check-arch-doc-schema.js` | `product.md`/`architecture.md`/`structure.md` missing required `##` sections |
+| Structure check | `scripts/check-structure.js` + `scripts/smart-quarantine.js` | Files outside their declared home — routes them to `quarantine/` |
+| Identity chain (unified) | `scripts/check-agent-os.js` | Any dangling/wrong-target/orphan/stray adapter across Claude skills+agents, Codex, Cursor; `agents/dist/` stale vs sources; missing DO-NOT-EDIT headers. `check-identity-dist-fresh.js` and `check-skill-adapters.js` are thin back-compat stubs that delegate here. |
+
+## Change rules
+
+- If product truth changes, update `architecture/product.md` first.
+- If architecture changes, update `architecture/architecture.md` and tests or code together.
+- If file placement changes, update `config/root-allowlist.lock.json`, `architecture/structure.md`, and the enforcing tests/scripts together, with exact owner-approved touches.
+- If files move, regenerate `architecture/sitemap.md` and `architecture/ontology.md`.
+- If a doc starts accumulating history instead of decisions, distill it back down.
+
+---
+
+# Generated sitemap
+Path: architecture/sitemap.md
+sha256: f306a251594cfc79a588aae787c6627ec17ee9f644cbc7e01e873a8fe7d27ba1
+
+## Entry Points
+`index.js` — Robot Dojo — entr…
+`middleware.js` — Vercel Edge Middl…
+
+## Routes
+`routes/account-prefs.js` — /api/account/* — …
+`routes/accounts.js` — Accounts & Identi…
+`routes/admin.js` — Admin routes — re…
+`routes/api.js` — REST API — timeli…
+`routes/apps.js`
+`routes/auth.js` — Authentication ro…
+`routes/billing-bb.js` — Black Belt sessio…
+`routes/billing-history.js` — Unified billing h…
+`routes/billing-stripe.js` — Stripe billing ro…
+`routes/billing-usdc.js` — USDC billing rout…
+`routes/billing.js` — Billing surface r…
+`routes/books.js` — …
+`routes/chat.js` — Chat streaming en…
+`routes/compiled.js` — Compiled views — …
+`routes/content.js` — routes/content.js…
+`routes/files.js` — Drop-folder files…
+`routes/health-coach.js` — Health daily coac…
+`routes/health.js` — Health API — mark…
+`routes/identity.js` — /api/identity/* —…
+`routes/integrations.js` — Integration healt…
+`routes/network.js` — Network API — peo…
+`routes/notifications.js` — Notifications rou…
+`routes/oauth-microsoft.js` — Microsoft OAuth r…
+`routes/oauth.js` — Google OAuth rout…
+`routes/people.js` — routes/people.js …
+`routes/podcast.js`
+`routes/public-chat.js` — Public chat — loc…
+`routes/secure-input.js` — secure-input rout…
+`routes/session-log.js` — /api/session-log …
+`routes/setup-steps.js` — /api/setup-steps …
+`routes/setup.js` — Local setup API f…
+`routes/auth/` — 1 files
+`routes/setup/` — Setup progress AP…
+
+## Lib Modules
+`lib/about.js`
+`lib/account-deletion.js`
+`lib/account-personas.js`
+`lib/account-prefs-queries.js`
+`lib/account-prefs.js`
+`lib/account-topic.js`
+`lib/accounts-open-app.js`
+`lib/accounts-open-target.js`
+`lib/accounts-queries.js`
+`lib/active-builds.js`
+`lib/address-extract.js`
+`lib/address-normalize.js`
+`lib/address-patterns.js`
+`lib/admin-queries.js`
+`lib/agent-personas.js`
+`lib/agent-wrap.js`
+`lib/agents-md-queries.js`
+`lib/anthropic-client.js`
+`lib/api-key-class.js`
+`lib/api-key-probe.js`
+`lib/api-queries.js`
+`lib/app-events.js`
+`lib/app-memory-context.js`
+`lib/app-registry.js`
+`lib/app-substrate.js`
+`lib/apple-calendar-reader.js`
+`lib/apple-calls-reader.js`
+`lib/apple-mail-reader.js`
+`lib/apple-notes-reader.js`
+`lib/apple-photos-sync.js`
+`lib/apple-store-paths.js`
+`lib/asana-context-sync.js`
+`lib/asana-my-tasks.js`
+`lib/asana-routing-config.js`
+`lib/asana.js`
+`lib/attribute-deterministic.js`
+`lib/attribute-residual.js`
+`lib/auth-queries.js`
+`lib/auth.js`
+`lib/backup-buckets.js`
+`lib/backup-coverage.js`
+`lib/backup-evidence.js`
+`lib/backup-guardian.js`
+`lib/backup-options.js`
+`lib/backup-worktree.js`
+`lib/bb-session.js`
+`lib/billing-bb-queries.js`
+`lib/billing-history-queries.js`
+`lib/billing-queries.js`
+`lib/billing-stripe-queries.js`
+`lib/book-cover.js`
+`lib/book-engine.js`
+`lib/book-host.js`
+`lib/book-interior.js`
+`lib/book-pdf.js`
+`lib/book-print-job.js`
+`lib/book-volumes.js`
+`lib/brand-persona.js`
+`lib/brave-search.js`
+`lib/broker-lots.js`
+`lib/calendar-extractor.js`
+`lib/calendar-sync.js`
+`lib/call-routing.js`
+`lib/canonical-budget.js`
+`lib/canonical-name.js`
+`lib/canonical-write.js`
+`lib/chat-context.js`
+`lib/chat-entity-linking.js`
+`lib/chat-memory-backfill.js`
+`lib/chat-models.js`
+`lib/chat-tools.js`
+`lib/chat-transcript-import.js`
+`lib/chat-ttft-estimator.js`
+`lib/chat.js`
+`lib/chunk-worker.js`
+`lib/claude-code-jsonl.js`
+`lib/claude-code-reconcile.js`
+`lib/coding-topic-idle.js`
+`lib/company-name-normalize.js`
+`lib/compiled-queries.js`
+`lib/compute-tier.js`
+`lib/config.js`
+`lib/connectivity-reconciler.js`
+`lib/contacts-extractor.js`
+`lib/content-queries.js`
+`lib/context-paths.js`
+`lib/context-router.js`
+`lib/conversation-visibility.js`
+`lib/conversations.js`
+`lib/corpus-scan.js`
+`lib/credential-scan.js`
+`lib/criteria-lint.js`
+`lib/criteria-parser.js`
+`lib/data-arrival-pipelines.js`
+`lib/data-plane-proof.js`
+`lib/db-encryption.js`
+`lib/db-health.js`
+`lib/db-writer-policy.js`
+`lib/db.js`
+`lib/demo-shell-guard.js`
+`lib/device-name.js`
+`lib/device-rename.js`
+`lib/doc-classify.js`
+`lib/doc-extract.js`
+`lib/document-vault.js`
+`lib/drive-sync.js`
+`lib/ego-render.js`
+`lib/eight-sleep-sync.js`
+`lib/email-adjudication.js`
+`lib/email.js`
+`lib/embed-pause-hold.js`
+`lib/embed-proof-freeze.js`
+`lib/entity-card.js`
+`lib/entity-claims.js`
+`lib/entity-company-evidence.js`
+`lib/entity-enrich-policy.js`
+`lib/entity-enrich.js`
+`lib/entity-evidence.js`
+`lib/entity-facts.js`
+`lib/entity-floor.js`
+`lib/entity-matcher.js`
+`lib/entity-nodes.js`
+`lib/entity-relationships.js`
+`lib/entity-resolve.js`
+`lib/entity-source-evidence.js`
+`lib/entity-standalone.js`
+`lib/entity-timeline.js`
+`lib/entity-unmerge.js`
+`lib/family-from-content.js`
+`lib/family-inference.js`
+`lib/family-nicknames.js`
+`lib/finance-weekly-review.js`
+`lib/followup-entities.js`
+`lib/followup-sweep.js`
+`lib/gateway-tls.js`
+`lib/generate-user-md.js`
+`lib/gmail-sync.js`
+`lib/google-contacts-sync.js`
+`lib/google-docs.js`
+`lib/google-oauth.js`
+`lib/google-photos-sync.js`
+`lib/google-scopes.js`
+`lib/google-sheets.js`
+`lib/google-slides.js`
+`lib/granola-call-asana.js`
+`lib/granola-client.js`
+`lib/granola-sync.js`
+`lib/graph-calendar-sync.js`
+`lib/gsc-heal.js`
+`lib/handle-rename.js`
+`lib/health-apple-canonical.js`
+`lib/health-apple-daily-json.js`
+`lib/health-coach-schema.js`
+`lib/health-coach.js`
+`lib/health-data-point-source.js`
+`lib/health-fhir-import.js`
+`lib/health-history.js`
+`lib/health-ingestion.js`
+`lib/health-intel-regeneration.js`
+`lib/health-intel.js`
+`lib/health-marker-copy.js`
+`lib/health-marker-metadata.js`
+`lib/health-marker-payload-cache.js`
+`lib/health-medications.js`
+`lib/health-pdf-ocr.js`
+`lib/health-queries.js`
+`lib/health-query.js`
+`lib/health-recovery-status.js`
+`lib/health-timeline.js`
+`lib/identity-card.js`
+`lib/identity-distill.js`
+`lib/identity-dump.js`
+`lib/identity-export.js`
+`lib/identity-log.js`
+`lib/identity-matching.js`
+`lib/identity-queries.js`
+`lib/identity.js`
+`lib/idle-gate.js`
+`lib/imessage.js`
+`lib/imports-envelope.js`
+`lib/imports-snapshot.js`
+`lib/ingest-orchestrator.js`
+`lib/integration-health.js`
+`lib/integration-reconciler.js`
+`lib/integration-registry.js`
+`lib/integration-status.js`
+`lib/integrations-queries.js`
+`lib/invite-targets-queries.js`
+`lib/ip.js`
+`lib/junk-classifier.js`
+`lib/key-issuance.js`
+`lib/key-store.js`
+`lib/keychain.js`
+`lib/launch-integrations.js`
+`lib/legacy-provider-rename.js`
+`lib/link-corpus.js`
+`lib/linkedin-scraper.js`
+`lib/llm-batch.js`
+`lib/llm-gateway.js`
+`lib/llm-provider-pref.js`
+`lib/lulu-client.js`
+`lib/macos-permissions.js`
+`lib/magic-link.js`
+`lib/maintenance-routines.js`
+`lib/maintenance.js`
+`lib/markdown-documents.js`
+`lib/memory-context.js`
+`lib/memory-events.js`
+`lib/memory-ingest.js`
+`lib/memory-prompt.js`
+`lib/memory-recalc.js`
+`lib/memory-recall-eval.js`
+`lib/memory-scope-routing.js`
+`lib/memory-verify-phase.js`
+`lib/memory.js`
+`lib/merge-verify.js`
+`lib/microsoft-oauth.js`
+`lib/middleware-auth.js`
+`lib/mint-tunnel-token.js`
+`lib/model-allowlists.js`
+`lib/model-key-cadence.js`
+`lib/model-lane.js`
+`lib/models-picker.js`
+`lib/module-loader.js`
+`lib/monarch-auth.js`
+`lib/monarch-client.js`
+`lib/monarch-compact.js`
+`lib/monarch-history.js`
+`lib/monarch-month-book.js`
+`lib/monarch-month-views.js`
+`lib/monarch-prices.js`
+`lib/monarch-schedule.js`
+`lib/monarch-store.js`
+`lib/monarch-sync.js`
+`lib/network-classify.js`
+`lib/network-queries.js`
+`lib/nickname-resolver.js`
+`lib/notifications-queries.js`
+`lib/notion-blocks.js`
+`lib/notion-sync.js`
+`lib/oauth-queries.js`
+`lib/oauth-state.js`
+`lib/oauth-sync-queue.js`
+`lib/ollama-lifecycle.js`
+`lib/onboarding-eta.js`
+`lib/onepassword-cli.js`
+`lib/oura-sync.js`
+`lib/outlook-sync.js`
+`lib/owner-corpus-sources.js`
+`lib/owner-corpus.js`
+`lib/passive-deadline.js`
+`lib/passive-jobs.js`
+`lib/passive-maintenance-handlers.js`
+`lib/passive-reconciler.js`
+`lib/passive-retention.js`
+`lib/passive-supervisor.js`
+`lib/passive-sync-orchestrator.js`
+`lib/people-merge.js`
+`lib/people-seed.js`
+`lib/people-write.js`
+`lib/permission-watcher.js`
+`lib/person-professional.js`
+`lib/person-resolver.js`
+`lib/persona-sync.js`
+`lib/pipeline-attachments.js`
+`lib/place-taxonomy.js`
+`lib/podcast-jobs.js`
+`lib/podcast-library.js`
+`lib/podcast-listening.js`
+`lib/podcast-progress.js`
+`lib/podcast-script.js`
+`lib/podcast-series.js`
+`lib/podcast-tts.js`
+`lib/podcast.js`
+`lib/portfolio-view.js`
+`lib/pricing.js`
+`lib/private-data-roots.js`
+`lib/product-guide.js`
+`lib/profile-research.js`
+`lib/protected-repos.js`
+`lib/provenance.js`
+`lib/provider-health.js`
+`lib/publication-manifest.js`
+`lib/publication-posture.js`
+`lib/publication-step.js`
+`lib/publication-sweep.js`
+`lib/rag-search.js`
+`lib/rag.js`
+`lib/raw-llm-client.js`
+`lib/raw-websocket.js`
+`lib/receipt-classify.js`
+`lib/receipt-extract.js`
+`lib/referral.js`
+`lib/relation-mine.js`
+`lib/relation-questions.js`
+`lib/relation-resolve.js`
+`lib/relation-store.js`
+`lib/relation-vocabulary.js`
+`lib/relation-walk.js`
+`lib/relationship-builder.js`
+`lib/relay-client.js`
+`lib/request-observer.js`
+`lib/research-store.js`
+`lib/reserved-slugs.js`
+`lib/review-digest.js`
+`lib/robotdojo-paths.js`
+`lib/scoring.js`
+`lib/secure-input.js`
+`lib/server.js`
+`lib/session-log-queue.js`
+`lib/session-log.js`
+`lib/session-open-pack.js`
+`lib/session-registry.js`
+`lib/session.js`
+`lib/setup-local-help.js`
+`lib/setup-queries.js`
+`lib/setup-readiness.js`
+`lib/setup-steps.js`
+`lib/snapshots.js`
+`lib/source-topic-migrate.js`
+`lib/speech-fingerprint.js`
+`lib/spend-guard.js`
+`lib/split-vector-store.js`
+`lib/sse.js`
+`lib/stage-events.js`
+`lib/standing-corrections.js`
+`lib/stripe.js`
+`lib/subscriptions.js`
+`lib/supervisor-status.js`
+`lib/taxonomy-default.js`
+`lib/taxonomy.js`
+`lib/timeline-compile.js`
+`lib/timeline-recalc.js`
+`lib/timeline-schema.js`
+`lib/timeline.js`
+`lib/topic-at-define.js`
+`lib/topic-context-apply.js`
+`lib/topic-context.js`
+`lib/topic-distill.js`
+`lib/topic-lifecycle.js`
+`lib/topic-live-thread.js`
+`lib/topic-routing-policy.js`
+`lib/topic-session.js`
+`lib/topic-source-routing.js`
+`lib/topic-workbench-seed.js`
+`lib/topics.js`
+`lib/transcript-attribution.js`
+`lib/transcript-roster.js`
+`lib/transcript-segments.js`
+`lib/transcripts.js`
+`lib/tunnel-agent.js`
+`lib/tunnel-client.js`
+`lib/upload-store.js`
+`lib/usdc-watcher.js`
+`lib/user-identity.js`
+`lib/user-timeline-facts.js`
+`lib/utils.js`
+`lib/viewer-corrections.js`
+`lib/viewer-projection.js`
+`lib/viewer-topic-lens.js`
+`lib/voice-ingest.js`
+`lib/voices.js`
+`lib/warmup.js`
+`lib/wb-resolve-person.js`
+`lib/work-item-title.js`
+`lib/workbench-distill.js`
+`lib/workbench-files.js`
+`lib/workbench-library.js`
+`lib/workbench-log-reason.js`
+`lib/workbench-log-seed.js`
+`lib/workbench-log.js`
+`lib/workbench-open.js`
+`lib/workbench-promote-entities.js`
+`lib/workbench-rag.js`
+`lib/workbench-synthesis.js`
+`lib/workbenches.js`
+`lib/writing-classify.js`
+`lib/writing-freeze.js`
+`lib/writing-learn.js`
+`lib/writing.js`
+`lib/xai-keys.js`
+`lib/ann/`
+`lib/bb/`
+`lib/chat-tools/`
+`lib/chat/`
+`lib/cohort/`
+`lib/distill-sources/`
+`lib/drop-folder/`
+`lib/fanout/`
+`lib/identity-targets/`
+`lib/llm/`
+`lib/neon/`
+`lib/observability/`
+`lib/public-chat/`
+`lib/quarantine/`
+`lib/rag/`
+`lib/referral/`
+
+---
+
+# Repository ontology
+Path: architecture/ontology.md
+sha256: 95220b49c6e8e803f638e970905cdc6c5744a646fc0066b4b7f5bf82087d1f70
+
+## Top-Level Directories
+
+| Directory | Purpose | Belongs | Does NOT belong |
+|-----------|---------|---------|-----------------|
+| `agents/` | Canonical Robot Dojo Agent OS: roster, personas, build skills, generated adapters | roster.md, personas/*.md, agents/skills/*/SKILL.md, quality/build contracts, generated dist/ | User profile, private memory, runtime data |
+| `api/` | Public Vercel serverless functions | Public-facing edge functions | Business logic |
+| `apps/` | Frontend applications | Browser HTML, JS, CSS, and assets | Backend logic |
+| `architecture/` | Architecture and canonical documentation surfaces | architecture/product.md, architecture/architecture.md, architecture/structure.md, generated architecture/sitemap.md, generated architecture/ontology.md, architecture/surfaces.json | Runtime code, private user data, process artifacts, or generated public bundles |
+| `code/` | External repos, gitignored and GCP-backed | Git clones of linked external repos | Committed product source |
+| `config/` | Configuration and registries | Models, voices, taxonomy, account settings, lock files, registries | Secrets or raw data |
+| `docs/` | Robot Dojo/product/operator documentation | Human-facing product and operator docs | Product truth, planning artifacts, raw user files, derived workbench analysis |
+| `gateway/` | Canonical WebSocket/TCP/SNI gateway deployment source | Hono server, Redis integration, Docker config, Terraform deploy source, deploy scripts, device registration, tunnel routes, and blind TCP/SNI relay code | Application business logic |
+| `lib/` | Core reusable business logic | Reusable modules, integrations, data pipelines | Route handlers, scripts, frontend code |
+| `pipeline/` | Retired (st_0c491456 Phase 3e). The dev pipeline (kanban, stories, generalizations, schema) relocated to user/workbenches/topics/work/robot-dojo/wk_robot_dojo/ (st_9699c94f). This entry remains only so the existing untracked scratch directory does not trip the root allowlist; no tracked files may land under it (check-root-lock enforces). | Untracked scratch only (legacy quarantine-manifest.jsonl, archive/, batch-prep/, research/, reports/, sessions/). Nothing canonical. | Tracked files of any kind; any new dev-pipeline artifacts (those go to the wk_robot_dojo workbench) |
+| `quarantine/` | Stop-the-line holding zone for misplaced files | Temporary files awaiting routing | Permanent storage |
+| `routes/` | HTTP route handlers | Hono route files | Business logic or frontend code |
+| `scripts/` | Operational, QA, migration, and generator scripts | Scripts run by humans, CI, cron, install, QA, and build-pipeline support | Library code or route handlers |
+| `tests/` | Automated tests and fixtures | node:test files, fixtures, Playwright specs, shell-fixture tests | Product source |
+| `user/` | Private per-user substrate | profile, inbox, imports, files, contexts, workbenches, transcripts, memory, databases, logs, media, models | Tracked source code, product docs, canonical Agent OS definitions |
+
+## Top-Level Files
+
+Files approved at root by Node.js, npm, Vercel, GitHub, install, test, or lock conventions. Nothing else.
+
+| File | Purpose | Required |
+|------|---------|----------|
+| `.gitignore` | Repo-wide ignore policy | Yes |
+| `.vercelignore` | Vercel deploy exclusion policy | Yes |
+| `.worktreeinclude` | Files copied into a new git worktree by `claude --worktree` (st_8745309c) — currently .env.local for DB isolation | No |
+| `ACCOUNT_RECOVERY.txt` | Local operator account recovery instructions | Yes |
+| `AGENTS.md` | Install symlink (or file) to agents/dist/AGENTS.md for Grok/Codex project roots | Yes |
+| `CLAUDE.md` | Claude Code project adapter | Yes |
+| `LICENSE` | Repository license | Yes |
+| `LICENSE-BLACKBELT` | Black Belt source-available license (Elastic License 2.0); White Belt root LICENSE stays MIT | Yes |
+| `README.md` | Public repository overview | Yes |
+| `identity.example.json` | Example local identity configuration | Yes |
+| `index.js` | Server entry point | Yes |
+| `install.sh` | Terminal install path | Yes |
+| `knip.json` | Dead-code/dependency analysis config | Yes |
+| `middleware.js` | Vercel edge middleware | Yes |
+| `package-lock.json` | npm lockfile | Yes |
+| `package.json` | Node.js project manifest | Yes |
+| `playwright.config.js` | Playwright test config | Yes |
+| `skills-lock.json` | Installed skill/plugin lockfile | Yes |
+| `stryker.config.mjs` | Mutation testing config | Yes |
+| `vercel.json` | Vercel deployment configuration | Yes |
+
+## Rules
+
+1. No planning docs at root. Plans live inside the owning story, defect, or workbench.
+2. No catch-all directories. A directory named `misc/`, `tmp/`, `stuff/` accumulates entropy. Name directories by what they contain.
+3. No loose scripts at root. One-off scripts go in `scripts/`. Subsystem-owned scripts live inside that subsystem.
+4. `scripts/` subdirs are action-named: `scripts/ingest/`, `scripts/qa/` — not `scripts/pipeline/` (ambiguous with `pipeline/`).
+5. Adding a new top-level directory requires owner approval and an exact edit to `config/root-allowlist.lock.json`.
+6. Quarantine is a stop-the-line signal, not a parking lot. A file in `quarantine/` means the architecture is violated.
+7. Private user substrate lives under `user/`: `user/files/` for source evidence, `user/contexts/` for compact context packages, and `user/workbenches/` for deep working sets.
+
+---
+
+# Account recovery
+Path: ACCOUNT_RECOVERY.txt
+sha256: 13a8a0f0aa8d073a45b5873604aa0695f57b788ba742674242752c57bfff189d
+
+Robot Dojo Account Recovery
+
+Robot Dojo runs on this machine. If you are logged out or lose the login token,
+recover from the local folder:
+
+1. Open Terminal.
+2. Go to this folder:
+
+ cd ~/robotdojo
+
+3. Show the current token:
+
+ npm run token -- show
+
+4. Rotate the token if it was exposed:
+
+ npm run token -- rotate
+
+Rotating the token signs out every browser session. Use the new token with the
+Server Name shown in Accounts > Admin.
+
+Advanced:
+
+- Set a chosen token:
+
+ npm run token -- set rd_your_new_token_here
+
+- Show help:
+
+ npm run token -- help
+
+The token is stored in macOS Keychain under robotdojo-ROBOTDOJO_AUTH_TOKEN.
+
+---
+
+# Public README
+Path: README.md
+sha256: 54cd89e284da66c4eb38e5bcbd2efcf8db04a2fc9f8ce0c740e1124b7387deac
+
+# Robot Dojo
+
+Robot Dojo is a Mac-first, local-first personal intelligence system. Chat is the product. Memory is what makes it different.
+
+It connects to your real data, organizes it into topics, entities, timeline, and logs, then uses that same memory in web chat and in a coding agent. The coding agent has the shipped skills, its own tools, and can write small scripts as you go. Black Belt adds the living world model underneath that chat: people, places, companies, and relationships.
+
+## Install
+
+One command, from a fresh clone on an Apple Silicon Mac:
+
+```bash
+git clone https://github.com/RobotDojo-AI/black-belt.git
+cd black-belt
+./install.sh
+```
+
+The installer checks prerequisites, installs Homebrew, Node, and the local embedding model, provisions local TLS, starts the background service, and opens your browser to Account Integrations at `https://localhost:4338`. From there you connect your own foundation-model key, your Google workspace, and any API-key tools you already use.
+
+You can also install directly from the hosted script:
+
+```bash
+curl -fsSL https://robotdojo.ai/install.sh | bash
+```
+
+Because you clone first, `install.sh` is local, readable code you can inspect before running it.
+
+Requirements: Apple Silicon Mac, 16GB RAM minimum, 8GB free disk, Xcode Command Line Tools (the installer stops early and tells you to run `xcode-select --install` if they are missing).
+
+## Belts
+
+| Belt | Promise | Included |
+| --- | --- | --- |
+| White | Knows you | Local chat with RAG, files, topics, local memory, user context, and chat history |
+| Black | Knows your world | White plus entities, enrichment, entity-aware chat, Health, premium apps, and premium tool runs |
+
+If Black Belt expires, the engines pause. Your raw data and local artifacts are preserved on your machine, read-only, and resubscribing re-animates them.
+
+## Licensing
+
+Robot Dojo is a dual-licensed repository. The nearest license governs each file.
+
+- **White Belt is open source under the MIT License** (root [`LICENSE`](LICENSE)). Run it locally, forever, with your own AI keys.
+- **Black Belt is source-available under the Elastic License 2.0** ([`LICENSE-BLACKBELT`](LICENSE-BLACKBELT)). Source-available means the code is public so you can audit it — it is **not** open source. Black Belt runs only while you hold an active subscription; the Elastic License 2.0's license-key clause is the legal form of that gate. Your data stays yours across both tiers.
+
+## Known rough edges
+
+This is a private beta. The path a first tester runs works end to end, but some edges are still rough:
+
+- **Google connect shows an "unverified app" warning.** Formal Google app verification is pending; the warning is expected for beta and safe to accept. Google connect also depends on operator-provided OAuth credentials — if your machine has none, connect the workspace path is unavailable and you should reach a first personally-aware chat through Apple-local data, an API-key tool, or dropped files instead.
+- **Remote access is a Black Belt feature that needs a beta invite secret.** Without it, the app runs local-only at `https://localhost:4338`; the "reach from anywhere" relay degrades silently to local.
+- **macOS is the supported target.** Linux is best-effort; Windows is not supported (use WSL2 at your own risk).
+- **First-run wants Full Disk Access.** The installer opens the macOS privacy pane so Apple-local sources (Contacts, iMessage, Calendar) can sync into your personal context.
+
+## Architecture
+
+Start here:
+
+- [architecture/product.md](architecture/product.md) - product promise, launch scope, tier model
+- [architecture/architecture.md](architecture/architecture.md) - human-readable system architecture
+- [architecture/structure.md](architecture/structure.md) - repository placement contract
+- [architecture/sitemap.md](architecture/sitemap.md) - generated file inventory
+- [architecture/ontology.md](architecture/ontology.md) - generated directory ontology
+
+## Repository Shape
+
+Core runtime code lives in `lib/`, `routes/`, `api/`, and `apps/`.
+
+Local user data, generated contexts, imports, logs, and pipeline artifacts are gitignored. Canonical docs are short, curated surfaces. Generated inventory docs are regenerated from code and config.
+
+## Development
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run focused tests for the build pipeline:
+
+```bash
+node --test tests/story-preflight.test.js tests/story-pipeline.test.js
+```
+
+Regenerate inventory docs after structural changes:
+
+```bash
+node scripts/generate-sitemap.js --write
+node scripts/generate-ontology.js --write
+```
+
+Run checks before shipping:
+
+```bash
+npm test
+```
+
+---
+
+# Privacy page
+Path: apps/privacy.html
+sha256: bd360f1357d5a39d1241edfc95eb5570c7ed84e885c65685bdeba08a99a8c7d0
+
+Privacy Policy — Robot Dojo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ Private beta. 90 days of Black Belt on install.
+
+
+ Privacy
+
+ Last updated: May 28, 2026
+
+ The short version
+
+ Your private Robot Dojo data is local-first: it lives on your Mac, not on a Robot Dojo server. The installed local app does not send private data or telemetry to Robot Dojo unless you explicitly submit an error report or feedback item. If you choose backup, copies go only to a cloud server you own, control, and pay for.
+
+ What Robot Dojo processes
+
+ Robot Dojo imports data from sources you connect or files you add: email, calendar, contacts, messages, documents, and Apple Health exports where enabled. Everything is stored locally on your Mac. There is no Robot Dojo cloud database for your private data.
+
+ The relay
+
+ robotdojo.ai provides an encrypted, zero-knowledge relay tunnel so you can reach your local instance from another computer or your phone without exposing localhost or running a VPN. Traffic through the relay is end-to-end encrypted; Robot Dojo cannot read data passing through it, and the relay never stores your private data. Remote access via the relay is a paid Black Belt feature.
+
+ What we collect
+
+ If you request access, we collect your email to respond. The public website may use basic analytics to understand site traffic. The installed local app does not send private telemetry to Robot Dojo.
+
+ Local login uses a token stored in macOS Keychain. Robot Dojo does not use email login codes for the local app.
+
+ Error reports and feedback
+
+ Bottom-right error reports are diagnostics. The app explains what is being sent, scrubs PII and secrets, and never sends raw local files, API keys, tokens, or private data dumps. Product feedback is a regular form. In chat, @miyagi is local product help; @feedback explicitly sends scrubbed feedback to the Robot Dojo task queue.
+
+ AI providers
+
+ Robot Dojo installs a local model baseline. If you add third-party model providers, the app may send the specific prompt context needed to answer your message to that provider. Provider keys are stored in Keychain and are never revealed back through the app.
+
+ Local ownership and deletion
+
+ Robot Dojo is local and folder-based. Delete the product folder to remove the app. Local data and Keychain credentials are separate; full wipe instructions list the data folder and Keychain items to remove. Robot Dojo has no server-side copy of your private data.
+
+ Google API Services
+
+ Robot Dojo's use and transfer of information received from Google APIs to any other app will adhere to Google API Services User Data Policy, including the Limited Use requirements.
+
+ Contact
+
+ miyagi@robotdojo.ai
+
+
+
+ &copy; 2026 Robot Dojo, LLC
+
+ Home
+ Licensing
+ Privacy
+ Terms
+
+---
+
+# Install script
+Path: apps/static/install.sh
+sha256: fdfcfd278727803e08eec0035a9399a80e178da173df3e3746d7e647c2371ec1
+
+#!/usr/bin/env bash
+# shellcheck shell=bash
+#
+# Robot Dojo — one-command installer
+#
+# curl -fsSL https://robotdojo.ai/install.sh | bash
+#
+# Clones the repo, installs dependencies, bootstraps config, runs migrations,
+# installs a service (launchd on macOS), and opens the local Account
+# Integrations page plus setup-aware chat in the default browser.
+#
+# Idempotent: safe to re-run (offers upgrade path on existing install).
+# Privacy-first: no telemetry, all logging is local.
+#
+# Environment overrides:
+# ROBOTDOJO_HOME — install dir (default: ~/robotdojo)
+# ROBOTDOJO_CONFIG — config dir (default: ~/.robotdojo)
+# ROBOTDOJO_REPO — git repo URL (default: https://github.com/RobotDojo-AI/black-belt.git)
+# ROBOTDOJO_BRANCH — branch (default: main)
+# ROBOTDOJO_NO_OPEN=1 — skip opening browser at the end
+# ROBOTDOJO_NO_OPEN_PERMISSIONS=1 — skip opening macOS Full Disk Access
+# ROBOTDOJO_NO_SERVICE=1 — skip installing the background service
+# ROBOTDOJO_DRY_RUN=1 — print every side-effect command instead of executing it
+# (test-only: stubs launchctl, security, mkcert, plist writes).
+# ROBOTDOJO_KEYCHAIN_PREFIX — prefix prepended to every robotdojo-* Keychain
+# service name (default: empty). Tests set
+# ROBOTDOJO_KEYCHAIN_PREFIX=test- so they never
+# touch the operator's real Keychain entries.
+#
+set -euo pipefail
+
+# --- Constants -----------------------------------------------------------
+
+ROBOTDOJO_HOME="${ROBOTDOJO_HOME:-$HOME/robotdojo}"
+ROBOTDOJO_CONFIG="${ROBOTDOJO_CONFIG:-$HOME/.robotdojo}"
+# WHY: public repo at the RobotDojo-AI org. Older personal repo paths are not
+# customer-installable and may 404 for strangers — st_42799dbe AC 1.
+ROBOTDOJO_REPO="${ROBOTDOJO_REPO:-https://github.com/RobotDojo-AI/black-belt.git}"
+ROBOTDOJO_BRANCH="${ROBOTDOJO_BRANCH:-main}"
+
+APP_PORT=4338
+SITE_PORT=4336
+PRODUCT_ORIGIN="${ROBOTDOJO_PRODUCT_ORIGIN:-https://robotdojo.ai}"
+MIN_NODE_MAJOR=20
+MIN_DISK_MB=8000
+LOCAL_EMBED_MODEL_ID="Snowflake/snowflake-arctic-embed-l-v2.0"
+
+# WHY com.robotdojo.server: every product LaunchAgent shares the
+# `com.robotdojo.*` namespace (st_bc949e7c). The actual install loop is
+# manifest-driven (config/launch-agents.json); this constant remains only
+# for the legacy uninstall path that targets the single pre-rename plist.
+LAUNCHD_LABEL="com.robotdojo.server"
+LAUNCHD_PLIST="$HOME/Library/LaunchAgents/${LAUNCHD_LABEL}.plist"
+LAUNCH_AGENTS_MANIFEST="$ROBOTDOJO_HOME/config/launch-agents.json"
+LAUNCH_AGENTS_TEMPLATE_DIR="$ROBOTDOJO_HOME/apps/static/launch-ag
+
+---
+
+### ask
+
+Robot Dojo public truth version 0847ccb5bff0faad. This projection is generated from canonical docs and registered public-safe source summaries. It is not a second product source of truth.
+
+## Common questions
+
+Q: What is Robot Dojo?
+A: Robot Dojo is a personal AI system that actually knows you. Chat with your email, calendar, contacts, and messages unified into one living memory; work in it with research, analyses, and apps on your own data; and build the bigger ideas you’ve always had. All local, on your Mac.
+Source: architecture/product.md
+
+Q: Who is Robot Dojo for?
+A: Founders, builders, and entrepreneurs tired of repeating themselves to AI. You already have the context (inbox, calendar, messages, notes), and Robot Dojo turns it into an assistant that remembers you across every session. The private beta is a small, smart cohort installing on a Mac and getting more out of AI than a stock foundation model, with no founder hand-holding.
+Source: architecture/product.md
+
+Q: Is this like Garry Tan's GBrain?
+A: Similar arc, different audience. GBrain (https://github.com/garrytan/gbrain) is a developer tool: a knowledge graph you or an agent fills by writing markdown pages. Robot Dojo is for non-technical people: more productized, less configuration. It extracts signal from data you already have (email, iMessage, calendar, transcripts, contacts), so you don't write pages; Robot Dojo reads what you already did.
+Source: architecture/product.md
+
+Q: What should I connect and import?
+A: Start with the accounts that already know you. Connect Google with one OAuth click for Gmail, Calendar, and Contacts. Grant Full Disk Access on your Mac and Robot Dojo reads your local Apple data: iMessage, Contacts, Calendar, Notes, Photos metadata, Call history, and Mail. Drop a Google Takeout archive or any foundation-model chat exports into your inbox folder for deeper history. The more real context Robot Dojo has, the faster it feels like it knows you.
+Source: architecture/product.md
+
+Q: Where does my data live?
+A: On your machine. Always. Robot Dojo runs locally and stores everything on your hardware; the robotdojo.ai servers never see your private data. When you want to reach your instance from another computer or your phone, robotdojo.ai provides an encrypted, zero-knowledge relay: end-to-end encrypted, no cloud storage, and Robot Dojo cannot read what passes through it. Remote access via the relay is a paid Black Belt feature.
+Source: architecture/product.md + architecture/architecture.md
+
+Q: Do I need a dedicated computer?
+A: No. Robot Dojo runs fine on the Mac you already own. 16GB of RAM is enough on any modern machine. A Mac mini is a better host if you want one, because it stays on whether your laptop is open or not, so the relay is always reachable from another computer or your phone. Move to a dedicated machine any time; nothing locks you in.
+Source: architecture/product.md
+
+Q: Is it open source?
+A: Yes. White Belt is MIT, fully open source, free to read, audit, fork, and run. Black Belt is source-available on a subscription: the code is still public so you can audit every line, and an active subscription unlocks the premium engines and the encrypted relay.
+Source: architecture/product.md + architecture/architecture.md
+
+Q: How do I install Robot Dojo?
+A: One command on your Mac: curl -fsSL https://robotdojo.ai/install.sh | bash. Or open the Install modal at the top of robotdojo.ai for the same command. Install takes 10–20 minutes; when the local server is ready, your browser opens to setup.
+Source: architecture/product.md + apps/static/install.sh
+
+Q: What is Black Belt?
+A: Black Belt knows your world. It includes White Belt plus entity extraction, enrichment, entity context files, people, places, companies, relationship context, entity-aware chat, premium apps, and premium tool runs. Every install includes Black Belt for 90 days. Then the key expires.
+Source: architecture/product.md
+
+Q: What happens when Black Belt expires?
+A: White Belt knows you locally: White Belt is the local foundation: chat with RAG, user files, chat history, topics, local memory, and user context. The code is public; you can audit, fork, and run it on your own hardware. White Belt does not include entity extraction, entity enrichment, inline entity recognition, build skills, premium apps, or premium agent/tool runs. Black Belt is the world model and creation layer. It includes White Belt plus entity extraction, enrichment, entity context files, people/places/companies, relationship context, entity-aware chat, coding-agent skills on topics, Health, premium apps, and premium agent/tool runs.
+Source: architecture/product.md
+
+Q: Which docs are canonical?
+A: Canonical docs are split by purpose: architecture/product.md says what Robot Dojo is, architecture/architecture.md says how the product is shaped, architecture/structure.md says where things belong, architecture/sitemap.md is generated file inventory, and architecture/ontology.md is generated directory ontology. Product truth changes start in architecture/product.md.
+Source: architecture/architecture.md + architecture/structure.md
+
+Q: Where do files belong in the repo?
+A: The root stays rare and canonical. Browser code belongs in apps/, reusable business logic in lib/, HTTP handlers in routes/ or api/, operational scripts in scripts/, tests in tests/, and planning artifacts in pipeline/. The generated ontology enforces those boundaries.
+Source: architecture/structure.md + architecture/ontology.md
+
+Q: Does Robot Dojo depend on the first user?
+A: The first user is a calibration seed, not a hard-coded product subject. Product code, skills, personas, pipeline instructions, and public docs refer to the current user, owner, or account through runtime variables and identity context. First-user-specific names, samples, memories, topics, entities, chats, credentials, and voice calibration must remain only in private seed data or explicitly labeled owner/developer files that never ship in customer builds. The same repo serves the founder as user one, then serves any future user without agents needing to remember which names were hard-coded by accident.
+Source: architecture/product.md
+
+Q: What can I ask on /faq?
+A: Use /faq for product, install, privacy, tier, architecture, repo-structure, and usage questions about Robot Dojo. It is public and bounded to the public Robot Dojo docs corpus.
+Source: architecture/product.md + architecture/architecture.md
+
+Q: What source files power this answer?
+A: The projection is generated from registered public-safe sources: architecture/product.md, architecture/architecture.md, architecture/structure.md, architecture/sitemap.md, architecture/ontology.md, ACCOUNT_RECOVERY.txt, README.md, apps/privacy.html, apps/static/install.sh.
+Source: config/public-truth-sources.json
+
+## Registered public sources
+
+# Product vision
+Path: architecture/product.md
+sha256: 0c39b54e138a3710861232e5503f979ae4a90b1433196096f8399044fa4a3c66
+
+## Promise
+
+You are working with an AI that knows your world. It connects to your accounts, learns from what you already have, and gives back answers, focus, and leverage — without surrendering your data to a stranger.
+
+Robot Dojo is local-first. Your raw data stays on your machine. The intelligence layer is yours; the running engine is what you pay for.
+
+Account recovery is local-first. If you lose the login token, open the Robot Dojo folder on the machine that runs the server and use `npm run token -- show` to reveal the current token or `npm run token -- rotate` to create a new one. Rotating a token signs out every browser session.
+
+## Who it's for
+
+The launch cohort is a small group of operators and builders — typically founders, investors, or technical leaders — who have enough context (CRM-style relationships, deep work archives, complex calendars, health data) that a generic chat surface flattens what they could actually do with it.
+
+The first wedge demo is reasoning over a real network: YC companies, top VCs, companies in your portfolio, friends, family, and the people and organizations you have already worked with. The product earns its place by making that context usable from the first session.
+
+The promise scales beyond that wedge — anyone whose life is messy enough that searching it themselves is harder than asking — but the launch cohort is the operator profile that proves it.
+
+## Tiers
+
+**White Belt — open source, MIT-licensed, free.**
+
+White Belt is the local foundation: chat with RAG, user files, chat history, topics, local memory, and user context. The code is public; you can audit, fork, and run it on your own hardware.
+
+White Belt does not include entity extraction, entity enrichment, inline entity recognition, build skills, premium apps, or premium agent/tool runs.
+
+**Black Belt — source-available under the Elastic License v2 (ELv2), runs on subscription.**
+
+Black Belt is the world model and creation layer. It includes White Belt plus entity extraction, enrichment, entity context files, people/places/companies, relationship context, entity-aware chat, coding-agent skills on topics, Health, premium apps, and premium agent/tool runs.
+
+The code is public so you can audit it. Running it requires an active subscription — the relay (remote access) is the hard server-side gate. On subscription lapse, engines pause and the data is preserved read-only; your raw files, local databases, chat history, topics, topic logs and outputs, user-created files/apps, account settings, and existing entity markdowns stay on your machine. Reactivation restores active use.
+
+At launch, every install gets Black Belt for 90 days. Then the key expires. Billing and checkout are not part of the beta surface.
+
+## What you can do
+
+**Chat.** Open a chat and ask anything about your world. The system loads your identity, the selected topic, relevant RAG, and matched entities. Public docs chat at `/ask` answers from generated public truth derived from canonical docs.
+
+The visual north star is a fast, polished, quiet chat interface in the spirit of Gemini: clean, focused, and calm.
+
+**Topics.** Chat is the standing conversation on a topic. The coding agent works the same topic with extra tools. `/topic` opens the topic's last state, log, and next step. Durable conclusions write back to that topic so the next session resumes. There is no separate workbench product.
+
+`/topic health` and `/topic coaching` replace the old `/health` and `/coach` skills. `/work {name}` still routes to `/topic`.
+
+**Build (agent OS).** A six-agent pipeline turns an idea into shipped code: Miyagi orchestrates; Tantei maps the codebase; Hakase researches outside the codebase; Ori designs schema and architecture; Katagami builds; Bunshin audits every stage. Stages are framing, research, scope, plan, build, qa, close — each one writes one artifact, seals it, and stops for explicit owner approval.
+
+Customer-facing build skills are not chat commands. Black Belt topic work in the coding agent uses build skills underneath. The agent OS is shipped portable — skills, personas, and pipeline stages are protocols, not a dependency on one IDE or one coding assistant.
+
+**Apps on the substrate.** Health is the first first-party premium app built on top of the substrate. Future apps reuse the same local data, topic context, RAG, timeline, and chat infrastructure only after they are promoted into the app registry. The app layer specializes; it does not fork the intelligence system.
+
+## Launch scope
+
+People want a chat that knows them. Launch is that, in two places: web chat (memory; topics are the standing conversations) and the coding agent (the same memory, plus shipped skills, the agent's tools, and small scripts as they go).
+
+Nothing else launches. Health, Fitness, Network, and Podcast stay on this machine. Account Integrations is Chat setup so the memory is real.
+
+Work here in `RobotDojo-AI/dev`. Public install clones `RobotDojo-AI/black-belt`, a published subset of a named commit. Tests and founder app UIs do not ship. Do not keep a second working copy. Founder waffle appears because those app folders exist here.
+
+Install on macOS Apple Silicon (16GB RAM minimum). Connect and import fill topics, entities, timeline, and logs. Chat and the coding agent read that same memory. Chat opens without a foundation-model key. Background jobs sync without choking the machine. Data stays local. White Belt and Black Belt promises stay explicit.
+
+## First user to product
+
+The first user is a calibration seed, not a hard-coded product subject.
+
+Product code, skills, personas, pipeline instructions, and public docs refer to the current user, owner, or account through runtime variables and identity context. First-user-specific names, samples, memories, topics, entities, chats, credentials, and voice calibration must remain only in private seed data or explicitly labeled owner/developer files that never ship in customer builds.
+
+The same repo serves the founder as user one, then serves any future user without agents needing to remember which names were hard-coded by accident.
+
+## Non-negotiables
+
+- Local-first data ownership.
+- No user data on Robot Dojo servers.
+- Mac-only until further notice.
+- Apple Silicon and 16GB RAM minimum; 32GB recommended for heavier Black Belt work.
+- No CPU-choking background work.
+- Fast chat.
+- Clear White and Black tier behavior.
+- Product intelligence is shipped; founder identity data is not.
+- No random agent-built product surfaces.
+- No hidden dependence on one coding assistant.
+- No hard-coded first-user identity in product behavior.
+- Canonical docs stay short and useful.
+- Generated docs summarize the codebase; curated docs guide future code.
+
+---
+
+# Architecture
+Path: architecture/architecture.md
+sha256: 557471bb41559718c6226a39e0f1384d6b08732da231795cd4c4985f89b33b13
+
+## System shape
+
+Robot Dojo is a single local server (a Hono process on the user's Mac) plus a relay for optional remote access. There is no cloud business logic. The user's data lives in `~/robotdojo/user/`, the product code lives in `~/robotdojo/{lib,routes,apps,scripts,agents}/`, and the public surface lives at `~/robotdojo/api/` (Vercel edge functions) and `~/robotdojo/apps/` (browser HTML).
+
+The product layers:
+
+1. **Install and access.** macOS-only on Apple Silicon. The app runs on the user's Mac and is reachable locally. A relay at `robotdojo.ai` is optional remote access — not cloud hosting, not a VPN, not required for local use.
+2. **Account connections and imports.** The user connects email, calendar, SMS/iMessage, chat exports, files, and health or domain data where available, plus foundation model session exports.
+3. **Local data plane.** Raw personal data stays local. User data is never stored on Robot Dojo's servers as part of the core product. Product intelligence and user identity are separate.
+4. **RAG and timeline.** Useful source material is embedded, scored, filtered, and tagged. Low-quality or stale material is suppressed. Background indexing throttles itself.
+5. **User and topic context.** A user-editable `user/workbenches/user/wk_user/` vessel (chat-injected distillation + deep companion) plus topic and entity context files synthesized over time.
+6. **Black Belt world model.** Entity extraction, enrichment, context files, and world-aware chat. People, places, and companies become first-class surfaces.
+7. **Chat runtime.** Chat loads user context, selected topic context, relevant RAG, and any matched entity context. Topic selection uses a registry lookup, not an LLM on the critical path.
+8. **Apps on the substrate.** Health is the first first-party premium app. Future apps ship through the app registry/package contract.
+9. **Build system.** Skills and pipeline stages are reusable build protocols. Customer-facing build skills are not chat commands.
+10. **Backup boundary.** Product code in source control; private local state in GCP-backed backup; no hidden third place.
+
+Internally, chat is the hero. The framing is that everything else feeds the chat experience or is consumed by it. The visual north star is fast, polished, and quiet.
+
+## Data flow
+
+Robot Dojo improves by repeatedly distilling source material into cleaner context:
+
+1. Ingest raw records.
+2. Normalize and deduplicate.
+3. Score and filter.
+4. Tag by topic.
+5. Update timeline and user-level context.
+6. In Black Belt, extract and enrich entities.
+7. Generate or refresh context docs.
+8. Use those docs in chat.
+9. Let the user's corrections feed the next pass.
+
+This is the same pattern behind health and coaching. Chat grows the corpus laterally. Focused topic sessions in the coding agent grow it vertically by adding framing, decisions, and reusable mental models.
+
+The architectural promise:
+
+- It keeps syncing from the user's connected accounts.
+- It filters weak source material instead of hoarding noise.
+- It weights recent knowledge because people change.
+- It improves topic context while the user chats and while the user is away.
+- It recognizes entities and context as the user chats.
+- It lets the user correct identity, agents, topics, and important context directly.
+
+## Agent OS
+
+The build pipeline is a six-agent system, isolated context windows, persona-bound briefs.
+
+- **Miyagi (宮城)** — orchestrator + thinking partner. Always running. Routes work, enforces gates via story-gate.js, talks to the owner.
+- **Tantei (探偵)** — codebase mapper. Spawned when a story touches code that needs a map.
+- **Hakase (博士)** — external researcher. Spawned when a story needs knowledge outside the codebase.
+- **Ori (織)** — schema + design architect. Spawned when a story is multi-phase or needs schema/API design.
+- **Katagami (型紙)** — builder. Spawned after the plan is sealed.
+- **Bunshin (分身)** — mandatory stage QC auditor. Runs before research, scope, plan, build, and QA artifacts are presented. Close uses Bunshin only when it introduces new judgment, waiver, failed-QA handling, rollback guidance, or product/architecture claims.
+
+The pipeline stages are fixed: framing → research → scope → plan → build → qa → close. Every stage writes one artifact under `user/workbenches/topics/work/robot-dojo/wk_robot_dojo/stories/{id}/`, seals it, and stops for explicit owner approval. The single hop after a seal is the only implicit-approval exception; everything else is owner-driven.
+
+The skill set is portable. Skills, personas, and pipeline stages are protocols. They are designed to be carried across IDEs (Claude Code, Codex, Cursor) — the canonical sources live in `agents/personas/*.md` and `agents/skills/*/SKILL.md`, and tool-specific adapters in `agents/dist/` are disposable generated outputs.
+
+Topic-bound exploratory work runs through the universal `/topic {name}` opener — one OPEN/CLOSE ritual for every topic or entity. Bespoke `/coach` and `/health` are deprecated stubs that redirect to `/topic coaching` and `/topic health`. `/work {name}` is the same command.
+
+The system is built to be portable across future AI stacks. The owner-facing decision points (each stage seal, each Bunshin verdict, each implicit-approval boundary) are protocol-level, not Claude-specific.
+
+## Tier enforcement
+
+White Belt is MIT-licensed open source. The code is public; anyone can audit, fork, and run it.
+
+Black Belt is source-available under the Elastic License v2 (ELv2). The code is public so users can audit what they run. Running Black Belt requires an active subscription — the relay (remote access) is the hard server-side gate, not a client-side check. Subscription state lives server-side and is not crackable from the client.
+
+If Black Belt expires:
+
+- Engines pause: entity extraction and enrichment jobs, entity-aware chat injection, coding-agent skills on topics, Health and premium app execution, premium agent/tool runs.
+- Data is preserved read-only: raw files, local databases, chat history, topics, topic logs and outputs, user-created files/apps, account settings, and existing entity markdowns stay on the machine.
+- Reactivation restores active use.
+
+User raw data is never encrypted by Robot Dojo. It stays the user's, in plain SQLite under `~/robotdojo/user/databases/` (default) with optional encryption gates documented in build conventions.
+
+The tier boundary is enforced through the relay and through clearly-labeled engine gates inside the codebase. There is no AES-256 runtime artifact, no inert-bytes scheme, no key-management layer on the user's machine — the gate is server-side because that is what is actually unforgeable.
+
+## Core invariants
+
+- Local-first is a product promise, not an implementation detail.
+- Robot Dojo servers do not store user private data.
+- Raw user data is preserved unless the user explicitly deletes it.
+- Derived intelligence must be regenerable from raw data and history.
+- The first user is seed data, not a hard-coded product assumption.
+- Customer mode is the release default. Owner/dev mode can expose internal fixtures and tooling, but customer mode cannot.
+- Background work must be load-aware and must not make the user's machine feel slow.
+- No agent should write directly to the database through ad hoc scripts during normal product operation.
+- Server-side write paths should use a single-writer event protocol.
+- Canonical docs guide future work; generated inventory docs summarize the codebase.
+- Human-readable docs distill signal over time instead of accumulating every historical explanation.
+
+---
+
+# Repository structure
+Path: architecture/structure.md
+sha256: 898ad7b3c388173fa7ea2639e65165a298a8f0508d9453d3d3843870bc49395c
+
+## Root files
+
+Root files must be rare.
+
+| File | Purpose |
+| --- | --- |
+| `ACCOUNT_RECOVERY.txt` | Local operator account recovery instructions |
+| `README.md` | Public repository overview |
+| `CLAUDE.md` | Claude Code adapter only |
+| `.gitignore` | Repo-wide ignore policy |
+| `.vercelignore` | Vercel deploy exclusion policy |
+| `identity.example.json` | Example local identity config |
+| `index.js` | Local server entry point |
+| `middleware.js` | Vercel edge middleware |
+| `install.sh` | Terminal install path |
+| `knip.json` | Dead-code/dependency analysis config |
+| `package.json` | Node project manifest |
+| `package-lock.json` | npm lockfile |
+| `playwright.config.js` | Playwright test config |
+| `skills-lock.json` | Installed skill/plugin lockfile |
+| `stryker.config.mjs` | Mutation testing config |
+| `vercel.json` | Vercel deployment config |
+| `LICENSE` | License |
+
+`ACCOUNT_RECOVERY.txt` stays at root because emergency recovery must be discoverable when the operator is locked out or disoriented. It is not part of the architecture doc set.
+
+Do not add new root docs. Cross-cutting product and repo docs belong in `architecture/`.
+
+## Top-level directories
+
+| Directory | Belongs Here | Does Not Belong Here |
+| --- | --- | --- |
+| `.github/` | CODEOWNERS and CI workflows that enforce owner review for architecture lock changes | Product source, local state, secrets |
+| `api/` | Public Vercel functions | Business logic |
+| `apps/` | Browser HTML, JS, CSS, assets | Backend logic |
+| `agents/` | Canonical Robot Dojo Agent OS: roster, personas, build skills, generated adapters | User profile, private memory, runtime data |
+| `code/` | External repos, gitignored and GCP-backed | Committed product source |
+| `config/` | User-created config, root lock, and registry config | Secrets or raw data |
+| `docs/` | Robot Dojo/product/operator documentation written for humans | Product truth, planning artifacts, raw user-added files, derived workbench analysis |
+| `gateway/` | Sole canonical gateway folder: Hono control plane, Redis integration, Terraform deploy source, deploy scripts, device registration, tunnel routes, and blind TCP/SNI relay code | App business logic, filled Terraform vars/state/plans |
+| `lib/` | Core reusable business logic | Route handlers, frontend, one-off scripts |
+| `quarantine/` | Temporary holding zone for misplaced files, gitignored | Permanent storage |
+| `routes/` | Hono route handlers | Reusable business logic |
+| `scripts/` | Operational, QA, migration, and generator scripts | Library modules |
+| `tests/` | Automated tests and fixtures | Product source |
+| `user/` | Private per-user substrate, gitignored and GCP-backed: profile, inbox, imports, files, contexts, workbenches, transcripts, memory, databases, logs, media, models | Canonical Agent OS, product source, public docs |
+
+Recoverability rule: every file must be in exactly one recoverability class — GitHub-tracked source, GCP-backed private/local state, or explicitly regenerable tool output. `scripts/check-backup-recoverability.js` enforces this for ignored files so GitHub and GCP stay MECE instead of relying on memory.
+
+## Doc-class homes
+
+Canonical docs distill signal. Each doc class has exactly one home. Generated docs follow code and config; curated docs guide future code.
+
+| Doc class | Home | Notes |
+| --- | --- | --- |
+| Product truth | `architecture/product.md` | Customer promise, launch scope, tier model |
+| System shape | `architecture/architecture.md` | Human-readable architecture; internal "chat is the hero" framing |
+| Placement rules | `config/root-allowlist.lock.json` → `architecture/structure.md` | This file derives from the lock |
+| File inventory | `architecture/sitemap.md` | Generated by `scripts/generate-sitemap.js` |
+| Directory ontology | `architecture/ontology.md` | Generated by `scripts/generate-ontology.js` from the lock |
+| Agent OS roster + routing | `agents/agents.md` | Per-agent bodies in `agents/personas/{Name}.md` |
+| Build conventions | `agents/build-conventions.md` | Portable cross-tool engineering rules |
+| Quality contract | `agents/default-quality.md` | Embedded by include marker into every persona and skill |
+| Skills (build + tool) | `agents/skills/*/SKILL.md` | Each skill carries its own contract + steps |
+| Current work state | `user/workbenches/topics/work/robot-dojo/wk_robot_dojo/kanban.md` | Not auto-loaded globally |
+| Owner user context (chat) | `user/workbenches/user/wk_user/context.md` | Chat-injected distillation, ≤ `USER_CARD_CHAR_BUDGET` |
+| Owner user context (IDE deep) | `user/workbenches/user/wk_user/USER.md` | Long-form deep companion |
+| Owner writing (voice + structure + formatting) | `user/workbenches/user/wk_user/user-voice/` (`voice.md`, `structure/`, `formatting/`, `samples/`, `check.md`, auto `learned.md`) | How the owner writes to the world (PII) — gitignored, never shipped. Compounds from writing samples and sent mail. Operator chat is not a source. |
+| Miyagi writing (voice + structure + formatting) | `config/agent-voice/` (`voice.md`, `structure/`, `formatting/`) | How Miyagi talks to the owner — PII-free, included by every persona. Chat logs and working-together feedback train this path via standing corrections. |
+| Topic context (canonical) | `user/contexts/topics/{t1}/[{t2}/]context.md` | Compact memory for chat |
+| Entity context (canonical) | `user/contexts/{people,companies,places}/{display-slug}--{stable-id-suffix}/context.md` | Display-slug name; stable entity id in frontmatter and DB |
+| Workbench resume + substrate | `user/workbenches/{topics|entities}/.../{workbench_id}/INDEX.md` + `substrate/` | Deep work; promotes durable truth into the attached `context.md` |
+| Pipeline story artifacts | `user/workbenches/topics/work/robot-dojo/wk_robot_dojo/stories/{id}/` | Per `STORY_SCHEMA.json` |
+
+**Package rule.** Canonical topic and entity memory lives inside a package directory as `context.md`. Topic package names use topic slugs. Entity package names use a human-readable display slug plus a stable ID suffix: `{display-slug}--{stable-id-suffix}`. The package directory is also the owner for workbenches and other first-class context-local support files attached to that owner.
+
+**Context-doc ontology.** Every `context.md` (user, topic, or entity) is loaded directly into chat — it is the compact canonical memory layer, not deep substrate. Section schema: a `# Topic|Entity: {slug}` heading, a short "what this covers" paragraph, optional boot-up reading list, then current state. Injection contract: `wk_user/context.md` is injected by `lib/identity-card.js` (budget `USER_CARD_CHAR_BUDGET = 4000`); topic and entity `context.md` files are loaded by the topic/entity resolver. Compact ≠ thin: every line earns its place because it ships in every chat turn for that selection.
+
+**Workbench placement.** Deep topic/entity work belongs in a registered workbench under `user/workbenches/`, not hidden inside a pipeline story or nested inside compact context packages. The canonical resume index lives at `user/workbenches/topics/{t1}/{t2}/{workbench_id}/INDEX.md` or `user/workbenches/entities/{people|companies|places}/{entity-package}/{workbench_id}/INDEX.md`. Pipeline artifacts are not deleted, but pipeline remains process history rather than the workbench home.
+
+Placement rule: if it is evidence, cite it. If it is thinking, move it. If it is truth, promote it. Raw evidence can remain in `user/transcripts/`, `user/databases/`, `user/files/`, or another approved user source root; `docs/` is evidence only when the documentation itself is the source. Derived research, analysis, dashboards, normalized datasets, decisions, todos, and next-action state belong in the attached workbench. Long-form workbench synthesis may be as deep as the work requires; durable compressed conclusions promote into the attached topic/entity `context.md`.
+
+Every workbench `INDEX.md` includes a distillation contract. The contract names the purpose, canonical target, compact-context rule, long-synthesis home, RAG substrate, and review threshold. Agents must state or refresh that contract before major research or build work so the user can correct the promotion boundary before work accumulates.
+
+Every T1 and T2 topic has a natural default workbench landing zone. Creating a topic creates that default workbench unless one already exists. Entity workbenches are created on demand when a person, company, or place becomes the owner of deep work. Topic rename, delete, or merge operations must consolidate attached workbenches by rehoming their `INDEX.md` and substrate under the surviving topic/entity and repointing canonical promotion targets.
+
+`user/contexts/research/` is retired. It is not an approved destination for new or canonical workbench substrate; if it reappears, the contents must be moved into `user/workbenches/` or cited from an approved source root.
+
+Every workbench attaches to one or more canonical targets:
+
+- topic: T1 or T2 topic slug
+- person: canonical person ID
+- company: canonical company ID
+- place: canonical place ID
+
+`thing` and health-condition entities are not workbench attachment types. Health investigations attach to the existing personal health topic. Durable findings promote back into the attached topic/entity context and RAG; the workbench keeps the in-flight layer resumable.
+
+## Enforcing gates
+
+Pre-commit gates fire on every commit. Each one targets a specific class of failure.
+
+| Gate | Script | Failure it blocks |
+| --- | --- | --- |
+| Root allowlist | `scripts/check-root-lock.js` | New top-level entries not approved in `config/root-allowlist.lock.json` |
+| Registry schema | `scripts/check-registry-schema.js` | Malformed entries in `architecture/surfaces.json` |
+| Canonical mode | `scripts/check-canonical-mode.js` | Re-introduction of autonomous doc-writer pattern |
+| Doc budget | `scripts/check-doc-budget.js` | Any registered surface over its `max_chars` cap |
+| Human-authored class | `scripts/gate-human-authored.js` | Staged edits to a human-authored canonical surface without a story declaring it in `meta.json.touches` |
+| Canonical readers | `scripts/check-canonical-readers.js` | Skill or persona missing `canonical_reads` frontmatter or a sitemap+ontology read in its first step |
+| Persona ontology | `scripts/check-persona-ontology.js` | Persona missing required frontmatter, wrong section order, stale include hash, or 7th unsanctioned persona file |
+| Skill ontology | `scripts/check-skill-ontology.js` | Skill missing `name`/`description`/`type`, missing `## Contract`/`## Steps`, stale include hash |
+| Agent-voice ontology | `scripts/check-fragment-ontology.js` | `config/agent-voice/` missing its base/channel purpose headers, or owner voice (PII) surfacing under shipped config |
+| Architecture doc schema | `scripts/check-arch-doc-schema.js` | `product.md`/`architecture.md`/`structure.md` missing required `##` sections |
+| Structure check | `scripts/check-structure.js` + `scripts/smart-quarantine.js` | Files outside their declared home — routes them to `quarantine/` |
+| Identity chain (unified) | `scripts/check-agent-os.js` | Any dangling/wrong-target/orphan/stray adapter across Claude skills+agents, Codex, Cursor; `agents/dist/` stale vs sources; missing DO-NOT-EDIT headers. `check-identity-dist-fresh.js` and `check-skill-adapters.js` are thin back-compat stubs that delegate here. |
+
+## Change rules
+
+- If product truth changes, update `architecture/product.md` first.
+- If architecture changes, update `architecture/architecture.md` and tests or code together.
+- If file placement changes, update `config/root-allowlist.lock.json`, `architecture/structure.md`, and the enforcing tests/scripts together, with exact owner-approved touches.
+- If files move, regenerate `architecture/sitemap.md` and `architecture/ontology.md`.
+- If a doc starts accumulating history instead of decisions, distill it back down.
+
+---
+
+# Generated sitemap
+Path: architecture/sitemap.md
+sha256: f306a251594cfc79a588aae787c6627ec17ee9f644cbc7e01e873a8fe7d27ba1
+
+## Entry Points
+`index.js` — Robot Dojo — entr…
+`middleware.js` — Vercel Edge Middl…
+
+## Routes
+`routes/account-prefs.js` — /api/account/* — …
+`routes/accounts.js` — Accounts & Identi…
+`routes/admin.js` — Admin routes — re…
+`routes/api.js` — REST API — timeli…
+`routes/apps.js`
+`routes/auth.js` — Authentication ro…
+`routes/billing-bb.js` — Black Belt sessio…
+`routes/billing-history.js` — Unified billing h…
+`routes/billing-stripe.js` — Stripe billing ro…
+`routes/billing-usdc.js` — USDC billing rout…
+`routes/billing.js` — Billing surface r…
+`routes/books.js` — …
+`routes/chat.js` — Chat streaming en…
+`routes/compiled.js` — Compiled views — …
+`routes/content.js` — routes/content.js…
+`routes/files.js` — Drop-folder files…
+`routes/health-coach.js` — Health daily coac…
+`routes/health.js` — Health API — mark…
+`routes/identity.js` — /api/identity/* —…
+`routes/integrations.js` — Integration healt…
+`routes/network.js` — Network API — peo…
+`routes/notifications.js` — Notifications rou…
+`routes/oauth-microsoft.js` — Microsoft OAuth r…
+`routes/oauth.js` — Google OAuth rout…
+`routes/people.js` — routes/people.js …
+`routes/podcast.js`
+`routes/public-chat.js` — Public chat — loc…
+`routes/secure-input.js` — secure-input rout…
+`routes/session-log.js` — /api/session-log …
+`routes/setup-steps.js` — /api/setup-steps …
+`routes/setup.js` — Local setup API f…
+`routes/auth/` — 1 files
+`routes/setup/` — Setup progress AP…
+
+## Lib Modules
+`lib/about.js`
+`lib/account-deletion.js`
+`lib/account-personas.js`
+`lib/account-prefs-queries.js`
+`lib/account-prefs.js`
+`lib/account-topic.js`
+`lib/accounts-open-app.js`
+`lib/accounts-open-target.js`
+`lib/accounts-queries.js`
+`lib/active-builds.js`
+`lib/address-extract.js`
+`lib/address-normalize.js`
+`lib/address-patterns.js`
+`lib/admin-queries.js`
+`lib/agent-personas.js`
+`lib/agent-wrap.js`
+`lib/agents-md-queries.js`
+`lib/anthropic-client.js`
+`lib/api-key-class.js`
+`lib/api-key-probe.js`
+`lib/api-queries.js`
+`lib/app-events.js`
+`lib/app-memory-context.js`
+`lib/app-registry.js`
+`lib/app-substrate.js`
+`lib/apple-calendar-reader.js`
+`lib/apple-calls-reader.js`
+`lib/apple-mail-reader.js`
+`lib/apple-notes-reader.js`
+`lib/apple-photos-sync.js`
+`lib/apple-store-paths.js`
+`lib/asana-context-sync.js`
+`lib/asana-my-tasks.js`
+`lib/asana-routing-config.js`
+`lib/asana.js`
+`lib/attribute-deterministic.js`
+`lib/attribute-residual.js`
+`lib/auth-queries.js`
+`lib/auth.js`
+`lib/backup-buckets.js`
+`lib/backup-coverage.js`
+`lib/backup-evidence.js`
+`lib/backup-guardian.js`
+`lib/backup-options.js`
+`lib/backup-worktree.js`
+`lib/bb-session.js`
+`lib/billing-bb-queries.js`
+`lib/billing-history-queries.js`
+`lib/billing-queries.js`
+`lib/billing-stripe-queries.js`
+`lib/book-cover.js`
+`lib/book-engine.js`
+`lib/book-host.js`
+`lib/book-interior.js`
+`lib/book-pdf.js`
+`lib/book-print-job.js`
+`lib/book-volumes.js`
+`lib/brand-persona.js`
+`lib/brave-search.js`
+`lib/broker-lots.js`
+`lib/calendar-extractor.js`
+`lib/calendar-sync.js`
+`lib/call-routing.js`
+`lib/canonical-budget.js`
+`lib/canonical-name.js`
+`lib/canonical-write.js`
+`lib/chat-context.js`
+`lib/chat-entity-linking.js`
+`lib/chat-memory-backfill.js`
+`lib/chat-models.js`
+`lib/chat-tools.js`
+`lib/chat-transcript-import.js`
+`lib/chat-ttft-estimator.js`
+`lib/chat.js`
+`lib/chunk-worker.js`
+`lib/claude-code-jsonl.js`
+`lib/claude-code-reconcile.js`
+`lib/coding-topic-idle.js`
+`lib/company-name-normalize.js`
+`lib/compiled-queries.js`
+`lib/compute-tier.js`
+`lib/config.js`
+`lib/connectivity-reconciler.js`
+`lib/contacts-extractor.js`
+`lib/content-queries.js`
+`lib/context-paths.js`
+`lib/context-router.js`
+`lib/conversation-visibility.js`
+`lib/conversations.js`
+`lib/corpus-scan.js`
+`lib/credential-scan.js`
+`lib/criteria-lint.js`
+`lib/criteria-parser.js`
+`lib/data-arrival-pipelines.js`
+`lib/data-plane-proof.js`
+`lib/db-encryption.js`
+`lib/db-health.js`
+`lib/db-writer-policy.js`
+`lib/db.js`
+`lib/demo-shell-guard.js`
+`lib/device-name.js`
+`lib/device-rename.js`
+`lib/doc-classify.js`
+`lib/doc-extract.js`
+`lib/document-vault.js`
+`lib/drive-sync.js`
+`lib/ego-render.js`
+`lib/eight-sleep-sync.js`
+`lib/email-adjudication.js`
+`lib/email.js`
+`lib/embed-pause-hold.js`
+`lib/embed-proof-freeze.js`
+`lib/entity-card.js`
+`lib/entity-claims.js`
+`lib/entity-company-evidence.js`
+`lib/entity-enrich-policy.js`
+`lib/entity-enrich.js`
+`lib/entity-evidence.js`
+`lib/entity-facts.js`
+`lib/entity-floor.js`
+`lib/entity-matcher.js`
+`lib/entity-nodes.js`
+`lib/entity-relationships.js`
+`lib/entity-resolve.js`
+`lib/entity-source-evidence.js`
+`lib/entity-standalone.js`
+`lib/entity-timeline.js`
+`lib/entity-unmerge.js`
+`lib/family-from-content.js`
+`lib/family-inference.js`
+`lib/family-nicknames.js`
+`lib/finance-weekly-review.js`
+`lib/followup-entities.js`
+`lib/followup-sweep.js`
+`lib/gateway-tls.js`
+`lib/generate-user-md.js`
+`lib/gmail-sync.js`
+`lib/google-contacts-sync.js`
+`lib/google-docs.js`
+`lib/google-oauth.js`
+`lib/google-photos-sync.js`
+`lib/google-scopes.js`
+`lib/google-sheets.js`
+`lib/google-slides.js`
+`lib/granola-call-asana.js`
+`lib/granola-client.js`
+`lib/granola-sync.js`
+`lib/graph-calendar-sync.js`
+`lib/gsc-heal.js`
+`lib/handle-rename.js`
+`lib/health-apple-canonical.js`
+`lib/health-apple-daily-json.js`
+`lib/health-coach-schema.js`
+`lib/health-coach.js`
+`lib/health-data-point-source.js`
+`lib/health-fhir-import.js`
+`lib/health-history.js`
+`lib/health-ingestion.js`
+`lib/health-intel-regeneration.js`
+`lib/health-intel.js`
+`lib/health-marker-copy.js`
+`lib/health-marker-metadata.js`
+`lib/health-marker-payload-cache.js`
+`lib/health-medications.js`
+`lib/health-pdf-ocr.js`
+`lib/health-queries.js`
+`lib/health-query.js`
+`lib/health-recovery-status.js`
+`lib/health-timeline.js`
+`lib/identity-card.js`
+`lib/identity-distill.js`
+`lib/identity-dump.js`
+`lib/identity-export.js`
+`lib/identity-log.js`
+`lib/identity-matching.js`
+`lib/identity-queries.js`
+`lib/identity.js`
+`lib/idle-gate.js`
+`lib/imessage.js`
+`lib/imports-envelope.js`
+`lib/imports-snapshot.js`
+`lib/ingest-orchestrator.js`
+`lib/integration-health.js`
+`lib/integration-reconciler.js`
+`lib/integration-registry.js`
+`lib/integration-status.js`
+`lib/integrations-queries.js`
+`lib/invite-targets-queries.js`
+`lib/ip.js`
+`lib/junk-classifier.js`
+`lib/key-issuance.js`
+`lib/key-store.js`
+`lib/keychain.js`
+`lib/launch-integrations.js`
+`lib/legacy-provider-rename.js`
+`lib/link-corpus.js`
+`lib/linkedin-scraper.js`
+`lib/llm-batch.js`
+`lib/llm-gateway.js`
+`lib/llm-provider-pref.js`
+`lib/lulu-client.js`
+`lib/macos-permissions.js`
+`lib/magic-link.js`
+`lib/maintenance-routines.js`
+`lib/maintenance.js`
+`lib/markdown-documents.js`
+`lib/memory-context.js`
+`lib/memory-events.js`
+`lib/memory-ingest.js`
+`lib/memory-prompt.js`
+`lib/memory-recalc.js`
+`lib/memory-recall-eval.js`
+`lib/memory-scope-routing.js`
+`lib/memory-verify-phase.js`
+`lib/memory.js`
+`lib/merge-verify.js`
+`lib/microsoft-oauth.js`
+`lib/middleware-auth.js`
+`lib/mint-tunnel-token.js`
+`lib/model-allowlists.js`
+`lib/model-key-cadence.js`
+`lib/model-lane.js`
+`lib/models-picker.js`
+`lib/module-loader.js`
+`lib/monarch-auth.js`
+`lib/monarch-client.js`
+`lib/monarch-compact.js`
+`lib/monarch-history.js`
+`lib/monarch-month-book.js`
+`lib/monarch-month-views.js`
+`lib/monarch-prices.js`
+`lib/monarch-schedule.js`
+`lib/monarch-store.js`
+`lib/monarch-sync.js`
+`lib/network-classify.js`
+`lib/network-queries.js`
+`lib/nickname-resolver.js`
+`lib/notifications-queries.js`
+`lib/notion-blocks.js`
+`lib/notion-sync.js`
+`lib/oauth-queries.js`
+`lib/oauth-state.js`
+`lib/oauth-sync-queue.js`
+`lib/ollama-lifecycle.js`
+`lib/onboarding-eta.js`
+`lib/onepassword-cli.js`
+`lib/oura-sync.js`
+`lib/outlook-sync.js`
+`lib/owner-corpus-sources.js`
+`lib/owner-corpus.js`
+`lib/passive-deadline.js`
+`lib/passive-jobs.js`
+`lib/passive-maintenance-handlers.js`
+`lib/passive-reconciler.js`
+`lib/passive-retention.js`
+`lib/passive-supervisor.js`
+`lib/passive-sync-orchestrator.js`
+`lib/people-merge.js`
+`lib/people-seed.js`
+`lib/people-write.js`
+`lib/permission-watcher.js`
+`lib/person-professional.js`
+`lib/person-resolver.js`
+`lib/persona-sync.js`
+`lib/pipeline-attachments.js`
+`lib/place-taxonomy.js`
+`lib/podcast-jobs.js`
+`lib/podcast-library.js`
+`lib/podcast-listening.js`
+`lib/podcast-progress.js`
+`lib/podcast-script.js`
+`lib/podcast-series.js`
+`lib/podcast-tts.js`
+`lib/podcast.js`
+`lib/portfolio-view.js`
+`lib/pricing.js`
+`lib/private-data-roots.js`
+`lib/product-guide.js`
+`lib/profile-research.js`
+`lib/protected-repos.js`
+`lib/provenance.js`
+`lib/provider-health.js`
+`lib/publication-manifest.js`
+`lib/publication-posture.js`
+`lib/publication-step.js`
+`lib/publication-sweep.js`
+`lib/rag-search.js`
+`lib/rag.js`
+`lib/raw-llm-client.js`
+`lib/raw-websocket.js`
+`lib/receipt-classify.js`
+`lib/receipt-extract.js`
+`lib/referral.js`
+`lib/relation-mine.js`
+`lib/relation-questions.js`
+`lib/relation-resolve.js`
+`lib/relation-store.js`
+`lib/relation-vocabulary.js`
+`lib/relation-walk.js`
+`lib/relationship-builder.js`
+`lib/relay-client.js`
+`lib/request-observer.js`
+`lib/research-store.js`
+`lib/reserved-slugs.js`
+`lib/review-digest.js`
+`lib/robotdojo-paths.js`
+`lib/scoring.js`
+`lib/secure-input.js`
+`lib/server.js`
+`lib/session-log-queue.js`
+`lib/session-log.js`
+`lib/session-open-pack.js`
+`lib/session-registry.js`
+`lib/session.js`
+`lib/setup-local-help.js`
+`lib/setup-queries.js`
+`lib/setup-readiness.js`
+`lib/setup-steps.js`
+`lib/snapshots.js`
+`lib/source-topic-migrate.js`
+`lib/speech-fingerprint.js`
+`lib/spend-guard.js`
+`lib/split-vector-store.js`
+`lib/sse.js`
+`lib/stage-events.js`
+`lib/standing-corrections.js`
+`lib/stripe.js`
+`lib/subscriptions.js`
+`lib/supervisor-status.js`
+`lib/taxonomy-default.js`
+`lib/taxonomy.js`
+`lib/timeline-compile.js`
+`lib/timeline-recalc.js`
+`lib/timeline-schema.js`
+`lib/timeline.js`
+`lib/topic-at-define.js`
+`lib/topic-context-apply.js`
+`lib/topic-context.js`
+`lib/topic-distill.js`
+`lib/topic-lifecycle.js`
+`lib/topic-live-thread.js`
+`lib/topic-routing-policy.js`
+`lib/topic-session.js`
+`lib/topic-source-routing.js`
+`lib/topic-workbench-seed.js`
+`lib/topics.js`
+`lib/transcript-attribution.js`
+`lib/transcript-roster.js`
+`lib/transcript-segments.js`
+`lib/transcripts.js`
+`lib/tunnel-agent.js`
+`lib/tunnel-client.js`
+`lib/upload-store.js`
+`lib/usdc-watcher.js`
+`lib/user-identity.js`
+`lib/user-timeline-facts.js`
+`lib/utils.js`
+`lib/viewer-corrections.js`
+`lib/viewer-projection.js`
+`lib/viewer-topic-lens.js`
+`lib/voice-ingest.js`
+`lib/voices.js`
+`lib/warmup.js`
+`lib/wb-resolve-person.js`
+`lib/work-item-title.js`
+`lib/workbench-distill.js`
+`lib/workbench-files.js`
+`lib/workbench-library.js`
+`lib/workbench-log-reason.js`
+`lib/workbench-log-seed.js`
+`lib/workbench-log.js`
+`lib/workbench-open.js`
+`lib/workbench-promote-entities.js`
+`lib/workbench-rag.js`
+`lib/workbench-synthesis.js`
+`lib/workbenches.js`
+`lib/writing-classify.js`
+`lib/writing-freeze.js`
+`lib/writing-learn.js`
+`lib/writing.js`
+`lib/xai-keys.js`
+`lib/ann/`
+`lib/bb/`
+`lib/chat-tools/`
+`lib/chat/`
+`lib/cohort/`
+`lib/distill-sources/`
+`lib/drop-folder/`
+`lib/fanout/`
+`lib/identity-targets/`
+`lib/llm/`
+`lib/neon/`
+`lib/observability/`
+`lib/public-chat/`
+`lib/quarantine/`
+`lib/rag/`
+`lib/referral/`
+
+---
+
+# Repository ontology
+Path: architecture/ontology.md
+sha256: 95220b49c6e8e803f638e970905cdc6c5744a646fc0066b4b7f5bf82087d1f70
+
+## Top-Level Directories
+
+| Directory | Purpose | Belongs | Does NOT belong |
+|-----------|---------|---------|-----------------|
+| `agents/` | Canonical Robot Dojo Agent OS: roster, personas, build skills, generated adapters | roster.md, personas/*.md, agents/skills/*/SKILL.md, quality/build contracts, generated dist/ | User profile, private memory, runtime data |
+| `api/` | Public Vercel serverless functions | Public-facing edge functions | Business logic |
+| `apps/` | Frontend applications | Browser HTML, JS, CSS, and assets | Backend logic |
+| `architecture/` | Architecture and canonical documentation surfaces | architecture/product.md, architecture/architecture.md, architecture/structure.md, generated architecture/sitemap.md, generated architecture/ontology.md, architecture/surfaces.json | Runtime code, private user data, process artifacts, or generated public bundles |
+| `code/` | External repos, gitignored and GCP-backed | Git clones of linked external repos | Committed product source |
+| `config/` | Configuration and registries | Models, voices, taxonomy, account settings, lock files, registries | Secrets or raw data |
+| `docs/` | Robot Dojo/product/operator documentation | Human-facing product and operator docs | Product truth, planning artifacts, raw user files, derived workbench analysis |
+| `gateway/` | Canonical WebSocket/TCP/SNI gateway deployment source | Hono server, Redis integration, Docker config, Terraform deploy source, deploy scripts, device registration, tunnel routes, and blind TCP/SNI relay code | Application business logic |
+| `lib/` | Core reusable business logic | Reusable modules, integrations, data pipelines | Route handlers, scripts, frontend code |
+| `pipeline/` | Retired (st_0c491456 Phase 3e). The dev pipeline (kanban, stories, generalizations, schema) relocated to user/workbenches/topics/work/robot-dojo/wk_robot_dojo/ (st_9699c94f). This entry remains only so the existing untracked scratch directory does not trip the root allowlist; no tracked files may land under it (check-root-lock enforces). | Untracked scratch only (legacy quarantine-manifest.jsonl, archive/, batch-prep/, research/, reports/, sessions/). Nothing canonical. | Tracked files of any kind; any new dev-pipeline artifacts (those go to the wk_robot_dojo workbench) |
+| `quarantine/` | Stop-the-line holding zone for misplaced files | Temporary files awaiting routing | Permanent storage |
+| `routes/` | HTTP route handlers | Hono route files | Business logic or frontend code |
+| `scripts/` | Operational, QA, migration, and generator scripts | Scripts run by humans, CI, cron, install, QA, and build-pipeline support | Library code or route handlers |
+| `tests/` | Automated tests and fixtures | node:test files, fixtures, Playwright specs, shell-fixture tests | Product source |
+| `user/` | Private per-user substrate | profile, inbox, imports, files, contexts, workbenches, transcripts, memory, databases, logs, media, models | Tracked source code, product docs, canonical Agent OS definitions |
+
+## Top-Level Files
+
+Files approved at root by Node.js, npm, Vercel, GitHub, install, test, or lock conventions. Nothing else.
+
+| File | Purpose | Required |
+|------|---------|----------|
+| `.gitignore` | Repo-wide ignore policy | Yes |
+| `.vercelignore` | Vercel deploy exclusion policy | Yes |
+| `.worktreeinclude` | Files copied into a new git worktree by `claude --worktree` (st_8745309c) — currently .env.local for DB isolation | No |
+| `ACCOUNT_RECOVERY.txt` | Local operator account recovery instructions | Yes |
+| `AGENTS.md` | Install symlink (or file) to agents/dist/AGENTS.md for Grok/Codex project roots | Yes |
+| `CLAUDE.md` | Claude Code project adapter | Yes |
+| `LICENSE` | Repository license | Yes |
+| `LICENSE-BLACKBELT` | Black Belt source-available license (Elastic License 2.0); White Belt root LICENSE stays MIT | Yes |
+| `README.md` | Public repository overview | Yes |
+| `identity.example.json` | Example local identity configuration | Yes |
+| `index.js` | Server entry point | Yes |
+| `install.sh` | Terminal install path | Yes |
+| `knip.json` | Dead-code/dependency analysis config | Yes |
+| `middleware.js` | Vercel edge middleware | Yes |
+| `package-lock.json` | npm lockfile | Yes |
+| `package.json` | Node.js project manifest | Yes |
+| `playwright.config.js` | Playwright test config | Yes |
+| `skills-lock.json` | Installed skill/plugin lockfile | Yes |
+| `stryker.config.mjs` | Mutation testing config | Yes |
+| `vercel.json` | Vercel deployment configuration | Yes |
+
+## Rules
+
+1. No planning docs at root. Plans live inside the owning story, defect, or workbench.
+2. No catch-all directories. A directory named `misc/`, `tmp/`, `stuff/` accumulates entropy. Name directories by what they contain.
+3. No loose scripts at root. One-off scripts go in `scripts/`. Subsystem-owned scripts live inside that subsystem.
+4. `scripts/` subdirs are action-named: `scripts/ingest/`, `scripts/qa/` — not `scripts/pipeline/` (ambiguous with `pipeline/`).
+5. Adding a new top-level directory requires owner approval and an exact edit to `config/root-allowlist.lock.json`.
+6. Quarantine is a stop-the-line signal, not a parking lot. A file in `quarantine/` means the architecture is violated.
+7. Private user substrate lives under `user/`: `user/files/` for source evidence, `user/contexts/` for compact context packages, and `user/workbenches/` for deep working sets.
+
+---
+
+# Account recovery
+Path: ACCOUNT_RECOVERY.txt
+sha256: 13a8a0f0aa8d073a45b5873604aa0695f57b788ba742674242752c57bfff189d
+
+Robot Dojo Account Recovery
+
+Robot Dojo runs on this machine. If you are logged out or lose the login token,
+recover from the local folder:
+
+1. Open Terminal.
+2. Go to this folder:
+
+ cd ~/robotdojo
+
+3. Show the current token:
+
+ npm run token -- show
+
+4. Rotate the token if it was exposed:
+
+ npm run token -- rotate
+
+Rotating the token signs out every browser session. Use the new token with the
+Server Name shown in Accounts > Admin.
+
+Advanced:
+
+- Set a chosen token:
+
+ npm run token -- set rd_your_new_token_here
+
+- Show help:
+
+ npm run token -- help
+
+The token is stored in macOS Keychain under robotdojo-ROBOTDOJO_AUTH_TOKEN.
+
+---
+
+# Public README
+Path: README.md
+sha256: 54cd89e284da66c4eb38e5bcbd2efcf8db04a2fc9f8ce0c740e1124b7387deac
+
+# Robot Dojo
+
+Robot Dojo is a Mac-first, local-first personal intelligence system. Chat is the product. Memory is what makes it different.
+
+It connects to your real data, organizes it into topics, entities, timeline, and logs, then uses that same memory in web chat and in a coding agent. The coding agent has the shipped skills, its own tools, and can write small scripts as you go. Black Belt adds the living world model underneath that chat: people, places, companies, and relationships.
+
+## Install
+
+One command, from a fresh clone on an Apple Silicon Mac:
+
+```bash
+git clone https://github.com/RobotDojo-AI/black-belt.git
+cd black-belt
+./install.sh
+```
+
+The installer checks prerequisites, installs Homebrew, Node, and the local embedding model, provisions local TLS, starts the background service, and opens your browser to Account Integrations at `https://localhost:4338`. From there you connect your own foundation-model key, your Google workspace, and any API-key tools you already use.
+
+You can also install directly from the hosted script:
+
+```bash
+curl -fsSL https://robotdojo.ai/install.sh | bash
+```
+
+Because you clone first, `install.sh` is local, readable code you can inspect before running it.
+
+Requirements: Apple Silicon Mac, 16GB RAM minimum, 8GB free disk, Xcode Command Line Tools (the installer stops early and tells you to run `xcode-select --install` if they are missing).
+
+## Belts
+
+| Belt | Promise | Included |
+| --- | --- | --- |
+| White | Knows you | Local chat with RAG, files, topics, local memory, user context, and chat history |
+| Black | Knows your world | White plus entities, enrichment, entity-aware chat, Health, premium apps, and premium tool runs |
+
+If Black Belt expires, the engines pause. Your raw data and local artifacts are preserved on your machine, read-only, and resubscribing re-animates them.
+
+## Licensing
+
+Robot Dojo is a dual-licensed repository. The nearest license governs each file.
+
+- **White Belt is open source under the MIT License** (root [`LICENSE`](LICENSE)). Run it locally, forever, with your own AI keys.
+- **Black Belt is source-available under the Elastic License 2.0** ([`LICENSE-BLACKBELT`](LICENSE-BLACKBELT)). Source-available means the code is public so you can audit it — it is **not** open source. Black Belt runs only while you hold an active subscription; the Elastic License 2.0's license-key clause is the legal form of that gate. Your data stays yours across both tiers.
+
+## Known rough edges
+
+This is a private beta. The path a first tester runs works end to end, but some edges are still rough:
+
+- **Google connect shows an "unverified app" warning.** Formal Google app verification is pending; the warning is expected for beta and safe to accept. Google connect also depends on operator-provided OAuth credentials — if your machine has none, connect the workspace path is unavailable and you should reach a first personally-aware chat through Apple-local data, an API-key tool, or dropped files instead.
+- **Remote access is a Black Belt feature that needs a beta invite secret.** Without it, the app runs local-only at `https://localhost:4338`; the "reach from anywhere" relay degrades silently to local.
+- **macOS is the supported target.** Linux is best-effort; Windows is not supported (use WSL2 at your own risk).
+- **First-run wants Full Disk Access.** The installer opens the macOS privacy pane so Apple-local sources (Contacts, iMessage, Calendar) can sync into your personal context.
+
+## Architecture
+
+Start here:
+
+- [architecture/product.md](architecture/product.md) - product promise, launch scope, tier model
+- [architecture/architecture.md](architecture/architecture.md) - human-readable system architecture
+- [architecture/structure.md](architecture/structure.md) - repository placement contract
+- [architecture/sitemap.md](architecture/sitemap.md) - generated file inventory
+- [architecture/ontology.md](architecture/ontology.md) - generated directory ontology
+
+## Repository Shape
+
+Core runtime code lives in `lib/`, `routes/`, `api/`, and `apps/`.
+
+Local user data, generated contexts, imports, logs, and pipeline artifacts are gitignored. Canonical docs are short, curated surfaces. Generated inventory docs are regenerated from code and config.
+
+## Development
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run focused tests for the build pipeline:
+
+```bash
+node --test tests/story-preflight.test.js tests/story-pipeline.test.js
+```
+
+Regenerate inventory docs after structural changes:
+
+```bash
+node scripts/generate-sitemap.js --write
+node scripts/generate-ontology.js --write
+```
+
+Run checks before shipping:
+
+```bash
+npm test
+```
+
+---
+
+# Privacy page
+Path: apps/privacy.html
+sha256: bd360f1357d5a39d1241edfc95eb5570c7ed84e885c65685bdeba08a99a8c7d0
+
+Privacy Policy — Robot Dojo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ Private beta. 90 days of Black Belt on install.
+
+
+ Privacy
+
+ Last updated: May 28, 2026
+
+ The short version
+
+ Your private Robot Dojo data is local-first: it lives on your Mac, not on a Robot Dojo server. The installed local app does not send private data or telemetry to Robot Dojo unless you explicitly submit an error report or feedback item. If you choose backup, copies go only to a cloud server you own, control, and pay for.
+
+ What Robot Dojo processes
+
+ Robot Dojo imports data from sources you connect or files you add: email, calendar, contacts, messages, documents, and Apple Health exports where enabled. Everything is stored locally on your Mac. There is no Robot Dojo cloud database for your private data.
+
+ The relay
+
+ robotdojo.ai provides an encrypted, zero-knowledge relay tunnel so you can reach your local instance from another computer or your phone without exposing localhost or running a VPN. Traffic through the relay is end-to-end encrypted; Robot Dojo cannot read data passing through it, and the relay never stores your private data. Remote access via the relay is a paid Black Belt feature.
+
+ What we collect
+
+ If you request access, we collect your email to respond. The public website may use basic analytics to understand site traffic. The installed local app does not send private telemetry to Robot Dojo.
+
+ Local login uses a token stored in macOS Keychain. Robot Dojo does not use email login codes for the local app.
+
+ Error reports and feedback
+
+ Bottom-right error reports are diagnostics. The app explains what is being sent, scrubs PII and secrets, and never sends raw local files, API keys, tokens, or private data dumps. Product feedback is a regular form. In chat, @miyagi is local product help; @feedback explicitly sends scrubbed feedback to the Robot Dojo task queue.
+
+ AI providers
+
+ Robot Dojo installs a local model baseline. If you add third-party model providers, the app may send the specific prompt context needed to answer your message to that provider. Provider keys are stored in Keychain and are never revealed back through the app.
+
+ Local ownership and deletion
+
+ Robot Dojo is local and folder-based. Delete the product folder to remove the app. Local data and Keychain credentials are separate; full wipe instructions list the data folder and Keychain items to remove. Robot Dojo has no server-side copy of your private data.
+
+ Google API Services
+
+ Robot Dojo's use and transfer of information received from Google APIs to any other app will adhere to Google API Services User Data Policy, including the Limited Use requirements.
+
+ Contact
+
+ miyagi@robotdojo.ai
+
+
+
+ &copy; 2026 Robot Dojo, LLC
+
+ Home
+ Licensing
+ Privacy
+ Terms
+
+---
+
+# Install script
+Path: apps/static/install.sh
+sha256: fdfcfd278727803e08eec0035a9399a80e178da173df3e3746d7e647c2371ec1
+
+#!/usr/bin/env bash
+# shellcheck shell=bash
+#
+# Robot Dojo — one-command installer
+#
+# curl -fsSL https://robotdojo.ai/install.sh | bash
+#
+# Clones the repo, installs dependencies, bootstraps config, runs migrations,
+# installs a service (launchd on macOS), and opens the local Account
+# Integrations page plus setup-aware chat in the default browser.
+#
+# Idempotent: safe to re-run (offers upgrade path on existing install).
+# Privacy-first: no telemetry, all logging is local.
+#
+# Environment overrides:
+# ROBOTDOJO_HOME — install dir (default: ~/robotdojo)
+# ROBOTDOJO_CONFIG — config dir (default: ~/.robotdojo)
+# ROBOTDOJO_REPO — git repo URL (default: https://github.com/RobotDojo-AI/black-belt.git)
+# ROBOTDOJO_BRANCH — branch (default: main)
+# ROBOTDOJO_NO_OPEN=1 — skip opening browser at the end
+# ROBOTDOJO_NO_OPEN_PERMISSIONS=1 — skip opening macOS Full Disk Access
+# ROBOTDOJO_NO_SERVICE=1 — skip installing the background service
+# ROBOTDOJO_DRY_RUN=1 — print every side-effect command instead of executing it
+# (test-only: stubs launchctl, security, mkcert, plist writes).
+# ROBOTDOJO_KEYCHAIN_PREFIX — prefix prepended to every robotdojo-* Keychain
+# service name (default: empty). Tests set
+# ROBOTDOJO_KEYCHAIN_PREFIX=test- so they never
+# touch the operator's real Keychain entries.
+#
+set -euo pipefail
+
+# --- Constants -----------------------------------------------------------
+
+ROBOTDOJO_HOME="${ROBOTDOJO_HOME:-$HOME/robotdojo}"
+ROBOTDOJO_CONFIG="${ROBOTDOJO_CONFIG:-$HOME/.robotdojo}"
+# WHY: public repo at the RobotDojo-AI org. Older personal repo paths are not
+# customer-installable and may 404 for strangers — st_42799dbe AC 1.
+ROBOTDOJO_REPO="${ROBOTDOJO_REPO:-https://github.com/RobotDojo-AI/black-belt.git}"
+ROBOTDOJO_BRANCH="${ROBOTDOJO_BRANCH:-main}"
+
+APP_PORT=4338
+SITE_PORT=4336
+PRODUCT_ORIGIN="${ROBOTDOJO_PRODUCT_ORIGIN:-https://robotdojo.ai}"
+MIN_NODE_MAJOR=20
+MIN_DISK_MB=8000
+LOCAL_EMBED_MODEL_ID="Snowflake/snowflake-arctic-embed-l-v2.0"
+
+# WHY com.robotdojo.server: every product LaunchAgent shares the
+# `com.robotdojo.*` namespace (st_bc949e7c). The actual install loop is
+# manifest-driven (config/launch-agents.json); this constant remains only
+# for the legacy uninstall path that targets the single pre-rename plist.
+LAUNCHD_LABEL="com.robotdojo.server"
+LAUNCHD_PLIST="$HOME/Library/LaunchAgents/${LAUNCHD_LABEL}.plist"
+LAUNCH_AGENTS_MANIFEST="$ROBOTDOJO_HOME/config/launch-agents.json"
+LAUNCH_AGENTS_TEMPLATE_DIR="$ROBOTDOJO_HOME/apps/static/launch-ag
+
+---
+
+### core
+
+Robot Dojo public truth version 0847ccb5bff0faad. This projection is generated from canonical docs and registered public-safe source summaries. It is not a second product source of truth.
+
+Q: What is Robot Dojo?
+A: Robot Dojo is a personal AI system that actually knows you. Chat with your email, calendar, contacts, and messages unified into one living memory; work in it with research, analyses, and apps on your own data; and build the bigger ideas you’ve always had. All local, on your Mac.
+Source: architecture/product.md
+
+Q: Who is Robot Dojo for?
+A: Founders, builders, and entrepreneurs tired of repeating themselves to AI. You already have the context (inbox, calendar, messages, notes), and Robot Dojo turns it into an assistant that remembers you across every session. The private beta is a small, smart cohort installing on a Mac and getting more out of AI than a stock foundation model, with no founder hand-holding.
+Source: architecture/product.md
+
+Q: Is this like Garry Tan's GBrain?
+A: Similar arc, different audience. GBrain (https://github.com/garrytan/gbrain) is a developer tool: a knowledge graph you or an agent fills by writing markdown pages. Robot Dojo is for non-technical people: more productized, less configuration. It extracts signal from data you already have (email, iMessage, calendar, transcripts, contacts), so you don't write pages; Robot Dojo reads what you already did.
+Source: architecture/product.md
+
+Q: What should I connect and import?
+A: Start with the accounts that already know you. Connect Google with one OAuth click for Gmail, Calendar, and Contacts. Grant Full Disk Access on your Mac and Robot Dojo reads your local Apple data: iMessage, Contacts, Calendar, Notes, Photos metadata, Call history, and Mail. Drop a Google Takeout archive or any foundation-model chat exports into your inbox folder for deeper history. The more real context Robot Dojo has, the faster it feels like it knows you.
+Source: architecture/product.md
+
+Q: Where does my data live?
+A: On your machine. Always. Robot Dojo runs locally and stores everything on your hardware; the robotdojo.ai servers never see your private data. When you want to reach your instance from another computer or your phone, robotdojo.ai provides an encrypted, zero-knowledge relay: end-to-end encrypted, no cloud storage, and Robot Dojo cannot read what passes through it. Remote access via the relay is a paid Black Belt feature.
+Source: architecture/product.md + architecture/architecture.md
+
+Q: Do I need a dedicated computer?
+A: No. Robot Dojo runs fine on the Mac you already own. 16GB of RAM is enough on any modern machine. A Mac mini is a better host if you want one, because it stays on whether your laptop is open or not, so the relay is always reachable from another computer or your phone. Move to a dedicated machine any time; nothing locks you in.
+Source: architecture/product.md
+
+Q: Is it open source?
+A: Yes. White Belt is MIT, fully open source, free to read, audit, fork, and run. Black Belt is source-available on a subscription: the code is still public so you can audit every line, and an active subscription unlocks the premium engines and the encrypted relay.
+Source: architecture/product.md + architecture/architecture.md
+
+Q: How do I install Robot Dojo?
+A: One command on your Mac: curl -fsSL https://robotdojo.ai/install.sh | bash. Or open the Install modal at the top of robotdojo.ai for the same command. Install takes 10–20 minutes; when the local server is ready, your browser opens to setup.
+Source: architecture/product.md + apps/static/install.sh
+
+Q: What is Black Belt?
+A: Black Belt knows your world. It includes White Belt plus entity extraction, enrichment, entity context files, people, places, companies, relationship context, entity-aware chat, premium apps, and premium tool runs. Every install includes Black Belt for 90 days. Then the key expires.
+Source: architecture/product.md
+
+Q: What happens when Black Belt expires?
+A: White Belt knows you locally: White Belt is the local foundation: chat with RAG, user files, chat history, topics, local memory, and user context. The code is public; you can audit, fork, and run it on your own hardware. White Belt does not include entity extraction, entity enrichment, inline entity recognition, build skills, premium apps, or premium agent/tool runs. Black Belt is the world model and creation layer. It includes White Belt plus entity extraction, enrichment, entity context files, people/places/companies, relationship context, entity-aware chat, coding-agent skills on topics, Health, premium apps, and premium agent/tool runs.
+Source: architecture/product.md
+
+Q: Which docs are canonical?
+A: Canonical docs are split by purpose: architecture/product.md says what Robot Dojo is, architecture/architecture.md says how the product is shaped, architecture/structure.md says where things belong, architecture/sitemap.md is generated file inventory, and architecture/ontology.md is generated directory ontology. Product truth changes start in architecture/product.md.
+Source: architecture/architecture.md + architecture/structure.md
+
+Q: Where do files belong in the repo?
+A: The root stays rare and canonical. Browser code belongs in apps/, reusable business logic in lib/, HTTP handlers in routes/ or api/, operational scripts in scripts/, tests in tests/, and planning artifacts in pipeline/. The generated ontology enforces those boundaries.
+Source: architecture/structure.md + architecture/ontology.md
+
+Q: Does Robot Dojo depend on the first user?
+A: The first user is a calibration seed, not a hard-coded product subject. Product code, skills, personas, pipeline instructions, and public docs refer to the current user, owner, or account through runtime variables and identity context. First-user-specific names, samples, memories, topics, entities, chats, credentials, and voice calibration must remain only in private seed data or explicitly labeled owner/developer files that never ship in customer builds. The same repo serves the founder as user one, then serves any future user without agents needing to remember which names were hard-coded by accident.
+Source: architecture/product.md
+
+Q: What can I ask on /faq?
+A: Use /faq for product, install, privacy, tier, architecture, repo-structure, and usage questions about Robot Dojo. It is public and bounded to the public Robot Dojo docs corpus.
+Source: architecture/product.md + architecture/architecture.md
+
+Q: What source files power this answer?
+A: The projection is generated from registered public-safe sources: architecture/product.md, architecture/architecture.md, architecture/structure.md, architecture/sitemap.md, architecture/ontology.md, ACCOUNT_RECOVERY.txt, README.md, apps/privacy.html, apps/static/install.sh.
+Source: config/public-truth-sources.json
+
+---
+
+### install-guide
+
+Robot Dojo public truth version 0847ccb5bff0faad. This projection is generated from canonical docs and registered public-safe source summaries. It is not a second product source of truth.
+
+Q: What should I connect and import?
+A: Start with the accounts that already know you. Connect Google with one OAuth click for Gmail, Calendar, and Contacts. Grant Full Disk Access on your Mac and Robot Dojo reads your local Apple data: iMessage, Contacts, Calendar, Notes, Photos metadata, Call history, and Mail. Drop a Google Takeout archive or any foundation-model chat exports into your inbox folder for deeper history. The more real context Robot Dojo has, the faster it feels like it knows you.
+Source: architecture/product.md
+
+Q: Do I need a dedicated computer?
+A: No. Robot Dojo runs fine on the Mac you already own. 16GB of RAM is enough on any modern machine. A Mac mini is a better host if you want one, because it stays on whether your laptop is open or not, so the relay is always reachable from another computer or your phone. Move to a dedicated machine any time; nothing locks you in.
+Source: architecture/product.md
+
+Q: How do I install Robot Dojo?
+A: One command on your Mac: curl -fsSL https://robotdojo.ai/install.sh | bash. Or open the Install modal at the top of robotdojo.ai for the same command. Install takes 10–20 minutes; when the local server is ready, your browser opens to setup.
+Source: architecture/product.md + apps/static/install.sh
+
+#!/usr/bin/env bash
+# shellcheck shell=bash
+#
+# Robot Dojo — one-command installer
+#
+# curl -fsSL https://robotdojo.ai/install.sh | bash
+#
+# Clones the repo, installs dependencies, bootstraps config, runs migrations,
+# installs a service (launchd on macOS), and opens the local Account
+# Integrations page plus setup-aware chat in the default browser.
+#
+# Idempotent: safe to re-run (offers upgrade path on existing install).
+# Privacy-first: no telemetry, all logging is local.
+#
+# Environment overrides:
+# ROBOTDOJO_HOME — install dir (default: ~/robotdojo)
+# ROBOTDOJO_CONFIG — config dir (default: ~/.robotdojo)
+# ROBOTDOJO_REPO — git repo URL (default: https://github.com/RobotDojo-AI/black-belt.git)
+# ROBOTDOJO_BRANCH — branch (default: main)
+# ROBOTDOJO_NO_OPEN=1 — skip opening browser at the end
+# ROBOTDOJO_NO_OPEN_PERMISSIONS=1 — skip opening macOS Full Disk Access
+# ROBOTDOJO_NO_SERVICE=1 — skip installing the background service
+# ROBOTDOJO_DRY_RUN=1 — print every side-effect command instead of executing it
+# (test-only: stubs launchctl, security, mkcert, plist writes).
+# ROBOTDOJO_KEYCHAIN_PREFIX — prefix prepended to every robotdojo-* Keychain
+# service name (default: empty). Tests set
+# ROBOTDOJO_KEYCHAIN_PREFIX=test- so they never
+# touch the operator's real Keychain entries.
+#
+set -euo pipefail
+
+# --- Constants -----------------------------------------------------------
+
+ROBOTDOJO_HOME="${ROBOTDOJO_HOME:-$HOME/robotdojo}"
+ROBOTDOJO_CONFIG="${ROBOTDOJO_CONFIG:-$HOME/.robotdojo}"
+# WHY: public repo at the RobotDojo-AI org. Older personal repo paths are not
+# customer-installable and may 404 for strangers — st_42799dbe AC 1.
+ROBOTDOJO_REPO="${ROBOTDOJO_REPO:-https://github.com/RobotDojo-AI/black-belt.git}"
+ROBOTDOJO_BRANCH="${ROBOTDOJO_BRANCH:-main}"
+
+APP_PORT=4338
+SITE_PORT=4336
+PRODUCT_ORIGIN="${ROBOTDOJO_PRODUCT_ORIGIN:-https://robotdojo.ai}"
+MIN_NODE_MAJOR=20
+MIN_DISK_MB=8000
+LOCAL_EMBED_MODEL_ID="Snowflake/snowflake-arctic-embed-l-v2.0"
+
+# WHY com.robotdojo.server: every product LaunchAgent shares the
+# `com.robotdojo.*` namespace (st_bc949e7c). The actual install loop is
+# manifest-driven (config/launch-agents.json); this constant remains only
+# for the legacy uninstall path that targets the single pre-rename plist.
+LAUNCHD_LABEL="com.robotdojo.server"
+LAUNCHD_PLIST="$HOME/Library/LaunchAgents/${LAUNCHD_LABEL}.plist"
+LAUNCH_AGENTS_MANIFEST="$ROBOTDOJO_HOME/config/launch-agents.json"
+LAUNCH_AGENTS_TEMPLATE_DIR="$ROBOTDOJO_HOME/apps/static/launch-ag
+
+---
+
+### setup-guide
+
+Robot Dojo public truth version 0847ccb5bff0faad. This projection is generated from canonical docs and registered public-safe source summaries. It is not a second product source of truth.
+
+Q: What should I connect and import?
+A: Start with the accounts that already know you. Connect Google with one OAuth click for Gmail, Calendar, and Contacts. Grant Full Disk Access on your Mac and Robot Dojo reads your local Apple data: iMessage, Contacts, Calendar, Notes, Photos metadata, Call history, and Mail. Drop a Google Takeout archive or any foundation-model chat exports into your inbox folder for deeper history. The more real context Robot Dojo has, the faster it feels like it knows you.
+Source: architecture/product.md
+
+Q: Do I need a dedicated computer?
+A: No. Robot Dojo runs fine on the Mac you already own. 16GB of RAM is enough on any modern machine. A Mac mini is a better host if you want one, because it stays on whether your laptop is open or not, so the relay is always reachable from another computer or your phone. Move to a dedicated machine any time; nothing locks you in.
+Source: architecture/product.md
+
+Q: How do I install Robot Dojo?
+A: One command on your Mac: curl -fsSL https://robotdojo.ai/install.sh | bash. Or open the Install modal at the top of robotdojo.ai for the same command. Install takes 10–20 minutes; when the local server is ready, your browser opens to setup.
+Source: architecture/product.md + apps/static/install.sh
+
+Q: Where does my data live?
+A: On your machine. Always. Robot Dojo runs locally and stores everything on your hardware; the robotdojo.ai servers never see your private data. When you want to reach your instance from another computer or your phone, robotdojo.ai provides an encrypted, zero-knowledge relay: end-to-end encrypted, no cloud storage, and Robot Dojo cannot read what passes through it. Remote access via the relay is a paid Black Belt feature.
+Source: architecture/product.md + architecture/architecture.md
+
+---
+
+### faq-how-it-works
+
+Robot Dojo public truth version 0847ccb5bff0faad. This projection is generated from canonical docs and registered public-safe source summaries. It is not a second product source of truth.
+
+## System shape
+
+Robot Dojo is a single local server (a Hono process on the user's Mac) plus a relay for optional remote access. There is no cloud business logic. The user's data lives in `~/robotdojo/user/`, the product code lives in `~/robotdojo/{lib,routes,apps,scripts,agents}/`, and the public surface lives at `~/robotdojo/api/` (Vercel edge functions) and `~/robotdojo/apps/` (browser HTML).
+
+The product layers:
+
+1. **Install and access.** macOS-only on Apple Silicon. The app runs on the user's Mac and is reachable locally. A relay at `robotdojo.ai` is optional remote access — not cloud hosting, not a VPN, not required for local use.
+2. **Account connections and imports.** The user connects email, calendar, SMS/iMessage, chat exports, files, and health or domain data where available, plus foundation model session exports.
+3. **Local data plane.** Raw personal data stays local. User data is never stored on Robot Dojo's servers as part of the core product. Product intelligence and user identity are separate.
+4. **RAG and timeline.** Useful source material is embedded, scored, filtered, and tagged. Low-quality or stale material is suppressed. Background indexing throttles itself.
+5. **User and topic context.** A user-editable `user/workbenches/user/wk_user/` vessel (chat-injected distillation + deep companion) plus topic and entity context files synthesized over time.
+6. **Black Belt world model.** Entity extraction, enrichment, context files, and world-aware chat. People, places, and companies become first-class surfaces.
+7. **Chat runtime.** Chat loads user context, selected topic context, relevant RAG, and any matched entity context. Topic selection uses a registry lookup, not an LLM on the critical path.
+8. **Apps on the substrate.** Health is the first first-party premium app. Future apps ship through the app registry/package contract.
+9. **Build system.** Skills and pipeline stages are reusable build protocols. Customer-facing build skills are not chat commands.
+10. **Backup boundary.** Product code in source control; private local state in GCP-backed backup; no hidden third place.
+
+Internally, chat is the hero. The framing is that everything else feeds the chat experience or is consumed by it. The visual north star is fast, polished, and quiet.
+
+## Data flow
+
+Robot Dojo improves by repeatedly distilling source material into cleaner context:
+
+1. Ingest raw records.
+2. Normalize and deduplicate.
+3. Score and filter.
+4. Tag by topic.
+5. Update timeline and user-level context.
+6. In Black Belt, extract and enrich entities.
+7. Generate or refresh context docs.
+8. Use those docs in chat.
+9. Let the user's corrections feed the next pass.
+
+This is the same pattern behind health and coaching. Chat grows the corpus laterally. Focused topic sessions in the coding agent grow it vertically by adding framing, decisions, and reusable mental models.
+
+The architectural promise:
+
+- It keeps syncing from the user's connected accounts.
+- It filters weak source material instead of hoarding noise.
+- It weights recent knowledge because people change.
+- It improves topic context while the user chats and while the user is away.
+- It recognizes entities and context as the user chats.
+- It lets the user correct identity, agents, topics, and important context directly.
+
+## Agent OS
+
+The build pipeline is a six-agent system, isolated context windows, persona-bound briefs.
+
+- **Miyagi (宮城)** — orchestrator + thinking partner. Always running. Routes work, enforces gates via story-gate.js, talks to the owner.
+- **Tantei (探偵)** — codebase mapper. Spawned when a story touches code that needs a map.
+- **Hakase (博士)** — external researcher. Spawned when a story needs knowledge outside the codebase.
+- **Ori (織)** — schema + design architect. Spawned when a story is multi-phase or needs schema/API design.
+- **Katagami (型紙)** — builder. Spawned after the plan is sealed.
+- **Bunshin (分身)** — mandatory stage QC auditor. Runs before research, scope, plan, build, and QA artifacts are presented. Close uses Bunshin only when it introduces new judgment, waiver, failed-QA handling, rollback guidance, or product/architecture claims.
+
+The pipeline stages are fixed: framing → research → scope → plan → build → qa → close. Every stage writes one artifact under `user/workbenches/topics/work/robot-dojo/wk_robot_dojo/stories/{id}/`, seals it, and stops for explicit owner approval. The single hop after a seal is the only implicit-approval exception; everything else is owner-driven.
+
+The skill set is portable. Skills, personas, and pipeline stages are protocols. They are designed to be carried across IDEs (Claude Code, Codex, Cursor) — the canonical sources live in `agents/personas/*.md` and `agents/skills/*/SKILL.md`, and tool-specific adapters in `agents/dist/` are disposable generated outputs.
+
+Topic-bound exploratory work runs through the universal `/topic {name}` opener — one OPEN/CLOSE ritual for every topic or entity. Bespoke `/coach` and `/health` are deprecated stubs that redirect to `/topic coaching` and `/topic health`. `/work {name}` is the same command.
+
+The system is built to be portable across future AI stacks. The owner-facing decision points (each stage seal, each Bunshin verdict, each implicit-approval boundary) are protocol-level, not Claude-specific.
+
+## Tier enforcement
+
+White Belt is MIT-licensed open source. The code is public; anyone can audit, fork, and run it.
+
+Black Belt is source-available under the Elastic License v2 (ELv2). The code is public so users can audit what they run. Running Black Belt requires an active subscription — the relay (remote access) is the hard server-side gate, not a client-side check. Subscription state lives server-side and is not crackable from the client.
+
+If Black Belt expires:
+
+- Engines pause: entity extraction and enrichment jobs, entity-aware chat injection, coding-agent skills on topics, Health and premium app execution, premium agent/tool runs.
+- Data is preserved read-only: raw files, local databases, chat history, topics, topic logs and outputs, user-created files/apps, account settings, and existing entity markdowns stay on the machine.
+- Reactivation restores active use.
+
+User raw data is never encrypted by Robot Dojo. It stays the user's, in plain SQLite under `~/robotdojo/user/databases/` (default) with optional encryption gates documented in build conventions.
+
+The tier boundary is enforced through the relay and through clearly-labeled engine gates inside the codebase. There is no AES-256 runtime artifact, no inert-bytes scheme, no key-management layer on the user's machine — the gate is server-side because that is what is actually unforgeable.
+
+## Core invariants
+
+- Local-first is a product promise, not an implementation detail.
+- Robot Dojo servers do not store user private data.
+- Raw user data is preserved unless the user explicitly deletes it.
+- Derived intelligence must be regenerable from raw data and history.
+- The first user is seed data, not a hard-coded product assumption.
+- Customer mode is the release default. Owner/dev mode can expose internal fixtures and tooling, but customer mode cannot.
+- Background work must be load-aware and must not make the user's machine feel slow.
+- No agent should write directly to the database through ad hoc scripts during normal product operation.
+- Server-side write paths should use a single-writer event protocol.
+- Canonical docs guide future work; generated inventory docs summarize the codebase.
+- Human-readable docs distill signal over time instead of accumulating every historical explanation.
+
+---
+
+### faq-privacy
+
+Robot Dojo public truth version 0847ccb5bff0faad. This projection is generated from canonical docs and registered public-safe source summaries. It is not a second product source of truth.
+
+Q: Where does my data live?
+A: On your machine. Always. Robot Dojo runs locally and stores everything on your hardware; the robotdojo.ai servers never see your private data. When you want to reach your instance from another computer or your phone, robotdojo.ai provides an encrypted, zero-knowledge relay: end-to-end encrypted, no cloud storage, and Robot Dojo cannot read what passes through it. Remote access via the relay is a paid Black Belt feature.
+Source: architecture/product.md + architecture/architecture.md
+
+## Core invariants
+
+- Local-first is a product promise, not an implementation detail.
+- Robot Dojo servers do not store user private data.
+- Raw user data is preserved unless the user explicitly deletes it.
+- Derived intelligence must be regenerable from raw data and history.
+- The first user is seed data, not a hard-coded product assumption.
+- Customer mode is the release default. Owner/dev mode can expose internal fixtures and tooling, but customer mode cannot.
+- Background work must be load-aware and must not make the user's machine feel slow.
+- No agent should write directly to the database through ad hoc scripts during normal product operation.
+- Server-side write paths should use a single-writer event protocol.
+- Canonical docs guide future work; generated inventory docs summarize the codebase.
+- Human-readable docs distill signal over time instead of accumulating every historical explanation.
+
+---
+
+### faq-your-data
+
+Robot Dojo public truth version 0847ccb5bff0faad. This projection is generated from canonical docs and registered public-safe source summaries. It is not a second product source of truth.
+
+Q: Where does my data live?
+A: On your machine. Always. Robot Dojo runs locally and stores everything on your hardware; the robotdojo.ai servers never see your private data. When you want to reach your instance from another computer or your phone, robotdojo.ai provides an encrypted, zero-knowledge relay: end-to-end encrypted, no cloud storage, and Robot Dojo cannot read what passes through it. Remote access via the relay is a paid Black Belt feature.
+Source: architecture/product.md + architecture/architecture.md
+
+---
+
+### faq-pricing
+
+Robot Dojo public truth version 0847ccb5bff0faad. This projection is generated from canonical docs and registered public-safe source summaries. It is not a second product source of truth.
+
+Q: What is Black Belt?
+A: Black Belt knows your world. It includes White Belt plus entity extraction, enrichment, entity context files, people, places, companies, relationship context, entity-aware chat, premium apps, and premium tool runs. Every install includes Black Belt for 90 days. Then the key expires.
+Source: architecture/product.md
+
+Q: What happens when Black Belt expires?
+A: White Belt knows you locally: White Belt is the local foundation: chat with RAG, user files, chat history, topics, local memory, and user context. The code is public; you can audit, fork, and run it on your own hardware. White Belt does not include entity extraction, entity enrichment, inline entity recognition, build skills, premium apps, or premium agent/tool runs. Black Belt is the world model and creation layer. It includes White Belt plus entity extraction, enrichment, entity context files, people/places/companies, relationship context, entity-aware chat, coding-agent skills on topics, Health, premium apps, and premium agent/tool runs.
+Source: architecture/product.md
+
+---
+
+### faq-open-source
+
+Robot Dojo public truth version 0847ccb5bff0faad. This projection is generated from canonical docs and registered public-safe source summaries. It is not a second product source of truth.
+
+Q: What is Robot Dojo?
+A: Robot Dojo is a personal AI system that actually knows you. Chat with your email, calendar, contacts, and messages unified into one living memory; work in it with research, analyses, and apps on your own data; and build the bigger ideas you’ve always had. All local, on your Mac.
+Source: architecture/product.md
+
+Q: Who is Robot Dojo for?
+A: Founders, builders, and entrepreneurs tired of repeating themselves to AI. You already have the context (inbox, calendar, messages, notes), and Robot Dojo turns it into an assistant that remembers you across every session. The private beta is a small, smart cohort installing on a Mac and getting more out of AI than a stock foundation model, with no founder hand-holding.
+Source: architecture/product.md
+
+Q: Is this like Garry Tan's GBrain?
+A: Similar arc, different audience. GBrain (https://github.com/garrytan/gbrain) is a developer tool: a knowledge graph you or an agent fills by writing markdown pages. Robot Dojo is for non-technical people: more productized, less configuration. It extracts signal from data you already have (email, iMessage, calendar, transcripts, contacts), so you don't write pages; Robot Dojo reads what you already did.
+Source: architecture/product.md
+
+Q: Is it open source?
+A: Yes. White Belt is MIT, fully open source, free to read, audit, fork, and run. Black Belt is source-available on a subscription: the code is still public so you can audit every line, and an active subscription unlocks the premium engines and the encrypted relay.
+Source: architecture/product.md + architecture/architecture.md
+
+# Robot Dojo
+
+Robot Dojo is a Mac-first, local-first personal intelligence system. Chat is the product. Memory is what makes it different.
+
+It connects to your real data, organizes it into topics, entities, timeline, and logs, then uses that same memory in web chat and in a coding agent. The coding agent has the shipped skills, its own tools, and can write small scripts as you go. Black Belt adds the living world model underneath that chat: people, places, companies, and relationships.
+
+## Install
+
+One command, from a fresh clone on an Apple Silicon Mac:
+
+```bash
+git clone https://github.com/RobotDojo-AI/black-belt.git
+cd black-belt
+./install.sh
+```
+
+The installer checks prerequisites, installs Homebrew, Node, and the local embedding model, provisions local TLS, starts the background service, and opens your browser to Account Integrations at `https://localhost:4338`. From there you connect your own foundation-model key, your Google workspace, and any API-key tools you already use.
+
+You can also install directly from the hosted script:
+
+```bash
+curl -fsSL https://robotdojo.ai/install.sh | bash
+```
+
+Because you clone first, `install.sh` is local, readable code you can inspect before running it.
+
+Requirements: Apple Silicon Mac, 16GB RAM minimum, 8GB free disk, Xcode Command Line Tools (the installer stops early and tells you to run `xcode-select --install` if they are missing).
+
+## Belts
+
+| Belt | Promise | Included |
+| --- | --- | --- |
+| White | Knows you | Local chat with RAG, files, topics, local memory, user context, and chat history |
+| Black | Knows your world | White plus entities, enrichment, entity-aware chat, Health, premium apps, and premium tool runs |
+
+If Black Belt expires, the engines pause. Your raw data and local artifacts are preserved on your machine, read-only, and resubscribing re-animates them.
+
+## Licensing
+
+Robot Dojo is a dual-licensed repository. The nearest license governs each file.
+
+- **White Belt is open source under the MIT License** (root [`LICENSE`](LICENSE)). Run it locally, forever, with your own AI keys.
+- **Black Belt is source-available under the Elastic License 2.0** ([`LICENSE-BLACKBELT`](LICENSE-BLACKBELT)). Source-available means the code is public so you can audit it — it is **not** open source. Black Belt runs only while you hold an active subscription; the Elastic License 2.0's license-key clause is the legal form of that gate. Your data stays yours across both tiers.
+
+## Known rough edges
+
+This is a private beta. The path a first tester runs works end to end, but some edges are still rough:
+
+- **Google connect shows an "unverified app" warning.** Formal Google app verification is pending; the warning is expected for beta and safe to accept. Google connect also depends on operator-provided OAuth credentials — if your machine has none, connect the workspace path is unavailable and you should reach a first personally-aware chat through Apple-local data, an API-key tool, or dropped files instead.
+- **Remote access is a Black Belt feature that needs a beta invite secret.** Without it, the app runs local-only at `https://localhost:4338`; the "reach from anywhere" relay degrades silently to local.
+- **macOS is the supported target.** Linux is best-effort; Windows is not supported (use WSL2 at your own risk).
+- **First-run wants Full Disk Access.** The installer opens the macOS privacy pane so Apple-local sources (Contacts, iMessage, Calendar) can sync into your personal context.
+
+## Architecture
+
+Start here:
+
+- [architecture/product.md](architecture/product.md) - product promise, launch scope, tier model
+- [architecture/architecture.md](architecture/architecture.md) - human-readable system architecture
+- [architecture/structure.md](architecture/structure.md) - repository placement contract
+- [architecture/sitemap.md](architecture/sitemap.md) - generated file inventory
+- [architecture/ontology.md](architecture/ontology.md) - generated directory ontology
+
+## Repository Shape
+
+Core runtime code lives in `lib/`, `routes/`, `api/`, and `apps/`.
+
+Local user data, generated contexts, imports, logs, and pipeline artifacts are gitignored. Canonical docs are short, curated surfaces. Generated inventory docs are regenerated from code and config.
+
+## Development
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run focused tests for the build pipeline:
+
+```bash
+node --test tests/story-preflight.test.js tests/story-pipeline.test.js
+```
+
+Regenerate inventory docs after structural changes:
+
+```bash
+node scripts/generate-sitemap.js --write
+node scripts/generate-ontology.js --write
+```
+
+Run checks before shipping:
+
+```bash
+npm test
+```
+
+---
+
+### repo-structure
+
+Robot Dojo public truth version 0847ccb5bff0faad. This projection is generated from canonical docs and registered public-safe source summaries. It is not a second product source of truth.
+
+Q: Which docs are canonical?
+A: Canonical docs are split by purpose: architecture/product.md says what Robot Dojo is, architecture/architecture.md says how the product is shaped, architecture/structure.md says where things belong, architecture/sitemap.md is generated file inventory, and architecture/ontology.md is generated directory ontology. Product truth changes start in architecture/product.md.
+Source: architecture/architecture.md + architecture/structure.md
+
+Q: Where do files belong in the repo?
+A: The root stays rare and canonical. Browser code belongs in apps/, reusable business logic in lib/, HTTP handlers in routes/ or api/, operational scripts in scripts/, tests in tests/, and planning artifacts in pipeline/. The generated ontology enforces those boundaries.
+Source: architecture/structure.md + architecture/ontology.md
+
+## Root files
+
+Root files must be rare.
+
+| File | Purpose |
+| --- | --- |
+| `ACCOUNT_RECOVERY.txt` | Local operator account recovery instructions |
+| `README.md` | Public repository overview |
+| `CLAUDE.md` | Claude Code adapter only |
+| `.gitignore` | Repo-wide ignore policy |
+| `.vercelignore` | Vercel deploy exclusion policy |
+| `identity.example.json` | Example local identity config |
+| `index.js` | Local server entry point |
+| `middleware.js` | Vercel edge middleware |
+| `install.sh` | Terminal install path |
+| `knip.json` | Dead-code/dependency analysis config |
+| `package.json` | Node project manifest |
+| `package-lock.json` | npm lockfile |
+| `playwright.config.js` | Playwright test config |
+| `skills-lock.json` | Installed skill/plugin lockfile |
+| `stryker.config.mjs` | Mutation testing config |
+| `vercel.json` | Vercel deployment config |
+| `LICENSE` | License |
+
+`ACCOUNT_RECOVERY.txt` stays at root because emergency recovery must be discoverable when the operator is locked out or disoriented. It is not part of the architecture doc set.
+
+Do not add new root docs. Cross-cutting product and repo docs belong in `architecture/`.
+
+## Top-level directories
+
+| Directory | Belongs Here | Does Not Belong Here |
+| --- | --- | --- |
+| `.github/` | CODEOWNERS and CI workflows that enforce owner review for architecture lock changes | Product source, local state, secrets |
+| `api/` | Public Vercel functions | Business logic |
+| `apps/` | Browser HTML, JS, CSS, assets | Backend logic |
+| `agents/` | Canonical Robot Dojo Agent OS: roster, personas, build skills, generated adapters | User profile, private memory, runtime data |
+| `code/` | External repos, gitignored and GCP-backed | Committed product source |
+| `config/` | User-created config, root lock, and registry config | Secrets or raw data |
+| `docs/` | Robot Dojo/product/operator documentation written for humans | Product truth, planning artifacts, raw user-added files, derived workbench analysis |
+| `gateway/` | Sole canonical gateway folder: Hono control plane, Redis integration, Terraform deploy source, deploy scripts, device registration, tunnel routes, and blind TCP/SNI relay code | App business logic, filled Terraform vars/state/plans |
+| `lib/` | Core reusable business logic | Route handlers, frontend, one-off scripts |
+| `quarantine/` | Temporary holding zone for misplaced files, gitignored | Permanent storage |
+| `routes/` | Hono route handlers | Reusable business logic |
+| `scripts/` | Operational, QA, migration, and generator scripts | Library modules |
+| `tests/` | Automated tests and fixtures | Product source |
+| `user/` | Private per-user substrate, gitignored and GCP-backed: profile, inbox, imports, files, contexts, workbenches, transcripts, memory, databases, logs, media, models | Canonical Agent OS, product source, public docs |
+
+Recoverability rule: every file must be in exactly one recoverability class — GitHub-tracked source, GCP-backed private/local state, or explicitly regenerable tool output. `scripts/check-backup-recoverability.js` enforces this for ignored files so GitHub and GCP stay MECE instead of relying on memory.
+
+## Doc-class homes
+
+Canonical docs distill signal. Each doc class has exactly one home. Generated docs follow code and config; curated docs guide future code.
+
+| Doc class | Home | Notes |
+| --- | --- | --- |
+| Product truth | `architecture/product.md` | Customer promise, launch scope, tier model |
+| System shape | `architecture/architecture.md` | Human-readable architecture; internal "chat is the hero" framing |
+| Placement rules | `config/root-allowlist.lock.json` → `architecture/structure.md` | This file derives from the lock |
+| File inventory | `architecture/sitemap.md` | Generated by `scripts/generate-sitemap.js` |
+| Directory ontology | `architecture/ontology.md` | Generated by `scripts/generate-ontology.js` from the lock |
+| Agent OS roster + routing | `agents/agents.md` | Per-agent bodies in `agents/personas/{Name}.md` |
+| Build conventions | `agents/build-conventions.md` | Portable cross-tool engineering rules |
+| Quality contract | `agents/default-quality.md` | Embedded by include marker into every persona and skill |
+| Skills (build + tool) | `agents/skills/*/SKILL.md` | Each skill carries its own contract + steps |
+| Current work state | `user/workbenches/topics/work/robot-dojo/wk_robot_dojo/kanban.md` | Not auto-loaded globally |
+| Owner user context (chat) | `user/workbenches/user/wk_user/context.md` | Chat-injected distillation, ≤ `USER_CARD_CHAR_BUDGET` |
+| Owner user context (IDE deep) | `user/workbenches/user/wk_user/USER.md` | Long-form deep companion |
+| Owner writing (voice + structure + formatting) | `user/workbenches/user/wk_user/user-voice/` (`voice.md`, `structure/`, `formatting/`, `samples/`, `check.md`, auto `learned.md`) | How the owner writes to the world (PII) — gitignored, never shipped. Compounds from writing samples and sent mail. Operator chat is not a source. |
+| Miyagi writing (voice + structure + formatting) | `config/agent-voice/` (`voice.md`, `structure/`, `formatting/`) | How Miyagi talks to the owner — PII-free, included by every persona. Chat logs and working-together feedback train this path via standing corrections. |
+| Topic context (canonical) | `user/contexts/topics/{t1}/[{t2}/]context.md` | Compact memory for chat |
+| Entity context (canonical) | `user/contexts/{people,companies,places}/{display-slug}--{stable-id-suffix}/context.md` | Display-slug name; stable entity id in frontmatter and DB |
+| Workbench resume + substrate | `user/workbenches/{topics|entities}/.../{workbench_id}/INDEX.md` + `substrate/` | Deep work; promotes durable truth into the attached `context.md` |
+| Pipeline story artifacts | `user/workbenches/topics/work/robot-dojo/wk_robot_dojo/stories/{id}/` | Per `STORY_SCHEMA.json` |
+
+**Package rule.** Canonical topic and entity memory lives inside a package directory as `context.md`. Topic package names use topic slugs. Entity package names use a human-readable display slug plus a stable ID suffix: `{display-slug}--{stable-id-suffix}`. The package directory is also the owner for workbenches and other first-class context-local support files attached to that owner.
+
+**Context-doc ontology.** Every `context.md` (user, topic, or entity) is loaded directly into chat — it is the compact canonical memory layer, not deep substrate. Section schema: a `# Topic|Entity: {slug}` heading, a short "what this covers" paragraph, optional boot-up reading list, then current state. Injection contract: `wk_user/context.md` is injected by `lib/identity-card.js` (budget `USER_CARD_CHAR_BUDGET = 4000`); topic and entity `context.md` files are loaded by the topic/entity resolver. Compact ≠ thin: every line earns its place because it ships in every chat turn for that selection.
+
+**Workbench placement.** Deep topic/entity work belongs in a registered workbench under `user/workbenches/`, not hidden inside a pipeline story or nested inside compact context packages. The canonical resume index lives at `user/workbenches/topics/{t1}/{t2}/{workbench_id}/INDEX.md` or `user/workbenches/entities/{people|companies|places}/{entity-package}/{workbench_id}/INDEX.md`. Pipeline artifacts are not deleted, but pipeline remains process history rather than the workbench home.
+
+Placement rule: if it is evidence, cite it. If it is thinking, move it. If it is truth, promote it. Raw evidence can remain in `user/transcripts/`, `user/databases/`, `user/files/`, or another approved user source root; `docs/` is evidence only when the documentation itself is the source. Derived research, analysis, dashboards, normalized datasets, decisions, todos, and next-action state belong in the attached workbench. Long-form workbench synthesis may be as deep as the work requires; durable compressed conclusions promote into the attached topic/entity `context.md`.
+
+Every workbench `INDEX.md` includes a distillation contract. The contract names the purpose, canonical target, compact-context rule, long-synthesis home, RAG substrate, and review threshold. Agents must state or refresh that contract before major research or build work so the user can correct the promotion boundary before work accumulates.
+
+Every T1 and T2 topic has a natural default workbench landing zone. Creating a topic creates that default workbench unless one already exists. Entity workbenches are created on demand when a person, company, or place becomes the owner of deep work. Topic rename, delete, or merge operations must consolidate attached workbenches by rehoming their `INDEX.md` and substrate under the surviving topic/entity and repointing canonical promotion targets.
+
+`user/contexts/research/` is retired. It is not an approved destination for new or canonical workbench substrate; if it reappears, the contents must be moved into `user/workbenches/` or cited from an approved source root.
+
+Every workbench attaches to one or more canonical targets:
+
+- topic: T1 or T2 topic slug
+- person: canonical person ID
+- company: canonical company ID
+- place: canonical place ID
+
+`thing` and health-condition entities are not workbench attachment types. Health investigations attach to the existing personal health topic. Durable findings promote back into the attached topic/entity context and RAG; the workbench keeps the in-flight layer resumable.
+
+## Enforcing gates
+
+Pre-commit gates fire on every commit. Each one targets a specific class of failure.
+
+| Gate | Script | Failure it blocks |
+| --- | --- | --- |
+| Root allowlist | `scripts/check-root-lock.js` | New top-level entries not approved in `config/root-allowlist.lock.json` |
+| Registry schema | `scripts/check-registry-schema.js` | Malformed entries in `architecture/surfaces.json` |
+| Canonical mode | `scripts/check-canonical-mode.js` | Re-introduction of autonomous doc-writer pattern |
+| Doc budget | `scripts/check-doc-budget.js` | Any registered surface over its `max_chars` cap |
+| Human-authored class | `scripts/gate-human-authored.js` | Staged edits to a human-authored canonical surface without a story declaring it in `meta.json.touches` |
+| Canonical readers | `scripts/check-canonical-readers.js` | Skill or persona missing `canonical_reads` frontmatter or a sitemap+ontology read in its first step |
+| Persona ontology | `scripts/check-persona-ontology.js` | Persona missing required frontmatter, wrong section order, stale include hash, or 7th unsanctioned persona file |
+| Skill ontology | `scripts/check-skill-ontology.js` | Skill missing `name`/`description`/`type`, missing `## Contract`/`## Steps`, stale include hash |
+| Agent-voice ontology | `scripts/check-fragment-ontology.js` | `config/agent-voice/` missing its base/channel purpose headers, or owner voice (PII) surfacing under shipped config |
+| Architecture doc schema | `scripts/check-arch-doc-schema.js` | `product.md`/`architecture.md`/`structure.md` missing required `##` sections |
+| Structure check | `scripts/check-structure.js` + `scripts/smart-quarantine.js` | Files outside their declared home — routes them to `quarantine/` |
+| Identity chain (unified) | `scripts/check-agent-os.js` | Any dangling/wrong-target/orphan/stray adapter across Claude skills+agents, Codex, Cursor; `agents/dist/` stale vs sources; missing DO-NOT-EDIT headers. `check-identity-dist-fresh.js` and `check-skill-adapters.js` are thin back-compat stubs that delegate here. |
+
+## Change rules
+
+- If product truth changes, update `architecture/product.md` first.
+- If architecture changes, update `architecture/architecture.md` and tests or code together.
+- If file placement changes, update `config/root-allowlist.lock.json`, `architecture/structure.md`, and the enforcing tests/scripts together, with exact owner-approved touches.
+- If files move, regenerate `architecture/sitemap.md` and `architecture/ontology.md`.
+- If a doc starts accumulating history instead of decisions, distill it back down.
+
+## Top-Level Directories
+
+| Directory | Purpose | Belongs | Does NOT belong |
+|-----------|---------|---------|-----------------|
+| `agents/` | Canonical Robot Dojo Agent OS: roster, personas, build skills, generated adapters | roster.md, personas/*.md, agents/skills/*/SKILL.md, quality/build contracts, generated dist/ | User profile, private memory, runtime data |
+| `api/` | Public Vercel serverless functions | Public-facing edge functions | Business logic |
+| `apps/` | Frontend applications | Browser HTML, JS, CSS, and assets | Backend logic |
+| `architecture/` | Architecture and canonical documentation surfaces | architecture/product.md, architecture/architecture.md, architecture/structure.md, generated architecture/sitemap.md, generated architecture/ontology.md, architecture/surfaces.json | Runtime code, private user data, process artifacts, or generated public bundles |
+| `code/` | External repos, gitignored and GCP-backed | Git clones of linked external repos | Committed product source |
+| `config/` | Configuration and registries | Models, voices, taxonomy, account settings, lock files, registries | Secrets or raw data |
+| `docs/` | Robot Dojo/product/operator documentation | Human-facing product and operator docs | Product truth, planning artifacts, raw user files, derived workbench analysis |
+| `gateway/` | Canonical WebSocket/TCP/SNI gateway deployment source | Hono server, Redis integration, Docker config, Terraform deploy source, deploy scripts, device registration, tunnel routes, and blind TCP/SNI relay code | Application business logic |
+| `lib/` | Core reusable business logic | Reusable modules, integrations, data pipelines | Route handlers, scripts, frontend code |
+| `pipeline/` | Retired (st_0c491456 Phase 3e). The dev pipeline (kanban, stories, generalizations, schema) relocated to user/workbenches/topics/work/robot-dojo/wk_robot_dojo/ (st_9699c94f). This entry remains only so the existing untracked scratch directory does not trip the root allowlist; no tracked files may land under it (check-root-lock enforces). | Untracked scratch only (legacy quarantine-manifest.jsonl, archive/, batch-prep/, research/, reports/, sessions/). Nothing canonical. | Tracked files of any kind; any new dev-pipeline artifacts (those go to the wk_robot_dojo workbench) |
+| `quarantine/` | Stop-the-line holding zone for misplaced files | Temporary files awaiting routing | Permanent storage |
+| `routes/` | HTTP route handlers | Hono route files | Business logic or frontend code |
+| `scripts/` | Operational, QA, migration, and generator scripts | Scripts run by humans, CI, cron, install, QA, and build-pipeline support | Library code or route handlers |
+| `tests/` | Automated tests and fixtures | node:test files, fixtures, Playwright specs, shell-fixture tests | Product source |
+| `user/` | Private per-user substrate | profile, inbox, imports, files, contexts, workbenches, transcripts, memory, databases, logs, media, models | Tracked source code, product docs, canonical Agent OS definitions |
+
+## Top-Level Files
+
+Files approved at root by Node.js, npm, Vercel, GitHub, install, test, or lock conventions. Nothing else.
+
+| File | Purpose | Required |
+|------|---------|----------|
+| `.gitignore` | Repo-wide ignore policy | Yes |
+| `.vercelignore` | Vercel deploy exclusion policy | Yes |
+| `.worktreeinclude` | Files copied into a new git worktree by `claude --worktree` (st_8745309c) — currently .env.local for DB isolation | No |
+| `ACCOUNT_RECOVERY.txt` | Local operator account recovery instructions | Yes |
+| `AGENTS.md` | Install symlink (or file) to agents/dist/AGENTS.md for Grok/Codex project roots | Yes |
+| `CLAUDE.md` | Claude Code project adapter | Yes |
+| `LICENSE` | Repository license | Yes |
+| `LICENSE-BLACKBELT` | Black Belt source-available license (Elastic License 2.0); White Belt root LICENSE stays MIT | Yes |
+| `README.md` | Public repository overview | Yes |
+| `identity.example.json` | Example local identity configuration | Yes |
+| `index.js` | Server entry point | Yes |
+| `install.sh` | Terminal install path | Yes |
+| `knip.json` | Dead-code/dependency analysis config | Yes |
+| `middleware.js` | Vercel edge middleware | Yes |
+| `package-lock.json` | npm lockfile | Yes |
+| `package.json` | Node.js project manifest | Yes |
+| `playwright.config.js` | Playwright test config | Yes |
+| `skills-lock.json` | Installed skill/plugin lockfile | Yes |
+| `stryker.config.mjs` | Mutation testing config | Yes |
+| `vercel.json` | Vercel deployment configuration | Yes |
+
+## Rules
+
+1. No planning docs at root. Plans live inside the owning story, defect, or workbench.
+2. No catch-all directories. A directory named `misc/`, `tmp/`, `stuff/` accumulates entropy. Name directories by what they contain.
+3. No loose scripts at root. One-off scripts go in `scripts/`. Subsystem-owned scripts live inside that subsystem.
+4. `scripts/` subdirs are action-named: `scripts/ingest/`, `scripts/qa/` — not `scripts/pipeline/` (ambiguous with `pipeline/`).
+5. Adding a new top-level directory requires owner approval and an exact edit to `config/root-allowlist.lock.json`.
+6. Quarantine is a stop-the-line signal, not a parking lot. A file in `quarantine/` means the architecture is violated.
+7. Private user substrate lives under `user/`: `user/files/` for source evidence, `user/contexts/` for compact context packages, and `user/workbenches/` for deep working sets.

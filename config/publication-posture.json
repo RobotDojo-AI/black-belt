@@ -1,0 +1,164 @@
+{
+  "_comment": [
+    "THE POSTURE TABLE. One scan implementation, two placements (st_dd0e19d8 AC15/AC16).",
+    "",
+    "This file is DATA, not code, and that is the whole point: if a blocking class ever",
+    "produces a false positive on ordinary product vocabulary, the recovery is to change",
+    "one word here from 'block' to 'report' — no code edit, no redeploy of the gate.",
+    "That escape hatch is failure-manifest entry 1 of the design and it is the reason",
+    "the owner's commits cannot be held hostage by this gate.",
+    "",
+    "PLACEMENTS",
+    "  staged   every commit (pre-commit, scans only the staged files)",
+    "  publish  the publication certification run (scans the whole tree / published set)",
+    "",
+    "VALUES",
+    "  block    a non-permitted finding of this class fails the run",
+    "  report   the finding is printed and the run still succeeds",
+    "  skip     the class is not scanned at all in this placement, and the run summary",
+    "           SAYS SO — an exclusion that is reported rather than invisible",
+    "",
+    "PROMOTION RULE (how a class earns 'block' at commit time). A class is set to block",
+    "at 'staged' only when (a) it already blocked at commit before this story — relaxing",
+    "that is a regression — or (b) a full-tree run shows zero non-permitted findings for",
+    "it. Every class below records which of the two applies and, where it is still",
+    "reporting, the measured finding count that has to reach zero first.",
+    "",
+    "SKIP_PATHS KINDS (required on every entry — the loader rejects an entry without one).",
+    "  gate_source            code or config the gate must not flag itself on. It carries NO",
+    "                         corpus term, ever. Nothing in the gate can check that, because",
+    "                         the gate does not scan these files — so it is checked OUT OF BAND",
+    "                         by scripts/qa/skip-paths-corpus-proof.js, which scans them against",
+    "                         the corpus with separator variants and with the local allowlist",
+    "                         un-suppressed. QA st_dd0e19d8 found a real leak in one of them.",
+    "  self_match_dictionary  a list the gate matches AGAINST. Scanning it flags its own",
+    "                         entries by construction, so the out-of-band proof asserts instead",
+    "                         that every finding is one of the file's own DATA entries — a term",
+    "                         appearing in a comment or any non-entry position still fails.",
+    "Adding a skip path without a kind fails the table load, which fails every run that",
+    "reads it. That is the point: a new exclusion cannot escape the out-of-band scan.",
+    "",
+    "NO OWNER DATA IN THIS FILE. It names classes and repo paths, never terms."
+  ],
+
+  "classes": {
+    "terms": {
+      "staged": "block",
+      "publish": "block",
+      "_why": "Tier A — the owner's distinctive terms from the gitignored config overrides. This POSTURE has been block-at-commit since st_e36f5f2b and relaxing it is a regression; what changed is the corpus, not the policy. Measured 2026-07-25: the pre-story term set (58 terms, no surface variants) found 0 findings on the whole tree; phase 1's AC12 singular/plural rule adds the one form that matches, and it finds 1 — scripts/ingest/03b-service-vendor.js, a company name stored plural and written singular. That is precisely the leak AC12 exists to catch and AC1 removes, so it blocks. Consequence to know about: that one file cannot be committed until AC1 edits it, which is the edit phase 3 already makes."
+    },
+    "private_terms": {
+      "staged": "report",
+      "publish": "block",
+      "_why": "AC9 — the owner's name, family, stored contacts, work colleagues and archive slugs. Same precision class as Tier A, but NEVER scanned at commit before this story, and measured 2026-07-25 at 35 findings across 11 tracked files. Blocking those at commit would fail ordinary commits on work this story has not done yet. Promote to block when the count reaches zero (AC1/AC5, phase 3)."
+    },
+    "entity_ids": {
+      "staged": "block",
+      "publish": "block",
+      "_why": "Content-id suffixes of real people/companies/places. LOOKED like it blocked at commit since st_e36f5f2b; measured 2026-07-25, it caught nothing at all. Its shape carried a \\b word boundary, which git's POSIX engine reads as a literal 'b' — so the arm matched 'b' followed by 16 hex characters (12 files, none of them containing a real id) instead of matching ids. Phase 1 fixed the shape, and the fixed arm found 7 genuine leaks across 3 files. PROMOTED TO BLOCK 2026-07-26 on the owner's decision (\"Turn them on\"), against the promotion rule's condition (b): re-measured on the whole tracked tree after the phase 3 removals, the fixed arm finds ZERO findings — permitted or otherwise. Nothing is being suppressed to reach that number: the permitted list carries no entity_ids entry at all, and it cannot (the class is owner-identifying, so LOCAL_ONLY_CLASSES refuses it in the tracked half). Proven at commit placement, not only on the tree: scripts/qa/commit-posture-proof.js stages the files the pre-commit de-tax itself regenerates and asserts exit 0."
+    },
+    "emails": {
+      "staged": "block",
+      "publish": "block",
+      "_why": "AC11 — real addresses from the owner's graph, matched by shape + set intersection. Never scanned at commit before this story. Measured 2026-07-25: 38 findings across 17 files, of which 21 were two public-by-construction addresses and 17 were genuine leaks in 4 files. PROMOTED TO BLOCK 2026-07-26 on the owner's decision (\"Turn them on\"), against the promotion rule's condition (b): re-measured on the whole tracked tree after the phase 3 removals, 21 findings across 13 file/term pairs remain and ALL 21 are permitted — the non-permitted count is zero. THE CONDITION THE OWNER'S DECISION CARRIED: 8 of those 21 rows sit in 5 files the pre-commit hook REGENERATES AND STAGES during the commit (public-truth.js, public-truth.json, llms-full.txt, faq-bundle.js, faq-context.json), so the hook itself puts the address back on every commit. Without a permitted entry for each, this promotion would fail every commit the owner makes. All 13 pairs are seeded in config/publication-permitted.json and the seeding is proven at commit placement by scripts/qa/commit-posture-proof.js, which stages those regenerated files and asserts exit 0."
+    },
+    "domains": {
+      "staged": "report",
+      "publish": "block",
+      "_why": "AC11 — domains of companies the owner is part of, scoped to employers. Never scanned at commit before this story. Measured 2026-07-25: 1 finding, in a generic vendor-domain list. It is an owner decision under AC5 whether that is a leak or a permitted collision, so this build does not pre-empt it."
+    },
+    "literal_names": {
+      "staged": "skip",
+      "publish": "block",
+      "_why": "AC10 — company, place, alias and person names from the entity graph: 24,253 patterns, the measured-noisy class (217 findings across 66 files). SKIPPED at commit on COST, not on policy. Measured 2026-07-25 on this tree: this pattern file costs a 1.17s FLOOR before any haystack is read (1.26s over one staged file, 2.11s over a realistic de-tax staged set, 2.07s with apps/static/llms-full.txt alone) against a 1.5s budget for everything pre-commit adds. Scanning it at commit breaks the budget on an ordinary commit. It blocks at publication, where a one-off 24s full-tree pass is affordable. Reversing this needs a token-index scan family for names, not a posture change."
+    },
+    "paths": {
+      "staged": "block",
+      "publish": "block",
+      "_why": "A corpus term baked into a tracked FILE PATH leaks even when the contents are clean. Scan family rather than a corpus class: it matches the terms + private_terms literals against path strings. Has blocked at commit since st_e36f5f2b. Measured 2026-07-25: 0 findings."
+    }
+  },
+
+  "skip_paths": [
+    {
+      "path": "scripts/check-first-user-clean.js",
+      "kind": "gate_source",
+      "reason": "the gate's own CLI facade — a gate that can block on its own source can block every commit"
+    },
+    {
+      "path": "lib/owner-corpus.js",
+      "kind": "gate_source",
+      "reason": "gate source (corpus assembly) — same exclusion as the facade, not a new class"
+    },
+    {
+      "path": "lib/owner-corpus-sources.js",
+      "kind": "gate_source",
+      "reason": "gate source (corpus extraction) — same exclusion as the facade"
+    },
+    {
+      "path": "lib/corpus-scan.js",
+      "kind": "gate_source",
+      "reason": "gate source (scan families) — same exclusion as the facade"
+    },
+    {
+      "path": "lib/publication-posture.js",
+      "kind": "gate_source",
+      "reason": "gate source (posture + permitted list) — same exclusion as the facade"
+    },
+    {
+      "path": "scripts/check-publication-permitted.js",
+      "kind": "gate_source",
+      "reason": "gate source (permitted-list CLI) — same exclusion as the facade"
+    },
+    {
+      "path": "config/publication-posture.json",
+      "kind": "gate_source",
+      "reason": "this file — it names the classes the gate hunts, so it must not be hunted"
+    },
+    {
+      "path": "config/publication-permitted.json",
+      "kind": "self_match_dictionary",
+      "reason": "the permitted list holds, by construction, terms that already appear in the tree; scanning it would flag every entry it exists to excuse"
+    },
+    {
+      "path": "config/publication-permitted.user.json",
+      "kind": "self_match_dictionary",
+      "reason": "the gitignored half of the permitted list — same reason, and it never ships"
+    },
+    {
+      "path": "config/owner-corpus-allowlist.json",
+      "kind": "self_match_dictionary",
+      "reason": "the allowlist catalogs the collisions the corpus must ignore; scanning it flags its own contents"
+    },
+    {
+      "path": "config/surnames-top-25K.json",
+      "kind": "self_match_dictionary",
+      "reason": "AC19 bulk dictionary — 25,005 surnames. The gate cannot scan the dictionary it matches against without matching itself."
+    },
+    {
+      "path": "config/nicknames.json",
+      "kind": "self_match_dictionary",
+      "reason": "AC19 bulk dictionary — 2,164 nicknames, same self-match problem"
+    },
+    {
+      "path": "config/yc-domains.json",
+      "kind": "self_match_dictionary",
+      "reason": "AC19 bulk dictionary — 5,862 startup domains, same self-match problem"
+    },
+    {
+      "path": "config/big-tech-domains.json",
+      "kind": "self_match_dictionary",
+      "reason": "AC19 self-excluded dictionary — 129 large-employer domains"
+    },
+    {
+      "path": "config/vc-firms-domains.json",
+      "kind": "self_match_dictionary",
+      "reason": "AC19 self-excluded dictionary — 52 investor domains"
+    },
+    {
+      "path": "config/service-vendor-keywords.json",
+      "kind": "self_match_dictionary",
+      "reason": "AC19 self-excluded dictionary — 28 service-vendor keywords"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "story_id": "st_feff0f53",
+  "product_apps": [
+    {
+      "id": "website",
+      "name": "Website",
+      "use_case": "Public website, login, FAQ, public Ask, legal pages, install guidance",
+      "surface": "public",
+      "status": "migrated",
+      "routes": ["/", "/login", "/ask", "/faq", "/privacy", "/terms", "/licensing", "/install-success", "/auth-google-guidance", "/install.sh", "/llms.txt", "/sitemap.xml"],
+      "subflows": ["home", "login", "faq", "ask", "legal", "install", "guidance"]
+    },
+    { "id": "chat", "name": "Chat", "use_case": "Conversation, assistance, and topic-centered work", "surface": "product", "status": "migrated" },
+    { "id": "health", "name": "Health", "use_case": "Personal health data review and notes", "surface": "product", "status": "migrated" },
+    { "id": "fitness", "name": "Fitness", "use_case": "Daily meals, training, and recovery", "surface": "product", "status": "migrated" },
+    { "id": "network", "name": "Network", "use_case": "Relationship and entity management", "surface": "product", "status": "migrated" },
+    {
+      "id": "account",
+      "name": "Account",
+      "use_case": "Account management, setup, integrations, identity, and skills",
+      "surface": "system",
+      "status": "migrated",
+      "routes": ["/account", "/accounts", "/account/how-to", "/account/general", "/account/integrations", "/account/agents", "/account/skills", "/account/you", "/account/shortcuts", "/account/setup", "/account/imports"],
+      "subflows": ["how-to", "general", "integrations", "agents", "skills", "you", "shortcuts", "setup", "imports"]
+    }
+  ],
+  "workbench_apps": [
+    { "id": "wk_coaching", "name": "Coaching", "surface": "workbench", "status": "descriptor" },
+    { "id": "wk_ecede903", "name": "Career/Job Search", "surface": "workbench", "status": "private-generated" },
+    { "id": "wk_cedar", "name": "Cedar", "surface": "workbench", "status": "descriptor" },
+    { "id": "wk_health", "name": "Health Workbench", "surface": "workbench", "status": "private-generated" },
+    { "id": "wk_robot_dojo", "name": "Robot Dojo", "surface": "workbench", "status": "descriptor" },
+    { "id": "wk_project_maple", "name": "Project Maple", "surface": "workbench", "status": "private-generated" }
+  ],
+  "status_contract": ["migrated", "private-generated", "descriptor", "owner-approved-excluded"],
+  "private_data_boundary": "Inventory records app coverage only. Private paths, owner data, generated datasets, and private dashboard source stay in the owning workbench."
+}

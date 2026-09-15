@@ -1,0 +1,17 @@
+{
+  "_comment": "Default brand alias lookup table — st_93fddaf0 Phase 8. PUBLIC-SAFE defaults shipped with the repo. Owner-specific employer/client aliases belong in config/company-aliases.user.json (gitignored). Used by lib/company-name-normalize.js. Keys are lowercased + space-collapsed; values render as the proper brand name. Long-tail companies fall through to the 9-rule Openprise pipeline.",
+  "aliases": {
+    "ibm": "IBM",
+    "att": "AT&T",
+    "amex": "American Express",
+    "nyu": "NYU",
+    "mit": "MIT",
+    "ucla": "UCLA",
+    "harvard": "Harvard",
+    "stanford": "Stanford",
+    "yale": "Yale",
+    "princeton": "Princeton",
+    "wharton": "Wharton",
+    "columbia": "Columbia University"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "_comment": "Canonical-paths registry for smart-quarantine. The registry follows running code, not aspirational docs. See user/workbenches/topics/work/robot-dojo/wk_robot_dojo/stories/st_27393879/02-plan.md.",
+  "canonical_paths": [
+    {
+      "filename": "taxonomy.user.json",
+      "path": "config/taxonomy.user.json",
+      "local_only": true,
+      "reason": "user-specific topic taxonomy with employer/family names; running code reads from this path (lib/taxonomy.js:34)",
+      "rename_from": "config/taxonomy.json"
+    },
+    {
+      "filename": "vault-manifest.json",
+      "path": ".robotdojo/vault-manifest.json",
+      "local_only": true,
+      "reason": "scripts/vault-manifest.js writes here (line 70)",
+      "writer": "scripts/vault-manifest.js"
+    },
+    {
+      "filename": "cohort-revocation.json",
+      "path": ".robotdojo/cohort-revocation.json",
+      "local_only": true,
+      "reason": "scripts/cohort-revocation-poll.js caches revoked cohort week state here for launch entitlement cleanup",
+      "writer": "scripts/cohort-revocation-poll.js"
+    },
+    {
+      "filename": "launch-agents-quarantine",
+      "path": ".robotdojo/launch-agents-quarantine/",
+      "local_only": true,
+      "reason": "scripts/repair-live-launch-agents.js moves stale com.robotdojo LaunchAgents here instead of deleting them",
+      "writer": "scripts/repair-live-launch-agents.js"
+    },
+    {
+      "filename": "bin",
+      "path": ".robotdojo/bin/",
+      "local_only": true,
+      "reason": "scripts/install-macos-permission-helper.sh writes the local Robot Dojo launcher used for macOS privacy prompts",
+      "writer": "scripts/install-macos-permission-helper.sh"
+    },
+    {
+      "filename": "models",
+      "path": ".robotdojo/models/",
+      "local_only": true,
+      "reason": "local embedding model cache; installer prewarms Snowflake embeddings here so embeddings run offline at $0",
+      "writer": "scripts/setup/prewarm-local-embeddings.js"
+    },
+    {
+      "filename": "robotdojo.db",
+      "path": ".robotdojo/robotdojo.db",
+      "local_only": true,
+      "reason": "launch runtime stores the encrypted local database under ROBOTDOJO_CONFIG so code stays separate from local product state",
+      "writer": "lib/config.js"
+    },
+    {
+      "filename": "robotdojo.db-shm",
+      "path": ".robotdojo/robotdojo.db-shm",
+      "local_only": true,
+      "reason": "SQLite shared-memory sidecar for the canonical local database",
+      "writer": "sqlite"
+    },
+    {
+      "filename": "robotdojo.db-wal",
+      "path": ".robotdojo/robotdojo.db-wal",
+      "local_only": true,
+      "reason": "SQLite write-ahead log sidecar for the canonical local database",
+      "writer": "sqlite"
+    },
+    {
+      "filename": "health-markers.json",
+      "path": "quarantine/legacy-data/health-markers.json",
+      "local_only": false,
+      "reason": "legacy export; data lives in health_markers DB table; preserved for human review per never-delete"
+    }
+  ],
+  "stray_dotdir_db_pattern": {
+    "match_glob": ".robotdojo/*.db*",
+    "destination": "quarantine/dotdir/",
+    "reason": "stray DB outside databases/; preserve for backup/inspection"
+  }
+}

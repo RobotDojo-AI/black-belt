@@ -1,0 +1,9 @@
+{
+  "_comment": "Copy this to ~/.robotdojo/identity.json and fill in your details. Never commit it.",
+  "emails": [
+    "you@example.com",
+    "you@work.com"
+  ],
+  "owner_person_id": "REPLACE_WITH_YOUR_PEOPLE_ID",
+  "display_name_match": "your full name"
+}

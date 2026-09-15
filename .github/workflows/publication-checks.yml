@@ -1,0 +1,52 @@
+# Publication cleanliness — the checks that need no copy of the owner's data.
+#
+# WHY THIS IS A SEPARATE WORKFLOW. root-lock.yml enforces the repository's
+# architecture lock and is itself an architecture-locked file; these checks
+# enforce that nothing private reaches the published copy. Two different
+# properties, two different reasons to go red, and keeping them apart means a
+# change here never needs a signature on the architecture lock.
+#
+# WHAT IT DELIBERATELY DOES NOT RUN (st_dd0e19d8 AC17). The owner-data check
+# (scripts/check-first-user-clean.js) is absent on purpose. A GitHub runner has
+# no copy of his corpus, so that check would find nothing and report clean — a
+# vacuous pass, which is the exact failure this story exists to close. It runs
+# on his machine at every commit and at publication. The limitation is stated in
+# the story's artifact rather than papered over with a green tick here.
+#
+# NO CONDITIONS, NO SUPPRESSION. Every step below runs unconditionally and fails
+# the workflow when it fails: no `if:`, no `continue-on-error:`, and no `|| true`
+# in any run body. A conditional check is a check that can be arranged not to
+# run. scripts/qa/ci-wiring-proof.js asserts all of that against this file.
+
+name: Publication cleanliness
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  publication-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # Owner domains, calendar ids, workspace gids and stored-credential values.
+      # Without --require-domains: on a bare runner the owner-domain arm has
+      # nothing to cross-check and no-ops by design, while the generic pattern
+      # arms do the work. Passing --require-domains here would turn a correct
+      # no-op into a failure on every push.
+      - run: node scripts/check-public-config-clean.js
+      # The deploy ignore-list actually excludes the private data roots.
+      - run: node scripts/check-vercelignore-private-data.js
+      # Every permitted entry has a name, a file, a class, a date and a stated
+      # reason, no owner-identifying class is named in the tracked half, and no
+      # tracked entry excuses an exposure the tree does not already carry.
+      - run: node scripts/check-publication-permitted.js --schema
+      # The published file set still resolves to the locked digest — this is the
+      # manifest's schema check and its drift check in one: the loader refuses a
+      # malformed manifest before the lock is compared.
+      - run: node scripts/publication-manifest.js --check-lock

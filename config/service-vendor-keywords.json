@@ -1,0 +1,35 @@
+{
+  "_comment": "Service-vendor keyword list — st_93fddaf0 Phase 5. Used by scripts/ingest/03b-service-vendor.js to flag contacts whose display name embeds a business-noun keyword. Word-boundary matched, case-insensitive. Keep targeted: false positives on real personal contacts cost more than false negatives on a vendor. Owner-audited cases live in `audited`; broader business-noun keywords live in `general`.",
+  "general": [
+    "Pool",
+    "Lawn",
+    "Plumbing",
+    "Plumb",
+    "Electric",
+    "Electrical",
+    "Cleaning",
+    "Pest",
+    "HVAC",
+    "Roofing",
+    "Contractor",
+    "Contracting",
+    "Salon",
+    "Spa",
+    "Repair",
+    "Mowing",
+    "Heating",
+    "Landscaping",
+    "Handyman",
+    "Painting",
+    "Tile",
+    "Carpet",
+    "Cleaners",
+    "Locksmith",
+    "Tree Service",
+    "Pest Control",
+    "Auto Repair"
+  ],
+  "audited": [
+    "Down to Earth"
+  ]
+}

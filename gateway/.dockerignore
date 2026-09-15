@@ -1,0 +1,9 @@
+node_modules
+infra/.terraform
+infra/.terraform.lock.hcl
+infra/terraform.tfvars
+infra/terraform.tfvars.bak
+infra/*.tfstate
+infra/*.tfstate.*
+*.log
+.DS_Store

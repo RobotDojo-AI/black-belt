@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="robots" content="noindex,follow">
+  <title>Robot Dojo — Accounts</title>
+  <link rel="preload" href="/static/vendor/fonts.css?v=app-shell-20260529-2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="/static/shared/theme.css?v=app-shell-20260529-2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="/static/shared/shell.css?v=2026-09-09-1" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="/static/shared/app-layout.css?v=app-shell-20260529-2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="/account/style.css?v=2026-09-08-6" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="/static/vendor/fonts.css?v=app-shell-20260529-2">
+    <link rel="stylesheet" href="/static/shared/theme.css?v=app-shell-20260529-2">
+    <link rel="stylesheet" href="/static/shared/shell.css?v=2026-09-09-1">
+    <link rel="stylesheet" href="/static/shared/app-layout.css?v=app-shell-20260529-2">
+    <link rel="stylesheet" href="/account/style.css?v=2026-09-08-6">
+  </noscript>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/static/icon-180.png">
+  <link rel="manifest" href="/static/manifest.json">
+  <!-- general fields: user_handle, user_uuid -->
+  <script src="/static/vendor/marked.min.js" defer></script>
+  <script src="/static/vendor/purify.min.js" defer></script>
+  <script>
+    try {
+      const tab = location.pathname.replace(/^\/accounts?\/?/, '') || 'how-to';
+      document.documentElement.dataset.accountInitialTab = tab;
+    } catch {}
+  </script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    html{height:100%}
+    body{opacity:1;margin:0;height:100dvh;display:flex;flex-direction:column;overflow:hidden;background:#f8fafc;color:#1f1f1f;font:14px/1.5 Inter,-apple-system,BlinkMacSystemFont,system-ui,sans-serif}body.app-ready{opacity:1}
+    .material-symbols-outlined{display:inline-flex;align-items:center;justify-content:center;width:20px;min-width:20px;height:20px;overflow:hidden;font-size:20px;line-height:1}
+    .global-topbar{display:flex;align-items:center;gap:8px;min-height:48px;padding:6px 12px 6px 4px;background:#f8fafc;box-sizing:border-box;flex-shrink:0;position:relative}
+    .topbar-icon-btn{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 36px}
+    .topbar-hamburger{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 40px}
+    .topbar-brand{display:flex;align-items:center;gap:6px;flex:0 0 auto}
+    .topbar-search-wrapper{flex:1;min-width:0;display:flex;align-items:center;justify-content:center}
+    .persistent-search{display:flex;align-items:center;gap:6px;min-height:32px;width:100%;max-width:680px;box-sizing:border-box}
+    .app-body{display:flex;flex:1;min-height:0;overflow:hidden;background:#f8fafc;padding-top:10px;box-sizing:border-box}
+    .app-sidebar{width:260px;flex:0 0 260px;background:#f8fafc;border-right:0;padding:6px;box-sizing:border-box;overflow:hidden;display:flex;flex-direction:column}
+    .main{min-height:0;min-width:0;flex:1;display:flex;flex-direction:column;overflow:hidden;background:#f8fafc}
+    .accounts-toolbar{display:flex;align-items:center;gap:8px;padding:12px 24px;flex-shrink:0;max-width:1200px;margin:0 auto;width:100%;box-sizing:border-box}
+    .accounts-toolbar-title{display:none;font-size:16px;font-weight:600;color:#1f1f1f;flex:1;min-width:0}
+    .accounts-toolbar:empty{display:none}
+    .accounts-toolbar:has(.accounts-toolbar-title:only-child){display:none}
+    .accounts-feed{flex:1;overflow-y:auto;padding:0 24px 24px;max-width:1200px;margin:0 auto;width:100%;box-sizing:border-box}
+    .acct-nav{padding:4px 8px;min-height:100%;display:flex;flex-direction:column}
+    .acct-nav-item{display:flex;align-items:center;gap:10px;height:32px;padding:0 12px;border-radius:20px;color:#444746;font:13px Inter,-apple-system,BlinkMacSystemFont,system-ui,sans-serif}
+    .acct-nav-item.active{background:#d3e3fd;color:#041e49;font-weight:500}
+    .acct-nav-icon{font-size:18px;line-height:1;flex:0 0 18px;width:18px;height:18px}
+    .acct-nav-divider{border:0;border-top:1px solid #e8eaed;margin:6px 12px}
+    .acct-nav-footer{margin-top:auto;padding-top:8px}
+    .acct-card{background:#fff;border:1px solid #e8eaed;border-radius:8px;padding:16px 20px;margin-bottom:8px}
+    .acct-card-header{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+    .acct-card-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#f1f3f4;color:#5f6368;flex-shrink:0}
+    .acct-card-icon .material-symbols-outlined{font-size:20px}
+    .acct-card-title{flex:1;min-width:0}
+    .acct-card-name{font-size:14px;font-weight:500;color:#1f1f1f;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .acct-card-service{font-size:11px;color:#5f6368;display:flex;align-items:center;gap:4px;margin-top:2px}
+    .general-howto-card{max-width:780px;margin-bottom:16px}
+    html[data-account-initial-tab]:not([data-account-initial-tab="how-to"]) .general-howto-card{display:none}
+    .general-howto-body{display:grid;gap:10px;padding-top:12px;font:13px/1.55 Inter,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;color:#1f1f1f}
+    .general-howto-body p{margin:0}
+    .howto-key{font-weight:850;color:#1a73e8}
+    .acct-group-header{font-size:12px;font-weight:600;color:#5f6368;text-transform:uppercase;letter-spacing:.04em;padding:0 4px 8px;border-bottom:1px solid #e8eaed;margin:0 0 12px}
+    .integ-summary{font-size:13px;color:#1f1f1f;margin:0 0 14px;text-align:center;padding:10px 16px;background:#f1f3f4;border-radius:8px;border:1px solid #e8eaed}
+    .integ-group{margin:0 0 24px}
+    .integ-table-wrap{overflow-x:auto;border:1px solid #e8eaed;border-radius:8px}
+    .integ-table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
+    .integ-table th{font-weight:600;padding:10px 12px;border-bottom:1px solid rgba(0,0,0,.10);font-size:12px;color:#5f6368;text-align:left}
+    .integ-table td{padding:10px 12px;border-bottom:1px solid rgba(0,0,0,.06);font-size:13px;vertical-align:middle;color:#1f1f1f}
+    .integ-dashboard-table .integ-th-name,.integ-dashboard-table .integ-td-name{width:130px}
+    .integ-dashboard-table .integ-th-type,.integ-dashboard-table .integ-td-type{width:100px}
+    .integ-dashboard-table .integ-th-count,.integ-dashboard-table .integ-td-count{width:46px;text-align:center}
+    .integ-dashboard-table .integ-th-status,.integ-dashboard-table .integ-td-status{width:220px;text-align:left}
+    .integ-col-icon{display:block;font-size:18px;line-height:1;margin:0 auto 2px;color:#444746}
+    .integ-col-label{display:block;font-size:10px;line-height:1}
+    .integ-health-cell{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;width:100%}
+    .integ-status-dot{display:inline-block;width:10px;height:10px;border-radius:999px;box-shadow:0 0 0 2px #f1f3f4}
+    .integ-status-label{font-size:11px;font-weight:600;line-height:1.25;text-align:center}
+    .integ-status-sentence{max-width:none;white-space:normal;overflow:visible;text-overflow:clip}
+    .integ-name-cell{display:flex;align-items:center;gap:6px;min-width:0}
+    .integ-name-main{min-width:0;overflow:hidden;text-overflow:ellipsis}
+    .integ-row-sub{margin-top:2px;color:#5f6368;font-size:11px;font-weight:400;overflow-wrap:anywhere}
+    .identity-showcase-lede{padding:6px 2px 16px;max-width:760px}
+    .identity-showcase-lede h2{margin:0 0 6px;color:#1f1f1f;font-size:20px;line-height:1.2;font-weight:650}
+    .identity-showcase-lede p{margin:0;color:#444746;font-size:14px;line-height:1.55}
+    .identity-showcase-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+    .identity-showcase-grid-single{grid-template-columns:minmax(280px,720px)}
+    .identity-showcase-card{display:flex;flex-direction:column;gap:14px;min-height:286px;padding:18px}
+    .identity-showcase-card-head{display:flex;align-items:flex-start;gap:12px;min-width:0}
+    .identity-showcase-eyebrow{margin-bottom:2px;color:#5f6368;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+    .identity-showcase-copy{color:#444746;font-size:13px;line-height:1.55}
+    .identity-showcase-copy p{margin:0 0 8px}
+    .identity-showcase-copy p:last-child{margin-bottom:0}
+    .identity-showcase-actions{display:flex;align-items:flex-end;justify-content:flex-start;margin-top:auto;padding-top:2px}
+    .identity-see-btn{min-height:32px;display:inline-flex;color:#5f6368;font-size:13px;line-height:1.45}
+    .identity-card-kanji{margin-right:6px}
+    @media(max-width:768px){html,body{overflow-x:hidden}.global-topbar{display:flex;gap:4px;min-height:calc(48px + env(safe-area-inset-top,0px));padding-top:calc(6px + env(safe-area-inset-top,0px));padding-left:max(4px,env(safe-area-inset-left,0px));padding-right:max(8px,env(safe-area-inset-right,0px))}.topbar-brand{gap:0;padding-right:0}.topbar-brand .brand-text{display:none}.topbar-search-wrapper{justify-content:stretch}.persistent-search{max-width:none;min-height:32px;padding:4px 10px}.app-body{padding:0;min-width:0}.app-body>.app-sidebar,.app-sidebar{display:flex;position:fixed;z-index:30;top:calc(48px + env(safe-area-inset-top,0px));left:0;bottom:0;width:min(260px,calc(100vw - 48px));max-width:86vw;transform:translateX(-105%)}.main{width:100%;min-width:0}}
+    @media(max-width:640px){.identity-showcase-grid,.identity-showcase-grid-single{grid-template-columns:1fr}.identity-showcase-card{min-height:0;padding:16px}.identity-showcase-card-head{align-items:flex-start}.identity-see-btn{width:100%;justify-content:center}}
+  </style>
+  <script>
+    window.RobotDojoBootFallback = setTimeout(() => {
+      if (!document.body || document.body.classList.contains('app-ready')) return;
+      document.body.classList.add('app-ready', 'app-boot-fallback');
+      const fallback = document.createElement('div');
+      fallback.className = 'rd-boot-fallback rd-error';
+      fallback.setAttribute('role', 'alert');
+      fallback.textContent = 'Robot Dojo Account could not finish loading. Refresh to retry.';
+      document.body.prepend(fallback);
+    }, 8000);
+  </script>
+  <script src="/static/shared/sw-register.js?v=2026-06-29-4" defer></script>
+</head>
+<body data-app="account">
+  <div class="global-topbar" id="globalTopbar"></div>
+
+  <div class="app-body">
+    <div class="app-sidebar" id="sidebar">
+      <div class="sidebar-top" style="display:none"></div>
+      <div class="sidebar-content" id="sidebarContent">
+        <div class="acct-nav rd-sidebar-section">
+          <div class="acct-nav-item active" data-section="how-to"><span class="material-symbols-outlined acct-nav-icon">smart_toy</span><span class="acct-nav-name">How To Robot</span></div>
+          <div class="acct-nav-item" data-section="general"><span class="material-symbols-outlined acct-nav-icon">admin_panel_settings</span><span class="acct-nav-name">Admin</span></div>
+          <div class="acct-nav-item" data-section="integrations"><span class="material-symbols-outlined acct-nav-icon">electrical_services</span><span class="acct-nav-name">Integrations</span></div>
+          <hr class="acct-nav-divider">
+          <div class="acct-nav-item" data-section="agents"><span class="material-symbols-outlined acct-nav-icon">smart_toy</span><span class="acct-nav-name">Agents</span></div>
+          <div class="acct-nav-item" data-section="skills"><span class="material-symbols-outlined acct-nav-icon">construction</span><span class="acct-nav-name">Skills</span></div>
+          <div class="acct-nav-item" data-section="you"><span class="material-symbols-outlined acct-nav-icon">person</span><span class="acct-nav-name">You</span></div>
+          <hr class="acct-nav-divider">
+          <div class="acct-nav-item" data-section="shortcuts"><span class="material-symbols-outlined acct-nav-icon">keyboard</span><span class="acct-nav-name">Shortcuts</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar(false)"></div>
+
+    <div class="main" id="mainArea">
+      <div class="accounts-toolbar" id="accountsToolbar"></div>
+      <div class="accounts-feed" id="accountsFeed">
+        <div class="acct-card general-howto-card" data-tab="how-to">
+          <div class="general-howto-body">
+            <p>Mention <span class="howto-key">@miyagi</span> when you want help understanding how Robot Dojo works and how to build the thing you're interested in. Miyagi answers from Robot Dojo's codebase and can explain the following and more:</p>
+            <p><span class="howto-key">Integrations</span> bring your data into Robot Dojo. Robot Dojo turns that data into <span class="howto-key">memory</span> your chat can use. Your data stays local and private, even when you connect through robotdojo.ai.</p>
+            <p>Creating <span class="howto-key">topics</span> organizes your memories and chat history into themes, which keeps chat fast, focused, and full of context you don't have to re-explain.</p>
+            <p>The coding agent works the same <span class="howto-key">topics</span> as chat, with extra tools: working with data directly, building small apps, and writing durable conclusions back so the next session resumes.</p>
+            <p><span class="howto-key">Skills</span> and <span class="howto-key">agent personas</span> give coding agents clear roles, instructions, workflows, and quality checks. They help non-technical people build with agents without needing to know every engineering step.</p>
+            <p>Use the feedback button in the bottom corner to send feedback, bug reports, or feature requests. Robot Dojo strips personal and sensitive information before sending it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/shared/icons.js?v=2026-06-23-2" defer></script>
+  <script src="/static/shared/utils.js" defer></script>
+  <script src="/static/shared/api.js" defer></script>
+  <script src="/static/shared/app-registry.js?v=2026-09-09-2" defer></script>
+  <script src="/static/shared/shell.js?v=2026-09-09-1" defer></script>
+  <script src="/static/shared/shell-notifications.js" defer></script>
+  <script src="/static/shared/shell-search.js" defer></script>
+  <script src="/static/shared/app-state.js" defer></script>
+  <script src="/static/shared/app-components.js" defer></script>
+  <script src="/static/shared/shortcuts.js?v=2026-09-08-9" defer></script>
+  <script src="/static/vendor/sortable.min.js" defer></script>
+  <script src="/account/app-config.js?v=howto-20260529-7" defer></script>
+  <script src="/account/components/task-tiles.js" defer></script>
+  <script src="/account/app.js?v=2026-09-09-3" defer></script>
+</body>
+</html>

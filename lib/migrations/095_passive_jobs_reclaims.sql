@@ -1,0 +1,26 @@
+-- st_b50005df Phase 2 — separate interrupted-success from real failure.
+--
+-- The pathology (research D2): acquireNextPassiveJob incremented `attempts`
+-- on EVERY claim. A long embed slice whose lease expired mid-run, or an
+-- idle/clean-stop reclaim, was recovered to 'queued' and re-claimed — and
+-- each re-claim bumped `attempts` even though nothing FAILED. With a real
+-- corpus a single embedding_topic job climbed to attempts=246, marching
+-- toward the max_attempts=5 -> quarantine dead-end despite never erroring.
+--
+-- The fix splits the counter:
+--   attempts  — REAL failures only. Incremented exclusively by failPassiveJob.
+--               This is the only counter compared against max_attempts.
+--   reclaims  — benign re-claims: lease-expiry recovery + idle/clean-stop
+--               re-queues. Bookkeeping only; NEVER gates quarantine.
+--
+-- A job can now be reclaimed an unbounded number of times (crash, idle-abort,
+-- slow slice) without ever marching to quarantine. Only a handler that
+-- genuinely errors max_attempts times for a non-busy reason is quarantined —
+-- exactly the poison-pill case quarantine is meant to contain.
+--
+-- DEFAULT 0 + NOT NULL: existing rows backfill to 0 reclaims, which is correct
+-- (their historical re-claims were counted in `attempts`; Phase 2 resets the
+-- live churn separately). Idempotent: ADD COLUMN guarded by the inline
+-- migrate() column probe in lib/db.js, so a re-run is a no-op.
+
+ALTER TABLE passive_jobs ADD COLUMN reclaims INTEGER NOT NULL DEFAULT 0;

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Robot Dojo — main server LaunchAgent template.
+  Tokens (__HOME__, __CONFIG__, __NODE__, __ROBOTDOJO_RUNTIME__, __PATH__,
+  __ROBOTDOJO_HOME__, __USER__, __ROBOTDOJO_APP__, __ROBOTDOJO_LAUNCHER__)
+  are expanded by install.sh. Do not edit by hand on a live install —
+  re-run the installer instead.
+
+  Label renamed from `ai.robotdojo` → `com.robotdojo.server` (st_bc949e7c)
+  so every product LaunchAgent shares the `com.robotdojo.*` namespace.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.robotdojo.server</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>__ROBOTDOJO_RUNTIME__</string>
+    <string>__ROBOTDOJO_HOME__/index.js</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>__ROBOTDOJO_HOME__</string>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>KeepAlive</key>
+  <true/>
+
+  <key>ThrottleInterval</key>
+  <integer>10</integer>
+
+  <key>StandardOutPath</key>
+  <string>__CONFIG__/logs/robotdojo-server.out.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>__CONFIG__/logs/robotdojo-server.err.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>__HOME__</string>
+    <key>USER</key>
+    <string>__USER__</string>
+    <key>PATH</key>
+    <string>__PATH__</string>
+    <key>NODE_ENV</key>
+    <string>production</string>
+    <key>ROBOTDOJO_HOME</key>
+    <string>__ROBOTDOJO_HOME__</string>
+    <key>ROBOTDOJO_CONFIG</key>
+    <string>__CONFIG__</string>
+    <key>ROBOTDOJO_DB</key>
+    <string>__CONFIG__/robotdojo.db</string>
+    <key>ROBOTDOJO_SERVER_DB_BUSY_TIMEOUT_MS</key>
+    <string>100</string>
+    <key>ROBOTDOJO_PODCAST_SERIES_CONCURRENCY</key>
+    <string>3</string>
+    <key>ROBOTDOJO_TTS_CHUNK_CONCURRENCY</key>
+    <string>3</string>
+    <key>ROBOTDOJO_SKIP_TUNNEL</key>
+    <string>1</string>
+  </dict>
+</dict>
+</plist>

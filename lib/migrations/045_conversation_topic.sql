@@ -1,0 +1,11 @@
+-- Migration 045: Add topic_slug to conversations.
+--
+-- Every conversation remembers which topic it was started in. topic_slug is
+-- nullable — existing conversations have no topic, new ones set it at creation
+-- when the user has a topic active in the left nav.
+--
+-- SQLite does not support ALTER TABLE ADD COLUMN IF NOT EXISTS.
+-- The migration runner handles "duplicate column name" gracefully: if the
+-- column was added manually on an existing DB, the runner records the migration
+-- as applied and continues (no throw). Fresh DBs apply normally.
+ALTER TABLE conversations ADD COLUMN topic_slug TEXT;

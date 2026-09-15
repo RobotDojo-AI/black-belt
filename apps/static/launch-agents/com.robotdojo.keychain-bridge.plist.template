@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Robot Dojo — Keychain bridge.
+
+  Aqua gui-domain process that decrypts robotdojo-LOCAL_DB_KEY for hardened
+  coding-agent hosts. Grok (Developer ID, hardened runtime, no Keychain
+  entitlements) cannot call `security -w` (status 36). This agent can, because
+  launchd starts it outside that process tree.
+
+  KeepAlive: the socket must exist for the duration of a login session.
+  Provider keys are not served.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.robotdojo.keychain-bridge</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>__ROBOTDOJO_RUNTIME__</string>
+    <string>__ROBOTDOJO_HOME__/scripts/keychain-bridge.js</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>__ROBOTDOJO_HOME__</string>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>KeepAlive</key>
+  <true/>
+
+  <key>ThrottleInterval</key>
+  <integer>2</integer>
+
+  <key>ProcessType</key>
+  <string>Background</string>
+
+  <key>StandardOutPath</key>
+  <string>__CONFIG__/logs/robotdojo-keychain-bridge.out.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>__CONFIG__/logs/robotdojo-keychain-bridge.err.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>__HOME__</string>
+    <key>USER</key>
+    <string>__USER__</string>
+    <key>NODE_ENV</key>
+    <string>production</string>
+    <key>PATH</key>
+    <string>__PATH__</string>
+    <key>ROBOTDOJO_HOME</key>
+    <string>__ROBOTDOJO_HOME__</string>
+    <key>ROBOTDOJO_CONFIG</key>
+    <string>__CONFIG__</string>
+  </dict>
+</dict>
+</plist>

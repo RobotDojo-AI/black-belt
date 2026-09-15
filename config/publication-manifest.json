@@ -1,0 +1,45 @@
+{
+  "_comment": "AC3 (st_dd0e19d8) — the explicit written list that decides what reaches the published copy. Path globs only; no owner data may enter this file, it is tracked and it ships. Glob syntax and the lock's meaning are documented in lib/publication-manifest.js. Regenerate the lock with `node scripts/publication-manifest.js --write-lock` IN THE SAME COMMIT that adds or removes a tracked file; a stale lock refuses publication by design.",
+  "include": [
+    {
+      "glob": "**",
+      "reason": "Everything git tracks is the universe. The guarantee comes from the exclusions below plus the lock, not from a narrow include: a narrow include silently drops a file the product needs and the failure shows up as a broken published copy rather than as a refusal."
+    }
+  ],
+  "exclude": [
+    {
+      "glob": "**/tests/**",
+      "reason": "The owner's decision at scope: the published version excludes the test suite. By DIRECTORY at any depth — 666 tracked files sit under a tests/ directory, including scripts/qa/tests/."
+    },
+    {
+      "glob": "**/*.test.js",
+      "reason": "The same decision by FILE SHAPE, which is the half a directory rule misses: one tracked test file (scripts/qa/regression-rag-embed-divergence.test.js) lives outside every tests/ directory and a directory-only rule would have shipped it."
+    },
+    {
+      "glob": "**/*.spec.js",
+      "reason": "The second test-file shape. No tracked file matches it today; the rule exists so a future .spec.js does not become the next file that ships because nobody re-derived the exclusion."
+    },
+    {
+      "glob": "apps/health/**",
+      "reason": "Founder app. Launch is Chat plus coding-agent memory. Health UI stays in dev."
+    },
+    {
+      "glob": "apps/fitness/**",
+      "reason": "Founder app. Launch is Chat plus coding-agent memory. Fitness UI stays in dev."
+    },
+    {
+      "glob": "apps/network/**",
+      "reason": "Founder app. Launch is Chat plus coding-agent memory. Network UI stays in dev."
+    },
+    {
+      "glob": "apps/podcast/**",
+      "reason": "Founder app. Launch is Chat plus coding-agent memory. Podcast UI stays in dev."
+    }
+  ],
+  "lock": {
+    "files": 1625,
+    "digest": "sha256:dd07b01cfab0d18621f42ee0a3f1cf2ecb18b7d4dd1d0dd6b919e12493101db9",
+    "commit": "167ca4f6f86b6165bbf32719717aa348fbb05a9e",
+    "generated_at": "2026-09-15T17:50:16.927Z"
+  }
+}

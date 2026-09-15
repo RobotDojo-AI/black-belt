@@ -1,0 +1,619 @@
+{
+  "conditionGroups": [
+    {
+      "name": "Primary Autoimmune",
+      "desc": "Autoimmune vasculitis — immune markers, flare activity, complement consumption",
+      "markers": [
+        "hscrp",
+        "c3",
+        "c4",
+        "anc",
+        "lymph_abs",
+        "wbc",
+        "lymphs",
+        "eosinophils",
+        "eos",
+        "eos_absolute",
+        "monocytes",
+        "monocytes_absolute",
+        "basos",
+        "baso_absolute",
+        "immature_granulocytes",
+        "esr",
+        "adalimumab_level",
+        "histone_ab",
+        "aso_titer",
+        "iga",
+        "igg",
+        "igm"
+      ],
+      "color": "#0f766e"
+    },
+    {
+      "name": "APOE4 & Cardiovascular",
+      "desc": "Lipid management, coronary risk, brain protection",
+      "markers": [
+        "ldl",
+        "apob",
+        "non_hdl",
+        "hdl",
+        "total_chol",
+        "triglycerides",
+        "vldl_cholesterol_cal",
+        "lpa",
+        "homocysteine",
+        "omega3_index",
+        "oura_rhr",
+        "oura_hrv",
+        "restingHR",
+        "hrv",
+        "vo2max",
+        "steps"
+      ],
+      "color": "#059669"
+    },
+    {
+      "name": "Kidney Stones & Calcium Wasting",
+      "desc": "Hypercalciuria, stone prevention, chlorthalidone monitoring",
+      "markers": [
+        "urine_calcium_24hr",
+        "calcium_serum",
+        "egfr",
+        "creatinine",
+        "bun",
+        "bun_creat_ratio",
+        "uric_acid",
+        "urine_oxalate_24hr",
+        "urine_uric_24hr",
+        "pth",
+        "vitamin_d",
+        "phosphorus",
+        "sodium",
+        "potassium",
+        "chloride",
+        "carbon_dioxide",
+        "co2"
+      ],
+      "color": "#0ea5e9"
+    },
+    {
+      "name": "Iron Metabolism & HFE",
+      "desc": "HFE S65C carrier, ferritin creep, copper deficiency",
+      "markers": [
+        "ferritin",
+        "iron_sat",
+        "iron",
+        "tibc",
+        "hemoglobin",
+        "platelets",
+        "hematocrit",
+        "mcv",
+        "mch",
+        "mchc",
+        "rdw",
+        "mpv",
+        "rbc",
+        "copper",
+        "zinc"
+      ],
+      "color": "#d97706"
+    },
+    {
+      "name": "Bone Health",
+      "desc": "4 genetic bone metabolism hits, DEXA monitoring, vitamin D",
+      "markers": [
+        "alp",
+        "vitamin_d",
+        "calcium_serum",
+        "urine_calcium_24hr",
+        "pth",
+        "phosphorus"
+      ],
+      "color": "#7c3aed"
+    },
+    {
+      "name": "Gilbert's & Liver",
+      "desc": "Chronic bilirubin elevation, statin monitoring",
+      "markers": [
+        "bilirubin",
+        "alt",
+        "ast",
+        "ggt",
+        "protein_total",
+        "albumin",
+        "globulin",
+        "a_g_ratio"
+      ],
+      "color": "#f59e0b"
+    },
+    {
+      "name": "Alopecia",
+      "desc": "Hair loss as downstream inflammatory response",
+      "markers": [
+        "copper",
+        "ferritin",
+        "zinc",
+        "testosterone",
+        "free_testosterone",
+        "free_testosterone_pg_ml",
+        "free_testosterone_ng_dl",
+        "dheas",
+        "anc"
+      ],
+      "color": "#a855f7"
+    },
+    {
+      "name": "Metabolic & Hormones",
+      "desc": "Insulin sensitivity, testosterone decline, adrenal function",
+      "markers": [
+        "hba1c",
+        "glucose",
+        "insulin",
+        "weight",
+        "body_fat",
+        "bmi",
+        "testosterone",
+        "free_testosterone",
+        "free_testosterone_pg_ml",
+        "free_testosterone_ng_dl",
+        "shbg",
+        "dheas",
+        "tsh",
+        "cortisol",
+        "b12",
+        "folate"
+      ],
+      "color": "#059669"
+    },
+    {
+      "name": "Toxicology",
+      "desc": "Mold exposure 2016-2017, heavy metals",
+      "markers": [
+        "ochratoxin",
+        "mycophenolic",
+        "mercury_blood",
+        "arsenic",
+        "lead"
+      ],
+      "color": "#64748b"
+    },
+    {
+      "name": "Sleep & Recovery",
+      "desc": "Oura ring — sleep quality, HRV, autonomic function",
+      "markers": [
+        "oura_sleep_score",
+        "oura_hrv",
+        "oura_rhr",
+        "oura_total_sleep",
+        "oura_deep_sleep",
+        "oura_rem_sleep",
+        "oura_readiness",
+        "oura_efficiency",
+        "respiratory_rate",
+        "spo2",
+        "steps"
+      ],
+      "color": "#6366f1"
+    }
+  ],
+  "rxGroups": [
+    {
+      "name": "Humira (Adalimumab)",
+      "status": "active",
+      "frequency": "every other week",
+      "date_started": "2020-01-01",
+      "desc": "TNF inhibitor for primary autoimmune condition. Started 2020, EOW since July 2025.",
+      "markers": [
+        "hscrp",
+        "c3",
+        "c4",
+        "anc",
+        "lymph_abs",
+        "eos_absolute",
+        "adalimumab_level",
+        "alt"
+      ],
+      "color": "#2563eb"
+    },
+    {
+      "name": "Olumiant (Baricitinib)",
+      "status": "active",
+      "dose": "4mg",
+      "frequency": "daily",
+      "date_started": "2025-12-01",
+      "desc": "JAK inhibitor. 2mg May-Sept 2025, 4mg since Dec 2025; resumed 2026-06-28 after about a 1-month gap; stop about 1-2 weeks before active TTC.",
+      "markers": [
+        "anc",
+        "lymph_abs",
+        "eos_absolute",
+        "platelets",
+        "hemoglobin",
+        "hscrp"
+      ],
+      "color": "#4f46e5"
+    },
+    {
+      "name": "Rosuvastatin + Ezetimibe",
+      "status": "active",
+      "dose": "Rosuvastatin 20mg + Ezetimibe 10mg",
+      "desc": "Statin + absorption blocker for APOE4. Rosuvastatin hold remains an open cardiologist conversation only if DFI is elevated.",
+      "markers": [
+        "ldl",
+        "apob",
+        "non_hdl",
+        "hdl",
+        "total_chol",
+        "triglycerides",
+        "alt",
+        "ast"
+      ],
+      "color": "#059669"
+    },
+    {
+      "name": "Chlorthalidone",
+      "status": "active",
+      "dose": "12.5mg",
+      "date_started": "2026-02-26",
+      "desc": "Thiazide for hypercalciuria, 12.5mg daily since 2026-02-26 and never actually stopped (owner confirmed 2026-07-26; the prior 'on hold' record was wrong). Because it kept running through the D3/K2 protocol, that protocol does not isolate a single variable and its urine-calcium readout reflects thiazide plus D3/K2 together.",
+      "markers": [
+        "urine_calcium_24hr",
+        "calcium_serum",
+        "egfr",
+        "creatinine",
+        "bun",
+        "bun_creat_ratio",
+        "sodium",
+        "potassium",
+        "chloride",
+        "carbon_dioxide",
+        "co2"
+      ],
+      "color": "#0ea5e9"
+    },
+    {
+      "name": "Finasteride",
+      "status": "held",
+      "dose": "1mg",
+      "date_started": "2025-12-01",
+      "date_stopped": "2026-06-01",
+      "desc": "5-alpha reductase inhibitor for alopecia. Started Dec 2025; off indefinitely through TTC/DFI window, with 3-month washout targeting Sept 1 2026 DFI.",
+      "markers": [
+        "testosterone",
+        "free_testosterone",
+        "free_testosterone_pg_ml",
+        "free_testosterone_ng_dl",
+        "dheas"
+      ],
+      "color": "#a855f7"
+    },
+    {
+      "name": "Supplements",
+      "type": "supplement",
+      "status": "active",
+      "desc": "5-MTHF, Fish Oil, D3+K2, CoQ10, Mg, Copper (planned/restart status unconfirmed).",
+      "markers": [
+        "vitamin_d",
+        "homocysteine",
+        "b12",
+        "folate",
+        "copper",
+        "zinc",
+        "omega3_index",
+        "ferritin",
+        "iron",
+        "tibc"
+      ],
+      "color": "#d97706"
+    }
+  ],
+  "bodyAreaMap": {
+    "heart": {
+      "name": "Heart",
+      "context": "Lipid transport and cardiovascular function. APOE e3/e4 carrier. Coronary calcium 0 at age 41. Rosuvastatin 20mg + ezetimibe 10mg. Aggressive targets: LDL <70, ApoB <80, non-HDL <100.",
+      "markers": [
+        "ldl",
+        "apob",
+        "non_hdl",
+        "hdl",
+        "total_chol",
+        "triglycerides",
+        "vldl_cholesterol_cal",
+        "lpa",
+        "homocysteine",
+        "omega3_index",
+        "vo2max",
+        "oura_rhr",
+        "oura_hrv",
+        "steps"
+      ],
+      "color": "#059669"
+    },
+    "liver": {
+      "name": "Liver",
+      "context": "Hepatocellular integrity, biliary flow and synthetic function. Gilbert's syndrome (chronic elevated bilirubin, benign). Statin hepatotoxicity surveillance; ALT is the key enzyme to watch.",
+      "markers": [
+        "alt",
+        "ast",
+        "ggt",
+        "bilirubin",
+        "protein_total",
+        "albumin",
+        "globulin",
+        "a_g_ratio",
+        "arsenic"
+      ],
+      "color": "#f59e0b"
+    },
+    "kidneys": {
+      "name": "Kidneys",
+      "context": "Glomerular filtration, electrolyte and acid-base handling, and renal excretion. Idiopathic hypercalciuria with a confirmed CLDN14 variant. Calcium oxalate stone history. Chlorthalidone 12.5mg daily since 2026-02-26.",
+      "markers": [
+        "egfr",
+        "creatinine",
+        "bun",
+        "bun_creat_ratio",
+        "uric_acid",
+        "calcium_serum",
+        "urine_calcium_24hr",
+        "urine_oxalate_24hr",
+        "urine_uric_24hr",
+        "sodium",
+        "potassium",
+        "chloride",
+        "carbon_dioxide",
+        "co2",
+        "arsenic",
+        "lead"
+      ],
+      "color": "#06b6d4"
+    },
+    "bone": {
+      "name": "Bone",
+      "context": "Bone turnover and the vitamin D axis. VDR Bsm variant plus genotyped CYP24A1 and CYP2R1. Annual DEXA on Lunar Prodigy. Vitamin D target 50-70 ng/mL.",
+      "markers": [
+        "alp",
+        "vitamin_d",
+        "pth",
+        "phosphorus",
+        "calcium_serum",
+        "urine_calcium_24hr"
+      ],
+      "color": "#a855f7"
+    },
+    "blood": {
+      "name": "Blood",
+      "context": "Haematopoiesis, immune cell lines, iron status and systemic inflammation. HFE S65C carrier. Dual immunosuppression (Humira + Olumiant) suppresses counts. ANC hard floor 1.5.",
+      "markers": [
+        "anc",
+        "lymph_abs",
+        "lymphs",
+        "wbc",
+        "eosinophils",
+        "eos",
+        "eos_absolute",
+        "basos",
+        "baso_absolute",
+        "monocytes",
+        "monocytes_absolute",
+        "immature_granulocytes",
+        "platelets",
+        "hemoglobin",
+        "hematocrit",
+        "mcv",
+        "mch",
+        "mchc",
+        "rbc",
+        "rdw",
+        "mpv",
+        "ferritin",
+        "iron",
+        "iron_sat",
+        "tibc",
+        "copper",
+        "zinc",
+        "b12",
+        "folate",
+        "hscrp",
+        "esr",
+        "c3",
+        "c4",
+        "adalimumab_level",
+        "histone_ab",
+        "aso_titer",
+        "iga",
+        "igg",
+        "igm",
+        "lead",
+        "mercury_blood"
+      ],
+      "color": "#475569"
+    },
+    "endocrine": {
+      "name": "Endocrine",
+      "context": "Hormonal axes and metabolic regulation. Testosterone declining with age, DHEA-S dropping. Finasteride held through the TTC/DFI washout. Thyroid stable. Body composition tracked as a metabolic-hormonal signal.",
+      "markers": [
+        "testosterone",
+        "free_testosterone",
+        "free_testosterone_pg_ml",
+        "free_testosterone_ng_dl",
+        "shbg",
+        "dheas",
+        "tsh",
+        "cortisol",
+        "insulin",
+        "glucose",
+        "hba1c",
+        "weight",
+        "body_fat",
+        "bmi"
+      ],
+      "color": "#059669"
+    },
+    "brain": {
+      "name": "Brain",
+      "context": "Risk lens, not an organ system: every marker here is measured for another system and read again for brain risk. APOE e3/e4 plus MTHFR/COMT/MAO-A context, lipid burden, glycemic stability, vitamin D and heavy-metal neurotoxicity.",
+      "markers": [
+        "homocysteine",
+        "b12",
+        "folate",
+        "omega3_index",
+        "ldl",
+        "apob",
+        "non_hdl",
+        "hdl",
+        "total_chol",
+        "triglycerides",
+        "hba1c",
+        "glucose",
+        "vitamin_d",
+        "oura_sleep_score",
+        "oura_total_sleep",
+        "oura_hrv",
+        "lead"
+      ],
+      "color": "#8b5cf6",
+      "lens": true
+    },
+    "sleep": {
+      "name": "Sleep",
+      "context": "Recovery lens over Oura device series. Oura ring since Dec 2019. ~3 years consistent wear. Sleep quality, breathing, oxygenation, steps, HRV, and resting heart rate are recovery metrics for autoimmune management.",
+      "markers": [
+        "oura_sleep_score",
+        "oura_total_sleep",
+        "oura_deep_sleep",
+        "oura_rem_sleep",
+        "oura_efficiency",
+        "oura_hrv",
+        "oura_rhr",
+        "oura_readiness",
+        "respiratory_rate",
+        "spo2",
+        "steps"
+      ],
+      "color": "#6366f1",
+      "lens": true
+    }
+  },
+  "rxMarkerMap": {
+    "humira": {
+      "pattern": "humira|adalimumab",
+      "markerIds": [
+        "hscrp",
+        "c3",
+        "c4",
+        "anc",
+        "lymph_abs",
+        "wbc",
+        "eosinophils",
+        "eos_absolute",
+        "esr",
+        "adalimumab_level",
+        "oura_sleep_score",
+        "oura_hrv"
+      ]
+    },
+    "olumiant": {
+      "pattern": "olumiant|baricitinib",
+      "markerIds": [
+        "hscrp",
+        "c3",
+        "c4",
+        "anc",
+        "lymph_abs",
+        "wbc",
+        "eosinophils",
+        "eos_absolute",
+        "esr",
+        "platelets",
+        "hemoglobin",
+        "oura_sleep_score",
+        "oura_hrv"
+      ]
+    },
+    "rosuvastatin": {
+      "pattern": "rosuvastatin",
+      "markerIds": [
+        "ldl",
+        "apob",
+        "non_hdl",
+        "hdl",
+        "total_chol",
+        "triglycerides",
+        "alt",
+        "ast"
+      ]
+    },
+    "ezetimibe": {
+      "pattern": "ezetimibe",
+      "markerIds": [
+        "ldl",
+        "apob",
+        "non_hdl",
+        "hdl",
+        "total_chol",
+        "triglycerides"
+      ]
+    },
+    "chlorthalidone": {
+      "pattern": "chlorthalidone",
+      "markerIds": [
+        "urine_calcium_24hr",
+        "calcium_serum",
+        "egfr",
+        "creatinine"
+      ]
+    },
+    "finasteride": {
+      "pattern": "finasteride",
+      "markerIds": [
+        "testosterone",
+        "free_testosterone",
+        "dheas"
+      ]
+    },
+    "bupropion": {
+      "pattern": "bupropion",
+      "markerIds": [
+        "weight",
+        "oura_sleep_score",
+        "oura_hrv"
+      ]
+    },
+    "colchicine": {
+      "pattern": "colchicine",
+      "markerIds": [
+        "hscrp",
+        "uric_acid",
+        "anc"
+      ]
+    },
+    "methotrexate": {
+      "pattern": "methotrexate",
+      "markerIds": [
+        "alt",
+        "ast",
+        "anc",
+        "lymph_abs",
+        "wbc",
+        "platelets"
+      ]
+    }
+  },
+  "definitions": {
+    "autoimmune-vasculitis": "Rare autoimmune disease: vessel inflammation, ulcers, eye disease.",
+    "gilbert's": "Benign inherited elevated bilirubin. No treatment needed.",
+    "apoe4": "Gene variant impairing cholesterol clearance + Alzheimer's risk.",
+    "non-hdl": "Total cholesterol minus HDL; a practical view of atherogenic cholesterol burden.",
+    "mthfr": "Gene for folate metabolism. C677T variant reduces efficiency ~35%.",
+    "comt": "Enzyme breaking down dopamine. Slow COMT = higher dopamine.",
+    "dopamine": "Neurotransmitter for motivation and focus. Builds up with slow COMT.",
+    "serotonin": "Mood neurotransmitter. High MAO-A clears it faster.",
+    "humira": "Adalimumab — TNF inhibitor for autoimmune conditions.",
+    "olumiant": "Baricitinib — JAK inhibitor for autoimmune conditions.",
+    "ezetimibe": "Cholesterol absorption blocker in gut. Paired with statins.",
+    "chlorthalidone": "Thiazide diuretic reducing urinary calcium loss. For kidney stones.",
+    "finasteride": "Blocks testosterone to DHT conversion. For hair loss.",
+    "ochratoxin": "Nephrotoxic mycotoxin from molds. Kidney/immune damage.",
+    "mycotoxin": "Toxic mold compound causing organ/immune damage."
+  }
+}

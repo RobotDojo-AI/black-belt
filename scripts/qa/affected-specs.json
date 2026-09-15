@@ -1,0 +1,75 @@
+{
+  "always": ["health.spec.js", "error-paths.spec.js"],
+  "apps/index.html": ["marketing-cull.spec.js"],
+  "apps/licensing.html": ["marketing-cull.spec.js"],
+  "apps/privacy.html": ["marketing-cull.spec.js"],
+  "apps/terms.html": ["marketing-cull.spec.js"],
+  "apps/static/shared/marketing.js": ["marketing-cull.spec.js"],
+  "apps/static/shared/marketing.css": ["marketing-cull.spec.js"],
+  "apps/chat/": [
+    "chat-first-token.spec.js",
+    "chat-stall-recovery.spec.js",
+    "chat-error-retry.spec.js",
+    "chat-indicator-value-surfacing.spec.js",
+    "chat-ttft-apex.spec.js",
+    "topic-inheritance.spec.js"
+  ],
+  "apps/account/": ["account-integrations-dashboard.spec.js", "account-app-polish.spec.js"],
+  "apps/network/": ["network-ui.spec.js"],
+  "apps/health/": ["health.spec.js"],
+  "routes/auth/local-start.js": ["no-setup-surface.spec.js"],
+  "routes/chat.js": [
+    "chat-first-token.spec.js",
+    "chat-stall-recovery.spec.js",
+    "chat-error-retry.spec.js",
+    "chat-indicator-value-surfacing.spec.js",
+    "chat-ttft-apex.spec.js"
+  ],
+  "lib/rag.js": [
+    "chat-ttft-apex.spec.js",
+    "chat-warm-ttft.spec.js",
+    "chat-cold-ttft.spec.js"
+  ],
+  "lib/chat/": [
+    "chat-first-token.spec.js",
+    "chat-stall-recovery.spec.js",
+    "chat-error-retry.spec.js",
+    "chat-indicator-value-surfacing.spec.js",
+    "chat-cold-ttft.spec.js",
+    "chat-warm-ttft.spec.js",
+    "chat-ttft-apex.spec.js"
+  ],
+  "lib/ann/": [
+    "chat-first-token.spec.js",
+    "chat-cold-ttft.spec.js",
+    "chat-warm-ttft.spec.js",
+    "chat-ttft-apex.spec.js"
+  ],
+  "lib/warmup.js": [
+    "chat-first-token.spec.js",
+    "chat-cold-ttft.spec.js",
+    "chat-warm-ttft.spec.js",
+    "chat-ttft-apex.spec.js"
+  ],
+  "routes/accounts.js": ["account-integrations-dashboard.spec.js", "account-app-polish.spec.js"],
+  "routes/people.js": ["network-ui.spec.js"],
+  "routes/setup/": ["account-integrations-dashboard.spec.js"],
+  "middleware.js": [
+    "auth-gates.spec.js",
+    "health.spec.js",
+    "apex-login-prefill.spec.js",
+    "apex-login-cookie-handoff.spec.js",
+    "apex-login-incognito.spec.js"
+  ],
+  "lib/db.js": ["health.spec.js", "error-paths.spec.js"],
+  "apps/login/": [
+    "apex-login-prefill.spec.js",
+    "apex-login-cookie-handoff.spec.js",
+    "apex-login-incognito.spec.js"
+  ],
+  "api/auth/": [
+    "apex-login-prefill.spec.js",
+    "apex-login-cookie-handoff.spec.js",
+    "apex-login-incognito.spec.js"
+  ]
+}

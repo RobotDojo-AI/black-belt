@@ -1,0 +1,40 @@
+# Robot Dojo — systemd user unit template.
+# Tokens (__HOME__, __CONFIG__, __NODE__, __NPM__, __PATH__) are expanded
+# by the installer. Install path: ~/.config/systemd/user/robotdojo.service.
+#
+# Manage:
+#   systemctl --user status   robotdojo
+#   systemctl --user restart  robotdojo
+#   journalctl --user -u robotdojo -f
+[Unit]
+Description=Robot Dojo — personal AI operating system
+Documentation=https://robotdojo.ai
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=__HOME__
+ExecStart=__NPM__ start
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=15
+
+# Log to journald — view with `journalctl --user -u robotdojo`.
+# Install script also tails stdout to ~/.robotdojo/logs/ via Environment below.
+StandardOutput=append:__CONFIG__/logs/robotdojo.out.log
+StandardError=append:__CONFIG__/logs/robotdojo.err.log
+
+Environment=PATH=__PATH__
+Environment=NODE_ENV=production
+Environment=ROBOTDOJO_HOME=__HOME__
+Environment=ROBOTDOJO_CONFIG=__CONFIG__
+Environment=ROBOTDOJO_DB=__CONFIG__/robotdojo.db
+
+# Hardening (user unit, best-effort)
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+
+[Install]
+WantedBy=default.target

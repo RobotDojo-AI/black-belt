@@ -1,0 +1,223 @@
+{
+  "_comment": "st_4312c9c0. Declares the LANE every model call site may run at, and why. Lanes are provider-agnostic: 'fast' | 'balanced' | 'best' resolve to a concrete model through config/models.json, so switching provider or model generation is a config change, never an edit to this file or to any call site. Enforced by scripts/check-tier-policy-match.js, which DISCOVERS call sites by scanning the tree — a new one that is not declared here fails the commit rather than going unnoticed.",
+  "provider": "xai",
+  "_provider_note": "The active provider for application calls. Every lane below resolves through config/models.json for THIS provider. Change this one field to move the whole application to google, openai, or xai — the per-provider lane table already exists and lib/llm/ carries an adapter for each. Nothing in this file names a model. 2026-08-14: owner set xAI/Grok as the default for chat and metered API spend. Anthropic remains selectable in the chat UI.",
+  "lane_order": [
+    "fast",
+    "balanced",
+    "best"
+  ],
+  "_lanes": {
+    "fast": "Cheapest tier. Mechanical work: extraction, classification, routing, dedup, bulk sweeps.",
+    "balanced": "Mid tier. Substrate synthesis, and mechanical work whose input is hard enough that the cheap lane fails on it.",
+    "best": "Top tier. Reserved. Nothing runs here by default — a site on 'best' should carry an explicit reason and the owner's approval."
+  },
+  "_categories": {
+    "substrate": "Output is persisted and read back into a later prompt. Mechanical test: does anything on the prompt-assembly path read this file or table. Held at a capable lane because an error compounds into every downstream answer and cannot be traced back.",
+    "mechanical": "Everything else. Read once, then discarded or stored where no prompt reads it. Cheapest lane that does the job.",
+    "infrastructure": "Names a model constant without choosing a tier for itself — gateways, registries, pickers, reverse-maps. No lane to enforce."
+  },
+  "personas": {
+    "Miyagi": "balanced",
+    "Katagami": "balanced",
+    "Bunshin": "balanced",
+    "Ori": "balanced",
+    "Hakase": "balanced",
+    "Tantei": "fast"
+  },
+  "_persona_note": "Personas run on the Claude Code subscription, not the metered key — billed as allowance, not dollars. The rule is not 'cheapest' but 'cheapest that does not cause a rerun': a failed stage costs a full second pass, which is more allowance than the lane saved. Bulk retrieval goes fast; anything that designs, builds, or checks stays balanced.",
+  "app_call_sites": {
+    "lib/conversations.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Live-thread compact. One-shot summarization of old messages; not a standing prompt layer."
+    },
+    "lib/topic-session.js": {
+      "max_lane": "balanced",
+      "category": "substrate",
+      "why": "Writes the topic LOG resume that the next session injects on turns 1-3."
+    },
+    "lib/topic-context.js": {
+      "max_lane": "balanced",
+      "category": "substrate",
+      "why": "The topic summary is a standing prompt layer, injected on every chat turn for that topic."
+    },
+    "lib/entity-card.js": {
+      "max_lane": "balanced",
+      "category": "substrate",
+      "why": "Entity cards for the highest-signal people are a standing prompt layer. Lower-signal entities already resolve to the fast lane through contextTierFromN2."
+    },
+    "lib/generate-user-md.js": {
+      "max_lane": "balanced",
+      "category": "substrate",
+      "why": "Writes the owner's USER.md — the identity card, a standing prompt layer."
+    },
+    "lib/voice-ingest.js": {
+      "max_lane": "balanced",
+      "category": "substrate",
+      "why": "Writes the owner-voice calibration corpus that governs every future piece of prose written in his name."
+    },
+    "lib/profile-research.js": {
+      "max_lane": "balanced",
+      "category": "substrate",
+      "why": "Writes persistent entity profile documents, architecturally parallel to entity-card.js."
+    },
+    "scripts/synthesize-brief.js": {
+      "max_lane": "balanced",
+      "category": "substrate",
+      "why": "Writes the world brief, read into every prompt via buildBriefBlock in lib/chat/system-prompt.js."
+    },
+    "scripts/memory-synthesize.js": {
+      "max_lane": "balanced",
+      "category": "substrate",
+      "why": "Writes agents/agents.md, which shapes every response."
+    },
+    "scripts/ingest/07-context.js": {
+      "max_lane": "balanced",
+      "category": "substrate",
+      "why": "Generates the entity context cards; routes per-entity so only the highest-signal people reach the balanced lane."
+    },
+    "lib/health-intel.js": {
+      "max_lane": "best",
+      "category": "mechanical",
+      "why": "Writes health_intel DB rows the health UI renders; nothing on the prompt-assembly path reads them back, so it is mechanical by the read-back test. HELD at the top lane deliberately, against the sealed plan's drop to cheapest: a full regeneration is ~$1.00, auto-regeneration is off by default so it fires only on the owner's explicit request, and lifetime spend is ~$12. Trading medical-synthesis quality for single-digit dollars is the wrong side of the trade. Lowering it needs no approval."
+    },
+    "lib/health-coach.js": {
+      "max_lane": "balanced",
+      "category": "mechanical",
+      "why": "Fitness photo and chat interpretation. Daily plans are deterministic; the model only reads a photo or a constraint and writes a JSON guess the owner can edit."
+    },
+    "lib/doc-extract.js": {
+      "max_lane": "balanced",
+      "category": "mechanical",
+      "why": "Document extraction to DB. Escalates from the fast lane on hard documents; nothing downstream reads the output into a prompt."
+    },
+    "lib/health-marker-copy.js": {
+      "max_lane": "balanced",
+      "category": "mechanical",
+      "why": "Per-marker display copy written to DB rows for the health UI. Read once by the renderer, never by a prompt."
+    },
+    "scripts/states/delaware-model.js": {
+      "max_lane": "balanced",
+      "category": "mechanical",
+      "why": "Valuation modelling read once by its caller. Escalates for the DCF step only."
+    },
+    "lib/identity-distill.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "A pure library — writes nothing, and neither of its two callers writes the identity-card path. Verified rather than assumed."
+    },
+    "lib/context-router.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Routing decision, read once. The highest-frequency call site in the system — it fires on every prompt — so the lane matters more here by volume than anywhere else."
+    },
+    "lib/attribute-residual.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Residual attribution the deterministic matcher could not settle."
+    },
+    "lib/entity-enrich.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Bulk iteration across the corpus — the largest expected dollar line, and the target for the batch discount."
+    },
+    "lib/followup-sweep.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Post-call extraction and synthesis into Asana rows."
+    },
+    "lib/granola-call-asana.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Transcript summary into an Asana task body."
+    },
+    "lib/workbench-promote-entities.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Compaction fallback when a promoted body exceeds its cap."
+    },
+    "lib/receipt-extract.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Structured field extraction from receipt images."
+    },
+    "lib/doc-classify.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Document type classification — the bulk-classification shape the fast lane exists for."
+    },
+    "lib/public-chat/core.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Public marketing chat. Internet-facing and rate-limited; must stay cheapest because the caller is a stranger."
+    },
+    "lib/health-pdf-ocr.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "OCR fallback for lab PDFs whose text layer is missing. Output lands in health rows, not in a prompt."
+    },
+    "lib/chat-tools/white/assistant-mention.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Resolves an @-mention inside a chat turn. Read once, in-turn."
+    },
+    "lib/quarantine/tier-1/index.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Quarantined tier-1 classification. Bulk shape, and quarantined code must never be the thing that raises spend."
+    },
+    "scripts/enrich-places.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Place enrichment. Bulk, and place cards are not a standing prompt layer."
+    },
+    "scripts/classify-places.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Place classification — bulk labelling."
+    },
+    "scripts/extract-all-pdfs.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Bulk PDF text extraction to DB."
+    },
+    "scripts/import-pdf-labs.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Lab PDF import — structured extraction to health rows."
+    },
+    "scripts/import-pdf-labs-batch.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Batch form of the lab import. Bulk by construction."
+    },
+    "scripts/ingest/adjudicate-email-classification.js": {
+      "max_lane": "fast",
+      "category": "mechanical",
+      "why": "Adjudicates only the residual the deterministic tier could not settle — the canonical Tier-0-then-Tier-1 shape."
+    },
+    "routes/chat.js": {
+      "max_lane": "balanced",
+      "category": "mechanical",
+      "why": "Interactive chat. The owner picks the model in the UI; this ceiling bounds what the route will honour by default."
+    },
+    "lib/writing.js": {
+      "max_lane": "balanced",
+      "category": "mechanical",
+      "why": "Live Miyagi replies and owner nested drafts. One-shot generate; not a standing prompt layer."
+    }
+  },
+  "infrastructure": {
+    "lib/compute-tier.js": "Canonical model-id and pricing table. Names every constant by definition.",
+    "lib/llm-gateway.js": "The single choke point. Its reverse-map must name every constant to resolve a caller's model back to a tier.",
+    "lib/llm-batch.js": "Batch lane. Same reverse-map requirement as the gateway.",
+    "lib/llm/anthropic.js": "Provider adapter. Translates lane and cache hints for the SDK.",
+    "lib/config.js": "Holds the per-provider lane table the resolver reads.",
+    "lib/chat-ttft-estimator.js": "Latency estimation keyed by model; makes no call.",
+    "routes/accounts.js": "Account/model surface for the UI; makes no call of its own.",
+    "scripts/check-tier-policy-match.js": "This gate. Necessarily names the constants it matches.",
+    "scripts/update-models.js": "Refreshes the per-provider catalog. Rewrites which model a lane resolves to, never which lane a caller asks for.",
+    "lib/models-picker.js": "UI model list."
+  }
+}

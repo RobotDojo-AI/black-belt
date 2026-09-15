@@ -1,0 +1,20 @@
+{
+  "_doc": "Black Belt files manifest. st_bc949e7c (2026-05-15). Used by scripts/cohort-revocation-poll.js (soft-delete on grace exceeded) and scripts/check-bb-files-manifest.js (pre-commit validator).",
+  "_grace_policy": "On cohort key expiry: 7-day warning window (server-health surfaces days_until_delete), 14-day grace beyond expiry, then BB UI surfaces and entity context.md files are removed from disk. WB chat/RAG/memory persists.",
+  "bb_repo_paths": [
+    "apps/network/",
+    "routes/network.js",
+    "lib/bb/",
+    "lib/chat-tools/black/",
+    "lib/network-queries.js",
+    "lib/entity-matcher.js",
+    "lib/referral.js",
+    "scripts/timeline-pipeline.js",
+    "scripts/top-referrals.js"
+  ],
+  "bb_user_data_paths": [
+    "~/.robotdojo/contexts/"
+  ],
+  "grace_period_days": 14,
+  "warning_period_days": 7
+}

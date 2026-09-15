@@ -1,0 +1,11 @@
+-- 136_notes_is_shared.sql — shared-note marker for the mining sweep
+-- (st_f67bc2eb D7, notes path).
+--
+-- A shared Apple Note can contain third-party-authored text; the relation
+-- mining sweep treats notes as owner-authored corpus, so shared notes are
+-- skipped. The reader marks this best-effort from the NoteStore share records
+-- (defense-in-depth only — Apple's schema is not verifiable on an empty
+-- store). The HARD guard lives in lib/relation-mine.js: a notes-only evidence
+-- cluster never writes an edge — notes corroborate chat/email instances or
+-- enqueue a question.
+ALTER TABLE notes ADD COLUMN is_shared INTEGER NOT NULL DEFAULT 0;

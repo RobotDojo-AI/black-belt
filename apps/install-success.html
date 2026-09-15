@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" data-page="install-success">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robot Dojo — Installed</title>
+  <meta name="description" content="Robot Dojo is installed. Open integrations and setup-aware chat to finish launch setup.">
+  <meta name="robots" content="noindex,follow">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/vendor/fonts.css">
+  <link rel="stylesheet" href="/static/shared/marketing.css">
+  <script src="/static/shared/sw-register.js" defer></script>
+  <style>
+    /* st_5a63545d AC 5 — dedicated welcome page (not the marketing fallback).
+       Tiny by design: bounded <10KB to distinguish from the 35KB homepage. */
+    body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; background: #f8fafc; color: #0f172a; margin: 0; }
+    .is-wrap { min-height: 100vh; display: grid; place-items: center; padding: 2rem 1rem; }
+    .is-card { max-width: 540px; padding: 2.5rem 2rem; background: #fff; border-radius: 14px; box-shadow: 0 1px 3px rgba(15,23,42,0.04), 0 12px 32px rgba(59,130,246,0.06); text-align: left; }
+    .is-logo { font-family: 'Noto Sans JP', sans-serif; font-size: 54px; opacity: 0.35; line-height: 1; margin-bottom: 12px; }
+    .is-eyebrow { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent, #3b82f6); font-weight: 600; }
+    .is-title { margin: 0.5rem 0 0.75rem; font-size: 1.6rem; font-weight: 600; letter-spacing: -0.02em; }
+    .is-sub { color: var(--text-dim, #64748b); line-height: 1.55; font-size: 0.95rem; margin: 0 0 1.5rem; }
+    .is-step { margin: 1rem 0; padding: 0.85rem 1rem; background: var(--bg2, #f1f5f9); border-radius: 10px; font-size: 0.92rem; }
+    .is-step strong { color: var(--text, #0f172a); }
+    .is-cta { display: inline-block; padding: 0.85rem 1.6rem; border-radius: 10px; background: var(--accent, #3b82f6); color: #fff; text-decoration: none; font-weight: 600; margin-top: 0.5rem; }
+    .is-cta:hover { background: #2563eb; }
+    .is-foot { margin-top: 1.75rem; font-size: 0.82rem; color: var(--text-muted, #94a3b8); }
+    .is-foot a { color: var(--text-dim, #64748b); text-decoration: none; }
+    .is-foot a:hover { color: var(--accent, #3b82f6); }
+    code { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; font-size: 0.9em; background: rgba(0,0,0,0.04); padding: 1px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body data-app="website" data-app-flow="install">
+  <main class="is-wrap">
+    <section class="is-card" data-card="install-success">
+      <div class="is-logo">道</div>
+      <div class="is-eyebrow">Install complete</div>
+      <h1 class="is-title">Welcome to Robot Dojo.</h1>
+      <p class="is-sub">
+        Robot Dojo is installed. Open integrations to connect accounts, then use
+        setup-aware chat for guidance while your local dojo runs.
+      </p>
+
+      <div class="is-step">
+        <strong>Open Integrations:</strong> connect accounts, import files, and
+        confirm backup from the Account page.
+      </div>
+
+      <div class="is-step">
+        <strong>Open chat help:</strong> chat starts with setup context so you
+        can ask what to connect, import, or check next.
+      </div>
+
+      <a class="is-cta" href="https://localhost:4338/account/integrations">Open Integrations</a>
+      <a class="is-cta" href="https://localhost:4338/chat?context=setup-guide">Open chat help</a>
+
+      <p class="is-foot">
+        Need help? Open chat help above · <a href="/">Back to home</a>
+      </p>
+    </section>
+</main>
+</body>
+</html>
